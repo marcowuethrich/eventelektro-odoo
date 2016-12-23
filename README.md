@@ -1,50 +1,34 @@
-[![Build Status](http://runbot.odoo.com/runbot/badge/flat/1/10.0.svg)](http://runbot.odoo.com/runbot)
-[![Tech Doc](http://img.shields.io/badge/10.0-docs-875A7B.svg?style=flat)](http://www.odoo.com/documentation/10.0)
-[![Help](http://img.shields.io/badge/10.0-help-875A7B.svg?style=flat)](https://www.odoo.com/forum/help-1)
-[![Nightly Builds](http://img.shields.io/badge/10.0-nightly-875A7B.svg?style=flat)](http://nightly.odoo.com/)
-
-Odoo
+Requirements:
 ----
 
-Odoo is a suite of web based open source business apps.
-
-The main Odoo Apps include an <a href="https://www.odoo.com/page/crm">Open Source CRM</a>,
-<a href="https://www.odoo.com/page/website-builder">Website Builder</a>,
-<a href="https://www.odoo.com/page/e-commerce">eCommerce</a>,
-<a href="https://www.odoo.com/page/warehouse">Warehouse Management</a>,
-<a href="https://www.odoo.com/page/project-management">Project Management</a>,
-<a href="https://www.odoo.com/page/accounting">Billing &amp; Accounting</a>,
-<a href="https://www.odoo.com/page/point-of-sale">Point of Sale</a>,
-<a href="https://www.odoo.com/page/employees">Human Resources</a>,
-<a href="https://www.odoo.com/page/lead-automation">Marketing</a>,
-<a href="https://www.odoo.com/page/manufacturing">Manufacturing</a>,
-<a href="https://www.odoo.com/page/purchase">Purchase Management</a>,
-<a href="https://www.odoo.com/#apps">...</a>
-
-Odoo Apps can be used as stand-alone applications, but they also integrate seamlessly so you get
-a full-featured <a href="https://www.odoo.com">Open Source ERP</a> when you install several Apps.
+ubuntu => 16.04
 
 
-Getting started with Odoo
--------------------------
-For a standard installation please follow the <a href="https://www.odoo.com/documentation/10.0/setup/install.html">Setup instructions</a>
-from the documentation.
+Install
+----
 
-If you are a developer you may type the following command at your terminal:
+sudo apt-get update
 
-    wget -O- https://raw.githubusercontent.com/odoo/odoo/10.0/setup/setup_dev.py | python
+sudo apt-get upgrade
 
-Then follow <a href="https://www.odoo.com/documentation/10.0/tutorials.html">the developer tutorials</a>
+sudo wget https://raw.githubusercontent.com/Yenthe666/InstallScript/10.0/odoo_install.sh
+
+sudo nano odoo_install.sh
+
+sudo chmod +x odoo_install.sh
+
+./odoo_install.sh
 
 
-For Odoo employees
-------------------
+Customer Changes
+----
 
-To add the odoo-dev remote use this command:
+Change the folder /odoo/odoo-server with the custom-Github repo (Main Programm Odoo and Server)
 
-    $ ./setup/setup_dev.py setup_git_dev
+Change the folder /odoo/custom with the actual Backup order (Customer addons)
 
-To fetch odoo merge pull requests refs use this command:
 
-    $ ./setup/setup_dev.py setup_git_review
+Run
+---
 
+sudo service odoo-server {start|stop|restart|force-reload}
