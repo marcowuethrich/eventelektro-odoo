@@ -1,11 +1,14 @@
 #!/bin/bash
 ################################################################################
-# Author: Marco Wüthrich
+# Script for installing Odoo on Ubuntu 14.04, 15.04 and 16.04 (could be used for other version too)
+# Author: Yenthe Van Ginneken
 #-------------------------------------------------------------------------------
-# This script will install Odoo on your Ubuntu 14.04 server. It can install  Odoo instances
+# This script will install Odoo on your Ubuntu 14.04 server. It can install multiple Odoo instances
 # in one Ubuntu because of the different xmlrpc_ports
 #-------------------------------------------------------------------------------
-# Make the file executable:
+# Make a new file:
+# sudo nano odoo-install.sh
+# Place this content in it and then make the file executable:
 # sudo chmod +x odoo-install.sh
 # Execute the script to install Odoo:
 # ./odoo-install
@@ -23,7 +26,7 @@ INSTALL_WKHTMLTOPDF="True"
 OE_PORT="8069"
 #Choose the Odoo version which you want to install. For example: 9.0, 8.0, 7.0 or saas-6. When using 'trunk' the master version will be installed.
 #IMPORTANT! This script contains extra libraries that are specifically needed for Odoo 9.0
-OE_VERSION="version/odoo9"
+OE_VERSION="9.0"
 # Set this to True if you want to install Odoo 9 Enterprise!
 IS_ENTERPRISE="False"
 #set the superadmin password
@@ -105,7 +108,7 @@ sudo chown $OE_USER:$OE_USER /var/log/$OE_USER
 # Install ODOO
 #--------------------------------------------------
 echo -e "\n==== Installing ODOO Server ===="
-sudo git clone --depth 1 --branch $OE_VERSION  https://github.com/marcowuethrich/odoo $OE_HOME_EXT/
+sudo git clone --depth 1 --branch $OE_VERSION https://www.github.com/odoo/odoo $OE_HOME_EXT/
 
 if [ $IS_ENTERPRISE = "True" ]; then
     # Odoo Enterprise install!
