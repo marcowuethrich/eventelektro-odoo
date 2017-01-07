@@ -16,7 +16,7 @@ OE_HOME="/opt/$OE_USER"
 OE_HOME_EXT="/opt/$OE_USER/$OE_USER-server"
 
 #Enter version for checkout "9.0" for version 9.0,"8.0" for version 8.0, "7.0 (version 7), "master" for trunk
-OE_VERSION="9.0"
+BRANCH="version/odoo9"
 
 #set the superadmin password
 OE_SUPERADMIN="superadminpassword"
@@ -81,6 +81,9 @@ sudo cp /usr/local/bin/wkhtmltoimage /usr/bin
 #--------------------------------------------------
 
 echo -e "\n==== Download ODOO Server ===="
+sudo su $OE_USER -c "git clone --depth 1 --single-branch --branch $BRANCH https://github.com/marcowuethrich/odoo.git $OE_HOME_EXT/"
+cd -
+
 
 echo -e "\n---- Create custom module directory ----"
 sudo su $OE_USER -c "mkdir $OE_HOME/custom"
