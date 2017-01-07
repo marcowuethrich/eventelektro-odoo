@@ -130,17 +130,17 @@ sudo cp ~/odoo/odoo-server/debian/openerp-server.conf /etc/odoo-server.conf
 sudo chown $OE_USER:$OE_USER /etc/odoo-server.conf
 sudo chmod 640 /etc/odoo-server.conf
 
-echo -e "* Change server config file"
-sudo sed -i s/"db_user = .*"/"db_user = $OE_USER"/g /etc/odoo-server.conf
-sudo sed -i s/"; admin_passwd.*"/"admin_passwd = $OE_SUPERADMIN"/g /etc/odoo-server.conf
-sudo su root -c "echo '[options]' >> /etc/odoo-server.conf"
-sudo su root -c "echo 'logfile = /var/log/$OE_USER/$OE_CONFIG$1.log' >> /etc/odoo-server.conf"
-sudo su root -c "echo 'addons_path=/odoo/odoo-server/addons,$OE_HOME/custom/addons' >> /etc/odoo-server.conf"
+# echo -e "* Change server config file"
+# sudo sed -i s/"db_user = .*"/"db_user = $OE_USER"/g /etc/odoo-server.conf
+# sudo sed -i s/"; admin_passwd.*"/"admin_passwd = $OE_SUPERADMIN"/g /etc/odoo-server.conf
+# sudo su root -c "echo '[options]' >> /etc/odoo-server.conf"
+# sudo su root -c "echo 'logfile = /var/log/$OE_USER/$OE_CONFIG$1.log' >> /etc/odoo-server.conf"
+# sudo su root -c "echo 'addons_path=/odoo/odoo-server/addons,$OE_HOME/custom/addons' >> /etc/odoo-server.conf"
 
 echo -e "* Create startup file"
-sudo su root -c "echo '#!/bin/sh' >> $OE_HOME_EXT/start.sh"
-sudo su root -c "echo 'sudo -u $OE_USER $OE_HOME_EXT/openerp-server --config=/etc/odoo-server.conf' >> $OE_HOME_EXT/start.sh"
-sudo chmod 755 $OE_HOME_EXT/start.sh
+# sudo su root -c "echo '#!/bin/sh' >> ~/odoo/odoo-server/start.sh"
+# sudo su root -c "echo 'sudo -u odoo ~/odoo/odoo-server/openerp-server --config=/etc/odoo-server.conf' >> ~/odoo/odoo-server/start.sh"
+sudo chmod 755 ~/odoo/odoo-server/start.sh
 
 #--------------------------------------------------
 # Adding ODOO as a deamon (initscript)
