@@ -118,7 +118,7 @@ sudo chown -R odoo: /opt/odoo/
 sudo chown odoo:root /var/log/odoo
 
 echo -e "* Create startup file"
-sudo cp /opt/odoo/start.sh /etc/init.d/odoo-server.sh
+sudo cp /opt/odoo/init.d/odoo-server.sh /etc/init.d/odoo-server
 sudo chmod 755 /etc/init.d/odoo-server.sh
 
 echo -e "* Starting Odoo Service"
