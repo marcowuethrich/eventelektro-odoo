@@ -8,15 +8,15 @@ Install Odoo 9
 ----
 
 * sudo apt-get install git
-* sudo git clone https://github.com/marcowuethrich/odoo.git -b "version/odoo9" --depth 1 --single-branch /opt/odoo/
-* sudo chmod +x /opt/odoo/odoo_install.sh
-* /opt/odoo/odoo_install.sh
+* sudo git clone https://github.com/marcowuethrich/odoo.git -b "version/odoo9" --depth 1 --single-branch /opt/odoo/odoo-server/
+* sudo chmod +x /opt/odoo/odoo-server/odoo_install.sh
+* /opt/odoo/odoo-server/odoo_install.sh
 
 
 Customer Changes
 ----
 
-Change the folder /opt/odoo/custom with the actual Backup order (Customer addons)
+Change the folder /opt/odoo/odoo-server/custom with the actual Backup order (Customer addons)
 
 
 Run
