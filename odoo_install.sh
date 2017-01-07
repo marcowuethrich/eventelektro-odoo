@@ -63,13 +63,22 @@ sudo mkdir /var/log/odoo
 #--------------------------------------------------
 
 echo -e "\n---- Install Python lib  ----"
-sudo pip install -r /opt/odoo/doc/requirements.txt
-sudo pip install -r /opt/odoo/requirements.txt
+#sudo pip install -r /opt/odoo/doc/requirements.txt
+#sudo pip install -r /opt/odoo/requirements.txt
 
-echo -e "\n---- Install Less CSS via nodejs and npm  ----"
-wget -qO- https://deb.nodesource.com/setup_6.x | sudo bash -
-sudo apt-get install nodejs
-sudo npm install -g less less-plugin-clean-css
+echo -e "\n---- Install tool packages ----"
+sudo apt-get install wget git python-pip gdebi-core -y
+
+echo -e "\n---- Install python packages ----"
+sudo apt-get install python-dateutil python-feedparser python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf python-decorator python-requests python-passlib python-pil -y python-suds
+
+echo -e "\n---- Install python libraries ----"
+sudo pip install gdata psycogreen ofxparse XlsxWriter
+
+echo -e "\n--- Install other required packages"
+sudo apt-get install node-clean-css -y
+sudo apt-get install node-less -y
+sudo apt-get install python-gevent -y
 
 #--------------------------------------------------
 # Install Wkhtmltopdf if needed
