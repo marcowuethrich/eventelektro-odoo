@@ -118,12 +118,11 @@ sudo chown -R odoo: /opt/odoo/
 sudo chown odoo:root /var/log/odoo
 
 echo -e "* Create startup file"
-sudo cp /opt/odoo/odoo-server.sh /etc/init.d/odoo-server.sh
+sudo cp /opt/odoo/start.sh /etc/init.d/odoo-server.sh
 sudo chmod 755 /etc/init.d/odoo-server.sh
-sudo chown root: /etc/init.d/odoo-server.sh
 
 echo -e "* Starting Odoo Service"
-sudo su root -c "/etc/init.d/odoo-server start"
+sudo service odoo-server start
 echo "-----------------------------------------------------------"
 echo "Done! The Odoo server is up and running. Specifications:"
 echo "Port: 8069"
