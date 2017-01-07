@@ -16,9 +16,7 @@ Install Odoo 9
 Customer Changes
 ----
 
-Change the folder /odoo/odoo-server with the custom-Github repo (Main Programm Odoo and Server)
-
-Change the folder /odoo/custom with the actual Backup order (Customer addons)
+Change the folder /opt/odoo/custom with the actual Backup order (Customer addons)
 
 
 Run

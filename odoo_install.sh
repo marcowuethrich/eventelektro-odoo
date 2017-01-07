@@ -67,7 +67,7 @@ sudo pip install -r /opt/odoo/doc/requirements.txt
 sudo pip install -r /opt/odoo/requirements.txt
 
 echo -e "\n---- Install Less CSS via nodejs and npm  ----"
-wget -qO- https://deb.nodesource.com/setup | sudo bash -
+wget -qO- https://deb.nodesource.com/setup_6.x | sudo bash -
 sudo apt-get install nodejs
 sudo npm install -g less less-plugin-clean-css
 
@@ -103,17 +103,15 @@ sudo chmod 755 -R /opt/odoo/custom/
 echo -e "* Create server config file"
 sudo cp /opt/odoo/debian/openerp-server.conf /etc/odoo-server.conf
 sudo chmod 640 /etc/odoo-server.conf
+# sudo chown odoo: /etc/odoo-server.conf
 
 sudo chown -R odoo: /opt/odoo/
 sudo chown odoo:root /var/log/odoo
 
-sudo chown odoo: /etc/odoo-server.conf
-sudo chmod 640 /etc/odoo-server.conf
-
 echo -e "* Create startup file"
 sudo cp /opt/odoo/odoo-server.sh /etc/init.d/odoo-server.sh
-sudo chmod 755 /etc/init.d/odoo-server
-sudo chown root: /etc/init.d/odoo-server
+sudo chmod 755 /etc/init.d/odoo-server.sh
+sudo chown root: /etc/init.d/odoo-server.sh
 
 echo -e "* Starting Odoo Service"
 sudo su root -c "/etc/init.d/odoo-server start"
