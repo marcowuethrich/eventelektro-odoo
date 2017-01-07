@@ -3,18 +3,14 @@
 # * website_event_track
 # 
 # Translators:
-# Martin Trigaux <mat@odoo.com>, 2016
-# jonas jensen <j.jensen@tcomp.dk>, 2016
-# Morten Schou <ms@msteknik.dk>, 2016
-# Jesper Carstensen <jc@danodoo.dk>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:57+0000\n"
-"PO-Revision-Date: 2016-09-07 08:57+0000\n"
-"Last-Translator: Jesper Carstensen <jc@danodoo.dk>, 2016\n"
-"Language-Team: Danish (https://www.transifex.com/odoo/teams/41243/da/)\n"
+"POT-Creation-Date: 2015-09-18 08:12+0000\n"
+"PO-Revision-Date: 2016-12-28 17:20+0000\n"
+"Last-Translator: Morten Schou <ms@msteknik.dk>\n"
+"Language-Team: Danish (http://www.transifex.com/odoo/odoo-9/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -29,36 +25,6 @@ msgstr ""
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.track_view
 msgid "<b>Date</b><br/>"
-msgstr ""
-
-#. module: website_event_track
-#: model:ir.ui.view,arch_db:website_event_track.event_track_template_new
-msgid "<b>Mail</b>:"
-msgstr ""
-
-#. module: website_event_track
-#: model:ir.ui.view,arch_db:website_event_track.event_track_template_new
-msgid "<b>Phone</b>:"
-msgstr ""
-
-#. module: website_event_track
-#: model:ir.ui.view,arch_db:website_event_track.event_track_template_new
-msgid "<b>Proposed By</b>:"
-msgstr ""
-
-#. module: website_event_track
-#: model:ir.ui.view,arch_db:website_event_track.event_track_template_new
-msgid "<b>Speakers Biography</b>:"
-msgstr ""
-
-#. module: website_event_track
-#: model:ir.ui.view,arch_db:website_event_track.event_track_template_new
-msgid "<b>Talk Introduction</b>:"
-msgstr ""
-
-#. module: website_event_track
-#: model:ir.ui.view,arch_db:website_event_track.event_track_template_new
-msgid "<b>Title</b>:"
 msgstr ""
 
 #. module: website_event_track
@@ -105,8 +71,6 @@ msgid ""
 "A technical explanation of Odoo as a CMS and a eCommerce platform for "
 "version 8."
 msgstr ""
-"En teknisk forklaring på Odoo som CMS og en elektronisk handel platform for "
-"version 8."
 
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.track_view
@@ -114,9 +78,9 @@ msgid "About The Author"
 msgstr ""
 
 #. module: website_event_track
-#: model:ir.model.fields,field_description:website_event_track.field_event_track_active
-msgid "Active"
-msgstr "Aktiv"
+#: model:ir.model.fields,field_description:website_event_track.field_event_track_message_needaction
+msgid "Action Needed"
+msgstr "Aktion påkrævet"
 
 #. module: website_event_track
 #: model:event.track,name:website_event_track.event_track19
@@ -129,7 +93,7 @@ msgid "Advanced reporting with Google Spreadsheets integration."
 msgstr ""
 
 #. module: website_event_track
-#: code:addons/website_event_track/models/event.py:26
+#: code:addons/website_event_track/models/event.py:182
 #, python-format
 msgid "Agenda"
 msgstr "Dagsorden"
@@ -145,8 +109,6 @@ msgid ""
 "Allow video and audio recording of their\n"
 "                                    presentation, for publishing on our website."
 msgstr ""
-"Tillad video- og lydoptagelser af deres\n"
-"præsentation, til udgivelse på vores hjemmeside."
 
 #. module: website_event_track
 #: selection:event.track,state:0
@@ -159,11 +121,6 @@ msgid "Application"
 msgstr ""
 
 #. module: website_event_track
-#: model:ir.ui.view,arch_db:website_event_track.view_event_track_search
-msgid "Archived"
-msgstr ""
-
-#. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_event_allowed_track_tag_ids
 msgid "Available Track Tags"
 msgstr ""
@@ -171,7 +128,7 @@ msgstr ""
 #. module: website_event_track
 #: model:event.sponsor.type,name:website_event_track.event_sponsor_type1
 msgid "Bronze"
-msgstr ""
+msgstr "Bronze"
 
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.event_track_proposal
@@ -191,7 +148,6 @@ msgstr ""
 
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_track_color
-#: model:ir.model.fields,field_description:website_event_track.field_event_track_tag_color
 msgid "Color Index"
 msgstr "Farve index"
 
@@ -224,6 +180,11 @@ msgid "Date"
 msgstr "Dato"
 
 #. module: website_event_track
+#: model:ir.model.fields,help:website_event_track.field_event_track_message_last_post
+msgid "Date of the last message posted on the record."
+msgstr "Dato for sidste besked på denne post."
+
+#. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.view_event_track_kanban
 msgid "Delete"
 msgstr "Slet"
@@ -252,7 +213,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:website_event_track.field_event_track_location_display_name
 #: model:ir.model.fields,field_description:website_event_track.field_event_track_tag_display_name
 msgid "Display Name"
-msgstr "Vis navn"
+msgstr "Vist navn"
 
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.track_view
@@ -276,6 +237,11 @@ msgstr ""
 #: model:ir.ui.view,arch_db:website_event_track.view_event_track_search
 msgid "Event"
 msgstr "Begivenhed"
+
+#. module: website_event_track
+#: model:ir.model.fields,field_description:website_event_track.field_event_event_blog_id
+msgid "Event Blog"
+msgstr ""
 
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.view_event_location_form
@@ -339,9 +305,24 @@ msgstr ""
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.event_track_social
 msgid ""
-"Find out what people see and say about this event,\n"
+"Find out what people see and say about this event, \n"
 "                        and join the conversation."
 msgstr ""
+
+#. module: website_event_track
+#: model:ir.model.fields,field_description:website_event_track.field_event_track_message_follower_ids
+msgid "Followers"
+msgstr "Followers"
+
+#. module: website_event_track
+#: model:ir.model.fields,field_description:website_event_track.field_event_track_message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Følgere (kanaler)"
+
+#. module: website_event_track
+#: model:ir.model.fields,field_description:website_event_track.field_event_track_message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Følgere (partnere)"
 
 #. module: website_event_track
 #: model:event.sponsor.type,name:website_event_track.event_sponsor_type3
@@ -404,7 +385,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:website_event_track.field_event_track_location_id
 #: model:ir.model.fields,field_description:website_event_track.field_event_track_tag_id
 msgid "ID"
-msgstr "ID"
+msgstr "Id"
+
+#. module: website_event_track
+#: model:ir.model.fields,help:website_event_track.field_event_track_message_unread
+msgid "If checked new messages require your attention."
+msgstr "Hvis afmærket, kræver nye beskeder din attention"
+
+#. module: website_event_track
+#: model:ir.model.fields,help:website_event_track.field_event_track_message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Hvis afmærket kræver nye beskeder din opmærksomhed "
 
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_track_image
@@ -417,9 +408,19 @@ msgid "Introduction"
 msgstr ""
 
 #. module: website_event_track
+#: model:ir.model.fields,field_description:website_event_track.field_event_track_message_is_follower
+msgid "Is Follower"
+msgstr "Følger"
+
+#. module: website_event_track
 #: model:event.track,name:website_event_track.event_track23
 msgid "Key Success factors selling Odoo."
 msgstr ""
+
+#. module: website_event_track
+#: model:ir.model.fields,field_description:website_event_track.field_event_track_message_last_post
+msgid "Last Message Date"
+msgstr "Sidste dato for besked"
 
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_sponsor___last_update
@@ -466,7 +467,13 @@ msgstr "Lav"
 #. module: website_event_track
 #: model:event.track,name:website_event_track.event_track31
 msgid "Lunch"
-msgstr "Frokost"
+msgstr ""
+
+#. module: website_event_track
+#: code:addons/website_event_track/models/event.py:81
+#, python-format
+msgid "Mail"
+msgstr ""
 
 #. module: website_event_track
 #: model:event.track,name:website_event_track.event_track22
@@ -485,7 +492,6 @@ msgstr "Medium"
 
 #. module: website_event_track
 #: model:ir.model.fields,help:website_event_track.field_event_sponsor_image_medium
-#: model:ir.model.fields,help:website_event_track.field_event_track_image
 msgid ""
 "Medium-sized image of this contact. It is automatically resized as a "
 "128x128px image, with aspect ratio preserved. Use this field in form views "
@@ -501,6 +507,16 @@ msgstr ""
 #: model:event.track,name:website_event_track.event_track24
 msgid "Merge proposals review, code sprint (entire day)."
 msgstr ""
+
+#. module: website_event_track
+#: model:ir.model.fields,field_description:website_event_track.field_event_track_message_ids
+msgid "Messages"
+msgstr "Beskeder"
+
+#. module: website_event_track
+#: model:ir.model.fields,help:website_event_track.field_event_track_message_ids
+msgid "Messages and communication history"
+msgstr "Besked- og kommunikations historik"
 
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.view_event_track_kanban
@@ -533,14 +549,37 @@ msgid "New Track Created"
 msgstr ""
 
 #. module: website_event_track
-#: model:ir.ui.view,arch_db:website_event_track.event_track_template_new
-msgid "New track proposal"
+#: code:addons/website_event_track/models/event.py:79
+#, python-format
+msgid "New Track Proposal"
+msgstr ""
+
+#. module: website_event_track
+#: code:addons/website_event_track/models/event.py:184
+#: model:ir.model.fields,field_description:website_event_track.field_event_event_show_blog
+#, python-format
+msgid "News"
 msgstr ""
 
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.tracks
 msgid "No tracks found!"
 msgstr ""
+
+#. module: website_event_track
+#: model:ir.model.fields,field_description:website_event_track.field_event_track_message_needaction_counter
+msgid "Number of Actions"
+msgstr "Antal aktioner"
+
+#. module: website_event_track
+#: model:ir.model.fields,help:website_event_track.field_event_track_message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Antal meddelser der kræver handling"
+
+#. module: website_event_track
+#: model:ir.model.fields,help:website_event_track.field_event_track_message_unread_counter
+msgid "Number of unread messages"
+msgstr "Antal ulæste beskeder"
 
 #. module: website_event_track
 #: model:event.track,name:website_event_track.event_track15
@@ -588,6 +627,12 @@ msgid "Partner Phone"
 msgstr ""
 
 #. module: website_event_track
+#: code:addons/website_event_track/models/event.py:82
+#, python-format
+msgid "Phone"
+msgstr "Telefon"
+
+#. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.track_view
 msgid "Practical Info"
 msgstr ""
@@ -605,6 +650,12 @@ msgstr ""
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.event_track_proposal
 msgid "Proposals are closed!"
+msgstr ""
+
+#. module: website_event_track
+#: code:addons/website_event_track/models/event.py:80
+#, python-format
+msgid "Proposed By"
 msgstr ""
 
 #. module: website_event_track
@@ -648,7 +699,7 @@ msgid "Responsible"
 msgstr "Ansvarlig"
 
 #. module: website_event_track
-#: model:ir.model.fields,field_description:website_event_track.field_event_track_location_id_8539
+#: model:ir.model.fields,field_description:website_event_track.field_event_track_location_id_8532
 #: model:ir.model.fields,field_description:website_event_track.field_event_track_location_name
 msgid "Room"
 msgstr "Rum"
@@ -667,7 +718,7 @@ msgstr ""
 #. module: website_event_track
 #: model:event.sponsor.type,name:website_event_track.event_sponsor_type2
 msgid "Silver"
-msgstr ""
+msgstr "Sølv"
 
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.event_track_social
@@ -680,11 +731,17 @@ msgid "Speaker Biography"
 msgstr ""
 
 #. module: website_event_track
-#: code:addons/website_event_track/models/website_event_track.py:122
+#: code:addons/website_event_track/models/event.py:136
 #: model:ir.model.fields,field_description:website_event_track.field_event_track_speaker_ids
 #, python-format
 msgid "Speakers"
 msgstr "Højtalere"
+
+#. module: website_event_track
+#: code:addons/website_event_track/models/event.py:84
+#, python-format
+msgid "Speakers Biography"
+msgstr ""
 
 #. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_sponsor_type_name
@@ -735,6 +792,11 @@ msgid "Submit Proposal"
 msgstr ""
 
 #. module: website_event_track
+#: model:web.tip,description:website_event_track.event_track_tip_1
+msgid "Switch to the calendar view to see the availability of each room."
+msgstr ""
+
+#. module: website_event_track
 #: model:ir.model.fields,field_description:website_event_track.field_event_track_tag_name
 msgid "Tag"
 msgstr "Tag"
@@ -751,12 +813,14 @@ msgid "Tags"
 msgstr "Tags"
 
 #. module: website_event_track
+#: code:addons/website_event_track/models/event.py:85
 #: model:ir.ui.view,arch_db:website_event_track.event_track_proposal
+#, python-format
 msgid "Talk Introduction"
 msgstr ""
 
 #. module: website_event_track
-#: code:addons/website_event_track/models/event.py:28
+#: code:addons/website_event_track/models/event.py:186
 #, python-format
 msgid "Talk Proposals"
 msgstr ""
@@ -767,7 +831,7 @@ msgid "Talk Title"
 msgstr ""
 
 #. module: website_event_track
-#: code:addons/website_event_track/models/event.py:25
+#: code:addons/website_event_track/models/event.py:181
 #, python-format
 msgid "Talks"
 msgstr ""
@@ -785,6 +849,11 @@ msgstr ""
 #. module: website_event_track
 #: model:event.track,name:website_event_track.event_track17
 msgid "The Art of Making an Odoo Demo."
+msgstr ""
+
+#. module: website_event_track
+#: model:ir.model.fields,help:website_event_track.field_event_track_website_url
+msgid "The full URL to access the document through the website."
 msgstr ""
 
 #. module: website_event_track
@@ -811,7 +880,9 @@ msgid ""
 msgstr ""
 
 #. module: website_event_track
+#: code:addons/website_event_track/models/event.py:83
 #: model:ir.model.fields,field_description:website_event_track.field_event_track_name
+#, python-format
 msgid "Title"
 msgstr "Titel"
 
@@ -875,9 +946,15 @@ msgid ""
 msgstr ""
 
 #. module: website_event_track
+#: model:ir.model.fields,field_description:website_event_track.field_event_track_message_unread
 #: model:ir.ui.view,arch_db:website_event_track.view_event_track_search
 msgid "Unread Messages"
 msgstr "Ulæste beskeder"
+
+#. module: website_event_track
+#: model:ir.model.fields,field_description:website_event_track.field_event_track_message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Ulæste besked tæller"
 
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.event_track_social
@@ -887,6 +964,11 @@ msgstr ""
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.view_event_track_kanban
 msgid "View Track"
+msgstr ""
+
+#. module: website_event_track
+#: model:ir.model.fields,field_description:website_event_track.field_event_track_website_published
+msgid "Visible in Website"
 msgstr ""
 
 #. module: website_event_track
@@ -909,6 +991,36 @@ msgstr ""
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.event_track_proposal_success
 msgid "We will evaluate your proposition and get back to you shortly."
+msgstr ""
+
+#. module: website_event_track
+#: model:ir.model.fields,field_description:website_event_track.field_event_track_website_message_ids
+msgid "Website Messages"
+msgstr "Website beskeder"
+
+#. module: website_event_track
+#: model:ir.model.fields,field_description:website_event_track.field_event_track_website_url
+msgid "Website URL"
+msgstr ""
+
+#. module: website_event_track
+#: model:ir.model.fields,help:website_event_track.field_event_track_website_message_ids
+msgid "Website communication history"
+msgstr "Website kommunikations historik"
+
+#. module: website_event_track
+#: model:ir.model.fields,field_description:website_event_track.field_event_track_website_meta_description
+msgid "Website meta description"
+msgstr ""
+
+#. module: website_event_track
+#: model:ir.model.fields,field_description:website_event_track.field_event_track_website_meta_keywords
+msgid "Website meta keywords"
+msgstr ""
+
+#. module: website_event_track
+#: model:ir.model.fields,field_description:website_event_track.field_event_track_website_meta_title
+msgid "Website meta title"
 msgstr ""
 
 #. module: website_event_track
@@ -945,14 +1057,14 @@ msgstr ""
 #: model:ir.ui.view,arch_db:website_event_track.view_event_track_form
 #: model:ir.ui.view,arch_db:website_event_track.view_event_track_kanban
 msgid "hours"
-msgstr "Timer"
-
-#. module: website_event_track
-#: model:ir.ui.view,arch_db:website_event_track.agenda
-msgid "talks"
 msgstr ""
 
 #. module: website_event_track
 #: model:ir.ui.view,arch_db:website_event_track.tracks
-msgid "unpublished"
+msgid "not published"
+msgstr "Ikke publiceret"
+
+#. module: website_event_track
+#: model:ir.ui.view,arch_db:website_event_track.agenda
+msgid "talks"
 msgstr ""

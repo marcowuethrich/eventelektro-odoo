@@ -3,18 +3,14 @@
 # * report
 # 
 # Translators:
-# Martin Trigaux <mat@odoo.com>, 2016
-# Ladislav Tomm <tomm@helemik.cz>, 2016
-# xlu <xlu@seznam.cz>, 2016
-# Ondřej Skuhravý <ondra.sk@volny.cz>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:57+0000\n"
-"PO-Revision-Date: 2016-09-07 08:57+0000\n"
-"Last-Translator: Ondřej Skuhravý <ondra.sk@volny.cz>, 2016\n"
-"Language-Team: Czech (https://www.transifex.com/odoo/teams/41243/cs/)\n"
+"POT-Creation-Date: 2016-12-07 10:39+0000\n"
+"PO-Revision-Date: 2016-12-08 08:38+0000\n"
+"Last-Translator: Martin Trigaux\n"
+"Language-Team: Czech (http://www.transifex.com/odoo/odoo-9/language/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -147,7 +143,7 @@ msgid "B9  23  33 x 62 mm"
 msgstr ""
 
 #. module: report
-#: code:addons/report/models/report.py:273
+#: code:addons/report/models/report.py:274
 #, python-format
 msgid "Bad Report Reference"
 msgstr ""
@@ -200,13 +196,6 @@ msgid "Default paper format ?"
 msgstr ""
 
 #. module: report
-#. openerp-web
-#: code:addons/report/static/src/xml/report.xml:12
-#, python-format
-msgid "Discard"
-msgstr "Zrušit"
-
-#. module: report
 #: model:ir.model.fields,field_description:report.field_ir_qweb_field_barcode_display_name
 #: model:ir.model.fields,field_description:report.field_report_abstract_report_display_name
 #: model:ir.model.fields,field_description:report.field_report_display_name
@@ -220,24 +209,17 @@ msgid "Display a header line"
 msgstr ""
 
 #. module: report
-#. openerp-web
-#: code:addons/report/static/src/xml/report.xml:8
-#, python-format
-msgid "Edit"
-msgstr "Upravit"
-
-#. module: report
-#: model:ir.ui.view,arch_db:report.base_config_settings_inherited
+#: model:ir.ui.view,arch_db:report.reporting_settings_form_inherited
 msgid "Edit external footer"
 msgstr ""
 
 #. module: report
-#: model:ir.ui.view,arch_db:report.base_config_settings_inherited
+#: model:ir.ui.view,arch_db:report.reporting_settings_form_inherited
 msgid "Edit external header"
 msgstr ""
 
 #. module: report
-#: model:ir.ui.view,arch_db:report.base_config_settings_inherited
+#: model:ir.ui.view,arch_db:report.reporting_settings_form_inherited
 msgid "Edit internal header"
 msgstr ""
 
@@ -247,9 +229,8 @@ msgid "Email:"
 msgstr ""
 
 #. module: report
-#: code:addons/report/models/report_paperformat.py:68
-#, python-format
-msgid "Error ! You cannot select a format AND specific page width/height."
+#: constraint:report.paperformat:0
+msgid "Error ! You cannot select a format AND speficic page width/height."
 msgstr ""
 
 #. module: report
@@ -271,11 +252,6 @@ msgstr "Fax:"
 #: selection:report.paperformat,format:0
 msgid "Folio 27  210 x 330 mm"
 msgstr ""
-
-#. module: report
-#: model:ir.model,name:report.model_ir_http
-msgid "HTTP routing"
-msgstr "HTTP routing"
 
 #. module: report
 #: model:ir.model.fields,field_description:report.field_report_paperformat_header_spacing
@@ -382,11 +358,6 @@ msgid "Paper format"
 msgstr ""
 
 #. module: report
-#: model:ir.model.fields,field_description:report.field_base_config_settings_paperformat_id
-msgid "Paper format *"
-msgstr ""
-
-#. module: report
 #: model:ir.ui.view,arch_db:report.paperformat_view_form
 #: model:ir.ui.view,arch_db:report.paperformat_view_tree
 msgid "Paper format configuration"
@@ -409,36 +380,22 @@ msgstr ""
 
 #. module: report
 #: model:ir.actions.report.xml,name:report.action_report_externalpreview
-#: model:ir.ui.view,arch_db:report.base_config_settings_inherited
+#: model:ir.ui.view,arch_db:report.reporting_settings_form_inherited
 msgid "Preview External Report"
 msgstr ""
 
 #. module: report
 #: model:ir.actions.report.xml,name:report.action_report_internalpreview
-#: model:ir.ui.view,arch_db:report.base_config_settings_inherited
+#: model:ir.ui.view,arch_db:report.reporting_settings_form_inherited
 msgid "Preview Internal Report"
 msgstr ""
 
 #. module: report
 #. openerp-web
-#: code:addons/report/static/src/xml/report.xml:5
-#, python-format
-msgid "Print"
-msgstr "Tisk"
-
-#. module: report
-#: model:ir.model.fields,field_description:report.field_ir_act_report_xml_print_report_name
-msgid "Printed Report Name"
-msgstr ""
-
-#. module: report
-#: model:ir.ui.view,arch_db:report.act_report_xml_view_inherit
-msgid "QWeb views"
-msgstr ""
-
-#. module: report
-#. openerp-web
-#: code:addons/report/static/src/js/qwebactionmanager.js:95
+#: code:addons/report/static/src/js/qwebactionmanager.js:76
+#: code:addons/report/static/src/js/qwebactionmanager.js:84
+#: code:addons/report/static/src/js/qwebactionmanager.js:91
+#: code:addons/report/static/src/js/qwebactionmanager.js:96
 #: model:ir.model,name:report.model_report
 #, python-format
 msgid "Report"
@@ -457,11 +414,9 @@ msgid "Right Margin (mm)"
 msgstr ""
 
 #. module: report
-#. openerp-web
-#: code:addons/report/static/src/xml/report.xml:11
-#, python-format
-msgid "Save"
-msgstr "Uložit"
+#: model:ir.ui.view,arch_db:report.act_report_xml_view_inherit
+msgid "Search associated QWeb views"
+msgstr ""
 
 #. module: report
 #: model:ir.model.fields,help:report.field_report_paperformat_format
@@ -489,15 +444,7 @@ msgid "This is a sample of an internal report."
 msgstr ""
 
 #. module: report
-#: model:ir.model.fields,help:report.field_ir_act_report_xml_print_report_name
-msgid ""
-"This is the filename of the report going to download. Keep empty to not "
-"change the report filename. You can use a python expression with the object "
-"and time variables."
-msgstr ""
-
-#. module: report
-#: code:addons/report/models/report.py:273
+#: code:addons/report/models/report.py:274
 #, python-format
 msgid "This report is not loaded into the database: %s."
 msgstr ""
@@ -509,7 +456,7 @@ msgstr ""
 
 #. module: report
 #. openerp-web
-#: code:addons/report/static/src/js/qwebactionmanager.js:18
+#: code:addons/report/static/src/js/qwebactionmanager.js:76
 #, python-format
 msgid ""
 "Unable to find Wkhtmltopdf on this \n"
@@ -529,14 +476,14 @@ msgid "Website:"
 msgstr "Webová stránka:"
 
 #. module: report
-#: code:addons/report/models/report.py:435
+#: code:addons/report/models/report.py:464
 #, python-format
 msgid "Wkhtmltopdf failed (error code: %s). Message: %s"
 msgstr ""
 
 #. module: report
 #. openerp-web
-#: code:addons/report/static/src/js/qwebactionmanager.js:19
+#: code:addons/report/static/src/js/qwebactionmanager.js:84
 #, python-format
 msgid ""
 "You need to start OpenERP with at least two \n"
@@ -545,7 +492,7 @@ msgstr ""
 
 #. module: report
 #. openerp-web
-#: code:addons/report/static/src/js/qwebactionmanager.js:20
+#: code:addons/report/static/src/js/qwebactionmanager.js:91
 #, python-format
 msgid ""
 "You should upgrade your version of\n"
@@ -555,20 +502,10 @@ msgid ""
 msgstr ""
 
 #. module: report
-#: model:ir.model,name:report.model_base_config_settings
-msgid "base.config.settings"
-msgstr "base.config.settings"
-
-#. module: report
 #. openerp-web
 #: code:addons/report/static/src/js/qwebactionmanager.js:96
 #, python-format
 msgid ""
 "Your installation of Wkhtmltopdf seems to be broken. The \n"
 "report will be shown in html.<br><br><a href=\"http://wkhtmltopdf.org/\" target=\"_blank\">wkhtmltopdf.org</a>"
-msgstr ""
-
-#. module: report
-#: model:ir.model,name:report.model_ir_qweb_field_barcode
-msgid "ir.qweb.field.barcode"
 msgstr ""

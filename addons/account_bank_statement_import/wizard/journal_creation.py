@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models
+from openerp import api, fields, models
 
-
-class AccountBankStatementImportJounalCreation(models.TransientModel):
+class account_bank_statement_import_journal_creation(models.TransientModel):
     _name = 'account.bank.statement.import.journal.creation'
     _description = 'Import Bank Statement Journal Creation Wizard'
 

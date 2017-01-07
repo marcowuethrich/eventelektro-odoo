@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<openerp>
+    <data>
         <!-- Contribution Register -->
 
         <record id="hr_houserent_allowance_register" model="hr.contribution.register">
@@ -579,4 +580,5 @@ or - (contract.wage * 0.12))</field>
             <field name="name">Medical Reimbursement</field>
             <field name="input_id" ref="hr_salary_rule_medical"/>
         </record>
-</odoo>
+    </data>
+</openerp>

@@ -2,10 +2,8 @@ odoo.define('point_of_sale.devices', function (require) {
 "use strict";
 
 var core = require('web.core');
-var Model = require('web.DataModel');
 var Session = require('web.Session');
 
-var QWeb = core.qweb;
 var _t = core._t;
 
 // the JobQueue schedules a sequence of 'jobs'. each job is
@@ -97,7 +95,7 @@ var ProxyDevice  = core.Class.extend(core.mixins.PropertiesMixin,{
 
         this.pos = parent;
 
-        this.weighing = false;
+        this.weighting = false;
         this.debug_weight = 0;
         this.use_debug_weight = false;
 
@@ -434,23 +432,6 @@ var ProxyDevice  = core.Class.extend(core.mixins.PropertiesMixin,{
             }
         }
         send_printing_job();
-    },
-
-    print_sale_details: function() { 
-        var self = this;
-        new Model('report.point_of_sale.report_saledetails').call('get_sale_details').then(function(result){
-            var env = {
-                company: self.pos.company,
-                pos: self.pos,
-                products: result.products,
-                payments: result.payments,
-                taxes: result.taxes,
-                total_paid: result.total_paid,
-                date: (new Date()).toLocaleString(),
-            };
-            var report = QWeb.render('SaleDetailsReport', env);
-            self.print_receipt(report);
-        })
     },
 
     // asks the proxy to log some information, as with the debug.log you can provide several arguments.

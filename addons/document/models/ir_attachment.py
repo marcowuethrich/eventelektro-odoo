@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 import logging
-import pyPdf
-import xml.dom.minidom
 import zipfile
-
+import xml.dom.minidom
 from StringIO import StringIO
 
-from odoo import api, models
+import pyPdf
+
+from openerp.osv import osv
 
 _logger = logging.getLogger(__name__)
 FTYPES = ['docx', 'pptx', 'xlsx', 'opendoc', 'pdf']
@@ -35,7 +35,7 @@ def textToString(element):
     return buff
 
 
-class IrAttachment(models.Model):
+class IrAttachment(osv.osv):
     _inherit = 'ir.attachment'
 
     def _index_docx(self, bin_data):
@@ -117,11 +117,10 @@ class IrAttachment(models.Model):
                 pass
         return buf
 
-    @api.model
-    def _index(self, bin_data, datas_fname, mimetype):
+    def _index(self, cr, uid, bin_data, datas_fname, mimetype):
         for ftype in FTYPES:
             buf = getattr(self, '_index_%s' % ftype)(bin_data)
             if buf:
                 return buf
 
-        return super(IrAttachment, self)._index(bin_data, datas_fname, mimetype)
+        return super(IrAttachment, self)._index(cr, uid, bin_data, datas_fname, mimetype)

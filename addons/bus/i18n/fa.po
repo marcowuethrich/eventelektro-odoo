@@ -3,16 +3,14 @@
 # * bus
 # 
 # Translators:
-# Hamid Darabi <hamid.darabi@gmail.com>, 2016
-# Martin Trigaux <mat@odoo.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:56+0000\n"
-"PO-Revision-Date: 2016-09-07 08:56+0000\n"
-"Last-Translator: Martin Trigaux <mat@odoo.com>, 2016\n"
-"Language-Team: Persian (https://www.transifex.com/odoo/teams/41243/fa/)\n"
+"POT-Creation-Date: 2016-09-22 13:16+0000\n"
+"PO-Revision-Date: 2016-09-23 08:59+0000\n"
+"Last-Translator: Martin Trigaux\n"
+"Language-Team: Persian (http://www.transifex.com/odoo/odoo-9/language/fa/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -56,13 +54,13 @@ msgid "Geo Latitude"
 msgstr ""
 
 #. module: bus
-#: model:ir.model.fields,field_description:bus.field_res_users_partner_longitude
-msgid "Geo Longitude"
+#: model:ir.model.fields,field_description:bus.field_res_users_date_localization
+msgid "Geo Localization Date"
 msgstr ""
 
 #. module: bus
-#: model:ir.model.fields,field_description:bus.field_res_users_date_localization
-msgid "Geolocation Date"
+#: model:ir.model.fields,field_description:bus.field_res_users_partner_longitude
+msgid "Geo Longitude"
 msgstr ""
 
 #. module: bus
@@ -82,7 +80,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:bus.field_bus_bus___last_update
 #: model:ir.model.fields,field_description:bus.field_bus_presence___last_update
 msgid "Last Modified on"
-msgstr "آخرین به‌روزرسانی در تاریخ "
+msgstr "تاریخ آخرین به‌روزرسانی"
 
 #. module: bus
 #: model:ir.model.fields,field_description:bus.field_bus_presence_last_poll
@@ -107,7 +105,7 @@ msgstr "آخرین به روز رسانی در"
 #. module: bus
 #: model:ir.model.fields,field_description:bus.field_bus_bus_message
 msgid "Message"
-msgstr "پیام"
+msgstr "پیغام"
 
 #. module: bus
 #: selection:bus.presence,status:0

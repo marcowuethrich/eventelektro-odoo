@@ -1,8 +1,4 @@
-# -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
-from odoo import models
-
+from openerp import models, SUPERUSER_ID
 
 class Lead(models.Model):
     _inherit = 'crm.lead'

@@ -1,6 +1,6 @@
 #!/bin/bash
 ### BEGIN INIT INFO
-# Provides:          odoo
+# Provides:          odoo.py
 # Required-Start:    $remote_fs $syslog
 # Required-Stop:     $remote_fs $syslog
 # Default-Start:     2 3 4 5
@@ -14,10 +14,10 @@
 . /lib/lsb/init-functions
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
-DAEMON=/usr/bin/odoo
+DAEMON=/usr/bin/odoo.py
 NAME=odoo
 DESC=odoo
-CONFIG=/etc/odoo/odoo.conf
+CONFIG=/etc/odoo/openerp-server.conf
 LOGFILE=/var/log/odoo/odoo-server.log
 PIDFILE=/var/run/${NAME}.pid
 USER=odoo

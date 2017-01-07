@@ -2,6 +2,7 @@ odoo.define('web_calendar.widgets', function(require) {
 "use strict";
 
 var core = require('web.core');
+var data = require('web.data');
 var Dialog = require('web.Dialog');
 var form_common = require('web.form_common');
 var Widget = require('web.Widget');
@@ -68,12 +69,12 @@ var QuickCreate = Dialog.extend({
         });
 
         this.$input = this.$('input').keyup(function enterHandler (e) {
-            if(e.keyCode === $.ui.keyCode.ENTER) {
+            if(e.keyCode == $.ui.keyCode.ENTER) {
                 self.$input.off('keyup', enterHandler);
                 if (!self.quick_add()){
                     self.$input.on('keyup', enterHandler);
                 }
-            } else if (e.keyCode === $.ui.keyCode.ESCAPE && self._buttons) {
+            } else if (e.keyCode == $.ui.keyCode.ESCAPE && self._buttons) {
                 self.close();
             }
         });
@@ -113,6 +114,20 @@ var QuickCreate = Dialog.extend({
             });
     },
 
+    /**
+     * Show full form popup
+     */
+     get_form_popup_infos: function() {
+        var parent = this.getParent();
+        var infos = {
+            view_id: false,
+            title: this.name,
+        };
+        if (!_.isUndefined(parent) && !(_.isUndefined(parent.ViewManager))) {
+            infos.view_id = parent.ViewManager.get_view_id('form');
+        }
+        return infos;
+    },
     slow_create: function(_data) {
         //if all day, we could reset time to display 00:00:00
         
@@ -125,21 +140,26 @@ var QuickCreate = Dialog.extend({
             defaults['default_' + field_name] = val;
         });
                     
+        var pop_infos = self.get_form_popup_infos();
+        var context = new data.CompoundContext(this.dataset.context, defaults);
         var pop = new form_common.FormViewDialog(this, {
             res_model: this.dataset.model,
             context: this.dataset.get_context(defaults),
             title: this.get_title(),
             disable_multiple_selection: true,
+            view_id: pop_infos.view_id,
             // Ensuring we use ``self.dataset`` and DO NOT create a new one.
             create_function: function(data, options) {
-                return self.dataset.create(data, options).fail(function (r) {
+                return self.dataset.create(data, options).done(function(r) {
+                }).fail(function (r, event) {
                    if (!r.data.message) { //else manage by openerp
                         throw new Error(r);
                    }
                 });
             },
-            read_function: function() {
-                return self.dataset.read_ids.apply(self.dataset, arguments).fail(function (r) {
+            read_function: function(id, fields, options) {
+                return self.dataset.read_ids.apply(self.dataset, arguments).done(function() {
+                }).fail(function (r, event) {
                     if (!r.data.message) { //else manage by openerp
                         throw new Error(r);
                     }
@@ -151,7 +171,7 @@ var QuickCreate = Dialog.extend({
                 def.resolve();
             }
         });
-        pop.on('create_completed', self, function() {
+        pop.on('create_completed', self, function(id) {
             created = true;
             self.trigger('slowadded');
         });
@@ -174,35 +194,54 @@ var Sidebar = Widget.extend({
     template: 'CalendarView.sidebar',
     
     start: function() {
+        this._super();
         this.filter = new SidebarFilter(this, this.getParent());
-        return $.when(this._super(), this.filter.appendTo(this.$el));
+        this.filter.appendTo(this.$('.o_calendar_filter'));
     }
 });
 var SidebarFilter = Widget.extend({
+    className: 'o_calendar_all_responsibles',
     events: {
-        'click .o_calendar_contact': 'on_click',
-    },
-    template: 'CalendarView.sidebar.filters',
+        'change input:checkbox': 'filter_click',
+        'click span.color_filter': 'select_previous',
 
+    },
     init: function(parent, view) {
         this._super(parent);
         this.view = view;
     },
-    render: function() {
+    set_filters: function() {
         var self = this;
-        var filters = _.filter(this.view.get_all_filters_ordered(), function(filter) {
-            return _.contains(self.view.now_filter_ids, filter.value);
+        _.forEach(self.view.all_filters, function(o) {
+            if (_.contains(self.view.now_filter_ids, o.value)) {
+                self.$('div.o_calendar_responsible input[value=' + o.value + ']').prop('checked',o.is_checked);
+            }
         });
-        this.$('.o_calendar_contacts').html(QWeb.render('CalendarView.sidebar.contacts', { filters: filters }));
     },
-    on_click: function(e) {
-        if (e.target.tagName !== 'INPUT') {
-            $(e.currentTarget).find('input').click();
-            return;
+    events_loaded: function(filters) {
+        var self = this;
+        if (!filters) {
+            filters = [];
+            _.forEach(self.view.get_all_filters_ordered(), function(o) {
+                if (_.contains(self.view.now_filter_ids, o.value)) {
+                    filters.push(o);
+                }
+            });
+        }            
+        this.$el.html(QWeb.render('CalendarView.sidebar.responsible', { filters: filters }));
+    },
+    filter_click: function(e) {
+        var self = this;
+        if (self.view.all_filters[0] && e.target.value == self.view.all_filters[0].value) {
+            self.view.all_filters[0].is_checked = e.target.checked;
+        } else {
+            self.view.all_filters[e.target.value].is_checked = e.target.checked;
         }
-        this.view.all_filters[e.target.value].is_checked = e.target.checked;
-        this.trigger_up('reload_events');
+        self.view.$calendar.fullCalendar('refetchEvents');
     },
+    select_previous: function(e) {
+        $(e.target).siblings('input').trigger('click');
+    }
 });
 
 return {

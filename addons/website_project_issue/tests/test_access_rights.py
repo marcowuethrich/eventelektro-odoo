@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo.addons.project.tests.test_access_rights import TestPortalProjectBase
-from odoo.exceptions import AccessError
-from odoo.tools import mute_logger
+from openerp.addons.project.tests.test_access_rights import TestPortalProjectBase
+from openerp.exceptions import AccessError
+from openerp.tools import mute_logger
 
 
 class TestPortalProjectBase(TestPortalProjectBase):
@@ -27,7 +26,7 @@ class TestPortalProjectBase(TestPortalProjectBase):
 
 
 class TestPortalIssue(TestPortalProjectBase):
-    @mute_logger('odoo.addons.base.ir.ir_model', 'odoo.models')
+    @mute_logger('openerp.addons.base.ir.ir_model', 'openerp.models')
     def test_00_project_access_rights(self):
         """ Test basic project access rights, for project and portal_project """
         pigs_id = self.project_pigs.id
@@ -85,6 +84,18 @@ class TestPortalIssue(TestPortalProjectBase):
         # ----------------------------------------
         self.project_pigs.write({'privacy_visibility': 'followers'})
 
+        # Do: Alfred reads project -> ko (employee ko followers)
+        # Test: no project issue visible
+        issues = Issue.sudo(self.user_projectuser.id).search([('project_id', '=', pigs_id)])
+        self.assertEqual(set(issues.ids), set([self.issue_4.id]),
+                         'access rights: employee user should not see issues of a not-followed followers project, only assigned')
+
+        # Do: Chell reads project -> ko (portal ko employee)
+        # Test: no project issue visible
+        issues = Issue.sudo(self.user_portal.id).search([('project_id', '=', pigs_id)])
+        self.assertEqual(set(issues.ids), set([self.issue_5.id]),
+                         'access rights: portal user should not see issues of a not-followed followers project, only assigned')
+
         # Data: subscribe Alfred, Chell and Donovan as follower
         self.project_pigs.message_subscribe_users(user_ids=[self.user_projectuser.id, self.user_portal.id, self.user_public.id])
         self.issue_1.sudo(self.user_projectmanager.id).message_subscribe_users(user_ids=[self.user_portal.id, self.user_projectuser.id])
@@ -93,12 +104,11 @@ class TestPortalIssue(TestPortalProjectBase):
         # Do: Alfred reads project -> ok (follower ok followers)
         # Test: followed + assigned issues visible
         issues = Issue.sudo(self.user_projectuser.id).search([('project_id', '=', pigs_id)])
-
-        self.assertEqual(set(issues.ids), test_issue_ids,
+        self.assertEqual(set(issues.ids), set([self.issue_1.id, self.issue_3.id, self.issue_4.id]),
                          'access rights: employee user should not see followed + assigned issues of a follower project')
 
         # Do: Chell reads project -> ok (follower ok follower)
         # Test: followed + assigned issues visible
         issues = Issue.sudo(self.user_portal.id).search([('project_id', '=', pigs_id)])
-        self.assertFalse(set(issues.ids),
-                         'access rights: portal user should not see issues of a follower project')
+        self.assertEqual(set(issues.ids), set([self.issue_1.id, self.issue_3.id, self.issue_5.id]),
+                         'access rights: employee user should not see followed + assigned issues of a follower project')

@@ -156,18 +156,27 @@ odoo.define_section('search.query', ['web.SearchView'], function (test) {
  * @return {instance.web.SearchView}
  */
 
-function makeSearchView (test, dummy_widget_attributes, defaults, options, raw_fields_view) {
+function makeSearchView (test, dummy_widget_attributes, defaults, options) {
     var core = test.deps['web.core'];
     var search_inputs = test.deps['web.search_inputs'];
     var data = test.deps['web.data'];
-    var data_manager = test.deps['web.data_manager'];
     var SearchView = test.deps['web.SearchView'];
 
     var mock = test.mock;
-    var assert = test.assert;
+    var assert = test.assert
 
     var DummyWidget = search_inputs.Field.extend(dummy_widget_attributes || {});
     core.search_widgets_registry.add('dummy', DummyWidget);
+
+    mock.add('dummy.model:fields_view_get', function () {
+        return {
+            type: 'search',
+            fields: {
+                dummy: {type: 'char', string: "Dummy", searchable: true}
+            },
+            arch: '<search><field name="dummy" widget="dummy"/></search>'
+        };
+    }, true);
 
     mock.add('ir.filters:get_filters', function () {
         return [];
@@ -179,22 +188,16 @@ function makeSearchView (test, dummy_widget_attributes, defaults, options, raw_f
         };
     });
 
+
+    // instance.client = { action_manager: { inner_action: undefined } };
+
     var dataset = new data.DataSet(null, 'dummy.model');
     
-    var mock_parent = {
-        getParent: function () { return null; },
-    };
+    var mock_parent = {getParent: function () {return null;}};
     
     options = _.defaults(options || {}, {$buttons: $('<div>')});
-    options.search_defaults = defaults;
-    var fields_view = data_manager._postprocess_fvg(raw_fields_view || {
-        type: 'search',
-        fields: {
-            dummy: {type: 'char', string: "Dummy", searchable: true}
-        },
-        arch: '<search><field name="dummy" widget="dummy"/></search>'
-    });
-    var view = new SearchView(mock_parent, dataset, fields_view, options);
+    
+    var view = new SearchView(mock_parent, dataset, false, defaults, options);
 
     view.on('invalid_search', this, function () {
         assert.ok(false, JSON.stringify([].slice(arguments)));
@@ -202,7 +205,7 @@ function makeSearchView (test, dummy_widget_attributes, defaults, options, raw_f
     return view;
 };
 
-odoo.define_section('search.defaults', ['web.search_inputs', 'web.SearchView', 'web.core', 'web.data', 'web.data_manager'], function (test, mock) {
+odoo.define_section('search.defaults', ['web.search_inputs', 'web.SearchView', 'web.core', 'web.data'], function (test, mock) {
     test('calling', function (assert) {
         assert.expect(2);
         var defaults_called = false;
@@ -428,7 +431,7 @@ odoo.define_section('search.defaults', ['web.search_inputs', 'web.SearchView', '
 
 });
 
-odoo.define_section('search.completions', ['web.search_inputs', 'web.SearchView', 'web.core', 'web.data', 'web.data_manager'], function (test, mock) {
+odoo.define_section('search.completions', ['web.search_inputs', 'web.SearchView', 'web.core', 'web.data'], function (test, mock) {
 
     test('calling', function (assert) {
         assert.expect(4);
@@ -848,7 +851,7 @@ odoo.define_section('search.completions', ['web.search_inputs', 'web.SearchView'
     });
 });
 
-odoo.define_section('search.serialization', ['web.search_inputs', 'web.SearchView', 'web.core', 'web.data', 'web.data_manager'], function (test, mock) {
+odoo.define_section('search.serialization', ['web.search_inputs', 'web.SearchView', 'web.core', 'web.data'], function (test, mock) {
 
     test('No facet, no call', function (assert, search_inputs, SearchView, core) {
         assert.expect(6);
@@ -1188,7 +1191,7 @@ odoo.define_section('search.serialization', ['web.search_inputs', 'web.SearchVie
     });
 });
 
-odoo.define_section('search.serialization', ['web.search_inputs', 'web.SearchView', 'web.core', 'web.data', 'web.data_manager'], function (test, mock) {
+odoo.define_section('search.serialization', ['web.search_inputs', 'web.SearchView', 'web.core', 'web.data'], function (test, mock) {
 
     test('is-drawn', function (assert) {
         assert.expect(3);
@@ -1196,9 +1199,9 @@ odoo.define_section('search.serialization', ['web.search_inputs', 'web.SearchVie
         var $fix = $('#qunit-fixture');
         return view.appendTo($fix)
             .done(function () {
-                assert.ok(view.$buttons.find('.o_filters_menu').length,
+                assert.ok(view.$buttons.find('.filters-menu').length,
                    "filters menu has been drawn");
-                assert.ok(view.$buttons.find('.o_group_by_menu').length,
+                assert.ok(view.$buttons.find('.group-by-menu').length,
                    "group by menu has been drawn");
                 assert.ok(view.$buttons.find('.o_favorites_menu').length,
                    "favorites menu has been drawn");
@@ -1207,33 +1210,37 @@ odoo.define_section('search.serialization', ['web.search_inputs', 'web.SearchVie
 
 });
 
-odoo.define_section('search.filters', ['web.search_inputs', 'web.SearchView', 'web.core', 'web.data', 'web.data_manager'], function (test, mock) {
-    function fields_view_get () {
-        // view with a single group of filters
-        return {
-            type: 'search',
-            fields: {},
-            arch: '<search>' +
-                    '<filter string="Foo1" domain="[ [\'foo\', \'=\', \'1\'] ]"/>' +
-                    '<filter name="foo2" string="Foo2" domain="[ [\'foo\', \'=\', \'2\'] ]"/>' +
-                    '<filter string="Foo3" domain="[ [\'foo\', \'=\', \'3\'] ]"/>' +
-                    '</search>',
-        };
+odoo.define_section('search.filters', ['web.search_inputs', 'web.SearchView', 'web.core', 'web.data'], function (test, mock) {
+    function setup () {
+        mock.add('dummy.model:fields_view_get', function () {
+            // view with a single group of filters
+            return {
+                type: 'search',
+                fields: {},
+                arch: '<search>' +
+                        '<filter string="Foo1" domain="[ [\'foo\', \'=\', \'1\'] ]"/>' +
+                        '<filter name="foo2" string="Foo2" domain="[ [\'foo\', \'=\', \'2\'] ]"/>' +
+                        '<filter string="Foo3" domain="[ [\'foo\', \'=\', \'3\'] ]"/>' +
+                        '</search>',
+            };
+        });
     }
 
     test('drawn', function (assert) {
+        setup();
         assert.expect(3);
-        var view = makeSearchView(this, {}, {}, {}, fields_view_get());
+        var view = makeSearchView(this);
         var $fix = $('#qunit-fixture');
 
         return view.appendTo($fix)
             .done(function () {
-                var $filters = view.$buttons.find('.o_filters_menu li'),
+                var $filters = view.$buttons.find('.filters-menu li'),
                     $favorites = view.$buttons.find('.o_favorites_menu li'),
-                    $groupby = view.$buttons.find('.o_group_by_menu li');
-                // 3 filters, 1 separator, 1 button add filter, 1 apply button
-                assert.equal($filters.length, 6,
-                      'filter menu should have 6 elements total');
+                    $groupby = view.$buttons.find('.group-by-menu li');
+                // 3 filters, 1 separator, 1 button add filter, 
+                // 1 filter condition menu, 1 apply button
+                assert.equal($filters.length, 7,
+                      'filter menu should have 7 elements total');
 
                 // 1 divider, 1 save search button, 1 text input, 2 checkboxes, 
                 // 1 save button, 3 add to dashboard things (a, input, button)
@@ -1242,9 +1249,9 @@ odoo.define_section('search.filters', ['web.search_inputs', 'web.SearchView', 'w
                 // assert.equal($favorites.length, 9,
                 //       "favorites menu should have 9 elements");
 
-                // 1 divider, 1 add custom group button
-                assert.equal($groupby.length, 2,
-                      "groupby menu should have 2 element");
+                // 1 divider, 1 add custom group button, 1 select groupby, 1 apply button,
+                assert.equal($groupby.length, 4,
+                      "groupby menu should have 4 element");
                 assert.equal(_.str.strip($filters.find('a')[0].textContent), "Foo1",
                       "Text content of first filter option should match filter string");
             });
@@ -1252,13 +1259,14 @@ odoo.define_section('search.filters', ['web.search_inputs', 'web.SearchView', 'w
 
     test('click adding from empty query', function (assert, search_inputs) {
         assert.expect(4);
+        setup();
         var Filter = search_inputs.Filter;
 
-        var view = makeSearchView(this, {}, {}, {}, fields_view_get());
+        var view = makeSearchView(this);
         var $fix = $('#qunit-fixture');
         return view.appendTo($fix)
             .done(function () {
-                var $fs = view.$buttons.find('.o_filters_menu li a');
+                var $fs = view.$buttons.find('.filters-menu li a');
                 $fs.eq(2).trigger('click');
                 assert.equal(view.query.length, 1, "click should have added a facet");
                 var facet = view.query.at(0);
@@ -1273,12 +1281,13 @@ odoo.define_section('search.filters', ['web.search_inputs', 'web.SearchView', 'w
 
     test('click adding from existing query', function (assert) {
         assert.expect(4);
-        var view = makeSearchView(this, {}, {foo2: true}, {}, fields_view_get());
+        setup();
+        var view = makeSearchView(this, {}, {foo2: true});
 
         var $fix = $('#qunit-fixture');
         return view.appendTo($fix)
             .done(function () {
-                var $fs = view.$buttons.find('.o_filters_menu li a');
+                var $fs = view.$buttons.find('.filters-menu li a');
                 $fs.eq(2).trigger('click');
                 assert.equal(view.query.length, 1, "click should not have changed facet count");
                 var facet = view.query.at(0);
@@ -1295,16 +1304,17 @@ odoo.define_section('search.filters', ['web.search_inputs', 'web.SearchView', 'w
 
     test('click removing from query', function (assert) {
         assert.expect(4);
+        setup();
 
         var calls = 0;
-        var view = makeSearchView(this, {}, {foo2: true}, {}, fields_view_get());
+        var view = makeSearchView(this, {}, {foo2: true});
         view.on('search_data', null, function () {
             ++calls;
         });
         var $fix = $('#qunit-fixture');
         return view.appendTo($fix)
             .done(function () {
-                var $fs = view.$buttons.find('.o_filters_menu li a');
+                var $fs = view.$buttons.find('.filters-menu li a');
                 // sanity check
                 assert.equal(view.query.length, 1, "query should have default facet");
                 assert.strictEqual(calls, 0);
@@ -1315,21 +1325,24 @@ odoo.define_section('search.filters', ['web.search_inputs', 'web.SearchView', 'w
     });
 });
 
-odoo.define_section('search.groupby', ['web.search_inputs', 'web.SearchView', 'web.core', 'web.data', 'web.data_manager'], function (test, mock) {
+odoo.define_section('search.groupby', ['web.search_inputs', 'web.SearchView', 'web.core', 'web.data'], function (test, mock) {
 
-    test('basic', ['web.FavoriteMenu', 'web.FilterMenu', 'web.GroupByMenu'], function (assert, search_inputs, SearchView, core, data, data_manager, FavoriteMenu, FilterMenu, GroupByMenu) {
+    test('basic', ['web.FavoriteMenu', 'web.FilterMenu', 'web.GroupByMenu'], function (assert, search_inputs, SearchView, core, data, FavoriteMenu, FilterMenu, GroupByMenu) {
         assert.expect(12);
-        var view = makeSearchView(this, {}, {}, {}, {
-            type: 'search',
-            fields: {},
-            arch: [
-                '<search>',
-                    '<filter string="Foo" context="{\'group_by\': \'foo\'}"/>',
-                    '<filter string="Bar" context="{\'group_by\': \'bar\'}"/>',
-                    '<filter string="Baz" context="{\'group_by\': \'baz\'}"/>',
-                '</search>'
-            ].join(''),
+        mock.add('dummy.model:fields_view_get', function () {
+            return {
+                type: 'search',
+                fields: {},
+                arch: [
+                    '<search>',
+                        '<filter string="Foo" context="{\'group_by\': \'foo\'}"/>',
+                        '<filter string="Bar" context="{\'group_by\': \'bar\'}"/>',
+                        '<filter string="Baz" context="{\'group_by\': \'baz\'}"/>',
+                    '</search>'
+                ].join(''),
+            };
         });
+        var view = makeSearchView(this);
         var $fix = $('#qunit-fixture');
         return view.appendTo($fix)
         .done(function () {
@@ -1365,19 +1378,22 @@ odoo.define_section('search.groupby', ['web.search_inputs', 'web.SearchView', 'w
 
     test('unified multiple groupby groups', function (assert, search_inputs, SearchView, core, data) {
         assert.expect(3);
-        var view = makeSearchView(this, {}, {}, {}, {
-            type: 'search',
-            fields: {},
-            arch: [
-                '<search>',
-                    '<filter string="Foo" context="{\'group_by\': \'foo\'}"/>',
-                    '<separator/>',
-                    '<filter string="Bar" context="{\'group_by\': \'bar\'}"/>',
-                    '<separator/>',
-                    '<filter string="Baz" context="{\'group_by\': \'baz\'}"/>',
-                '</search>'
-            ].join(''),
+        mock.add('dummy.model:fields_view_get', function () {
+            return {
+                type: 'search',
+                fields: {},
+                arch: [
+                    '<search>',
+                        '<filter string="Foo" context="{\'group_by\': \'foo\'}"/>',
+                        '<separator/>',
+                        '<filter string="Bar" context="{\'group_by\': \'bar\'}"/>',
+                        '<separator/>',
+                        '<filter string="Baz" context="{\'group_by\': \'baz\'}"/>',
+                    '</search>'
+                ].join(''),
+            };
         });
+        var view = makeSearchView(this);
         var $fix = $('#qunit-fixture');
 
         return view.appendTo($fix)
@@ -1399,7 +1415,7 @@ odoo.define_section('search.groupby', ['web.search_inputs', 'web.SearchView', 'w
     });
 });
 
-odoo.define_section('search.filters.saved', ['web.search_inputs', 'web.SearchView', 'web.core', 'web.data', 'web.data_manager'], function (test, mock) {
+odoo.define_section('search.filters.saved', ['web.search_inputs', 'web.SearchView', 'web.core', 'web.data'], function (test, mock) {
 
     test('checkboxing', function (assert) {
         assert.expect(6);
@@ -1414,7 +1430,7 @@ odoo.define_section('search.filters.saved', ['web.search_inputs', 'web.SearchVie
                 var $li = view.favorite_menu.$el.find('li:first').click();
 
                 assert.ok($li.hasClass('selected'), "should check/select the filter's row");
-                assert.ok($li.hasClass("o-searchview-custom-private"),
+                assert.ok($li.hasClass("oe_searchview_custom_private"),
                     "should have private filter note/class");
                 assert.equal(view.query.length, 1, "should have only one facet");
                 var values = view.query.at(0).values;
@@ -1508,14 +1524,14 @@ odoo.define_section('search.filters.saved', ['web.search_inputs', 'web.SearchVie
         var $fix = $('#qunit-fixture');
         return view.appendTo($fix)
         .then(function () {
-            view.favorite_menu.$el.find('.o_save_name input').first().val("filter name");
-            view.favorite_menu.$el.find('.o_save_name button').click();
+            view.favorite_menu.$el.find('.oe-save-name input').first().val("filter name");
+            view.favorite_menu.$el.find('.oe-save-name button').click();
             return done.promise();
         });
     });
 });
 
-odoo.define_section('search.advanced', ['web.search_inputs', 'web.SearchView', 'web.core', 'web.data', 'web.data_manager'], function (test, mock) {
+odoo.define_section('search.advanced', ['web.search_inputs', 'web.SearchView', 'web.core', 'web.data'], function (test, mock) {
 
     test('single-advanced', function (assert) {
         assert.expect(6);
@@ -1526,9 +1542,9 @@ odoo.define_section('search.advanced', ['web.search_inputs', 'web.SearchView', '
             .done(function () {
                 var $filter_menu = view.filter_menu.$el;
                 // open advanced search (not actually useful)
-                $filter_menu.find('.o_add_filter').click();
+                $filter_menu.find('.oe-add-filter').click();
                 // select proposition (only one)
-                var $prop = $filter_menu.find('.o_filter_condition');
+                var $prop = $filter_menu.find('.oe-filter-condition');
                 // field select should have two possible values, dummy and id
                 assert.equal($prop.find('select:first option').length,
                       2, "advanced search should provide choice between two fields");
@@ -1537,13 +1553,13 @@ odoo.define_section('search.advanced', ['web.search_inputs', 'web.SearchView', '
                       'dummy',
                       "only field should be dummy");
                 // operator should be "contains"/'ilike'
-                assert.equal($prop.find('.o_searchview_extended_prop_op').val(),
+                assert.equal($prop.find('.searchview_extended_prop_op').val(),
                       'ilike', "default char operator should be ilike");
                 // put value in
-                $prop.find('.o_searchview_extended_prop_value input')
+                $prop.find('.searchview_extended_prop_value input')
                      .val("stupid value");
                 // validate advanced search
-                $filter_menu.find('button.o_apply_filter').click();
+                $filter_menu.find('button.oe-apply-filter').click();
                 // resulting search
                 assert.equal(view.query.length, 1, "search query should have a single facet");
                 var facet = view.query.at(0);
@@ -1565,26 +1581,26 @@ odoo.define_section('search.advanced', ['web.search_inputs', 'web.SearchView', '
             .done(function () {
                 var $filter_menu = view.filter_menu.$el;
                 // open advanced search (not actually useful)
-                $filter_menu.find('.o_add_filter').click();
+                $filter_menu.find('.oe-add-filter').click();
                 // open second condition
-                $filter_menu.find('button.o_add_condition').click();
+                $filter_menu.find('a.oe-add-condition').click();
 
                 // select first proposition
-                var $prop1 = $filter_menu.find('.o_filter_condition:first');
-                $prop1.find('select.o_searchview_extended_prop_field').val("dummy").change();
-                $prop1.find('select.o_searchview_extended_prop_op').val('ilike');
-                $prop1.find('.o_searchview_extended_prop_value input')
+                var $prop1 = $filter_menu.find('.oe-filter-condition:first');
+                $prop1.find('select.searchview_extended_prop_field').val("dummy").change();
+                $prop1.find('select.searchview_extended_prop_op').val('ilike');
+                $prop1.find('.searchview_extended_prop_value input')
                      .val("stupid value");
 
                 // select first proposition
-                var $prop2 = $filter_menu.find('.o_filter_condition:last');
+                var $prop2 = $filter_menu.find('.oe-filter-condition:last');
                 // need to trigger event manually or op not changed
-                $prop2.find('select.o_searchview_extended_prop_field').val('id').change();
-                $prop2.find('select.o_searchview_extended_prop_op').val('=');
-                $prop2.find('.o_searchview_extended_prop_value input')
+                $prop2.find('select.searchview_extended_prop_field').val('id').change();
+                $prop2.find('select.searchview_extended_prop_op').val('=');
+                $prop2.find('.searchview_extended_prop_value input')
                      .val(42);
                 // validate advanced search
-                $filter_menu.find('button.o_apply_filter').click();
+                $filter_menu.find('button.oe-apply-filter').click();
 
                 // resulting search
                 assert.equal(view.query.length, 1, "search query should have a single facet");

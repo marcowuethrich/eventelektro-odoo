@@ -2,15 +2,10 @@
 
 import pytz
 
-from odoo import _, api, fields, models
-from odoo.addons.mail.models.mail_template import format_tz
-from odoo.exceptions import AccessError, UserError, ValidationError
-from odoo.tools.translate import html_translate
+from openerp import _, api, fields, models
+from openerp.exceptions import AccessError, UserError
 
-from dateutil.relativedelta import relativedelta
-
-
-class EventType(models.Model):
+class event_type(models.Model):
     """ Event Type """
     _name = 'event.type'
     _description = 'Event Type'
@@ -25,7 +20,7 @@ class EventType(models.Model):
         help="It will select this default maximum value when you choose this event")
 
 
-class EventEvent(models.Model):
+class event_event(models.Model):
     """Event"""
     _name = 'event.event'
     _description = 'Event'
@@ -52,7 +47,7 @@ class EventEvent(models.Model):
         readonly=False, states={'done': [('readonly', True)]},
         oldname='type')
     color = fields.Integer('Kanban Color Index')
-    event_mail_ids = fields.One2many('event.mail', 'event_id', string='Mail Schedule', default=lambda self: self._default_event_mail_ids(), copy=True)
+    event_mail_ids = fields.One2many('event.mail', 'event_id', string='Mail Schedule', default=lambda self: self._default_event_mail_ids())
 
     @api.model
     def _default_event_mail_ids(self):
@@ -60,16 +55,6 @@ class EventEvent(models.Model):
             'interval_unit': 'now',
             'interval_type': 'after_sub',
             'template_id': self.env.ref('event.event_subscription')
-        }), (0, 0, {
-            'interval_nbr': 2,
-            'interval_unit': 'days',
-            'interval_type': 'before_event',
-            'template_id': self.env.ref('event.event_reminder')
-        }), (0, 0, {
-            'interval_nbr': 15,
-            'interval_unit': 'days',
-            'interval_type': 'before_event',
-            'template_id': self.env.ref('event.event_reminder')
         })]
 
     # Seats and computation
@@ -87,7 +72,7 @@ class EventEvent(models.Model):
         oldname='register_current', string='Reserved Seats',
         store=True, readonly=True, compute='_compute_seats')
     seats_available = fields.Integer(
-        oldname='register_avail', string='Available Seats',
+        oldname='register_avail', string='Maximum Attendees',
         store=True, readonly=True, compute='_compute_seats')
     seats_unconfirmed = fields.Integer(
         oldname='register_prospect', string='Unconfirmed Seat Reservations',
@@ -133,7 +118,7 @@ class EventEvent(models.Model):
         'event.registration', 'event_id', string='Attendees',
         readonly=False, states={'done': [('readonly', True)]})
     # Date fields
-    date_tz = fields.Selection('_tz_get', string='Timezone', required=True, default=lambda self: self.env.user.tz)
+    date_tz = fields.Selection('_tz_get', string='Timezone', default=lambda self: self.env.user.tz)
     date_begin = fields.Datetime(
         string='Start Date', required=True,
         track_visibility='onchange', states={'done': [('readonly', True)]})
@@ -186,12 +171,12 @@ class EventEvent(models.Model):
         readonly=False, states={'done': [('readonly', True)]})
     country_id = fields.Many2one('res.country', 'Country',  related='address_id.country_id', store=True)
     description = fields.Html(
-        string='Description', oldname='note', translate=html_translate, sanitize_attributes=False,
+        string='Description', oldname='note', translate=True,
         readonly=False, states={'done': [('readonly', True)]})
     # badge fields
     badge_front = fields.Html(string='Badge Front')
     badge_back = fields.Html(string='Badge Back')
-    badge_innerleft = fields.Html(string='Badge Inner Left')
+    badge_innerleft = fields.Html(string='Badge Innner Left')
     badge_innerright = fields.Html(string='Badge Inner Right')
     event_logo = fields.Html(string='Event Logo')
 
@@ -211,17 +196,17 @@ class EventEvent(models.Model):
     @api.constrains('seats_max', 'seats_available')
     def _check_seats_limit(self):
         if self.seats_availability == 'limited' and self.seats_max and self.seats_available < 0:
-            raise ValidationError(_('No more available seats.'))
+            raise UserError(_('No more available seats.'))
 
     @api.one
     @api.constrains('date_begin', 'date_end')
     def _check_closing_date(self):
         if self.date_end < self.date_begin:
-            raise ValidationError(_('Closing Date cannot be set before Beginning Date.'))
+            raise UserError(_('Closing Date cannot be set before Beginning Date.'))
 
     @api.model
     def create(self, vals):
-        res = super(EventEvent, self).create(vals)
+        res = super(event_event, self).create(vals)
         if res.organizer_id:
             res.message_subscribe([res.organizer_id.id])
         if res.auto_confirm:
@@ -230,7 +215,7 @@ class EventEvent(models.Model):
 
     @api.multi
     def write(self, vals):
-        res = super(EventEvent, self).write(vals)
+        res = super(event_event, self).write(vals)
         if vals.get('organizer_id'):
             self.message_subscribe([vals['organizer_id']])
         return res
@@ -277,7 +262,7 @@ class EventEvent(models.Model):
             self.env['mail.template'].browse(template_id).send_mail(attendee.id, force_send=force_send)
 
 
-class EventRegistration(models.Model):
+class event_registration(models.Model):
     _name = 'event.registration'
     _description = 'Attendee'
     _inherit = ['mail.thread', 'ir.needaction_mixin']
@@ -311,7 +296,7 @@ class EventRegistration(models.Model):
     @api.constrains('event_id', 'state')
     def _check_seats_limit(self):
         if self.event_id.seats_availability == 'limited' and self.event_id.seats_max and self.event_id.seats_available < (1 if self.state == 'draft' else 0):
-            raise ValidationError(_('No more seats available for this event.'))
+            raise UserError(_('No more seats available for this event.'))
 
     @api.multi
     def _check_auto_confirmation(self):
@@ -325,7 +310,7 @@ class EventRegistration(models.Model):
 
     @api.model
     def create(self, vals):
-        registration = super(EventRegistration, self).create(vals)
+        registration = super(event_registration, self).create(vals)
         if registration._check_auto_confirmation():
             registration.sudo().confirm_registration()
         return registration
@@ -380,13 +365,13 @@ class EventRegistration(models.Model):
             contact_id = self.partner_id.address_get().get('contact', False)
             if contact_id:
                 contact = self.env['res.partner'].browse(contact_id)
-                self.name = contact.name or self.name
-                self.email = contact.email or self.email
-                self.phone = contact.phone or self.phone
+                self.name = self.name or contact.name
+                self.email = self.email or contact.email
+                self.phone = self.phone or contact.phone
 
     @api.multi
     def message_get_suggested_recipients(self):
-        recipients = super(EventRegistration, self).message_get_suggested_recipients()
+        recipients = super(event_registration, self).message_get_suggested_recipients()
         try:
             for attendee in self:
                 if attendee.partner_id:
@@ -423,22 +408,3 @@ class EventRegistration(models.Model):
             'target': 'new',
             'context': ctx,
         }
-
-    @api.multi
-    def get_date_range_str(self):
-        self.ensure_one()
-        today = fields.Datetime.from_string(fields.Datetime.now())
-        event_date = fields.Datetime.from_string(self.event_begin_date)
-        diff = (event_date.date() - today.date())
-        if diff.days == 0:
-            return _('Today')
-        elif diff.days == 1:
-            return _('Tomorrow')
-        elif event_date.isocalendar()[1] == today.isocalendar()[1]:
-            return _('This week')
-        elif today.month == event_date.month:
-            return _('This month')
-        elif event_date.month == (today + relativedelta(months=+1)):
-            return _('Next month')
-        else:
-            return format_tz(self.env, self.event_begin_date, tz='UTC', format='%Y%m%dT%H%M%SZ')

@@ -1,5 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
         <!-- DOCUMENTATION TOC VIEWS -->
         <record id="view_documentation_toc_list" model="ir.ui.view">
             <field name="name">forum.documentation.toc.list</field>
@@ -25,7 +27,7 @@
 
 
         <!-- Project Task Kanban View -->
-        <record id="view_forum_post_kanban" model="ir.ui.view">
+        <record model="ir.ui.view" id="view_forum_post_kanban">
             <field name="name">forum.post.kanban</field>
             <field name="model">forum.post</field>
             <field name="arch" type="xml">
@@ -98,4 +100,6 @@
                 </xpath>
             </field>
         </record>
-</odoo>
+
+    </data>
+</openerp>

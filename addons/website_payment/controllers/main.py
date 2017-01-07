@@ -1,30 +1,28 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
+from openerp import http
+from openerp.http import request
+from openerp.tools.translate import _
 
-from odoo import http, _
-from odoo.http import request
 
-
-class WebsitePayment(http.Controller):
+class website_payment(http.Controller):
     @http.route(['/my/payment_method'], type='http', auth="user", website=True)
-    def payment_method(self, **kwargs):
+    def payment_method(self):
         acquirers = list(request.env['payment.acquirer'].search([('website_published', '=', True), ('registration_view_template_id', '!=', False)]))
         partner = request.env.user.partner_id
-        payment_tokens = partner.payment_token_ids
-        payment_tokens |= partner.commercial_partner_id.sudo().payment_token_ids
+        payment_methods = partner.payment_method_ids
+        payment_methods |= partner.commercial_partner_id.sudo().payment_method_ids
         values = {
-            'pms': payment_tokens,
+            'pms': payment_methods,
             'acquirers': acquirers
         }
-        return_url = request.params.get('redirect', '/my/payment_method')
         for acquirer in acquirers:
-            acquirer.form = acquirer.sudo()._registration_render(request.env.user.partner_id.id, {'error': {}, 'error_message': [], 'return_url': return_url, 'json': False, 'bootstrap_formatting': True})
-        return request.render("website_payment.pay_methods", values)
+            acquirer.form = acquirer.sudo()._registration_render(request.env.user.partner_id.id, {'error': {}, 'error_message': [], 'return_url': '/my/payment_method', 'json': False, 'bootstrap_formatting': True})[0]
+        return request.website.render("website_payment.pay_methods", values)
 
     @http.route(['/website_payment/delete/'], methods=['POST'], type='http', auth="user", website=True)
     def delete(self, delete_pm_id=None):
         if delete_pm_id:
-            pay_meth = request.env['payment.token'].browse(int(delete_pm_id))
+            pay_meth = request.env['payment.method'].browse(int(delete_pm_id))
             pay_meth.unlink()
         return request.redirect('/my/payment_method')
 
@@ -48,7 +46,7 @@ class WebsitePayment(http.Controller):
 
         partner_id = user.partner_id.id if user.partner_id.id != request.website.partner_id.id else False
 
-        payment_form = acquirer.sudo().render(reference, float(amount), currency.id, values={'return_url': '/website_payment/confirm', 'partner_id': partner_id})
+        payment_form = acquirer.sudo().render(reference, float(amount), currency.id, values={'return_url': '/website_payment/confirm', 'partner_id': partner_id})[0]
         values = {
             'reference': reference,
             'acquirer': acquirer,
@@ -56,7 +54,7 @@ class WebsitePayment(http.Controller):
             'amount': float(amount),
             'payment_form': payment_form,
         }
-        return request.render('website_payment.pay', values)
+        return request.website.render('website_payment.pay', values)
 
     @http.route(['/website_payment/transaction'], type='json', auth="public", website=True)
     def transaction(self, reference, amount, currency_id, acquirer_id):
@@ -80,6 +78,6 @@ class WebsitePayment(http.Controller):
             tx = request.env['payment.transaction'].browse(tx_id)
             status = (tx.state == 'done' and 'success') or 'danger'
             message = (tx.state == 'done' and 'Your payment was successful! It may take some time to be validated on our end.') or 'OOps! There was a problem with your payment.'
-            return request.render('website_payment.confirm', {'tx': tx, 'status': status, 'message': message})
+            return request.website.render('website_payment.confirm', {'tx': tx, 'status': status, 'message': message})
         else:
             return request.redirect('/my/home')

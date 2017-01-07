@@ -3,29 +3,20 @@
 # * lunch
 # 
 # Translators:
-# Martin Trigaux <mat@odoo.com>, 2016
-# Henry Mineehen <info@mineehen.de>, 2016
+# Jasper Torlitz <inactive+jtorlitz@transifex.com>, 2015
 # Ralf Hilgenstock <rh@dialoge.info>, 2016
-# JackTheHunter <Maximilian.N98@gmail.com>, 2016
-# darenkster <inactive+darenkster@transifex.com>, 2016
-# Anja Funk <anja.funk@afimage.de>, 2016
+# darenkster <inactive+darenkster@transifex.com>, 2015
+# Thomas Lengyel <lexustec_fn@yahoo.de>, 2015
 # Thorsten Vocks <thorsten.vocks@openbig.org>, 2016
-# Jasper Torlitz <inactive+jtorlitz@transifex.com>, 2016
-# Thomas A. Jaeger <tj@jamotion.ch>, 2016
-# Wolfgang Taferner <wolfgang.transifex@service.wt-io-it.at>, 2016
-# Thomas Lengyel <lexustec_fn@yahoo.de>, 2016
-# Tina Rittmüller <tr@ife.de>, 2016
-# Rudolf Schnapka <rs@techno-flex.de>, 2016
-# Martin K <martinkuenz@gmail.com>, 2016
-# Walter Müller <inactive+WILL.I.AM@transifex.com>, 2016
+# Wolfgang Taferner, 2015-2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:58+0000\n"
-"PO-Revision-Date: 2016-09-07 08:58+0000\n"
-"Last-Translator: Walter Müller <inactive+WILL.I.AM@transifex.com>, 2016\n"
-"Language-Team: German (https://www.transifex.com/odoo/teams/41243/de/)\n"
+"POT-Creation-Date: 2015-09-18 08:12+0000\n"
+"PO-Revision-Date: 2016-10-10 09:36+0000\n"
+"Last-Translator: Thorsten Vocks <thorsten.vocks@openbig.org>\n"
+"Language-Team: German (http://www.transifex.com/odoo/odoo-9/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -33,20 +24,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: lunch
-#: model:ir.actions.act_window,help:lunch.lunch_order_line_action_control_suppliers
-msgid ""
-"- Click on the <span class=\"fa fa-phone text-success\"></span> to announce that the order is ordered <br>\n"
-"                - Click on the <span class=\"fa fa-check text-success\"></span> to announce that the order is received <br>\n"
-"                - Click on the <span class=\"fa fa-times-circle text-danger\"></span> red X to announce that the order isn't available"
-msgstr ""
-
-#. module: lunch
 #: model:ir.actions.act_window,help:lunch.lunch_order_line_action_by_supplier
-msgid ""
-"- Click on the <span class=\"fa fa-phone text-success\"></span> to announce that the order is ordered <br>\n"
-"                - Click on the <span class=\"fa fa-check text-success\"></span> to announce that the order is received <br>\n"
-"                - Click on the <span class=\"fa fa-times-circle text-danger\"></span> to announce that the order isn't available"
-msgstr ""
+#: model:ir.actions.act_window,help:lunch.lunch_order_line_action_control_suppliers
+msgid "- Click on the"
+msgstr "- Klicken Sie "
 
 #. module: lunch
 #: model:ir.ui.view,arch_db:lunch.lunch_order_view_form
@@ -56,7 +37,7 @@ msgstr "<span class=\"o_stat_text\">Saldo</span>"
 #. module: lunch
 #: model:ir.ui.view,arch_db:lunch.report_lunch_order
 msgid "<strong>Total</strong>"
-msgstr "<strong>Gesamt</strong>"
+msgstr "<strong>Gesamtsumme</strong>"
 
 #. module: lunch
 #: model:ir.actions.act_window,help:lunch.lunch_cashmove_action_control_accounts
@@ -64,21 +45,20 @@ msgid ""
 "A cashmove can either be an expense or a payment.<br>\n"
 "                An expense is automatically created at the order receipt.<br>\n"
 "                A payment represents the employee reimbursement to the company."
-msgstr ""
-"Eine Zahlung kann entweder eine Einnahme oder eine Ausgabe sein.<br>\n"
-"Eine Ausgabe wird automatisch durch die Auftragsfreigabe erstellt.<br>\n"
-"Eine Einzahlung repräsentiert die Erstattung des Mitarbeiters an die Firma."
+msgstr "Eine Zahlung kann entweder eine Einnahme oder eine Ausgabe sein.<br>\nEine Ausgabe wird automatisch durch die Auftragsfreigabe erstellt.<br>\nEine Einzahlung repräsentiert die Erstattung des Mitarbeiters an die Firma."
+
+#. module: lunch
+#: model:ir.actions.act_window,help:lunch.lunch_order_action_tree
+msgid ""
+"A lunch order is defined by its user, date and order lines.\n"
+"                Each order line corresponds to a product, an additional note and a price.\n"
+"                Before selecting your order lines, don't forget to read the warnings displayed in the reddish area."
+msgstr "Eine Mittagessenbestellung enthält den Benutzer, Datum und Bestellpositionen.\nJede Bestellposition besteht aus einem Produkt, einer Notiz sowie einem Preis.\nVor Auswahl Ihrer Bestellpositionen, sollten Sie nicht die Warnhinweise im roten Bereich mißachten."
 
 #. module: lunch
 #: model:ir.actions.act_window,help:lunch.lunch_product_action
 msgid "A product is defined by its name, category, price and vendor."
 msgstr "Ein Produkt ist definiert durch, Kategorie, Preis und Hersteller."
-
-#. module: lunch
-#: model:ir.model.fields,field_description:lunch.field_lunch_alert_active
-#: model:ir.model.fields,field_description:lunch.field_lunch_product_active
-msgid "Active"
-msgstr "Aktiv"
 
 #. module: lunch
 #. openerp-web
@@ -88,7 +68,7 @@ msgid "Add"
 msgstr "Hinzufügen"
 
 #. module: lunch
-#: code:addons/lunch/models/lunch.py:263
+#: code:addons/lunch/models/lunch.py:251
 #, python-format
 msgid "Alert"
 msgstr "Warnung"
@@ -118,17 +98,6 @@ msgid "And"
 msgstr "Und"
 
 #. module: lunch
-#: model:ir.actions.server,name:lunch.action_server_lunch_archive_product
-msgid "Archive/Unarchive"
-msgstr ""
-
-#. module: lunch
-#: model:ir.ui.view,arch_db:lunch.lunch_alert_view_search
-#: model:ir.ui.view,arch_db:lunch.lunch_product_view_search
-msgid "Archived"
-msgstr "Archiviert"
-
-#. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_order_balance_visible
 msgid "Balance visible"
 msgstr "Sichtbarer Saldo"
@@ -142,11 +111,6 @@ msgstr "Zwischen"
 #: model:ir.ui.view,arch_db:lunch.lunch_cashmove_view_search_2
 msgid "By Employee"
 msgstr "Nach Mitarbeiter"
-
-#. module: lunch
-#: model:ir.ui.view,arch_db:lunch.lunch_order_line_view_search
-msgid "By Order"
-msgstr ""
 
 #. module: lunch
 #: model:ir.ui.view,arch_db:lunch.lunch_cashmove_view_search
@@ -183,6 +147,7 @@ msgstr "Mahlzeit stornieren"
 
 #. module: lunch
 #: model:ir.ui.view,arch_db:lunch.lunch_order_line_view_search
+#: model:ir.ui.view,arch_db:lunch.lunch_order_view_search
 #: selection:lunch.order,state:0 selection:lunch.order.line,state:0
 msgid "Cancelled"
 msgstr "Abgebrochen"
@@ -213,6 +178,11 @@ msgstr "Klicken Sie, um ein Mittagsessensalarm zu erstellen."
 #: model:ir.actions.act_window,help:lunch.lunch_product_category_action
 msgid "Click to create a lunch category."
 msgstr "Klicken Sie, um ein Mittagsessenskategorie zu erstellen."
+
+#. module: lunch
+#: model:ir.actions.act_window,help:lunch.lunch_order_action_tree
+msgid "Click to create a lunch order."
+msgstr "Klicken Sie, um eine Mittagsessensbestellung zu erstellen."
 
 #. module: lunch
 #: model:ir.actions.act_window,help:lunch.lunch_cashmove_action_control_accounts
@@ -259,7 +229,7 @@ msgstr "Lieferantenkontrolle"
 #: model:ir.model.fields,field_description:lunch.field_lunch_product_category_create_uid
 #: model:ir.model.fields,field_description:lunch.field_lunch_product_create_uid
 msgid "Created by"
-msgstr "Erstellt von"
+msgstr "Angelegt von"
 
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_alert_create_date
@@ -318,8 +288,7 @@ msgstr "Anzeigename"
 #: code:addons/lunch/static/src/xml/lunch.xml:7
 #, python-format
 msgid "Don't forget the alerts displayed in the reddish area"
-msgstr ""
-"Vergessen Sie nicht die Hinweise im rötlich eingefärbten Bereich zu lesen."
+msgstr "Vergessen Sie nicht die Hinweise im rötlich eingefärbten Bereich zu lesen."
 
 #. module: lunch
 #: model:ir.ui.menu,name:lunch.lunch_cashmove_menu_payment
@@ -365,17 +334,14 @@ msgstr "Freitag"
 #: model:ir.ui.view,arch_db:lunch.lunch_order_line_view_search
 #: model:ir.ui.view,arch_db:lunch.lunch_product_view_search
 msgid "Group By"
-msgstr "Gruppiert nach..."
+msgstr "Gruppiere nach"
 
 #. module: lunch
 #: model:ir.module.category,description:lunch.module_lunch_category
 msgid ""
 "Helps you handle your lunch needs, if you are a manager you will be able to "
 "create new products, cashmoves and to confirm or cancel orders."
-msgstr ""
-"Unterstützt bei der Abwicklung Ihrer Mahlzeitenbestellungen. Als Mahlzeiten "
-"Manager müssen Sie berechtigt sein, Produkte anzulegen, Barzahlungen zu "
-"erfassen und Bestellungen zu erteilen bzw. zu stornieren."
+msgstr "Unterstützt bei der Abwicklung Ihrer Mahlzeitenbestellungen. Als Mahlzeiten Manager müssen Sie berechtigt sein, Produkte anzulegen, Barzahlungen zu erfassen und Bestellungen zu erteilen bzw. zu stornieren."
 
 #. module: lunch
 #: model:ir.actions.act_window,help:lunch.lunch_product_category_action
@@ -423,7 +389,7 @@ msgstr "Ich fühle mich nicht reich"
 #: model:ir.model.fields,field_description:lunch.field_lunch_order_id
 #: model:ir.model.fields,field_description:lunch.field_lunch_order_line_id
 #: model:ir.model.fields,field_description:lunch.field_lunch_order_line_lucky_id
-#: model:ir.model.fields,field_description:lunch.field_lunch_product_category_id_1815
+#: model:ir.model.fields,field_description:lunch.field_lunch_product_category_id_1805
 #: model:ir.model.fields,field_description:lunch.field_lunch_product_id
 msgid "ID"
 msgstr "ID"
@@ -483,13 +449,13 @@ msgid "Lunch Alert"
 msgstr "Mahlzeit Benachrichtigung"
 
 #. module: lunch
-#: code:addons/lunch/models/lunch.py:234
+#: code:addons/lunch/models/lunch.py:223
 #, python-format
 msgid "Lunch Cashmove"
 msgstr "Mittagessen-Bezahlung"
 
 #. module: lunch
-#: code:addons/lunch/models/lunch.py:63
+#: code:addons/lunch/models/lunch.py:62
 #: model:ir.actions.report.xml,name:lunch.action_report_lunch_order
 #: model:ir.model,name:lunch.model_lunch_order
 #: model:ir.ui.view,arch_db:lunch.report_lunch_order
@@ -530,7 +496,7 @@ msgid "My Lunch"
 msgstr "Mein Mittagessen"
 
 #. module: lunch
-#: model:ir.ui.view,arch_db:lunch.lunch_order_line_view_search
+#: model:ir.ui.view,arch_db:lunch.lunch_order_view_search
 msgid "My Orders"
 msgstr "Eigene Bestellungen"
 
@@ -540,6 +506,7 @@ msgid "Name/Date"
 msgstr "Name/Datum"
 
 #. module: lunch
+#: model:ir.ui.view,arch_db:lunch.lunch_order_view_search
 #: selection:lunch.order,state:0 selection:lunch.order.line,state:0
 msgid "New"
 msgstr "Neu"
@@ -551,11 +518,10 @@ msgid "New Order"
 msgstr "Neuer Auftrag"
 
 #. module: lunch
-#: code:addons/lunch/wizard/lucky_order.py:39
+#: code:addons/lunch/wizard/lucky_order.py:37
 #, python-format
 msgid "No product is matching your request. Now you will starve to death."
-msgstr ""
-"Kein Produkt stimmt mit Ihrer Anfrage überein. Nun werden Sie verhungern."
+msgstr "Kein Produkt stimmt mit Ihrer Anfrage überein. Nun werden Sie verhungern."
 
 #. module: lunch
 #: model:ir.ui.view,arch_db:lunch.lunch_order_line_view_search
@@ -565,25 +531,7 @@ msgstr "Nicht Erhalten"
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_order_line_note
 msgid "Note"
-msgstr "Notiz"
-
-#. module: lunch
-#: code:addons/lunch/models/lunch.py:194
-#, python-format
-msgid "Only your lunch manager cancels the orders."
-msgstr "Nur deine Frühstücks Manager können diesen Befehl rückgängig machen."
-
-#. module: lunch
-#: code:addons/lunch/models/lunch.py:163
-#, python-format
-msgid "Only your lunch manager processes the orders."
-msgstr ""
-
-#. module: lunch
-#: code:addons/lunch/models/lunch.py:183
-#, python-format
-msgid "Only your lunch manager sets the orders as received."
-msgstr ""
+msgstr "Bemerkung"
 
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_cashmove_order_id
@@ -649,15 +597,14 @@ msgstr ""
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_order_line_price
 #: model:ir.model.fields,field_description:lunch.field_lunch_product_price
-#: model:ir.ui.view,arch_db:lunch.lunch_order_line_view_tree
 msgid "Price"
 msgstr "Preis"
 
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_order_line_lucky_product_id
+#: model:ir.model.fields,field_description:lunch.field_lunch_order_line_name
 #: model:ir.model.fields,field_description:lunch.field_lunch_order_line_product_id
 #: model:ir.model.fields,field_description:lunch.field_lunch_product_name
-#: model:ir.ui.view,arch_db:lunch.lunch_order_line_view_search
 msgid "Product"
 msgstr "Produkt"
 
@@ -670,17 +617,12 @@ msgstr "Produktkategorien"
 #. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_order_line_category_id
 msgid "Product Category"
-msgstr "Produkt Kategorie"
+msgstr "Produktkategorie"
 
 #. module: lunch
 #: model:ir.ui.view,arch_db:lunch.lunch_product_category_view_form
 msgid "Product Category:"
 msgstr "Produktkategorie:"
-
-#. module: lunch
-#: model:ir.model.fields,field_description:lunch.field_lunch_order_line_name
-msgid "Product Name"
-msgstr "Produktbezeichnung"
 
 #. module: lunch
 #: model:ir.ui.view,arch_db:lunch.lunch_product_view_search
@@ -717,6 +659,7 @@ msgstr "Empfang der Mahlzeiten"
 
 #. module: lunch
 #: model:ir.ui.view,arch_db:lunch.lunch_order_line_view_search
+#: model:ir.ui.view,arch_db:lunch.lunch_order_view_search
 #: selection:lunch.order,state:0 selection:lunch.order.line,state:0
 msgid "Received"
 msgstr "Empfangen"
@@ -750,15 +693,14 @@ msgstr "Uhrzeit festlegen"
 #: model:ir.ui.view,arch_db:lunch.lunch_alert_view_search
 #: model:ir.ui.view,arch_db:lunch.lunch_order_line_view_search
 msgid "Search"
-msgstr "Suchen"
+msgstr "Suche"
 
 #. module: lunch
 #. openerp-web
 #: code:addons/lunch/static/src/xml/lunch.xml:5
 #, python-format
 msgid "Select a product and put your order comments on the note."
-msgstr ""
-"Wählen Sie ein Produkt und ergänzen Sie Ihre Kommentare zur Bestellposition"
+msgstr "Wählen Sie ein Produkt und ergänzen Sie Ihre Kommentare zur Bestellposition"
 
 #. module: lunch
 #: model:ir.ui.view,arch_db:lunch.lunch_order_view_form
@@ -797,17 +739,10 @@ msgid "The company this user is currently working for."
 msgstr "Das Unternehmen, für das der Benutzer gerade angemeldet ist."
 
 #. module: lunch
-#: code:addons/lunch/models/lunch.py:99
+#: code:addons/lunch/models/lunch.py:98
 #, python-format
 msgid "The date of your order is in the past."
 msgstr "Das Datum ihrer Bestellung liegt in der Vergangheit."
-
-#. module: lunch
-#: model:ir.actions.act_window,help:lunch.lunch_order_line_action
-msgid ""
-"There is no previous order recorded. Click on \"My Lunch\" and then create a"
-" new lunch order."
-msgstr ""
 
 #. module: lunch
 #. openerp-web
@@ -859,6 +794,11 @@ msgid "User"
 msgstr "Benutzer"
 
 #. module: lunch
+#: model:ir.ui.view,arch_db:lunch.lunch_order_view_search
+msgid "Users"
+msgstr "Benutzer"
+
+#. module: lunch
 #: model:ir.model.fields,field_description:lunch.field_lunch_order_line_lucky_supplier_ids
 #: model:ir.model.fields,field_description:lunch.field_lunch_order_line_supplier
 #: model:ir.model.fields,field_description:lunch.field_lunch_product_supplier
@@ -879,9 +819,7 @@ msgstr "Mittwoch"
 #. module: lunch
 #: model:ir.ui.view,arch_db:lunch.lunch_alert_view_form
 msgid "Write the message you want to display during the defined period..."
-msgstr ""
-"Schreiben Sie bitte eine Mitteilung, die zum benannten Zeitpunkt angezeigt "
-"werden soll."
+msgstr "Schreiben Sie bitte eine Mitteilung, die zum benannten Zeitpunkt angezeigt werden soll."
 
 #. module: lunch
 #: model:ir.actions.act_window,name:lunch.lunch_cashmove_action_account
@@ -894,7 +832,7 @@ msgid "Your Lunch Account"
 msgstr "Ihr Essenskonto"
 
 #. module: lunch
-#: model:ir.actions.act_window,name:lunch.lunch_order_line_action
+#: model:ir.actions.act_window,name:lunch.lunch_order_action_tree
 msgid "Your Orders"
 msgstr "Ihre Bestellungen"
 
@@ -903,9 +841,7 @@ msgstr "Ihre Bestellungen"
 #: code:addons/lunch/static/src/xml/lunch.xml:6
 #, python-format
 msgid "Your favorite meals will be created based on your last orders."
-msgstr ""
-"Ihre favorisierte Mahlzeit wird auf Basis der letzten Bestellung "
-"vorgeschlagen."
+msgstr "Ihre favorisierte Mahlzeit wird auf Basis der letzten Bestellung vorgeschlagen."
 
 #. module: lunch
 #: model:ir.ui.view,arch_db:lunch.lunch_cashmove_view_form
@@ -935,6 +871,11 @@ msgid "lunch order line"
 msgstr "Mahlzeiten Auftragspositionen"
 
 #. module: lunch
+#: model:ir.ui.view,arch_db:lunch.lunch_order_view_search
+msgid "lunch orders"
+msgstr "Essensbestellung"
+
+#. module: lunch
 #: model:ir.model,name:lunch.model_lunch_product
 msgid "lunch product"
 msgstr "Essens-Produkt"
@@ -953,3 +894,29 @@ msgstr ""
 #: model:ir.ui.view,arch_db:lunch.view_lunch_order_line_lucky
 msgid "or"
 msgstr "oder"
+
+#. module: lunch
+#: model:ir.actions.act_window,help:lunch.lunch_order_line_action_control_suppliers
+msgid "red X to announce that the order isn't available"
+msgstr ""
+
+#. module: lunch
+#: model:ir.actions.act_window,help:lunch.lunch_order_line_action_by_supplier
+#: model:ir.actions.act_window,help:lunch.lunch_order_line_action_control_suppliers
+msgid ""
+"to announce that the order is ordered <br>\n"
+"                - Click on the"
+msgstr ""
+
+#. module: lunch
+#: model:ir.actions.act_window,help:lunch.lunch_order_line_action_by_supplier
+#: model:ir.actions.act_window,help:lunch.lunch_order_line_action_control_suppliers
+msgid ""
+"to announce that the order is received <br>\n"
+"                - Click on the"
+msgstr ""
+
+#. module: lunch
+#: model:ir.actions.act_window,help:lunch.lunch_order_line_action_by_supplier
+msgid "to announce that the order isn't available"
+msgstr ""

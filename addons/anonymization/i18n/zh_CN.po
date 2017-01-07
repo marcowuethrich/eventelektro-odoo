@@ -3,15 +3,19 @@
 # * anonymization
 # 
 # Translators:
-# Jeffery Chen Fan <jeffery9@gmail.com>, 2016
+# fausthuang, 2015
+# fausthuang, 2015
+# Jeffery Chenn <jeffery9@gmail.com>, 2016
+# Joray <13637815@qq.com>, 2016
+# Joray <13637815@qq.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:56+0000\n"
-"PO-Revision-Date: 2016-09-07 08:56+0000\n"
-"Last-Translator: Jeffery Chen Fan <jeffery9@gmail.com>, 2016\n"
-"Language-Team: Chinese (China) (https://www.transifex.com/odoo/teams/41243/zh_CN/)\n"
+"POT-Creation-Date: 2015-09-07 14:40+0000\n"
+"PO-Revision-Date: 2016-06-22 13:04+0000\n"
+"Last-Translator: Jeffery Chenn <jeffery9@gmail.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/odoo/odoo-9/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -24,7 +28,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:anonymization.view_ir_model_fields_anonymization_history_form
 #: model:ir.ui.view,arch_db:anonymization.view_ir_model_fields_anonymization_history_tree
 msgid "Anonymization History"
-msgstr "隐藏历史"
+msgstr "隐藏日志"
 
 #. module: anonymization
 #: model:ir.actions.act_window,name:anonymization.action_ir_model_fields_anonymize_wizard
@@ -56,13 +60,13 @@ msgid "Anonymized Fields"
 msgstr "隐藏的字段"
 
 #. module: anonymization
-#: code:addons/anonymization/wizard/anonymize_wizard.py:194
+#: code:addons/anonymization/anonymization.py:431
 #, python-format
 msgid "Anonymized value can not be empty."
 msgstr "匿名值不能为空"
 
 #. module: anonymization
-#: code:addons/anonymization/wizard/anonymize_wizard.py:69
+#: code:addons/anonymization/anonymization.py:283
 #, python-format
 msgid ""
 "Before executing the anonymization process, you should make a backup of your"
@@ -70,7 +74,7 @@ msgid ""
 msgstr "在进行匿名化处理前，你需要给你的数据库做一个备份"
 
 #. module: anonymization
-#: code:addons/anonymization/wizard/anonymize_wizard.py:191
+#: code:addons/anonymization/anonymization.py:427
 #, python-format
 msgid ""
 "Cannot anonymize fields of these types: binary, many2many, many2one, "
@@ -89,7 +93,7 @@ msgstr "清除"
 #: model:ir.model.fields,field_description:anonymization.field_ir_model_fields_anonymization_migration_fix_create_uid
 #: model:ir.model.fields,field_description:anonymization.field_ir_model_fields_anonymize_wizard_create_uid
 msgid "Created by"
-msgstr "创建人"
+msgstr "创建者"
 
 #. module: anonymization
 #: model:ir.model.fields,field_description:anonymization.field_ir_model_fields_anonymization_create_date
@@ -133,8 +137,8 @@ msgid "Done"
 msgstr "完成"
 
 #. module: anonymization
-#: code:addons/anonymization/wizard/anonymize_wizard.py:139
-#: code:addons/anonymization/wizard/anonymize_wizard.py:263
+#: code:addons/anonymization/anonymization.py:372
+#: code:addons/anonymization/anonymization.py:431
 #, python-format
 msgid "Error !"
 msgstr "错误！"
@@ -157,8 +161,8 @@ msgstr "字段"
 
 #. module: anonymization
 #: model:ir.model.fields,field_description:anonymization.field_ir_model_fields_anonymization_field_name
-msgid "Field name"
-msgstr ""
+msgid "Field Name"
+msgstr "字段名称"
 
 #. module: anonymization
 #: model:ir.model.fields,field_description:anonymization.field_ir_model_fields_anonymization_history_field_ids
@@ -169,7 +173,7 @@ msgstr "字段"
 #. module: anonymization
 #: model:ir.model.fields,field_description:anonymization.field_ir_model_fields_anonymize_wizard_name
 msgid "File Name"
-msgstr "文件名称"
+msgstr "文件名"
 
 #. module: anonymization
 #: model:ir.model.fields,field_description:anonymization.field_ir_model_fields_anonymization_history_filepath
@@ -190,7 +194,7 @@ msgid "Import"
 msgstr "导入"
 
 #. module: anonymization
-#: code:addons/anonymization/wizard/anonymize_wizard.py:263
+#: code:addons/anonymization/anonymization.py:519
 #, python-format
 msgid ""
 "It is not possible to reverse the anonymization process without supplying "
@@ -203,7 +207,7 @@ msgstr "在没有提供匿名化导出文件前，不可能反转匿名化的进
 #: model:ir.model.fields,field_description:anonymization.field_ir_model_fields_anonymization_migration_fix___last_update
 #: model:ir.model.fields,field_description:anonymization.field_ir_model_fields_anonymize_wizard___last_update
 msgid "Last Modified on"
-msgstr "最后修改日"
+msgstr "最后修改时间"
 
 #. module: anonymization
 #: model:ir.model.fields,field_description:anonymization.field_ir_model_fields_anonymization_history_write_uid
@@ -211,7 +215,7 @@ msgstr "最后修改日"
 #: model:ir.model.fields,field_description:anonymization.field_ir_model_fields_anonymization_write_uid
 #: model:ir.model.fields,field_description:anonymization.field_ir_model_fields_anonymize_wizard_write_uid
 msgid "Last Updated by"
-msgstr "最后更新人"
+msgstr "最后更新者"
 
 #. module: anonymization
 #: model:ir.model.fields,field_description:anonymization.field_ir_model_fields_anonymization_history_write_date
@@ -239,12 +243,6 @@ msgid "New"
 msgstr "新建"
 
 #. module: anonymization
-#: code:addons/anonymization/wizard/anonymize_wizard.py:153
-#, python-format
-msgid "No fields are going to be anonymized."
-msgstr ""
-
-#. module: anonymization
 #: selection:ir.model.fields.anonymization,state:0
 msgid "Not Existing"
 msgstr "不存在"
@@ -257,7 +255,7 @@ msgstr "对象"
 #. module: anonymization
 #: model:ir.model.fields,field_description:anonymization.field_ir_model_fields_anonymization_model_name
 msgid "Object Name"
-msgstr "对象名"
+msgstr "对象名称"
 
 #. module: anonymization
 #: model:ir.model.fields,field_description:anonymization.field_ir_model_fields_anonymization_migration_fix_query
@@ -282,7 +280,6 @@ msgstr "已开始"
 
 #. module: anonymization
 #: model:ir.model.fields,field_description:anonymization.field_ir_model_fields_anonymization_history_state
-#: model:ir.model.fields,field_description:anonymization.field_ir_model_fields_anonymization_state
 #: model:ir.model.fields,field_description:anonymization.field_ir_model_fields_anonymize_wizard_state
 msgid "Status"
 msgstr "状态"
@@ -298,7 +295,7 @@ msgid "Target Version"
 msgstr "目标版本"
 
 #. module: anonymization
-#: code:addons/anonymization/models/anonymization.py:55
+#: code:addons/anonymization/anonymization.py:74
 #, python-format
 msgid ""
 "The database anonymization is currently in an unstable state. Some fields "
@@ -307,7 +304,7 @@ msgid ""
 msgstr "此数据库匿名化处于不稳定状态，有些字段已经匿名，有些没有。你在尝试进行创建、写入或者删除这些字段前，要解决这个问题。"
 
 #. module: anonymization
-#: code:addons/anonymization/wizard/anonymize_wizard.py:120
+#: code:addons/anonymization/anonymization.py:341
 #, python-format
 msgid ""
 "The database anonymization is currently in an unstable state. Some fields "
@@ -316,8 +313,8 @@ msgid ""
 msgstr "此数据库匿名化处于不稳定状态，有些字段已经匿名，有些没有。你在尝试进行其它任何操作前字段前，要解决这个问题。"
 
 #. module: anonymization
-#: code:addons/anonymization/wizard/anonymize_wizard.py:143
-#: code:addons/anonymization/wizard/anonymize_wizard.py:259
+#: code:addons/anonymization/anonymization.py:374
+#: code:addons/anonymization/anonymization.py:512
 #, python-format
 msgid ""
 "The database anonymization is currently in an unstable state. Some fields "
@@ -326,13 +323,13 @@ msgid ""
 msgstr "数据库匿名化当时在不稳定的状态。 有些字段匿名了，有些没有。你在做任何操作前要解决这个问题。"
 
 #. module: anonymization
-#: code:addons/anonymization/wizard/anonymize_wizard.py:141
+#: code:addons/anonymization/anonymization.py:372
 #, python-format
 msgid "The database is currently anonymized, you cannot anonymize it again."
 msgstr "此数据库已经匿名化，你不能再次使其匿名。"
 
 #. module: anonymization
-#: code:addons/anonymization/models/anonymization.py:53
+#: code:addons/anonymization/anonymization.py:72
 #, python-format
 msgid ""
 "The database is currently anonymized, you cannot create, modify or delete "
@@ -340,7 +337,7 @@ msgid ""
 msgstr "数据库目前已经匿名，你不能创建吗更改或者删除字段"
 
 #. module: anonymization
-#: code:addons/anonymization/wizard/anonymize_wizard.py:257
+#: code:addons/anonymization/anonymization.py:510
 #, python-format
 msgid ""
 "The database is not currently anonymized, you cannot reverse the "
@@ -360,7 +357,7 @@ msgid "Unstable"
 msgstr "不稳定"
 
 #. module: anonymization
-#: code:addons/anonymization/models/anonymization.py:32
+#: code:addons/anonymization/anonymization.py:48
 #: sql_constraint:ir.model.fields.anonymization:0
 #, python-format
 msgid "You cannot have two fields with the same name on the same object!"
@@ -405,3 +402,8 @@ msgstr "python"
 #: selection:ir.model.fields.anonymization.migration.fix,query_type:0
 msgid "sql"
 msgstr "sql"
+
+#. module: anonymization
+#: model:ir.model.fields,field_description:anonymization.field_ir_model_fields_anonymization_state
+msgid "unknown"
+msgstr "未知的"

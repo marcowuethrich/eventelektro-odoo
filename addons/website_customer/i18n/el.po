@@ -3,16 +3,15 @@
 # * website_customer
 # 
 # Translators:
-# Martin Trigaux <mat@odoo.com>, 2016
-# Kostas Goutoudis <goutoudis@gmail.com>, 2016
+# Kostas Goutoudis <goutoudis@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:57+0000\n"
-"PO-Revision-Date: 2016-09-07 08:57+0000\n"
-"Last-Translator: Kostas Goutoudis <goutoudis@gmail.com>, 2016\n"
-"Language-Team: Greek (https://www.transifex.com/odoo/teams/41243/el/)\n"
+"POT-Creation-Date: 2015-09-07 14:41+0000\n"
+"PO-Revision-Date: 2016-11-01 15:17+0000\n"
+"Last-Translator: Kostas Goutoudis <goutoudis@gmail.com>\n"
+"Language-Team: Greek (http://www.transifex.com/odoo/odoo-9/language/el/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -27,10 +26,10 @@ msgstr "<span class=\"fa fa-1x fa-tags\"/> Όλα"
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag_active
 msgid "Active"
-msgstr "Ενεργή"
+msgstr "Ενεργό"
 
 #. module: website_customer
-#: code:addons/website_customer/controllers/main.py:65
+#: code:addons/website_customer/controllers/main.py:68
 #, python-format
 msgid "All Countries"
 msgstr "Όλες οι χώρες"
@@ -73,7 +72,7 @@ msgstr "Εμφάνιση Ονόματος"
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag_id
 msgid "ID"
-msgstr "Κωδικός"
+msgstr "ID"
 
 #. module: website_customer
 #: model:ir.ui.view,arch_db:website_customer.implemented_by_block
@@ -83,7 +82,7 @@ msgstr "Υλοποιήθηκε από"
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag___last_update
 msgid "Last Modified on"
-msgstr "Τελευταία τροποποίηση στις"
+msgstr "Τελευταία αλλαγή στις"
 
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag_write_uid
@@ -100,9 +99,7 @@ msgstr "Τελευταία Ενημέρωση στις"
 msgid ""
 "Manage the partner tags to better classify them on your website.\n"
 "                    You can add the filter by tag on your website in the \"Customize\" menu."
-msgstr ""
-"Διαχειριστείτε τις ετικέτες συνεργατών για την καλύτερη κατάταξη τους στον ιστότοπο.\n"
-"Μπορείτε να εισάγετε κάποιο φίλτρο ανά ετικέτα στο ιστότοπό σας από το μενού \"Προσαρμογή\"."
+msgstr "Διαχειριστείτε τις ετικέτες συνεργατών για την καλύτερη κατάταξη τους στον ιστότοπο.\nΜπορείτε να εισάγετε κάποιο φίλτρο ανά ετικέτα στο ιστότοπό σας από το μενού \"Προσαρμογή\"."
 
 #. module: website_customer
 #: model:ir.ui.view,arch_db:website_customer.index
@@ -119,7 +116,7 @@ msgstr "Οι αναφορές μας"
 #. module: website_customer
 #: model:ir.model,name:website_customer.model_res_partner
 msgid "Partner"
-msgstr "Συναλλασόμενος"
+msgstr "Συνεργάτης"
 
 #. module: website_customer
 #: model:ir.ui.view,arch_db:website_customer.view_partner_tag_form
@@ -127,13 +124,17 @@ msgid "Partner Tag"
 msgstr "Ετικέτα Συνεργάτη"
 
 #. module: website_customer
+#: model:ir.actions.act_window,name:website_customer.action_partner_tag_form
+#: model:ir.ui.view,arch_db:website_customer.view_partner_tag_list
+msgid "Partner Tags"
+msgstr "Ετικέτες Συνεργάτη"
+
+#. module: website_customer
 #: model:ir.model,name:website_customer.model_res_partner_tag
 msgid ""
 "Partner Tags - These tags can be used on website to find customers by "
 "sector, or ... "
-msgstr ""
-"Ετικέτα Συνεργάτη - Αυτές οι ετικέτες μπορούν να χρησιμοποιηθούν στον "
-"ιστότοπο για την αναζήτηση πελατών ανά τομέα, ή ..."
+msgstr "Ετικέτα Συνεργάτη - Αυτές οι ετικέτες μπορούν να χρησιμοποιηθούν στον ιστότοπο για την αναζήτηση πελατών ανά τομέα, ή ..."
 
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag_partner_ids
@@ -161,6 +162,16 @@ msgid "Search"
 msgstr "Αναζήτηση"
 
 #. module: website_customer
+#: model:ir.ui.menu,name:website_customer.menu_partner_tag_form
+msgid "Tags"
+msgstr "Ετικέτες"
+
+#. module: website_customer
+#: model:ir.model.fields,help:website_customer.field_res_partner_tag_website_url
+msgid "The full URL to access the document through the website."
+msgstr "Η πλήρης διεύθυνση (URL) για την πρόσβαση στο έγγραφο μέσω του ιστοτόπου."
+
+#. module: website_customer
 #: model:ir.ui.view,arch_db:website_customer.index
 msgid "Trusted by millions worldwide"
 msgstr "Το εμπιστεύονται εκατομμύρια σε όλο τον κόσμο"
@@ -171,12 +182,14 @@ msgid "Visible in Website"
 msgstr "Ορατό στον Ιστότοπο"
 
 #. module: website_customer
-#: model:ir.actions.act_window,name:website_customer.action_partner_tag_form
-#: model:ir.ui.menu,name:website_customer.menu_partner_tag_form
-#: model:ir.ui.view,arch_db:website_customer.view_partner_tag_list
 #: model:ir.ui.view,arch_db:website_customer.view_partners_form_website
 msgid "Website Tags"
 msgstr "Ετικέτες Ιστότοπου"
+
+#. module: website_customer
+#: model:ir.model.fields,field_description:website_customer.field_res_partner_tag_website_url
+msgid "Website URL"
+msgstr "Διεύθυνση URL Ιστότοπου"
 
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_website_tag_ids

@@ -1,69 +1,77 @@
-# -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
-import werkzeug
-
-from odoo.api import Environment
-import odoo.http as http
-
-from odoo.http import request
-from odoo import SUPERUSER_ID
-from odoo import registry as registry_get
+import json
+import openerp
+import openerp.http as http
+from openerp.http import request
+import openerp.addons.web.controllers.main as webmain
+import json
 
 
-class CalendarController(http.Controller):
+class meeting_invitation(http.Controller):
 
     @http.route('/calendar/meeting/accept', type='http', auth="calendar")
     def accept(self, db, token, action, id, **kwargs):
-        registry = registry_get(db)
+        registry = openerp.modules.registry.RegistryManager.get(db)
+        attendee_pool = registry.get('calendar.attendee')
         with registry.cursor() as cr:
-            env = Environment(cr, SUPERUSER_ID, {})
-            attendee = env['calendar.attendee'].search([('access_token', '=', token), ('state', '!=', 'accepted')])
-            if attendee:
-                attendee.do_accept()
+            attendee_id = attendee_pool.search(cr, openerp.SUPERUSER_ID, [('access_token', '=', token), ('state', '!=', 'accepted')])
+            if attendee_id:
+                attendee_pool.do_accept(cr, openerp.SUPERUSER_ID, attendee_id)
         return self.view(db, token, action, id, view='form')
 
     @http.route('/calendar/meeting/decline', type='http', auth="calendar")
     def declined(self, db, token, action, id):
-        registry = registry_get(db)
+        registry = openerp.modules.registry.RegistryManager.get(db)
+        attendee_pool = registry.get('calendar.attendee')
         with registry.cursor() as cr:
-            env = Environment(cr, SUPERUSER_ID, {})
-            attendee = env['calendar.attendee'].search([('access_token', '=', token), ('state', '!=', 'declined')])
-            if attendee:
-                attendee.do_decline()
+            attendee_id = attendee_pool.search(cr, openerp.SUPERUSER_ID, [('access_token', '=', token), ('state', '!=', 'declined')])
+            if attendee_id:
+                attendee_pool.do_decline(cr, openerp.SUPERUSER_ID, attendee_id)
         return self.view(db, token, action, id, view='form')
 
     @http.route('/calendar/meeting/view', type='http', auth="calendar")
     def view(self, db, token, action, id, view='calendar'):
-        registry = registry_get(db)
+        registry = openerp.modules.registry.RegistryManager.get(db)
+        meeting_pool = registry.get('calendar.event')
+        attendee_pool = registry.get('calendar.attendee')
+        partner_pool = registry.get('res.partner')
         with registry.cursor() as cr:
-            # Since we are in auth=none, create an env with SUPERUSER_ID
-            env = Environment(cr, SUPERUSER_ID, {})
-            attendee = env['calendar.attendee'].search([('access_token', '=', token)])
-            timezone = attendee.partner_id.tz
-            lang = attendee.partner_id.lang or 'en_US'
-            event = env['calendar.event'].with_context(tz=timezone, lang=lang).browse(int(id))
+            attendee = attendee_pool.search_read(cr, openerp.SUPERUSER_ID, [('access_token', '=', token)], [])
 
-            # If user is logged, redirect to form view of event
-            # otherwise, display the simplifyed web page with event informations
-            if request.session.uid:
-                return werkzeug.utils.redirect('/web?db=%s#id=%s&view_type=form&model=calendar.event' % (db, id))
+            if attendee and attendee[0] and attendee[0].get('partner_id'):
+                partner_id = int(attendee[0].get('partner_id')[0])
+                tz = partner_pool.read(cr, openerp.SUPERUSER_ID, partner_id, ['tz'])['tz']
+            else:
+                tz = False
 
-            # NOTE : we don't use request.render() since:
-            # - we need a template rendering which is not lazy, to render before cursor closing
-            # - we need to display the template in the language of the user (not possible with
-            #   request.render())
-            return env['ir.ui.view'].with_context(lang=lang).render_template(
-                'calendar.invitation_page_anonymous', {
-                    'event': event,
-                    'attendee': attendee,
-                })
+            attendee_data = meeting_pool.get_attendee(cr, openerp.SUPERUSER_ID, id, dict(tz=tz))
+
+        if attendee:
+            attendee_data['current_attendee'] = attendee[0]
+
+        values = dict(
+            init = """
+                odoo.define('calendar.invitation_page', function (require) {
+                    require('base_calendar.base_calendar').showCalendarInvitation('%s', '%s', '%s', '%s', '%s');
+                });
+            """ % (db, action, id, 'form', json.dumps(attendee_data))
+        )
+        return request.render('web.webclient_bootstrap', values)
 
     # Function used, in RPC to check every 5 minutes, if notification to do for an event or not
-    @http.route('/calendar/notify', type='json', auth="user")
+    @http.route('/calendar/notify', type='json', auth="none")
     def notify(self):
-        return request.env['calendar.alarm_manager'].get_next_notif()
+        registry = request.registry
+        uid = request.session.uid
+        context = request.session.context
+        with registry.cursor() as cr:
+            res = registry.get("calendar.alarm_manager").get_next_notif(cr, uid, context=context)
+            return res
 
-    @http.route('/calendar/notify_ack', type='json', auth="user")
+    @http.route('/calendar/notify_ack', type='json', auth="none")
     def notify_ack(self, type=''):
-        return request.env['res.partner']._set_calendar_last_notif_ack()
+        registry = request.registry
+        uid = request.session.uid
+        context = request.session.context
+        with registry.cursor() as cr:
+            res = registry.get("res.partner")._set_calendar_last_notif_ack(cr, uid, context=context)
+            return res

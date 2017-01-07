@@ -3,4 +3,3 @@
 import test_sale_to_invoice
 import test_sale_order
 from . import test_product_id_change
-import test_sale_ui

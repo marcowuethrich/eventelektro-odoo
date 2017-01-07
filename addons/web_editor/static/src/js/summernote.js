@@ -210,7 +210,7 @@ dom.merge = function (node, begin, so, end, eo, mergeFilter, all) {
         while(end.lastChild) {end = end.lastChild;}
         eo = end.textContent.length-1;
     } else if (end.tagName) {
-
+        
     } else if (end.tagName && end.childNodes[so]) {
         end = end.childNodes[so];
         so = 0;
@@ -234,7 +234,7 @@ dom.merge = function (node, begin, so, end, eo, mergeFilter, all) {
             if (cur === begin) {
                 if (!all) add = true;
             }
-
+            
             __merge(cur);
             dom.orderClass(dom.node(cur));
 
@@ -931,8 +931,6 @@ options.keyMap.mac['ESCAPE'] = 'cancel';
 options.keyMap.mac['UP'] = 'up';
 options.keyMap.mac['DOWN'] = 'down';
 
-options.styleTags = ['p', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote'];
-
 $.summernote.pluginEvents.insertTable = function (event, editor, layoutInfo, sDim) {
   var $editable = layoutInfo.editable();
   var dimension = sDim.split('x');
@@ -986,7 +984,7 @@ $.summernote.pluginEvents.tab = function (event, editor, layoutInfo, outdent) {
                 $.summernote.pluginEvents.indent(event, editor, layoutInfo);
             }
         } else {
-            if (!outdent) {
+            if (!outdent){
                 if(dom.isText(r.sc)) {
                     var next = r.sc.splitText(r.so);
                 } else {
@@ -1169,6 +1167,8 @@ $.summernote.pluginEvents.visible = function (event, editor, layoutInfo) {
         if (dom.isCell(dom.node(r.sc)) || dom.isCell(dom.node(r.ec))) {
             remove_table_content(r);
             r = range.create(r.ec, 0).select();
+        } else {
+            r = r.deleteContents(true);
         }
         r.select();
     }
@@ -1508,7 +1508,7 @@ $.summernote.pluginEvents.backspace = function (event, editor, layoutInfo) {
 
         dom.removeSpace(temp2.parentNode, temp2, 0, temp, 0); // clean before jump for not select invisible space between 2 tag
         temp2 = dom.lastChild(temp2);
-
+    
         r = range.create(temp2, temp2.textContent.length, temp2, temp2.textContent.length);
         r.select();
 
@@ -1887,7 +1887,7 @@ eventHandler.modules.toolbar.button.updateRecentColor = function (elBtn, sEvent,
             font.className += ' ' + sValue;
             font.style.backgroundColor = "";
         } else {
-            font.className = font.className.replace(/(^|\s+)bg-\S+/, '');
+            font.className = font.className.replace(/(^|\s+)bg-\S+/);
             font.style.backgroundColor = sValue !== 'inherit' ? sValue : "";
         }
     }
@@ -1912,7 +1912,7 @@ eventHandler.modules.editor.redo = function ($popover) {
 
 // use image toolbar if current range is on image
 var fn_editor_currentstyle = eventHandler.modules.editor.currentStyle;
-eventHandler.modules.editor.currentStyle = function (target) {
+eventHandler.modules.editor.currentStyle = function(target) {
     var styleInfo = fn_editor_currentstyle.apply(this, arguments);
     // with our changes for inline editor, the targeted element could be a button of the editor
     if(!styleInfo.image || !dom.isEditable(styleInfo.image)) {
@@ -2309,18 +2309,6 @@ eventHandler.modules.popover.update = function ($popover, oStyle, isAirMode) {
     }
 };
 
-// override summernote clipboard functionality
-eventHandler.modules.clipboard.attach = function(layoutInfo) {
-    var $editable = layoutInfo.editable();
-    $editable.on('paste', function(e) {
-        e.preventDefault();
-        $editable.data('NoteHistory').recordUndo($editable);
-        var pastedText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
-        var formattedText = pastedText.replace(/([^.!?:;])\r?\n/g, "$1").trim(); // Remove linebreaks which are not at the end of a sentence
-        document.execCommand("insertText", false, formattedText);
-    });
-};
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var fn_attach = eventHandler.attach;
@@ -2336,9 +2324,6 @@ eventHandler.detach = function (oLayoutInfo, options) {
     $editable.off("scroll", summernote_table_scroll);
     $('.o_table_handler').remove();
 };
-
-options.icons.image.image = "file-image-o";
-$.summernote.lang['en-US'].image.image = "File / Image";
 
 return $.summernote;
 

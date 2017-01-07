@@ -1,17 +1,23 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
-import commands
 import logging
+import commands
+import json
+import os
+import os.path
+import openerp
 import time
+import random
+import subprocess
+import json
+import werkzeug
+import werkzeug.wrappers
 from threading import Lock
-
-
-from odoo import http
-from odoo.http import request
 
 _logger = logging.getLogger(__name__)
 
+
+from openerp import http
+from openerp.http import request
 
 # Those are the builtin raspberry pi USB modules, they should
 # not appear in the list of connected devices.

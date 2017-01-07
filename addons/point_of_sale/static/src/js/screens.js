@@ -61,7 +61,7 @@ var ScreenWidget = PosBaseWidget.extend({
         var self = this;
         if (self.pos.scan_product(code)) {
             if (self.barcode_product_screen) {
-                self.gui.show_screen(self.barcode_product_screen, null, null, true);
+                self.gui.show_screen(self.barcode_product_screen);
             }
         } else {
             this.barcode_error_action(code);
@@ -412,21 +412,7 @@ var ActionpadWidget = PosBaseWidget.extend({
         var self = this;
         this._super();
         this.$('.pay').click(function(){
-            var order = self.pos.get_order();
-            var has_valid_product_lot = _.every(order.orderlines.models, function(line){
-                return line.has_valid_product_lot();
-            });
-            if(!has_valid_product_lot){
-                self.gui.show_popup('confirm',{
-                    'title': _t('Empty Serial/Lot Number'),
-                    'body':  _t('One or more product(s) required serial/lot number.'),
-                    confirm: function(){
-                        self.gui.show_screen('payment');
-                    },
-                });
-            }else{
-                self.gui.show_screen('payment');
-            }
+            self.gui.show_screen('payment');
         });
         this.$('.set-customer').click(function(){
             self.gui.show_screen('clientlist');
@@ -463,8 +449,6 @@ var OrderWidget = PosBaseWidget.extend({
         this.pos.get_order().select_orderline(orderline);
         this.numpad_state.reset();
     },
-
-
     set_value: function(val) {
     	var order = this.pos.get_order();
     	if (order.get_selected_orderline()) {
@@ -521,12 +505,6 @@ var OrderWidget = PosBaseWidget.extend({
             el_node = el_node.childNodes[0];
             el_node.orderline = orderline;
             el_node.addEventListener('click',this.line_click_handler);
-        var el_lot_icon = el_node.querySelector('.line-lot-icon');
-        if(el_lot_icon){
-            el_lot_icon.addEventListener('click', (function() {
-                this.show_product_lot(orderline);
-            }.bind(this)));
-        }
 
         orderline.node = el_node;
         return el_node;
@@ -590,11 +568,6 @@ var OrderWidget = PosBaseWidget.extend({
 
         this.el.querySelector('.summary .total > .value').textContent = this.format_currency(total);
         this.el.querySelector('.summary .total .subentry .value').textContent = this.format_currency(taxes);
-    },
-    show_product_lot: function(orderline){
-        this.pos.get_order().select_orderline(orderline);
-        var order = this.pos.get_order();
-        order.display_lot_popup();
     },
 });
 
@@ -1113,18 +1086,8 @@ var ClientListScreenWidget = ScreenWidget.extend({
         }
     },
     save_changes: function(){
-        var self = this;
-        var order = this.pos.get_order();
         if( this.has_client_changed() ){
-            if ( this.new_client ) {
-                order.fiscal_position = _.find(this.pos.fiscal_positions, function (fp) {
-                    return fp.id === self.new_client.property_account_position_id[0];
-                });
-            } else {
-                order.fiscal_position = undefined;
-            }
-
-            order.set_client(this.new_client);
+            this.pos.get_order().set_client(this.new_client);
         }
     },
     has_client_changed: function(){
@@ -1194,7 +1157,7 @@ var ClientListScreenWidget = ScreenWidget.extend({
         
         var fields = {};
         this.$('.client-details-contents .detail').each(function(idx,el){
-            fields[el.name] = el.value || false;
+            fields[el.name] = el.value;
         });
 
         if (!fields.name) {
@@ -1208,6 +1171,7 @@ var ClientListScreenWidget = ScreenWidget.extend({
 
         fields.id           = partner.id || false;
         fields.country_id   = fields.country_id || false;
+        fields.barcode      = fields.barcode || '';
 
         new Model('res.partner').call('create_from_ui',[fields]).then(function(partner_id){
             self.saved_client_details(partner_id);
@@ -1432,6 +1396,8 @@ var ReceiptScreenWidget = ScreenWidget.extend({
     print_xml: function() {
         var env = {
             widget:  this,
+            pos:     this.pos,
+            order:   this.pos.get_order(),
             receipt: this.pos.get_order().export_for_printing(),
             paymentlines: this.pos.get_order().get_paymentlines()
         };
@@ -1963,13 +1929,12 @@ var PaymentScreenWidget = ScreenWidget.extend({
 
             invoiced.done(function(){
                 self.invoicing = false;
-                self.gui.show_screen('receipt');
+                order.finalize();
             });
         } else {
             this.pos.push_order(order);
             this.gui.show_screen('receipt');
         }
-
     },
 
     // Check if the order is paid, then sends it to the backend,
@@ -1984,31 +1949,14 @@ gui.define_screen({name:'payment', widget: PaymentScreenWidget});
 
 var set_fiscal_position_button = ActionButtonWidget.extend({
     template: 'SetFiscalPositionButton',
-    init: function (parent, options) {
-        this._super(parent, options);
-
-        this.pos.get('orders').bind('add remove change', function () {
-            this.renderElement();
-        }, this);
-
-        this.pos.bind('change:selectedOrder', function () {
-            this.renderElement();
-        }, this);
-    },
     button_click: function () {
         var self = this;
-
-        var no_fiscal_position = [{
-            label: _t("None"),
-        }];
-        var fiscal_positions = _.map(self.pos.fiscal_positions, function (fiscal_position) {
+        var selection_list = _.map(self.pos.fiscal_positions, function (fiscal_position) {
             return {
                 label: fiscal_position.name,
                 item: fiscal_position
             };
         });
-
-        var selection_list = no_fiscal_position.concat(fiscal_positions);
         self.gui.show_popup('selection',{
             title: _t('Select tax'),
             list: selection_list,
@@ -2019,20 +1967,6 @@ var set_fiscal_position_button = ActionButtonWidget.extend({
             }
         });
     },
-    get_current_fiscal_position_name: function () {
-        var name = _t('Tax');
-        var order = this.pos.get_order();
-
-        if (order) {
-            var fiscal_position = order.fiscal_position;
-
-            if (fiscal_position) {
-                name = fiscal_position.display_name;
-            }
-        }
-
-        return name;
-    }
 });
 
 define_action_button({

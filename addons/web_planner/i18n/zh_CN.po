@@ -3,17 +3,20 @@
 # * web_planner
 # 
 # Translators:
-# Jeffery Chen Fan <jeffery9@gmail.com>, 2016
-# liAnGjiA <liangjia@qq.com>, 2016
-# fausthuang <faust_huang@hotmail.com>, 2016
+# fausthuang, 2015
+# fausthuang, 2015
+# Gary Wei <Gary.wei@elico-corp.com>, 2015
+# Jeffery Chenn <jeffery9@gmail.com>, 2016
+# Joray <13637815@qq.com>, 2016
+# Joray <13637815@qq.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-14 15:55+0000\n"
-"PO-Revision-Date: 2016-11-14 15:55+0000\n"
-"Last-Translator: fausthuang <faust_huang@hotmail.com>, 2016\n"
-"Language-Team: Chinese (China) (https://www.transifex.com/odoo/teams/41243/zh_CN/)\n"
+"POT-Creation-Date: 2016-02-15 15:34+0000\n"
+"PO-Revision-Date: 2016-06-22 13:04+0000\n"
+"Last-Translator: Jeffery Chenn <jeffery9@gmail.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/odoo/odoo-9/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -27,16 +30,9 @@ msgid "Active"
 msgstr "有效"
 
 #. module: web_planner
-#. openerp-web
-#: code:addons/web_planner/static/src/js/web_planner_common.js:436
-#, python-format
-msgid "Cancel"
-msgstr "取消"
-
-#. module: web_planner
 #: model:ir.model.fields,field_description:web_planner.field_web_planner_create_uid
 msgid "Created by"
-msgstr "创建人"
+msgstr "创建者"
 
 #. module: web_planner
 #: model:ir.model.fields,field_description:web_planner.field_web_planner_create_date
@@ -62,23 +58,18 @@ msgstr "ID"
 #: model:ir.model.fields,help:web_planner.field_web_planner_active
 msgid ""
 "If the active field is set to False, it will allow you to hide the planner. "
-"This change requires a refresh of your page."
-msgstr ""
-
-#. module: web_planner
-#: model:ir.ui.view,arch_db:web_planner.web_planner_view_search
-msgid "Inactive"
-msgstr "无效"
+"This change requires a refreshing a your page."
+msgstr "如果这个有效字段被设置为False, Planner就会被隐藏起来。通常需要刷新一下页面"
 
 #. module: web_planner
 #: model:ir.model.fields,field_description:web_planner.field_web_planner___last_update
 msgid "Last Modified on"
-msgstr "最后修改日"
+msgstr "最后修改时间"
 
 #. module: web_planner
 #: model:ir.model.fields,field_description:web_planner.field_web_planner_write_uid
 msgid "Last Updated by"
-msgstr "最后更新人"
+msgstr "最后更新者"
 
 #. module: web_planner
 #: model:ir.model.fields,field_description:web_planner.field_web_planner_write_date
@@ -100,7 +91,7 @@ msgstr "菜单"
 #. module: web_planner
 #: model:ir.model.fields,field_description:web_planner.field_web_planner_name
 msgid "Name"
-msgstr "名字"
+msgstr "名称"
 
 #. module: web_planner
 #. openerp-web
@@ -110,18 +101,11 @@ msgid "Next step"
 msgstr "下一步"
 
 #. module: web_planner
-#. openerp-web
-#: code:addons/web_planner/static/src/js/web_planner_common.js:446
-#, python-format
-msgid "Odoo Enterprise"
-msgstr "Odoo 企业版"
-
-#. module: web_planner
 #: model:ir.model,name:web_planner.model_web_planner
 #: model:ir.ui.view,arch_db:web_planner.web_planner_view_search
 #: model:ir.ui.view,arch_db:web_planner.web_planner_view_tree
 msgid "Planner"
-msgstr "计划"
+msgstr "计划器"
 
 #. module: web_planner
 #: model:ir.model.fields,field_description:web_planner.field_web_planner_planner_application
@@ -150,8 +134,6 @@ msgid "Template"
 msgstr "模板"
 
 #. module: web_planner
-#. openerp-web
-#: code:addons/web_planner/static/src/js/web_planner_common.js:430
-#, python-format
-msgid "Upgrade now"
-msgstr "即刻升级"
+#: model:ir.ui.view,arch_db:web_planner.web_planner_view_search
+msgid "Unactive"
+msgstr "未激活"

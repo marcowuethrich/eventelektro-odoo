@@ -3,16 +3,14 @@
 # * web_settings_dashboard
 # 
 # Translators:
-# Dorin Hongu <dhongu@gmail.com>, 2016
-# Martin Trigaux <mat@odoo.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:57+0000\n"
-"PO-Revision-Date: 2016-09-07 08:57+0000\n"
-"Last-Translator: Martin Trigaux <mat@odoo.com>, 2016\n"
-"Language-Team: Romanian (https://www.transifex.com/odoo/teams/41243/ro/)\n"
+"POT-Creation-Date: 2016-06-17 08:01+0000\n"
+"PO-Revision-Date: 2016-11-02 05:21+0000\n"
+"Last-Translator: Martin Trigaux\n"
+"Language-Team: Romanian (http://www.transifex.com/odoo/odoo-9/language/ro/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -21,35 +19,12 @@ msgstr ""
 
 #. module: web_settings_dashboard
 #. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:90
+#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:78
 #, python-format
 msgid ""
 "%\n"
 "                Implementation"
-msgstr ""
-"%\n"
-"                Implementare"
-
-#. module: web_settings_dashboard
-#. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:149
-#, python-format
-msgid "(Community Edition)"
-msgstr "(Ediție comunitate)"
-
-#. module: web_settings_dashboard
-#. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:165
-#, python-format
-msgid "Activate the developer mode"
-msgstr "Activează modul de dezvoltare"
-
-#. module: web_settings_dashboard
-#. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:167
-#, python-format
-msgid "Activate the developer mode (with assets)"
-msgstr "Activează modul de dezvoltare (with assets)"
+msgstr "%\n                Implementare"
 
 #. module: web_settings_dashboard
 #. openerp-web
@@ -81,16 +56,9 @@ msgstr ""
 
 #. module: web_settings_dashboard
 #. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:102
+#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:90
 #, python-format
 msgid "Browse the documentation."
-msgstr ""
-
-#. module: web_settings_dashboard
-#. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:156
-#, python-format
-msgid "Copyright © 2004-2016"
 msgstr ""
 
 #. module: web_settings_dashboard
@@ -101,42 +69,28 @@ msgstr "Tablou de bord"
 
 #. module: web_settings_dashboard
 #. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:169
-#, python-format
-msgid "Deactivate the developer mode"
-msgstr "Dezactivează modul de dezvoltare"
-
-#. module: web_settings_dashboard
-#. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:66
+#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:64
 #, python-format
 msgid "Enter e-mail addresses (one per line)"
 msgstr ""
 
 #. module: web_settings_dashboard
 #. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:94
+#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:92
 #, python-format
 msgid "Follow these implementation guides to get the most out of Odoo."
 msgstr ""
 
 #. module: web_settings_dashboard
 #. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:156
-#, python-format
-msgid "GNU LGPL Licenced"
-msgstr ""
-
-#. module: web_settings_dashboard
-#. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:180
+#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:149
 #, python-format
 msgid "Get more features with the Enterprise Edition!"
 msgstr ""
 
 #. module: web_settings_dashboard
 #. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:133
+#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:131
 #, python-format
 msgid "Help us spread the word: Share Odoo's awesomeness with your friends!"
 msgstr ""
@@ -157,28 +111,28 @@ msgstr "Aplicații instalate"
 
 #. module: web_settings_dashboard
 #. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:67
+#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:59
 #, python-format
 msgid "Invite"
-msgstr "Invită"
+msgstr "Invita"
 
 #. module: web_settings_dashboard
 #. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:65
+#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:57
 #, python-format
 msgid "Invite new users:"
 msgstr ""
 
 #. module: web_settings_dashboard
 #. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:61
+#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:53
 #, python-format
 msgid "Manage access rights"
 msgstr "Gestionare drepturi de acces"
 
 #. module: web_settings_dashboard
 #. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:101
+#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:89
 #, python-format
 msgid "Need more help?"
 msgstr ""
@@ -194,26 +148,12 @@ msgstr ""
 #. openerp-web
 #: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:148
 #, python-format
-msgid "Odoo"
-msgstr "Odoo"
-
-#. module: web_settings_dashboard
-#. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:179
-#, python-format
 msgid "Odoo Enterprise"
 msgstr "Odoo Enterprise"
 
 #. module: web_settings_dashboard
 #. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:156
-#, python-format
-msgid "Odoo S.A."
-msgstr ""
-
-#. module: web_settings_dashboard
-#. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:73
+#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:71
 #, python-format
 msgid "Pending invitations:"
 msgstr ""
@@ -227,9 +167,9 @@ msgstr ""
 
 #. module: web_settings_dashboard
 #. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:131
+#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:129
 #, python-format
-msgid "Share the Love"
+msgid "Social Share"
 msgstr ""
 
 #. module: web_settings_dashboard
@@ -241,7 +181,7 @@ msgstr ""
 
 #. module: web_settings_dashboard
 #. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:183
+#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:152
 #, python-format
 msgid "Upgrade Now"
 msgstr ""
@@ -253,14 +193,14 @@ msgstr "Utilizatori"
 
 #. module: web_settings_dashboard
 #. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:109
+#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:107
 #, python-format
 msgid "You need to install some apps first."
 msgstr ""
 
 #. module: web_settings_dashboard
 #. openerp-web
-#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:79
+#: code:addons/web_settings_dashboard/static/src/xml/dashboard.xml:77
 #, python-format
 msgid "more"
-msgstr "mai mult(e)"
+msgstr ""

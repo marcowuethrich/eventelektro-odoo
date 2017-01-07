@@ -1,20 +1,20 @@
-# Translation of OpenERP Server.
+# Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * l10n_be_hr_payroll
-#
+# 
 # Translators:
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-21 09:29+0000\n"
-"PO-Revision-Date: 2015-09-08 05:24+0000\n"
+"PO-Revision-Date: 2016-12-30 12:19+0000\n"
 "Last-Translator: Martin Trigaux\n"
 "Language-Team: Swedish (http://www.transifex.com/odoo/odoo-9/language/sv/)\n"
-"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
+"Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: l10n_be_hr_payroll
@@ -125,7 +125,7 @@ msgstr ""
 #. module: l10n_be_hr_payroll
 #: model:ir.model.fields,help:l10n_be_hr_payroll.field_hr_employee_disabled_spouse_bool
 msgid "if recipient spouse is declared disabled by law"
-msgstr ""
+msgstr "Om den mottagarens partner är funktionshindrad i lagens mening"
 
 #. module: l10n_be_hr_payroll
 #: model:ir.ui.view,arch_db:l10n_be_hr_payroll.hr_employee_form__l10n_be_view_for
@@ -136,9 +136,3 @@ msgstr ""
 #: model:ir.ui.view,arch_db:l10n_be_hr_payroll.hr_employee_form__l10n_be_view_for
 msgid "number of dependent children declared as disabled"
 msgstr ""
-
-#~ msgid "Error! Contract start-date must be less than contract end-date."
-#~ msgstr "Fel! Avtalets startdatum måste vara mindre än dess slutdatum."
-
-#~ msgid "Error! You cannot create recursive hierarchy of Employee(s)."
-#~ msgstr "Fel! Rekusriva hierarkier med anställda ej möjligt-"

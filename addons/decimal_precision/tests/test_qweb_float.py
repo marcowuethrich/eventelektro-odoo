@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
-
-from odoo.tests import common
-
+from openerp.tests import common
 
 class TestFloatExport(common.TransactionCase):
+    def setUp(self):
+        super(TestFloatExport, self).setUp()
+        self.Model = self.registry('decimal.precision.test')
 
     def get_converter(self, name):
-        FloatField = self.env['ir.qweb.field.float']
-        _, precision = self.env['decimal.precision.test']._fields[name].digits or (None, None)
+        converter = self.registry('ir.qweb.field.float')
+        field = self.Model._fields[name]
 
-        def converter(value, options=None):
-            record = self.env['decimal.precision.test'].new({name: value})
-            return FloatField.record_to_html(record, name, options or {})
-        return converter
+        return lambda value, options=None: converter.value_to_html(
+            self.cr, self.uid, value, field, options=options, context=None)
 
     def test_basic_float(self):
         converter = self.get_converter('float')
@@ -31,20 +30,21 @@ class TestFloatExport(common.TransactionCase):
             converter(42.12345),
             "42.12")
 
-        converter = self.get_converter('float') # don't use float_4 because the field value 42.12345 is already orm converted to 42.1235
+        converter = self.get_converter('float_4')
         self.assertEqual(
-            converter(42.0, {'precision': 4}),
+            converter(42.0),
             '42.0000')
         self.assertEqual(
-            converter(42.12345, {'precision': 4}),
-            '42.1235')
+            converter(42.12345),
+            '42.1234')
 
     def test_precision_domain(self):
-        self.env['decimal.precision'].create({
+        DP = self.registry('decimal.precision')
+        DP.create(self.cr, self.uid, {
             'name': 'A',
             'digits': 2,
         })
-        self.env['decimal.precision'].create({
+        DP.create(self.cr, self.uid, {
             'name': 'B',
             'digits': 6,
         })
@@ -57,7 +57,7 @@ class TestFloatExport(common.TransactionCase):
             converter(42.0, {'decimal_precision': 'B'}),
             '42.000000')
 
-        converter = self.get_converter('float') # don't use float_4 because the field value 42.12345 is orm converted to 42.1235
+        converter = self.get_converter('float_4')
         self.assertEqual(
             converter(42.12345, {'decimal_precision': 'A'}),
             '42.12')

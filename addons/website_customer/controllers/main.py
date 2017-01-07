@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
+import openerp
+from openerp import SUPERUSER_ID
+from openerp.addons.web import http
+from openerp.addons.website.models.website import unslug
+from openerp.tools.translate import _
+from openerp.addons.web.http import request
 import werkzeug.urls
-
-from odoo import http
-from odoo.addons.website.models.website import unslug
-from odoo.tools.translate import _
-from odoo.http import request
 
 
 class WebsiteCustomer(http.Controller):
@@ -27,9 +26,10 @@ class WebsiteCustomer(http.Controller):
         '/customers/tag/<tag_id>/country/<country_name>-<int:country_id>/page/<int:page>',
     ], type='http', auth="public", website=True)
     def customers(self, country_id=0, page=0, country_name='', tag_id=0, **post):
-        Country = request.env['res.country']
-        Tag = request.env['res.partner.tag']
-        Partner = request.env['res.partner']
+        cr, uid, context = request.cr, request.uid, request.context
+        country_obj = request.registry['res.country']
+        tag_obj = request.registry['res.partner.tag']
+        partner_obj = request.registry['res.partner']
         partner_name = post.get('search', '')
 
         domain = [('website_published', '=', True), ('assigned_partner_id', '!=', False)]
@@ -45,19 +45,23 @@ class WebsiteCustomer(http.Controller):
             domain += [('tag_ids', 'in', tag_id)]
 
         # group by country, based on customers found with the search(domain)
-        countries = Partner.sudo().read_group(domain, ["id", "country_id"], groupby="country_id", orderby="country_id")
-        country_count = Partner.sudo().search_count(domain)
+        countries = partner_obj.read_group(
+            cr, openerp.SUPERUSER_ID, domain, ["id", "country_id"],
+            groupby="country_id", orderby="country_id", context=request.context)
+        country_count = partner_obj.search(
+            cr, openerp.SUPERUSER_ID, domain, count=True, context=request.context)
 
         if country_id:
             domain += [('country_id', '=', country_id)]
-            curr_country = Country.browse(country_id)
-            if country_id not in map(lambda x: x['country_id'][0], countries):
-                if curr_country.exists():
+            if not any(x['country_id'][0] == country_id for x in countries if x['country_id']):
+                country = country_obj.read(cr, uid, country_id, ['name'], context)
+                if country:
                     countries.append({
                         'country_id_count': 0,
-                        'country_id': (curr_country.id, curr_country.name)
+                        'country_id': (country_id, country['name'])
                     })
                 countries.sort(key=lambda d: d['country_id'] and d['country_id'][1])
+            curr_country = country_obj.browse(cr, uid, country_id, context)
 
         countries.insert(0, {
             'country_id_count': country_count,
@@ -65,7 +69,7 @@ class WebsiteCustomer(http.Controller):
         })
 
         # search customers to display
-        partner_count = Partner.sudo().search_count(domain)
+        partner_count = partner_obj.search_count(cr, openerp.SUPERUSER_ID, domain, context=request.context)
 
         # pager
         url = '/customers'
@@ -76,17 +80,23 @@ class WebsiteCustomer(http.Controller):
             scope=7, url_args=post
         )
 
-        partners = Partner.sudo().search(domain, offset=pager['offset'], limit=self._references_per_page)
-        google_map_partner_ids = ','.join(map(str, partners.ids))
+        partner_ids = partner_obj.search(request.cr, openerp.SUPERUSER_ID, domain,
+                                         offset=pager['offset'], limit=self._references_per_page,
+                                         context=request.context)
+        google_map_partner_ids = ','.join(map(str, partner_ids))
+        partners = partner_obj.browse(request.cr, openerp.SUPERUSER_ID, partner_ids, request.context)
         google_maps_api_key = request.env['ir.config_parameter'].sudo().get_param('google_maps_api_key')
 
-        tags = Tag.search([('website_published', '=', True), ('partner_ids', 'in', partners.ids)], order='classname, name ASC')
-        tag = tag_id and Tag.browse(tag_id) or False
+        tag_obj = request.registry['res.partner.tag']
+        tag_ids = tag_obj.search(cr, uid, [('website_published', '=', True), ('partner_ids', 'in', partner_ids)],
+                                 order='classname, name ASC', context=context)
+        tags = tag_obj.browse(cr, uid, tag_ids, context=context)
+        tag = tag_id and tag_obj.browse(cr, uid, tag_id, context=context) or False
 
         values = {
             'countries': countries,
             'current_country_id': country_id or 0,
-            'current_country': curr_country if country_id else False,
+            'current_country': country_id and curr_country or False,
             'partners': partners,
             'google_map_partner_ids': google_map_partner_ids,
             'pager': pager,
@@ -96,16 +106,16 @@ class WebsiteCustomer(http.Controller):
             'tags': tags,
             'google_maps_api_key': google_maps_api_key,
         }
-        return request.render("website_customer.index", values)
+        return request.website.render("website_customer.index", values)
 
     # Do not use semantic controller due to SUPERUSER_ID
     @http.route(['/customers/<partner_id>'], type='http', auth="public", website=True)
     def partners_detail(self, partner_id, **post):
         _, partner_id = unslug(partner_id)
         if partner_id:
-            partner = request.env['res.partner'].sudo().browse(partner_id)
+            partner = request.registry['res.partner'].browse(request.cr, SUPERUSER_ID, partner_id, context=request.context)
             if partner.exists() and partner.website_published:
                 values = {}
                 values['main_object'] = values['partner'] = partner
-                return request.render("website_customer.details", values)
+                return request.website.render("website_customer.details", values)
         return self.customers(**post)

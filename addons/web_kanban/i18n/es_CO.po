@@ -1,39 +1,27 @@
-# #-#-#-#-#  es_CO.po (Odoo 9.0)  #-#-#-#-#
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * web_kanban
-#
+# 
 # Translators:
 # Mateo Tibaquirá <nestormateo@gmail.com>, 2015
-# #-#-#-#-#  es_CO.po (Odoo 9.0)  #-#-#-#-#
-# Translation of Odoo Server.
-# This file contains the translation of the following modules:
-# * web_kanban
-#
-# Translators:
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-18 14:08+0000\n"
-"PO-Revision-Date: 2015-10-24 06:58+0000\n"
-"Last-Translator: Martin Trigaux\n"
-"Language-Team: Spanish (Colombia) (http://www.transifex.com/odoo/odoo-9/"
-"language/es_CO/)\n"
-"Language: es_CO\n"
+"POT-Creation-Date: 2015-09-07 14:41+0000\n"
+"PO-Revision-Date: 2015-10-30 22:54+0000\n"
+"Last-Translator: Mateo Tibaquirá <nestormateo@gmail.com>\n"
+"Language-Team: Spanish (Colombia) (http://www.transifex.com/odoo/odoo-9/language/es_CO/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"#-#-#-#-#  es_CO.po (Odoo 9.0)  #-#-#-#-#\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"#-#-#-#-#  es_CO.po (Odoo 9.0)  #-#-#-#-#\n"
+"Language: es_CO\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: web_kanban
 #. openerp-web
-#: code:addons/web_kanban/static/src/js/kanban_column.js:176
-#: code:addons/web_kanban/static/src/js/kanban_column.js:178
+#: code:addons/web_kanban/static/src/js/kanban_column.js:168
+#: code:addons/web_kanban/static/src/js/kanban_column.js:170
 #, python-format
 msgid " records"
 msgstr "registros"
@@ -57,7 +45,7 @@ msgstr "Añadir nueva Columna"
 
 #. module: web_kanban
 #. openerp-web
-#: code:addons/web_kanban/static/src/js/kanban_relational.js:53
+#: code:addons/web_kanban/static/src/js/kanban_relational.js:50
 #, python-format
 msgid "Add: "
 msgstr "Añadir:"
@@ -71,21 +59,21 @@ msgstr "Archivar Registros"
 
 #. module: web_kanban
 #. openerp-web
-#: code:addons/web_kanban/static/src/js/kanban_column.js:214
+#: code:addons/web_kanban/static/src/js/kanban_column.js:206
 #, python-format
 msgid "Are you sure that you want to remove this column ?"
 msgstr "¿Está seguro/a que quiere remover esta columna?"
 
 #. module: web_kanban
 #. openerp-web
-#: code:addons/web_kanban/static/src/js/kanban_view.js:515
+#: code:addons/web_kanban/static/src/js/kanban_view.js:475
 #, python-format
 msgid "Are you sure you want to delete this record ?"
 msgstr "¿Está seguro que quiere eliminar este registro?"
 
 #. module: web_kanban
 #. openerp-web
-#: code:addons/web_kanban/static/src/js/kanban_column.js:208
+#: code:addons/web_kanban/static/src/js/kanban_column.js:200
 #, python-format
 msgid "Cancel"
 msgstr "Cancelar"
@@ -93,7 +81,7 @@ msgstr "Cancelar"
 #. module: web_kanban
 #. openerp-web
 #: code:addons/web_kanban/static/src/js/kanban_relational.js:27
-#: code:addons/web_kanban/static/src/js/kanban_view.js:691
+#: code:addons/web_kanban/static/src/js/kanban_view.js:651
 #, python-format
 msgid "Create: "
 msgstr "Crear:"
@@ -122,7 +110,7 @@ msgstr "Editar"
 
 #. module: web_kanban
 #. openerp-web
-#: code:addons/web_kanban/static/src/js/kanban_column.js:224
+#: code:addons/web_kanban/static/src/js/kanban_column.js:216
 #, python-format
 msgid "Edit Column"
 msgstr "Editar Columna"
@@ -150,14 +138,14 @@ msgstr "Cargar más... ("
 
 #. module: web_kanban
 #. openerp-web
-#: code:addons/web_kanban/static/src/js/kanban_column.js:203
+#: code:addons/web_kanban/static/src/js/kanban_column.js:195
 #, python-format
 msgid "Ok"
 msgstr "Aceptar"
 
 #. module: web_kanban
 #. openerp-web
-#: code:addons/web_kanban/static/src/js/kanban_relational.js:67
+#: code:addons/web_kanban/static/src/js/kanban_relational.js:64
 #, python-format
 msgid "Open: "
 msgstr "Abrir:"
@@ -171,9 +159,9 @@ msgstr "Desarchivar Registros"
 
 #. module: web_kanban
 #. openerp-web
-#: code:addons/web_kanban/static/src/js/kanban_view.js:222
-#: code:addons/web_kanban/static/src/js/kanban_view.js:237
-#: code:addons/web_kanban/static/src/js/kanban_view.js:244
+#: code:addons/web_kanban/static/src/js/kanban_view.js:209
+#: code:addons/web_kanban/static/src/js/kanban_view.js:224
+#: code:addons/web_kanban/static/src/js/kanban_view.js:231
 #, python-format
 msgid "Undefined"
 msgstr "Indefinido"

@@ -3,23 +3,18 @@
 # * delivery
 # 
 # Translators:
-# Martin Trigaux <mat@odoo.com>, 2016
-# Karolina Tonković <karolina.tonkovic@storm.hr>, 2016
-# Bole <bole@dajmi5.com>, 2016
-# Vladimir Olujić <olujic.vladimir@storm.hr>, 2016
+# Bole <bole@dajmi5.com>, 2015
+# Ivica Dimjašević <ivica.dimjasevic@storm.hr>, 2015
+# Karolina Tonković <karolina.tonkovic@storm.hr>, 2015
 # Mario Jureša <mario.juresa@uvid.hr>, 2016
-# Đurđica Žarković <durdica.zarkovic@storm.hr>, 2016
-# Marko Carević <marko.carevic@live.com>, 2016
-# Ivica Dimjašević <ivica.dimjasevic@storm.hr>, 2016
-# KRISTINA PALAŠ <kristina.palas@storm.hr>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:56+0000\n"
-"PO-Revision-Date: 2016-09-07 08:56+0000\n"
-"Last-Translator: KRISTINA PALAŠ <kristina.palas@storm.hr>, 2016\n"
-"Language-Team: Croatian (https://www.transifex.com/odoo/teams/41243/hr/)\n"
+"POT-Creation-Date: 2016-09-22 13:16+0000\n"
+"PO-Revision-Date: 2016-11-28 11:52+0000\n"
+"Last-Translator: Martin Trigaux\n"
+"Language-Team: Croatian (http://www.transifex.com/odoo/odoo-9/language/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -52,11 +47,6 @@ msgid "# Manufacturing Orders"
 msgstr "# Nalozi za proizvodnju"
 
 #. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_product_variant_count
-msgid "# Product Variants"
-msgstr "# Varijante proizvoda"
-
-#. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_purchase_count
 msgid "# Purchases"
 msgstr "# Nabavke"
@@ -67,18 +57,9 @@ msgid "# Sales"
 msgstr "# Prodaje"
 
 #. module: delivery
-#: code:addons/delivery/models/delivery_carrier.py:74
-#, python-format
-msgid ""
-"<p class=\"oe_view_nocontent\">\n"
-"                    Buy Odoo Enterprise now to get more providers.\n"
-"                </p>"
-msgstr ""
-
-#. module: delivery
-#: model:ir.ui.view,arch_db:delivery.view_quant_package_form_save
-msgid "<span>kg</span>"
-msgstr "<span>kg</span>"
+#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_product_variant_count
+msgid "# of Product Variants"
+msgstr "# Varijanti proizvoda"
 
 #. module: delivery
 #: model:ir.ui.view,arch_db:delivery.report_delivery_document2
@@ -91,6 +72,14 @@ msgstr "<strong>Prijevoznik</strong>"
 #: model:ir.ui.view,arch_db:delivery.report_shipping2
 msgid "<strong>Weight</strong>"
 msgstr "<strong>Težina</strong>"
+
+#. module: delivery
+#: model:ir.model.fields,help:delivery.field_delivery_carrier_product_type
+#: model:ir.model.fields,help:delivery.field_delivery_carrier_type
+msgid ""
+"A consumable is a product for which you don't manage stock, a service is a "
+"non-material product provided by a company or an individual."
+msgstr ""
 
 #. module: delivery
 #: model:ir.model.fields,help:delivery.field_delivery_carrier_description_sale
@@ -113,28 +102,12 @@ msgstr ""
 msgid ""
 "A precise description of the Product, used only for internal information "
 "purposes."
-msgstr ""
-"Precizan opis proizvoda, koristi se samo u svrhu internog informiranja."
-
-#. module: delivery
-#: model:ir.model.fields,help:delivery.field_delivery_carrier_product_type
-#: model:ir.model.fields,help:delivery.field_delivery_carrier_type
-msgid ""
-"A stockable product is a product for which you manage stock. The \"Inventory\" app has to be installed.\n"
-"A consumable product, on the other hand, is a product for which stock is not managed.\n"
-"A service is a non-material product you provide.\n"
-"A digital content is a non-material product you sell online. The files attached to the products are the one that are sold on the e-commerce such as e-books, music, pictures,... The \"Digital Product\" module has to be installed."
-msgstr ""
+msgstr "Precizan opis proizvoda, koristi se samo u svrhu internog informiranja."
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_message_needaction
 msgid "Action Needed"
 msgstr "Potrebna dodatna radnja"
-
-#. module: delivery
-#: model:ir.model.fields,help:delivery.field_delivery_carrier_integration_level
-msgid "Action while validating Delivery Orders"
-msgstr ""
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_active
@@ -174,11 +147,6 @@ msgid "Available"
 msgstr "Dostupno"
 
 #. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_available_in_pos
-msgid "Available in the Point of Sale"
-msgstr "Dostupno u POS-u"
-
-#. module: delivery
 #: model:ir.model.fields,help:delivery.field_delivery_carrier_produce_delay
 msgid ""
 "Average delay in days to produce this product. In the case of multi-level "
@@ -211,9 +179,7 @@ msgstr "Barkod"
 msgid ""
 "Base price to compute the customer price. Sometimes called the catalog "
 "price."
-msgstr ""
-"Osnovna cijena za izračuna cijene za kupca, Ponekad se naziva kataloška "
-"cijena."
+msgstr "Osnovna cijena za izračuna cijene za kupca, Ponekad se naziva kataloška cijena."
 
 #. module: delivery
 #: selection:delivery.carrier,delivery_type:0
@@ -236,11 +202,6 @@ msgid "Bulk Weight"
 msgstr "Ukupna masa"
 
 #. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_can_be_expensed
-msgid "Can be Expensed"
-msgstr "Može predstavljati trošak"
-
-#. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_purchase_ok
 msgid "Can be Purchased"
 msgstr "Vidljiv u nabavi"
@@ -257,27 +218,35 @@ msgid "Can be Sold"
 msgstr "Može se prodavati"
 
 #. module: delivery
-#: model:ir.model.fields,help:delivery.field_stock_quant_package_shipping_weight
-msgid ""
-"Can be changed during the 'put in pack' to adjust the weight of the "
-"shipping."
-msgstr ""
+#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_can_be_expensed
+msgid "Can be expensed"
+msgstr "Može predstavljati trošak"
 
 #. module: delivery
 #: model:ir.ui.view,arch_db:delivery.view_picking_withcarrier_out_form
+#: model:ir.ui.view,arch_db:delivery.view_picking_withcarrier_out_form_shipping
 msgid "Cancel"
 msgstr "Odustani"
 
 #. module: delivery
 #: model:ir.model,name:delivery.model_delivery_carrier
 #: model:ir.model.fields,field_description:delivery.field_delivery_price_rule_carrier_id
-#: model:ir.model.fields,field_description:delivery.field_product_packaging_package_carrier_type
 #: model:ir.model.fields,field_description:delivery.field_stock_picking_carrier_id
 #: model:ir.ui.view,arch_db:delivery.view_delivery_carrier_form
 #: model:ir.ui.view,arch_db:delivery.view_delivery_carrier_search
 #: model:ir.ui.view,arch_db:delivery.view_delivery_carrier_tree
 msgid "Carrier"
 msgstr "Prijevoznik"
+
+#. module: delivery
+#: model:ir.ui.view,arch_db:delivery.view_picking_withcarrier_out_form
+msgid "Carrier Information"
+msgstr "Informacije prijevoznika"
+
+#. module: delivery
+#: model:ir.model.fields,field_description:delivery.field_stock_picking_carrier_tracking_ref
+msgid "Carrier Tracking Ref"
+msgstr ""
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_route_from_categ_ids
@@ -290,20 +259,16 @@ msgid "Check if the product is eligible for membership."
 msgstr "Provjerite da li proizvod ispunjava uvjete za članstvo."
 
 #. module: delivery
-#: model:ir.model.fields,help:delivery.field_delivery_carrier_to_weight
-msgid ""
-"Check if the product should be weighted using the hardware scale integration"
-msgstr "Označiti ako artikl treba izvagati vagom"
-
-#. module: delivery
-#: model:ir.model.fields,help:delivery.field_delivery_carrier_available_in_pos
-msgid "Check if you want this product to appear in the Point of Sale"
-msgstr "Označite ovdje ako ćelite da se proizvod pojavljuje na POS-u"
-
-#. module: delivery
 #: model:ir.actions.act_window,help:delivery.action_delivery_carrier_form
 msgid "Click to define a new delivery method."
 msgstr "Klikni za definiranje novog načina isporuke."
+
+#. module: delivery
+#: model:ir.model.fields,help:delivery.field_delivery_carrier_uos_coeff
+msgid ""
+"Coefficient to convert default Unit of Measure to Unit of Sale uos = uom * "
+"coeff"
+msgstr ""
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_color
@@ -336,11 +301,6 @@ msgid "Cost Price"
 msgstr "Cijena Koštanja"
 
 #. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_cost_method
-msgid "Cost method"
-msgstr "Metoda troška"
-
-#. module: delivery
 #: model:ir.model.fields,help:delivery.field_delivery_carrier_standard_price
 msgid ""
 "Cost of the product template used for standard stock valuation in accounting"
@@ -357,13 +317,6 @@ msgstr "Metoda troška"
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_country_ids
 msgid "Countries"
 msgstr "Države"
-
-#. module: delivery
-#: model:ir.model.fields,help:delivery.field_delivery_carrier_project_id
-msgid ""
-"Create a task under this project on sale order validation. This setting must"
-" be set for each company."
-msgstr ""
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_create_uid
@@ -398,14 +351,14 @@ msgid "Customer Lead Time"
 msgstr "Rok isporuke kupcu"
 
 #. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_partner_ref
-msgid "Customer Ref"
-msgstr "Šifra kupca"
-
-#. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_taxes_id
 msgid "Customer Taxes"
 msgstr "Porezi kod prodaje"
+
+#. module: delivery
+#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_partner_ref
+msgid "Customer ref"
+msgstr "Šifra kupca"
 
 #. module: delivery
 #: model:ir.model.fields,help:delivery.field_delivery_carrier_membership_date_from
@@ -432,9 +385,7 @@ msgstr "Predefinirana JM za sve funkcije zalihe."
 msgid ""
 "Default Unit of Measure used for purchase orders. It must be in the same "
 "category than the default unit of measure."
-msgstr ""
-"Predefinirana jedinica mjere za korištenje u narudžbama. Mora biti jednake "
-"kategorije kao i predefinirana jedinica mjere."
+msgstr "Predefinirana jedinica mjere za korištenje u narudžbama. Mora biti jednake kategorije kao i predefinirana jedinica mjere."
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_deferred_revenue_category_id
@@ -450,12 +401,7 @@ msgstr "Otprema"
 
 #. module: delivery
 #: model:ir.ui.view,arch_db:delivery.view_delivery_carrier_search
-msgid "Delivery Carrier"
-msgstr "Prevoznik za dostavu"
-
-#. module: delivery
-#: model:ir.ui.view,arch_db:delivery.view_picking_withcarrier_out_form
-msgid "Delivery Information"
+msgid "Delivery Carrier Search"
 msgstr ""
 
 #. module: delivery
@@ -508,19 +454,12 @@ msgstr "Odredište"
 msgid ""
 "Determine if a product needs to create automatically an event registration "
 "at the confirmation of a sales order line."
-msgstr ""
-"Odredite da li proizvod treba automatski stvoriti registraciju događaja ako "
-"se potvrdi redak prodajnog naloga."
+msgstr "Odredite da li proizvod treba automatski stvoriti registraciju događaja ako se potvrdi redak prodajnog naloga."
 
 #. module: delivery
 #: model:ir.model.fields,help:delivery.field_delivery_carrier_sequence
 msgid "Determine the display order"
 msgstr "Odredite redoslijed prikaza"
-
-#. module: delivery
-#: model:ir.ui.view,arch_db:delivery.view_quant_package_form_save
-msgid "Discard"
-msgstr "Odbaci"
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_display_name
@@ -534,15 +473,7 @@ msgid ""
 "Each carrier (e.g. UPS) can have several delivery methods (e.g.\n"
 "                UPS Express, UPS Standard) with a set of pricing rules attached\n"
 "                to each method."
-msgstr ""
-"Svaki prijevoznik (npr. UPS) može imati nekoliko načina isporuke (npr.\n"
-"UPS Express, UPS Standard) sa skupom pravila cijena povezanih\n"
-"sa svakom metodom."
-
-#. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_prod_environment
-msgid "Environment"
-msgstr "Okolina"
+msgstr "Svaki prijevoznik (npr. UPS) može imati nekoliko načina isporuke (npr.\nUPS Express, UPS Standard) sa skupom pravila cijena povezanih\nsa svakom metodom."
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_sale_order_delivery_price
@@ -551,8 +482,8 @@ msgstr "Procijenjena cijena isporuke"
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_event_ok
-msgid "Event Registration"
-msgstr "Organizacija događaja"
+msgid "Event Subscription"
+msgstr "Pretplata na događaj"
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_event_ticket_ids
@@ -595,15 +526,13 @@ msgid "Expense Account"
 msgstr "Konto troška"
 
 #. module: delivery
-#: model:ir.model.fields,help:delivery.field_sale_order_carrier_id
-msgid "Fill this field if you plan to invoice the shipping based on picking."
-msgstr ""
+#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_expense_policy
+msgid "Expense Invoice Policy"
+msgstr "Politika troška računa"
 
 #. module: delivery
-#: model:ir.ui.view,arch_db:delivery.view_delivery_carrier_form
-msgid ""
-"Filling this form allows you to filter delivery carriers according to the "
-"delivery address of your customer."
+#: model:ir.model.fields,help:delivery.field_sale_order_carrier_id
+msgid "Fill this field if you plan to invoice the shipping based on picking."
 msgstr ""
 
 #. module: delivery
@@ -653,23 +582,11 @@ msgid "Free if Order total is more than"
 msgstr "Besplatno ako je ukupna narudžba veća od"
 
 #. module: delivery
-#: selection:delivery.carrier,integration_level:0
-msgid "Get Rate"
-msgstr ""
-
-#. module: delivery
-#: selection:delivery.carrier,integration_level:0
-msgid "Get Rate and Create Shipment"
-msgstr ""
-
-#. module: delivery
 #: model:ir.model.fields,help:delivery.field_delivery_carrier_packaging_ids
 msgid ""
 "Gives the different ways to package the same product. This has no impact on "
 "the picking order and is mainly used if you use the EDI module."
-msgstr ""
-"Različiti načini pakiranja za artikl. Ovo nema utjecaja na skladišne "
-"dokumente i u pravilo se koristi uz EDI modul (ako ga koristite)."
+msgstr "Različiti načini pakiranja za artikl. Ovo nema utjecaja na skladišne dokumente i u pravilo se koristi uz EDI modul (ako ga koristite)."
 
 #. module: delivery
 #: model:ir.model.fields,help:delivery.field_delivery_price_rule_sequence
@@ -677,25 +594,14 @@ msgid "Gives the sequence order when calculating delivery carrier."
 msgstr ""
 
 #. module: delivery
+#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_weight
+msgid "Gross Weight"
+msgstr "Bruto težina"
+
+#. module: delivery
 #: model:ir.ui.view,arch_db:delivery.view_delivery_carrier_search
 msgid "Group By"
-msgstr "Grupiraj po"
-
-#. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_hs_code
-#: model:ir.model.fields,field_description:delivery.field_product_template_hs_code
-msgid "HS Code"
-msgstr "HS Code"
-
-#. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_product_packaging_height
-msgid "Height"
-msgstr "Visina"
-
-#. module: delivery
-#: sql_constraint:product.packaging:0
-msgid "Height must be positive"
-msgstr "Visina mora biti pozitivna"
+msgstr ""
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_id
@@ -738,6 +644,14 @@ msgid ""
 msgstr "Ako je označeno omogućava sakrivanje proizvoda bez brisanja."
 
 #. module: delivery
+#: model:ir.model.fields,help:delivery.field_delivery_carrier_expense_policy
+msgid ""
+"If you invoice at cost, the expense will be invoiced on the sale order at "
+"the cost of the analytic line;if you invoice at sales price, the price of "
+"the product will be used instead."
+msgstr "Ako izdate račun po trošku, trošak će se fakturirati po trošku retka prodajnog naloga; ako izdate račun po prodajnoj cijeni, umjesto toga će se koristiti cijena proizvoda."
+
+#. module: delivery
 #: model:ir.model.fields,help:delivery.field_delivery_carrier_image
 msgid ""
 "Image of the product variant (Big-sized image of product template if false)."
@@ -768,16 +682,6 @@ msgstr "Konto prihoda"
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_incoming_qty
 msgid "Incoming"
 msgstr "Ulazna"
-
-#. module: delivery
-#: model:ir.ui.view,arch_db:delivery.view_delivery_carrier_form
-msgid "Install more Providers"
-msgstr ""
-
-#. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_integration_level
-msgid "Integration Level"
-msgstr "Nivo integracije"
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_categ_id
@@ -831,6 +735,11 @@ msgid "Is a Delivery"
 msgstr "Je isporuka"
 
 #. module: delivery
+#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_is_product_variant
+msgid "Is a product variant"
+msgstr "Je varijanta proizvoda"
+
+#. module: delivery
 #: model:ir.model.fields,help:delivery.field_delivery_carrier_fixed_price
 msgid ""
 "Keep empty if the pricing depends on the advanced pricing per destination"
@@ -860,16 +769,6 @@ msgid "Last Updated on"
 msgstr "Vrijeme promjene"
 
 #. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_product_packaging_length
-msgid "Length"
-msgstr "Duljina"
-
-#. module: delivery
-#: sql_constraint:product.packaging:0
-msgid "Length must be positive"
-msgstr "Dužina mora biti pozitivna"
-
-#. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_location_id
 msgid "Location"
 msgstr "Lokacija"
@@ -880,27 +779,9 @@ msgid "Logistical Units"
 msgstr "Logističke jedinice"
 
 #. module: delivery
-#: model:ir.ui.view,arch_db:delivery.view_picking_withcarrier_out_form
-msgid "Manage Package Type"
-msgstr "Upravljanje vrstama pakiranja"
-
-#. module: delivery
-#: model:ir.model.fields,help:delivery.field_delivery_carrier_track_service
-msgid ""
-"Manually set quantities on order: Invoice based on the manually entered quantity, without creating an analytic account.\n"
-"Timesheets on contract: Invoice based on the tracked hours on the related timesheet.\n"
-"Create a task and track hours: Create a task on the sale order validation and track the work hours."
-msgstr ""
-
-#. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_produce_delay
 msgid "Manufacturing Lead Time"
 msgstr "Pripremno vrijeme proizvodnje"
-
-#. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_margin
-msgid "Margin"
-msgstr "RUC"
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_date_from
@@ -913,29 +794,9 @@ msgid "Margin Date To"
 msgstr "Krajnji datum do"
 
 #. module: delivery
-#: sql_constraint:delivery.carrier:0
-msgid "Margin cannot be lower than -100%"
-msgstr "Granična vrijednost nemože biti manje od -100%"
-
-#. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_product_packaging_max_weight
-msgid "Max Weight"
-msgstr "Maksimalna težina"
-
-#. module: delivery
-#: sql_constraint:product.packaging:0
-msgid "Max Weight must be positive"
-msgstr "Maksimalna težina mora biti pozitivna"
-
-#. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_price_rule_max_value
 msgid "Maximum Value"
 msgstr "Maksimalna Vrijednost"
-
-#. module: delivery
-#: model:ir.model.fields,help:delivery.field_product_packaging_max_weight
-msgid "Maximum weight shippable in this packaging"
-msgstr ""
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_image_medium
@@ -958,16 +819,6 @@ msgid "Membership Start Date"
 msgstr "Datum početka članstva"
 
 #. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_purchase_line_warn_msg
-msgid "Message for Purchase Order Line"
-msgstr "Poruka za stavku naloga za nabavu"
-
-#. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_sale_line_warn_msg
-msgid "Message for Sales Order Line"
-msgstr "Upozorenje za stavku prodajnog naloga"
-
-#. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_message_ids
 msgid "Messages"
 msgstr "Poruke"
@@ -985,18 +836,13 @@ msgid "Name"
 msgstr "Naziv"
 
 #. module: delivery
-#: selection:product.packaging,package_carrier_type:0
-msgid "No carrier integration"
-msgstr ""
-
-#. module: delivery
-#: code:addons/delivery/models/sale_order.py:63
+#: code:addons/delivery/models/sale_order.py:62
 #, python-format
 msgid "No carrier matching."
 msgstr ""
 
 #. module: delivery
-#: code:addons/delivery/models/sale_order.py:72
+#: code:addons/delivery/models/sale_order.py:70
 #, python-format
 msgid "No carrier set for this order."
 msgstr ""
@@ -1038,60 +884,19 @@ msgid "Number of unread messages"
 msgstr "Broj nepročitanih poruka"
 
 #. module: delivery
-#: model:ir.model.fields,help:delivery.field_delivery_carrier_purchase_method
-msgid ""
-"On ordered quantities: control bills based on ordered quantities.\n"
-"On received quantities: control bills based on received quantity."
-msgstr ""
-
-#. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_price_rule_operator
 msgid "Operator"
 msgstr "Operator"
 
 #. module: delivery
-#: model:ir.model.fields,help:delivery.field_delivery_carrier_invoice_policy
-msgid ""
-"Ordered Quantity: Invoice based on the quantity the customer ordered.\n"
-"Delivered Quantity: Invoiced based on the quantity the vendor delivered (time or deliveries)."
-msgstr ""
-
-#. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_outgoing_qty
 msgid "Outgoing"
-msgstr "Odlazno"
-
-#. module: delivery
-#: model:ir.ui.view,arch_db:delivery.view_quant_package_form_save
-msgid "Package"
-msgstr "Paket"
-
-#. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_product_packaging_shipper_package_code
-msgid "Package Code"
-msgstr ""
-
-#. module: delivery
-#: code:addons/delivery/models/stock_picking.py:35
-#: code:addons/delivery/models/stock_picking.py:128
-#, python-format
-msgid "Package Details"
-msgstr ""
+msgstr "Outgoing"
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_stock_picking_package_ids
 msgid "Packages"
 msgstr "Paketi"
-
-#. module: delivery
-#: model:ir.model,name:delivery.model_product_packaging
-msgid "Packaging"
-msgstr "Pakiranje"
-
-#. module: delivery
-#: model:ir.model,name:delivery.model_stock_pack_operation
-msgid "Packing Operation"
-msgstr "Operacija pakiranja"
 
 #. module: delivery
 #: model:ir.model,name:delivery.model_res_partner
@@ -1104,16 +909,18 @@ msgid "Physical Packages"
 msgstr "Fizički paketi"
 
 #. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_pos_categ_id
-msgid "Point of Sale Category"
-msgstr "Kategorije POS-a"
-
-#. module: delivery
 #: selection:delivery.price.rule,variable:0
 #: selection:delivery.price.rule,variable_factor:0
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_price
 msgid "Price"
 msgstr "Cijena"
+
+#. module: delivery
+#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_delivery_type
+#: model:ir.model.fields,field_description:delivery.field_stock_picking_delivery_type
+#: model:ir.ui.view,arch_db:delivery.view_delivery_carrier_search
+msgid "Price Computation"
+msgstr "Izračun cijene"
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_property_account_creditor_price_difference
@@ -1137,11 +944,6 @@ msgid "Pricelist Items"
 msgstr "Stavke cjenika"
 
 #. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_pricelist_item_ids
-msgid "Pricelist item ids"
-msgstr ""
-
-#. module: delivery
 #: model:ir.ui.view,arch_db:delivery.view_delivery_carrier_form
 msgid "Pricing"
 msgstr "Cijene"
@@ -1155,11 +957,6 @@ msgstr "Pravila cijena"
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_property_stock_procurement
 msgid "Procurement Location"
 msgstr "Lokacija nabave"
-
-#. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_product_variant_id
-msgid "Product"
-msgstr "Proizvod"
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_alert_time
@@ -1180,6 +977,11 @@ msgstr "Predložak maila za proizvod"
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_life_time
 msgid "Product Life Time"
 msgstr "Životni vijek proizvoda"
+
+#. module: delivery
+#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_product_manager
+msgid "Product Manager"
+msgstr "Menadžer proizvoda"
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_removal_time
@@ -1214,18 +1016,6 @@ msgid "Products"
 msgstr "Proizvodi"
 
 #. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_project_id
-msgid "Project"
-msgstr "Projekt"
-
-#. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_delivery_type
-#: model:ir.model.fields,field_description:delivery.field_stock_picking_delivery_type
-#: model:ir.ui.view,arch_db:delivery.view_delivery_carrier_search
-msgid "Provider"
-msgstr "Davatelj "
-
-#. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_description_purchase
 msgid "Purchase Description"
 msgstr "Opis nabave"
@@ -1234,11 +1024,6 @@ msgstr "Opis nabave"
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_purchase_gap
 msgid "Purchase Gap"
 msgstr "Razmak u kupovini"
-
-#. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_purchase_line_warn
-msgid "Purchase Order Line"
-msgstr "Stavka naloga nabave"
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_uom_po_id
@@ -1276,11 +1061,6 @@ msgid ""
 msgstr ""
 
 #. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_expense_policy
-msgid "Re-Invoice Expenses"
-msgstr ""
-
-#. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_reception_count
 msgid "Receipt"
 msgstr "Račun"
@@ -1291,19 +1071,9 @@ msgid "Reordering Rules"
 msgstr "Pravila ponovnog naručivanja"
 
 #. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_reordering_max_qty
-msgid "Reordering max qty"
-msgstr ""
-
-#. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_reordering_min_qty
-msgid "Reordering min qty"
-msgstr ""
-
-#. module: delivery
 #: model:ir.model,name:delivery.model_stock_return_picking
 msgid "Return Picking"
-msgstr "Povrat robe"
+msgstr ""
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_route_ids
@@ -1341,14 +1111,8 @@ msgstr "Prodajni nalog"
 
 #. module: delivery
 #: model:ir.model,name:delivery.model_sale_order_line
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_sale_line_warn
 msgid "Sales Order Line"
 msgstr "Stavka prodajnog naloga"
-
-#. module: delivery
-#: model:ir.ui.view,arch_db:delivery.view_quant_package_form_save
-msgid "Save"
-msgstr "Spremi"
 
 #. module: delivery
 #: model:ir.model.fields,help:delivery.field_delivery_carrier_categ_id
@@ -1356,24 +1120,19 @@ msgid "Select category for the current product"
 msgstr "Odabir kategorije za trenutni artikl"
 
 #. module: delivery
-#: code:addons/delivery/models/delivery_carrier.py:296
+#: model:ir.model.fields,help:delivery.field_delivery_carrier_event_type_id
+msgid ""
+"Select event types so when we use this product in sales order lines, it will"
+" filter events of this type only."
+msgstr "Odaberite događaj pa kada koristite ovaj proizvod u retku prodajnog naloga, filtirirati će samo događaje ove vrste."
+
+#. module: delivery
+#: code:addons/delivery/models/delivery_carrier.py:250
 #, python-format
 msgid ""
 "Selected product in the delivery method doesn't fulfill any of the delivery "
 "carrier(s) criteria."
 msgstr ""
-
-#. module: delivery
-#: model:ir.model.fields,help:delivery.field_delivery_carrier_purchase_line_warn
-#: model:ir.model.fields,help:delivery.field_delivery_carrier_sale_line_warn
-msgid ""
-"Selecting the \"Warning\" option will notify user with the message, "
-"Selecting \"Blocking Message\" will throw an exception with the message and "
-"block the flow. The Message has to be written in the next field."
-msgstr ""
-"Odabirom opcije \"Upozorenje\" obavijestit ćete korisnika porukom, odabirom "
-"opcije \"Blokiranje poruke\" učinit ćete izuzetak s porukom i blokirati tok."
-" Poruku treba napisati u slijedećem polju."
 
 #. module: delivery
 #: model:ir.ui.view,arch_db:delivery.view_picking_withcarrier_out_form
@@ -1392,16 +1151,9 @@ msgid "Set price"
 msgstr "Postavljanje cijena"
 
 #. module: delivery
-#: model:ir.model.fields,help:delivery.field_delivery_carrier_prod_environment
-msgid "Set to True if your credentials are certified for production."
-msgstr ""
-
-#. module: delivery
-#: code:addons/delivery/models/stock_picking.py:147
+#: code:addons/delivery/models/stock_picking.py:90
 #, python-format
-msgid ""
-"Shipment sent to carrier %s for expedition with tracking number %s<br/>Cost:"
-" %.2f %s"
+msgid "Shipment sent to carrier %s for expedition with tracking number %s"
 msgstr ""
 
 #. module: delivery
@@ -1410,14 +1162,21 @@ msgid "Shipping Cost"
 msgstr "Troškovi isporuke"
 
 #. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_stock_quant_package_shipping_weight
-msgid "Shipping Weight"
-msgstr ""
+#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_shipping_enabled
+msgid "Shipping enabled"
+msgstr "Omogućena dostava"
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_image_small
 msgid "Small-sized image"
 msgstr "Slika male veličine"
+
+#. module: delivery
+#: model:ir.model.fields,help:delivery.field_delivery_carrier_uos_id
+msgid ""
+"Specify a unit of measure here if invoicing is made in another unit of "
+"measure than inventory. Keep empty to use the default unit of measure."
+msgstr ""
 
 #. module: delivery
 #: model:ir.model.fields,help:delivery.field_delivery_carrier_product_sale_ok
@@ -1434,20 +1193,19 @@ msgstr "Navedite da li proizvod može biti odabran u HR trošak."
 #: model:ir.model.fields,help:delivery.field_delivery_carrier_property_cost_method
 msgid ""
 "Standard Price: The cost price is manually updated at the end of a specific period (usually once a year).\n"
-"                Average Price: The cost price is recomputed at each incoming shipment and used for the product valuation.\n"
-"                Real Price: The cost price displayed is the price of the last outgoing product (will be use in case of inventory loss for example)."
-msgstr ""
-
-#. module: delivery
-#: model:ir.model.fields,help:delivery.field_delivery_carrier_hs_code
-#: model:ir.model.fields,help:delivery.field_product_template_hs_code
-msgid "Standardized code for international shipping and goods declaration"
+"                    Average Price: The cost price is recomputed at each incoming shipment and used for the product valuation.\n"
+"                    Real Price: The cost price displayed is the price of the last outgoing product (will be use in case of inventory loss for example)."
 msgstr ""
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_state_ids
 msgid "States"
-msgstr "Statusi"
+msgstr "Stanja"
+
+#. module: delivery
+#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_state
+msgid "Status"
+msgstr "Status"
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_property_stock_account_input
@@ -1457,22 +1215,12 @@ msgstr "Konto skladišnog ulaza"
 #. module: delivery
 #: model:ir.model,name:delivery.model_stock_move
 msgid "Stock Move"
-msgstr "Skladišni prenos"
+msgstr "Skladišni prijenosi"
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_property_stock_account_output
 msgid "Stock Output Account"
 msgstr "Konto skladišnog izlaza"
-
-#. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_stock_move_ids
-msgid "Stock move ids"
-msgstr ""
-
-#. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_stock_quant_ids
-msgid "Stock quant ids"
-msgstr ""
 
 #. module: delivery
 #: model:ir.model.fields,help:delivery.field_delivery_carrier_normal_cost
@@ -1508,16 +1256,9 @@ msgid "Sum of Quantity in Vendor Bills"
 msgstr "Ukupna količina u ulaznim računima"
 
 #. module: delivery
-#: model:ir.model.fields,help:delivery.field_delivery_carrier_pricelist_id
-msgid ""
-"Technical field. Used for searching on pricelists, not stored in database."
-msgstr ""
-
-#. module: delivery
-#: model:ir.model.fields,help:delivery.field_delivery_carrier_stock_move_ids
-#: model:ir.model.fields,help:delivery.field_delivery_carrier_stock_quant_ids
-msgid "Technical: used to compute quantities."
-msgstr ""
+#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_name_template
+msgid "Template Name"
+msgstr "Naziv predloška"
 
 #. module: delivery
 #: model:delivery.carrier,name:delivery.delivery_carrier
@@ -1531,22 +1272,18 @@ msgid ""
 "The average delay in days between the confirmation of the customer order and"
 " the delivery of the finished products. It's the time you promise to your "
 "customers."
-msgstr ""
-"Prosječni dani odgode od potvrđene načudđbe do isporuke gotovog proizvoda. "
-"Ovo vrijeme jamčite kupcu kao rok isporuke."
+msgstr "Prosječni dani odgode od potvrđene načudđbe do isporuke gotovog proizvoda. Ovo vrijeme jamčite kupcu kao rok isporuke."
 
 #. module: delivery
-#: code:addons/delivery/models/sale_order.py:54
+#: code:addons/delivery/models/sale_order.py:53
 #, python-format
 msgid "The order state have to be draft to add delivery lines."
 msgstr "Stanje nalog mora biti 'Nacrt' da biste mogli dodavati stavke."
 
 #. module: delivery
-#: model:ir.model.fields,help:delivery.field_delivery_carrier_lst_price
-msgid ""
-"The sale price is managed from the product template. Click on the 'Variant "
-"Prices' button to set the extra attribute prices."
-msgstr ""
+#: model:ir.model.fields,help:delivery.field_delivery_carrier_partner_id
+msgid "The partner that is doing the delivery service."
+msgstr "Partner koji obavlja uslugu dostave."
 
 #. module: delivery
 #: model:ir.model.fields,help:delivery.field_delivery_carrier_volume
@@ -1571,27 +1308,21 @@ msgstr ""
 msgid ""
 "This account will be used for invoices instead of the default one to value "
 "expenses for the current product."
-msgstr ""
-"Ovaj račun će biti korišten za račune umjesto predefiniranog za vrednovanje "
-"troškova za trenutni artikl."
+msgstr "Ovaj račun će biti korišten za račune umjesto zadanog za vrednovanje troškova za trenutni artikl."
 
 #. module: delivery
 #: model:ir.model.fields,help:delivery.field_delivery_carrier_property_account_income_id
 msgid ""
 "This account will be used for invoices instead of the default one to value "
 "sales for the current product."
-msgstr ""
-"Ovaj račun će biti korišten za račune umjesto predefiniranog za vrednovanje "
-"prodaje za trenutni artikl."
+msgstr "Ovaj račun će biti korišten za račune umjesto zadanog za vrednovanje prodaje za trenutni artikl."
 
 #. module: delivery
 #: model:ir.model.fields,help:delivery.field_delivery_carrier_property_account_creditor_price_difference
 msgid ""
 "This account will be used to value price difference between purchase price "
 "and cost price."
-msgstr ""
-"Ovaj konto će se koristiti za knjiženje razlike između nabavne cijene i "
-"cijene koštanja."
+msgstr "Ovaj konto će se koristiti za knjiženje razlike između nabavne cijene i cijene koštanja."
 
 #. module: delivery
 #: model:ir.model.fields,help:delivery.field_res_partner_property_delivery_carrier_id
@@ -1608,11 +1339,6 @@ msgstr ""
 #. module: delivery
 #: model:ir.model.fields,help:delivery.field_delivery_carrier_price_extra
 msgid "This is the sum of the extra price of all attributes"
-msgstr ""
-
-#. module: delivery
-#: model:ir.model.fields,help:delivery.field_delivery_carrier_margin
-msgid "This percentage will be added to the shipping price."
 msgstr ""
 
 #. module: delivery
@@ -1634,24 +1360,12 @@ msgstr ""
 msgid ""
 "This stock location will be used, instead of the default one, as the source "
 "location for stock moves generated when you do an inventory."
-msgstr ""
-"Ova će se lokacija koristiti, umjesto predefinirane, kao odredišna lokacija "
-"za skladišne prijenose koji se generiraju prilikom izrade inventure."
-
-#. module: delivery
-#: model:ir.model.fields,help:delivery.field_delivery_carrier_pos_categ_id
-msgid "Those categories are used to group similar products for point of sale."
-msgstr ""
-
-#. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_to_weight
-msgid "To Weigh With Scale"
-msgstr "Izvagati vagom"
+msgstr "Ova će se lokacija koristiti, umjesto predefinirane, kao odredišna lokacija za skladišne prijenose koji se generiraju prilikom izrade inventure."
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_total_cost
 msgid "Total Cost"
-msgstr "Ukupni trošak"
+msgstr "Totalni trošak"
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_total_margin
@@ -1680,14 +1394,14 @@ msgid "Tracking"
 msgstr "Praćenje"
 
 #. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_stock_picking_carrier_tracking_ref
-msgid "Tracking Reference"
-msgstr ""
-
-#. module: delivery
 #: model:ir.model,name:delivery.model_stock_picking
 msgid "Transfer"
-msgstr "Prijenos"
+msgstr "Prenos"
+
+#. module: delivery
+#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_partner_id
+msgid "Transporter Company"
+msgstr "Dostavljačka tvrtka"
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_turnover
@@ -1700,7 +1414,20 @@ msgid "Turnover - Standard price"
 msgstr "Obrtaj - uobičajena cijena"
 
 #. module: delivery
+#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_event_type_id
+msgid "Type of Event"
+msgstr "Vrsta događaja"
+
+#. module: delivery
+#: model:ir.model.fields,help:delivery.field_delivery_carrier_shipping_enabled
+msgid ""
+"Uncheck this box to disable package shipping while validating Delivery "
+"Orders"
+msgstr ""
+
+#. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_uom_id
+#: model:ir.model.fields,field_description:delivery.field_stock_move_weight_uom_id
 #: model:ir.model.fields,field_description:delivery.field_stock_picking_weight_uom_id
 msgid "Unit of Measure"
 msgstr "Jedinica mjere"
@@ -1710,6 +1437,16 @@ msgstr "Jedinica mjere"
 msgid ""
 "Unit of Measure (Unit of Measure) is the unit of measurement for Weight"
 msgstr ""
+
+#. module: delivery
+#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_uos_coeff
+msgid "Unit of Measure -> UOS Coeff"
+msgstr "Koeficijent JM -> Prodajna JM"
+
+#. module: delivery
+#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_uos_id
+msgid "Unit of Sale"
+msgstr "Jedinica prodaje"
 
 #. module: delivery
 #: model:ir.model.fields,help:delivery.field_stock_picking_weight_uom_id
@@ -1727,11 +1464,6 @@ msgid "Unread Messages Counter"
 msgstr "Brojač nepročitanih poruka"
 
 #. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_valuation
-msgid "Valuation"
-msgstr ""
-
-#. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_price_rule_variable
 msgid "Variable"
 msgstr "Varijabla"
@@ -1742,24 +1474,24 @@ msgid "Variable Factor"
 msgstr "Varijabilni Faktor"
 
 #. module: delivery
+#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_price_extra
+msgid "Variant Extra Price"
+msgstr ""
+
+#. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_image_variant
 msgid "Variant Image"
 msgstr "Varijanta slike"
 
 #. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_price_extra
-msgid "Variant Price Extra"
-msgstr ""
+#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_seller_ids
+msgid "Vendor"
+msgstr "Dobavljač"
 
 #. module: delivery
 #: model:ir.model.fields,field_description:delivery.field_delivery_carrier_supplier_taxes_id
 msgid "Vendor Taxes"
 msgstr "Porezi dobavljača"
-
-#. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_seller_ids
-msgid "Vendors"
-msgstr "Dobavljači"
 
 #. module: delivery
 #: selection:delivery.price.rule,variable:0
@@ -1782,7 +1514,6 @@ msgstr "Jamstvo"
 #. module: delivery
 #: selection:delivery.price.rule,variable:0
 #: selection:delivery.price.rule,variable_factor:0
-#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_weight
 #: model:ir.model.fields,field_description:delivery.field_stock_move_weight
 #: model:ir.model.fields,field_description:delivery.field_stock_picking_weight
 #: model:ir.model.fields,field_description:delivery.field_stock_quant_package_weight
@@ -1795,16 +1526,6 @@ msgstr "Težina"
 #: selection:delivery.price.rule,variable_factor:0
 msgid "Weight * Volume"
 msgstr "Težina * Volumen"
-
-#. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_stock_move_weight_uom_id
-msgid "Weight Unit of Measure"
-msgstr ""
-
-#. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_stock_picking_shipping_weight
-msgid "Weight for Shipping"
-msgstr ""
 
 #. module: delivery
 #: model:ir.model.fields,help:delivery.field_delivery_carrier_alert_time
@@ -1832,9 +1553,7 @@ msgstr ""
 msgid ""
 "When a new a Serial Number is issued, this is the number of days before the "
 "goods starts deteriorating, without being dangerous yet."
-msgstr ""
-"Kada se izdaje novi serijski broj, to je broj dana prije početka "
-"pogoršavanja dobara, još je uvijek bezopasna."
+msgstr "Kada se izdaje novi serijski broj, to je broj dana prije početka pogoršavanja dobara, još je uvijek bezopasna."
 
 #. module: delivery
 #: model:ir.model.fields,help:delivery.field_delivery_carrier_property_stock_account_input
@@ -1860,30 +1579,10 @@ msgid ""
 "When validating an invoice, an email will be sent to the customer based on "
 "this template. The customer will receive an email for each product linked to"
 " an email template."
-msgstr ""
-"Kod provjere računa, e-mail će biti poslan kupcu na temelju tog predloška. "
-"Kupac će primiti e-poštu za svaki proizvod povezan na predložak e-pošte."
+msgstr "Kod provjere računa, e-mail će biti poslan kupcu na temelju tog predloška. Kupac će primiti e-poštu za svaki proizvod povezan na predložak e-pošte."
 
 #. module: delivery
-#: model:ir.model.fields,field_description:delivery.field_product_packaging_width
-msgid "Width"
-msgstr "Širina"
-
-#. module: delivery
-#: sql_constraint:product.packaging:0
-msgid "Width must be positive"
-msgstr ""
-
-#. module: delivery
-#: code:addons/delivery/models/stock_picking.py:187
-#, python-format
-msgid ""
-"You are shipping different packaging types in the same shipment.\n"
-"Packaging Types: %s"
-msgstr ""
-
-#. module: delivery
-#: code:addons/delivery/models/stock_picking.py:163
+#: code:addons/delivery/models/stock_picking.py:106
 #, python-format
 msgid ""
 "Your delivery method has no redirect on courier provider's website to track "
@@ -1904,3 +1603,11 @@ msgstr ""
 #: model:ir.ui.view,arch_db:delivery.view_delivery_carrier_form
 msgid "e.g. UPS Express"
 msgstr ""
+
+#. module: delivery
+#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_cost_method
+#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_reordering_max_qty
+#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_reordering_min_qty
+#: model:ir.model.fields,field_description:delivery.field_delivery_carrier_valuation
+msgid "unknown"
+msgstr "nepoznato"

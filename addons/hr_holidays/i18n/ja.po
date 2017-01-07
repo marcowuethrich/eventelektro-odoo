@@ -3,19 +3,16 @@
 # * hr_holidays
 # 
 # Translators:
-# Martin Trigaux <mat@odoo.com>, 2016
-# 高木正勝 <masakatsu.takagi@pro-spire.co.jp>, 2016
 # Yoshi Tashiro <tashiro@roomsfor.hk>, 2016
-# Manami Hashi <manami@roomsfor.hk>, 2016
-# Norimichi Sugimoto <norimichi.sugimoto@tls-ltd.co.jp>, 2016
+# 高木正勝 <masakatsu.takagi@pro-spire.co.jp>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:56+0000\n"
-"PO-Revision-Date: 2016-09-07 08:56+0000\n"
-"Last-Translator: Norimichi Sugimoto <norimichi.sugimoto@tls-ltd.co.jp>, 2016\n"
-"Language-Team: Japanese (https://www.transifex.com/odoo/teams/41243/ja/)\n"
+"POT-Creation-Date: 2016-09-22 13:16+0000\n"
+"PO-Revision-Date: 2016-12-08 05:56+0000\n"
+"Last-Translator: Yoshi Tashiro <tashiro@roomsfor.hk>\n"
+"Language-Team: Japanese (http://www.transifex.com/odoo/odoo-9/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -48,10 +45,11 @@ msgid "!important; font-size: 8px; min-width: 18px\"&gt;"
 msgstr "!important; font-size: 8px; min-width: 18px\"&gt;"
 
 #. module: hr_holidays
-#: code:addons/hr_holidays/models/hr_holidays.py:331
+#: code:addons/hr_holidays/hr_holidays.py:234
+#: code:addons/hr_holidays/hr_holidays.py:356
 #, python-format
-msgid "%s on %s : %.2f day(s)"
-msgstr "%s に %s : %.2f 日(s)"
+msgid "%s on %s"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.ui.view,arch_db:hr_holidays.report_holidayssummary
@@ -68,9 +66,7 @@ msgstr "&lt;/th&gt;"
 msgid ""
 "&lt;td class=\"text-center oe_leftfit oe_rightfit\" style=\"background-"
 "color:"
-msgstr ""
-"&lt;td class=\"text-center oe_leftfit oe_rightfit\" style=\"background-"
-"color:"
+msgstr "&lt;td class=\"text-center oe_leftfit oe_rightfit\" style=\"background-color:"
 
 #. module: hr_holidays
 #: model:ir.ui.view,arch_db:hr_holidays.report_holidayssummary
@@ -100,14 +96,7 @@ msgstr "不在"
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_department_absence_of_today
 msgid "Absence by Today"
-msgstr "本日で不在"
-
-#. module: hr_holidays
-#: model:ir.ui.view,arch_db:hr_holidays.hr_department_view_kanban
-msgid ""
-"Absent Employee(s), Whose leaves request are either confirmed or validated "
-"on today"
-msgstr "不在の従業員(達)、その休暇申請が今日、確認または承認されています"
+msgstr "本日不在"
 
 #. module: hr_holidays
 #: model:ir.actions.act_window,name:hr_holidays.hr_employee_action_from_department
@@ -119,6 +108,11 @@ msgstr "不在の従業員"
 #: model:ir.ui.view,arch_db:hr_holidays.hr_employee_view_search
 msgid "Absent Today"
 msgstr "本日不在"
+
+#. module: hr_holidays
+#: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_message_needaction
+msgid "Action Needed"
+msgstr "必要なアクション"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_status_active
@@ -164,7 +158,7 @@ msgstr "消込額"
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_holiday_type
 msgid "Allocation Mode"
-msgstr "割当モード"
+msgstr "割振りモード"
 
 #. module: hr_holidays
 #: selection:hr.holidays,type:0
@@ -187,7 +181,7 @@ msgid "Allocation Requests to Approve"
 msgstr "割当申請承認"
 
 #. module: hr_holidays
-#: code:addons/hr_holidays/models/hr.py:129
+#: code:addons/hr_holidays/hr_holidays.py:559
 #, python-format
 msgid "Allocation for %s"
 msgstr "%s の割当て"
@@ -210,7 +204,7 @@ msgstr "割当日数以上の休暇取得を許可"
 #. module: hr_holidays
 #: model:ir.ui.view,arch_db:hr_holidays.report_holidayssummary
 msgid "Analyze from"
-msgstr "分析元"
+msgstr "これから分析"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_double_validation
@@ -247,21 +241,6 @@ msgid "Assign Leaves"
 msgstr "休暇を割当てます。"
 
 #. module: hr_holidays
-#: model:ir.model.fields,help:hr_holidays.field_resource_calendar_uom_id
-msgid ""
-"Average hours of work per day.\n"
-"                It is used in an employee leave request to compute the number of days consumed based on the resource calendar.\n"
-"                It can be used to handle various contract types, e.g.:\n"
-"                - 38 Hours/Week, 5 Days/Week: 1 Day = 7.6 Hours\n"
-"                - 45 Hours/Week, 5 Days/Week: 1 Day = 9.0 Hours"
-msgstr ""
-"1日あたりの平均作業時間。\n"
-"リソースカレンダーに基づいて消費された日数を計算する従業員休暇申請で使用されます。\n"
-"さまざまな契約タイプを処理するために使用できます。例：\n"
-"- 38時間/週、5日/週：1日= 7.6時間\n"
-"- 45時間/週、5日/週：1日= 9.0時間"
-
-#. module: hr_holidays
 #: selection:hr.holidays.status,color_name:0
 msgid "Black"
 msgstr "黒"
@@ -285,7 +264,7 @@ msgstr "茶"
 #. module: hr_holidays
 #: selection:hr.holidays,holiday_type:0
 msgid "By Employee"
-msgstr "従業員別"
+msgstr "従業員ごと"
 
 #. module: hr_holidays
 #: selection:hr.holidays,holiday_type:0
@@ -297,9 +276,7 @@ msgstr "従業員タグ別"
 msgid ""
 "By Employee: Allocation/Request for individual Employee, By Employee Tag: "
 "Allocation/Request for group of employees in category"
-msgstr ""
-"従業員別：個々の従業員の割り当て/要求。\n"
-"従業員別タグ：カテゴリ内の従業員グループの割り当て/要求"
+msgstr "従業員別：個々の従業員の割り当て/要求。\n従業員別タグ：カテゴリ内の従業員グループの割り当て/要求"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_can_reset
@@ -315,12 +292,12 @@ msgstr "取消"
 #. module: hr_holidays
 #: selection:hr.employee,current_leave_state:0 selection:hr.holidays,state:0
 msgid "Cancelled"
-msgstr "取消済"
+msgstr "キャンセル済"
 
 #. module: hr_holidays
 #: model:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_filter
 msgid "Category"
-msgstr "カテゴリ"
+msgstr "分類"
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_holidays_category_id
@@ -332,26 +309,7 @@ msgstr "従業員のカテゴリ"
 msgid ""
 "Choose 'Leave Request' if someone wants to take an off-day. \n"
 "Choose 'Allocation Request' if you want to increase the number of leaves available for someone"
-msgstr ""
-"休暇を希望する人がる場合は、「休暇申請」を選択してください。　\n"
-"誰かの休暇を増やす場合は、「割当申請」を選択してください。"
-
-#. module: hr_holidays
-#: model:ir.actions.act_window,help:hr_holidays.open_allocation_holidays
-msgid "Click here to create a new leave allocation request."
-msgstr "クリックして休暇割当申請を新規作成してください。"
-
-#. module: hr_holidays
-#: model:ir.actions.act_window,help:hr_holidays.open_department_holidays_allocation_approve
-msgid "Click here to create a new leave allocation."
-msgstr "クリックして休暇割当を新規作成してください。"
-
-#. module: hr_holidays
-#: model:ir.actions.act_window,help:hr_holidays.open_company_allocation
-#: model:ir.actions.act_window,help:hr_holidays.open_department_holidays_approve
-#: model:ir.actions.act_window,help:hr_holidays.open_employee_leaves
-msgid "Click here to create a new leave request."
-msgstr "クリックして休暇申請を新規作成してください。"
+msgstr "休暇を希望している人がいたら、「休暇申請」を選んでください。　\n誰かの休暇を増やすのであれば、「割当て申請」を選んでください。"
 
 #. module: hr_holidays
 #: model:ir.actions.act_window,help:hr_holidays.open_ask_holidays
@@ -417,6 +375,11 @@ msgid "Created on"
 msgstr "作成日"
 
 #. module: hr_holidays
+#: model:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_filter
+msgid "Current"
+msgstr ""
+
+#. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_employee_current_leave_state
 msgid "Current Leave Status"
 msgstr "現在の休暇の状態"
@@ -427,14 +390,14 @@ msgid "Current Leave Type"
 msgstr "現在の休暇タイプ"
 
 #. module: hr_holidays
-#: model:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_filter
-msgid "Current Year"
-msgstr "今年"
-
-#. module: hr_holidays
 #: model:ir.ui.menu,name:hr_holidays.menu_hr_holidays_dashboard
 msgid "Dashboard"
 msgstr "ダッシュボード"
+
+#. module: hr_holidays
+#: model:ir.model.fields,help:hr_holidays.field_hr_holidays_message_last_post
+msgid "Date of the last message posted on the record."
+msgstr "記録上の最後のメッセージが投稿された日"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_department_id
@@ -475,7 +438,7 @@ msgstr "表示名"
 #. module: hr_holidays
 #: model:ir.ui.view,arch_db:hr_holidays.edit_holiday_new
 msgid "Duration"
-msgstr "日数"
+msgstr "期間"
 
 #. module: hr_holidays
 #: model:ir.model,name:hr_holidays.model_hr_employee
@@ -511,7 +474,7 @@ msgstr "終了日"
 msgid ""
 "Filters only on allocations and requests that belong to an holiday type that"
 " is 'active' (active field is True)"
-msgstr "休暇タイプに属している割当と申請に対してのみ有効です(アクティブなフィールドはTrueです)"
+msgstr "休暇タイプに属している割り当てとリクエストに対してのみ有効です(アクティブなフィールドはTrueです)"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_manager_id
@@ -519,10 +482,25 @@ msgid "First Approval"
 msgstr "最初の承認"
 
 #. module: hr_holidays
+#: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_message_follower_ids
+msgid "Followers"
+msgstr "フォロワー"
+
+#. module: hr_holidays
+#: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_message_channel_ids
+msgid "Followers (Channels)"
+msgstr "フォロワー (チャネル)"
+
+#. module: hr_holidays
+#: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_message_partner_ids
+msgid "Followers (Partners)"
+msgstr "フォロワー (取引先)"
+
+#. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_summary_dept_date_from
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_summary_employee_date_from
 msgid "From"
-msgstr "開始日"
+msgstr "差出人"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_employee_leave_date_from
@@ -543,7 +521,12 @@ msgstr "グループ化"
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_report_note
 msgid "HR Comments"
-msgstr "HRからのコメント"
+msgstr "HRからのこめんと"
+
+#. module: hr_holidays
+#: model:ir.model,name:hr_holidays.model_hr_department
+msgid "HR Department"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model,name:hr_holidays.model_hr_holidays_summary_dept
@@ -556,16 +539,6 @@ msgid "HR Leaves Summary Report By Employee"
 msgstr "HR 従業員別休暇サマリレポート"
 
 #. module: hr_holidays
-#: model:ir.model.fields,field_description:hr_holidays.field_resource_calendar_uom_id
-msgid "Hours per Day"
-msgstr "1日あたりの時間"
-
-#. module: hr_holidays
-#: model:ir.model,name:hr_holidays.model_hr_department
-msgid "Hr Department"
-msgstr "HR部"
-
-#. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_id
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_remaining_leaves_user_id
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_status_id
@@ -576,11 +549,21 @@ msgid "ID"
 msgstr "ID"
 
 #. module: hr_holidays
+#: model:ir.model.fields,help:hr_holidays.field_hr_holidays_message_unread
+msgid "If checked new messages require your attention."
+msgstr "チェックされている場合は、新しいメッセージに注意が必要です。"
+
+#. module: hr_holidays
+#: model:ir.model.fields,help:hr_holidays.field_hr_holidays_message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "チェックされている場合は、新しいメッセージに注意が必要です。"
+
+#. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_holidays_status_active
 msgid ""
 "If the active field is set to false, it will allow you to hide the leave "
 "type without removing it."
-msgstr "アクティブ項目をFalseにセットした場合、休暇タイプは削除することなく非表示にできます。"
+msgstr "この項目が正しくないとしても、休暇タイプをそのままにして、それを隠すことができます。"
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_holidays_status_limit
@@ -588,13 +571,22 @@ msgid ""
 "If you select this check box, the system allows the employees to take more "
 "leaves than the available ones for this type and will not take them into "
 "account for the \"Remaining Legal Leaves\" defined on the employee form."
-msgstr ""
-"このチェックボックスをオンにすると、従業員はこのタイプの利用可能な休暇よりも多くの休暇を取ることができ、従業員のフォームで定義された「残りの法定休暇」については考慮されません。"
+msgstr "このチェックボックスをオンにすると、従業員はこのタイプの利用可能な休暇よりも多くの休暇を取ることができ、従業員のフォームで定義された「残りの法定休暇」については考慮されません。"
+
+#. module: hr_holidays
+#: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_message_is_follower
+msgid "Is Follower"
+msgstr "フォロー中"
 
 #. module: hr_holidays
 #: selection:hr.holidays.status,color_name:0
 msgid "Ivory"
 msgstr "象牙色"
+
+#. module: hr_holidays
+#: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_message_last_post
+msgid "Last Message Date"
+msgstr "最終メッセージ日"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays___last_update
@@ -686,40 +678,7 @@ msgstr "休暇タイプ"
 #: model:ir.ui.view,arch_db:hr_holidays.view_holidays_status_filter
 #: model:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_status_search
 msgid "Leave Types"
-msgstr "休暇タイプ"
-
-#. module: hr_holidays
-#: code:addons/hr_holidays/models/hr_holidays.py:445
-#, python-format
-msgid "Leave request must be confirmed (\"To Approve\") in order to approve it."
-msgstr "休暇申請を承認するために、確認する必要があります(承認する)。"
-
-#. module: hr_holidays
-#: code:addons/hr_holidays/models/hr_holidays.py:460
-#, python-format
-msgid "Leave request must be confirmed in order to approve it."
-msgstr "休暇申請を承認するために、確認する必要があります。"
-
-#. module: hr_holidays
-#: code:addons/hr_holidays/models/hr_holidays.py:519
-#, python-format
-msgid "Leave request must be confirmed or validated in order to refuse it."
-msgstr "休暇申請は、それを拒否するために確認または確認されなければなりません。"
-
-#. module: hr_holidays
-#: code:addons/hr_holidays/models/hr_holidays.py:432
-#, python-format
-msgid ""
-"Leave request must be in Draft state (\"To Submit\") in order to confirm it."
-msgstr "休暇申請は確認のためにドラフト状態(送信する)でなければなりません。"
-
-#. module: hr_holidays
-#: code:addons/hr_holidays/models/hr_holidays.py:417
-#, python-format
-msgid ""
-"Leave request state must be \"Refused\" or \"To Approve\" in order to reset "
-"to Draft."
-msgstr "ドラフトにリセットするには、休暇申請を「拒否」または「承認」にする必要があります。"
+msgstr "休暇種別"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_department_leave_to_approve_count
@@ -883,7 +842,6 @@ msgstr "赤紫色"
 
 #. module: hr_holidays
 #: model:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_filter
-#: model:res.groups,name:hr_holidays.group_hr_holidays_manager
 msgid "Manager"
 msgstr "マネジャ"
 
@@ -914,6 +872,11 @@ msgid "Meeting Type"
 msgstr "打ち合わせタイプ"
 
 #. module: hr_holidays
+#: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_message_ids
+msgid "Messages"
+msgstr "メッセージ"
+
+#. module: hr_holidays
 #: model:ir.ui.view,arch_db:hr_holidays.edit_holiday_new
 #: model:ir.ui.view,arch_db:hr_holidays.view_holiday
 msgid "Mode"
@@ -927,7 +890,7 @@ msgstr "月"
 #. module: hr_holidays
 #: model:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_filter
 msgid "My Department Leaves"
-msgstr "自部門の休暇"
+msgstr "私の部門の休暇"
 
 #. module: hr_holidays
 #: model:ir.ui.menu,name:hr_holidays.menu_hr_holidays_my_leaves
@@ -950,6 +913,11 @@ msgid "New"
 msgstr "新規"
 
 #. module: hr_holidays
+#: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_message_needaction_counter
+msgid "Number of Actions"
+msgstr "アクションの数"
+
+#. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_number_of_days
 #: model:ir.ui.view,arch_db:hr_holidays.view_holiday
 #: model:ir.ui.view,arch_db:hr_holidays.view_holiday_employee
@@ -963,9 +931,14 @@ msgid "Number of Leaves"
 msgstr "休暇数"
 
 #. module: hr_holidays
-#: model:res.groups,name:hr_holidays.group_hr_holidays_user
-msgid "Officer"
-msgstr "オフィサー"
+#: model:ir.model.fields,help:hr_holidays.field_hr_holidays_message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "アクションを必要とするメッセージの数"
+
+#. module: hr_holidays
+#: model:ir.model.fields,help:hr_holidays.field_hr_holidays_message_unread_counter
+msgid "Number of unread messages"
+msgstr "未読メッセージの件数"
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_holidays_status_categ_id
@@ -981,33 +954,12 @@ msgid ""
 "                to a manager for validation. Be sure to set the right leave\n"
 "                type (recuperation, legal holidays, sickness) and the exact\n"
 "                number of open days related to your leave."
+msgstr "休暇申請を記録したら、検証のためにマネージャに送信されます。 適切な休暇タイプ(療養、法定休暇、病気)、休暇に関連する正確な日数を設定してください。"
+
+#. module: hr_holidays
+#: model:ir.actions.client,name:hr_holidays.action_client_hr_holidays_menu
+msgid "Open HR Menu"
 msgstr ""
-"休暇申請を記録したら、検証のためにマネージャに送信されます。 適切な休暇タイプ(療養、法定休暇、病気)、休暇に関連する正確な日数を設定してください。"
-
-#. module: hr_holidays
-#: code:addons/hr_holidays/models/hr_holidays.py:462
-#, python-format
-msgid "Only an HR Manager can apply the second approval on leave requests."
-msgstr "HR担当者のみが休暇の二次承認を承認できます。"
-
-#. module: hr_holidays
-#: code:addons/hr_holidays/models/hr_holidays.py:415
-#, python-format
-msgid "Only an HR Manager or the concerned employee can reset to draft."
-msgstr "HRマネージャーまたは関係する従業員だけがドラフトにリセットできます。"
-
-#. module: hr_holidays
-#: code:addons/hr_holidays/models/hr_holidays.py:440
-#: code:addons/hr_holidays/models/hr_holidays.py:455
-#, python-format
-msgid "Only an HR Officer or Manager can approve leave requests."
-msgstr "HR担当者またはマネージャのみが休暇を承認できます。"
-
-#. module: hr_holidays
-#: code:addons/hr_holidays/models/hr_holidays.py:514
-#, python-format
-msgid "Only an HR Officer or Manager can refuse leave requests."
-msgstr "HR担当者またはマネージャのみが休暇を却下できます。"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_parent_id
@@ -1033,18 +985,13 @@ msgstr "赤色"
 #. module: hr_holidays
 #: model:ir.ui.view,arch_db:hr_holidays.edit_holiday_new
 msgid "Refuse"
-msgstr "却下"
+msgstr "拒否"
 
 #. module: hr_holidays
 #: selection:hr.employee,current_leave_state:0 selection:hr.holidays,state:0
 #: model:mail.message.subtype,name:hr_holidays.mt_holidays_refused
 msgid "Refused"
-msgstr "却下済"
-
-#. module: hr_holidays
-#: model:ir.model.fields,help:hr_holidays.field_hr_holidays_user_id
-msgid "Related user name for the resource to manage its access."
-msgstr "そのアクセスを管理するためのリソースに関連するユーザ名"
+msgstr "不採用"
 
 #. module: hr_holidays
 #: model:ir.ui.view,arch_db:hr_holidays.view_holiday
@@ -1064,7 +1011,7 @@ msgstr "残りの休暇日数"
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_employee_remaining_leaves
 #: model:ir.ui.view,arch_db:hr_holidays.hr_holidays_leaves_assign_tree_view
 msgid "Remaining Legal Leaves"
-msgstr "法定休暇の残日数"
+msgstr "法定休暇の残り日数"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_remaining_leaves_user_no_of_leaves
@@ -1090,7 +1037,7 @@ msgstr "申請タイプ"
 #. module: hr_holidays
 #: model:mail.message.subtype,description:hr_holidays.mt_holidays_approved
 msgid "Request approved"
-msgstr "申請承認済"
+msgstr "申請承認"
 
 #. module: hr_holidays
 #: model:mail.message.subtype,description:hr_holidays.mt_holidays_confirmed
@@ -1116,11 +1063,6 @@ msgstr "承認の申請"
 #: model:ir.ui.view,arch_db:hr_holidays.edit_holiday_new
 msgid "Reset to Draft"
 msgstr "ドラフトに再設定"
-
-#. module: hr_holidays
-#: model:ir.model,name:hr_holidays.model_resource_calendar
-msgid "Resource Calendar"
-msgstr "リソースカレンダ"
 
 #. module: hr_holidays
 #: model:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_filter
@@ -1176,15 +1118,12 @@ msgid ""
 msgstr "この申請の従業員または従業員のカテゴリがありません。 ユーザーログインが従業員にリンクされていることを確認してください。"
 
 #. module: hr_holidays
-#: code:addons/hr_holidays/models/hr.py:117
+#: code:addons/hr_holidays/hr_holidays.py:554
 #, python-format
 msgid ""
 "The feature behind the field 'Remaining Legal Leaves' can only be used when there is only one leave type with the option 'Allow to Override Limit' unchecked. (%s Found). Otherwise, the update is ambiguous as we cannot decide on which leave type the update has to be done. \n"
-" You may prefer to use the classic menus 'Leave Requests' and 'Allocation Requests' located in Leaves Application to manage the leave days of the employees if the configuration does not allow to use this field."
-msgstr ""
-"'残存法定休暇’フィールドの後ろにある機能は、1つの休暇タイプのみが選択されている場合にのみ使用できます。'オプションを上書き'チェックボックスをオフにします。  (%s 発見).。 \n"
-"それ以外の場合は、更新を行う必要のある休暇タイプを決定できないため、更新があいまいです。\n"
-"構成でこのフィールドを使用できない場合、従業員の休暇日を管理するために、休暇アプリにあるクラシックメニューの 休暇申請 および 割当申請 を使用することをお勧めします。"
+"You may prefer to use the classic menus 'Leave Requests' and 'Allocation Requests' located in 'Human Resources \\ Leaves' to manage the leave days of the employees if the configuration does not allow to use this field."
+msgstr "「法定休暇の残り」の機能は、休暇タイプが１つだけであり、「限度を無効にする」が指定されていない場合(%s がある)にだけ、使うことができます。さもないと、どの休暇タイプを更新したのか不明になります。\nもし、従業員の休暇を管理するためにこの項目を使うことができないならば、人材/休暇にある以前のメニュー「休暇申請」と「割当て要求」を使ってください。"
 
 #. module: hr_holidays
 #: sql_constraint:hr.holidays:0
@@ -1192,32 +1131,27 @@ msgid "The number of days must be greater than 0."
 msgstr "日数は0より大きくなければなりません。"
 
 #. module: hr_holidays
-#: code:addons/hr_holidays/models/hr_holidays.py:253
-#, python-format
+#: constraint:hr.holidays:0
 msgid ""
 "The number of remaining leaves is not sufficient for this leave type.\n"
 "Please verify also the leaves waiting for validation."
-msgstr ""
-"残りの休暇の数は、この休暇タイプには不十分です。\n"
-"承認を待っている休暇も確認してください。"
+msgstr "残りの休暇の数は、この休暇タイプには不十分です。\n承認を待っている休暇も確認してください。"
 
 #. module: hr_holidays
-#: sql_constraint:hr.holidays:0
+#: code:addons/hr_holidays/hr_holidays.py:304
+#: code:addons/hr_holidays/hr_holidays.py:328 sql_constraint:hr.holidays:0
+#, python-format
 msgid "The start date must be anterior to the end date."
 msgstr "開始日は終了日の前でなければなりません。"
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_holidays_state
 msgid ""
-"The status is set to 'To Submit', when a holiday request is created.\n"
-"The status is 'To Approve', when holiday request is confirmed by user.\n"
-"The status is 'Refused', when holiday request is refused by manager.\n"
+"The status is set to 'To Submit', when a holiday request is created.            \n"
+"The status is 'To Approve', when holiday request is confirmed by user.            \n"
+"The status is 'Refused', when holiday request is refused by manager.            \n"
 "The status is 'Approved', when holiday request is approved by manager."
 msgstr ""
-"祝日のリクエストが作成されると、ステータスは「送信済」に設定されます。\n"
-"休暇申請がユーザーによって確認されたときのステータスは「承認待ち」です\n"
-"管理人によって祝日のリクエストが却下された場合のステータスは「却下」です\n"
-"休暇申請が管理者によって承認された場合のステータスは「承認済み」です。"
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_holidays_manager_id
@@ -1234,9 +1168,9 @@ msgstr "この部分は、休暇を承認をする第２レベルのユーザに
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_holidays_status_color_name
 msgid ""
-"This color will be used in the leaves summary located in Reporting > Leaves "
+"This color will be used in the leaves summary located in Reporting\\Leaves "
 "by Department."
-msgstr "この色は、レポート> 部署別休暇 にある休暇の概要で使用されます。"
+msgstr ""
 
 #. module: hr_holidays
 #: model:ir.model.fields,help:hr_holidays.field_hr_holidays_status_leaves_taken
@@ -1256,7 +1190,7 @@ msgstr "この値は休暇申請の総計であり、正数です。"
 #: selection:hr.holidays,state:0
 #: model:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_filter
 msgid "To Approve"
-msgstr "未承認"
+msgstr "承認する"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_employee_leave_date_to
@@ -1266,7 +1200,7 @@ msgstr "終了日"
 #. module: hr_holidays
 #: model:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_filter
 msgid "To Do"
-msgstr "未処理"
+msgstr "ToDo"
 
 #. module: hr_holidays
 #: model:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_filter
@@ -1276,7 +1210,7 @@ msgstr "給与明細表示対象"
 #. module: hr_holidays
 #: selection:hr.holidays,state:0
 msgid "To Submit"
-msgstr "未申請"
+msgstr "申請中"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_department_total_employee
@@ -1294,8 +1228,7 @@ msgid ""
 "Total number of legal leaves allocated to this employee, change this value "
 "to create allocation/leave request. Total based on all the leave types "
 "without overriding limit."
-msgstr ""
-"この従業員に割り当てられた法定休暇の総数。割当/休暇申請を作成するためにこの値を変更します。 上書き制限なしのすべての休暇タイプに基づく合計です。"
+msgstr "この従業員に割り当てられた法定休暇の総数。割当/休暇申請を作成するためにこの値を変更します。 上書き制限なしのすべての休暇タイプに基づく合計。"
 
 #. module: hr_holidays
 #: model:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_filter
@@ -1308,9 +1241,15 @@ msgid "Unpaid"
 msgstr "未払い"
 
 #. module: hr_holidays
+#: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_message_unread
 #: model:ir.ui.view,arch_db:hr_holidays.view_hr_holidays_filter
 msgid "Unread Messages"
 msgstr "未読メッセージ"
+
+#. module: hr_holidays
+#: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "未読メッセージカウンター"
 
 #. module: hr_holidays
 #: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_remaining_leaves_user_user_id
@@ -1349,12 +1288,21 @@ msgid "Waiting Second Validation"
 msgstr "2番目の検証待ち"
 
 #. module: hr_holidays
+#: model:ir.model.fields,field_description:hr_holidays.field_hr_holidays_website_message_ids
+msgid "Website Messages"
+msgstr "ウェブサイトメッセージ"
+
+#. module: hr_holidays
+#: model:ir.model.fields,help:hr_holidays.field_hr_holidays_website_message_ids
+msgid "Website communication history"
+msgstr "ウェブサイトコミュニケーション履歴"
+
+#. module: hr_holidays
 #: selection:hr.holidays.status,color_name:0
 msgid "Wheat"
 msgstr "小麦色"
 
 #. module: hr_holidays
-#: model:ir.model.fields,help:hr_holidays.field_hr_holidays_double_validation
 #: model:ir.model.fields,help:hr_holidays.field_hr_holidays_status_double_validation
 msgid ""
 "When selected, the Allocation/Leave Requests for this type require a second "
@@ -1366,36 +1314,35 @@ msgstr "これを選択すると、このタイプの割当/退出要求では�
 msgid ""
 "You can assign remaining Legal Leaves for each employee, Odoo\n"
 "               will automatically create and validate allocation requests."
-msgstr "各従業員に残りの法定休暇を割り当てることができます.Oudooは割り当て要求を自動的に作成し、検証します。"
+msgstr "各従業員に残りのリーガルリーフを割り当てることができます.Oudooは割り当て要求を自動的に作成し、検証します。"
 
 #. module: hr_holidays
-#: code:addons/hr_holidays/models/hr_holidays.py:244
-#, python-format
+#: constraint:hr.holidays:0
 msgid "You can not have 2 leaves that overlaps on same day!"
 msgstr "同じ日に重複する2休暇を設定することはできません！"
 
 #. module: hr_holidays
-#: code:addons/hr_holidays/models/hr_holidays.py:371
+#: code:addons/hr_holidays/hr_holidays.py:293
 #, python-format
 msgid "You cannot delete a leave which is in %s state."
 msgstr "%s 状態の休暇は削除できません。"
 
 #. module: hr_holidays
-#: code:addons/hr_holidays/models/hr.py:140
+#: code:addons/hr_holidays/hr_holidays.py:561
 #, python-format
 msgid "You cannot reduce validated allocation requests"
 msgstr "検証された割当申請を減らすことはできません"
 
 #. module: hr_holidays
-#: code:addons/hr_holidays/models/hr_holidays.py:350
-#: code:addons/hr_holidays/models/hr_holidays.py:361
+#: code:addons/hr_holidays/hr_holidays.py:352
+#: code:addons/hr_holidays/hr_holidays.py:364
 #, python-format
 msgid ""
 "You cannot set a leave request as '%s'. Contact a human resource manager."
 msgstr "'%s' として休暇申請を設定することはできません。 人事マネージャに連絡してください。"
 
 #. module: hr_holidays
-#: code:addons/hr_holidays/wizard/hr_holidays_summary_department.py:27
+#: code:addons/hr_holidays/wizard/hr_holidays_summary_department.py:26
 #, python-format
 msgid "You have to select at least one Department. And try again."
 msgstr "少なくとも1つの部門を選択する必要があります。そしてもう一度やり直してください。"
@@ -1404,7 +1351,7 @@ msgstr "少なくとも1つの部門を選択する必要があります。そ�
 #: model:ir.ui.view,arch_db:hr_holidays.edit_holiday_new
 #: model:ir.ui.view,arch_db:hr_holidays.view_employee_form_leave_inherit
 msgid "days"
-msgstr "日"
+msgstr "日数"
 
 #. module: hr_holidays
 #: model:ir.ui.view,arch_db:hr_holidays.edit_holiday_new

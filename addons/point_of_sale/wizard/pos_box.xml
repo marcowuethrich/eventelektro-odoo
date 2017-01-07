@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<odoo>
+<openerp>
+    <data>
         <act_window 
-            id="action_pos_box_in"
             name="Put Money In"
             res_model="cash.box.in"
             src_model="pos.session"
             view_mode="form"
             target="new"
-            key2="client_action_multi"/>
+            key2="client_action_multi"
+            id="action_pos_box_in" />
 
         <act_window 
-            id="action_pos_box_out"
             name="Take Money Out"
             res_model="cash.box.out"
             src_model="pos.session"
             view_mode="form"
             target="new"
-            key2="client_action_multi"/>
-</odoo>
+            key2="client_action_multi"
+            id="action_pos_box_out" />
+    </data>
+</openerp>

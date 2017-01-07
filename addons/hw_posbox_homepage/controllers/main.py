@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
 import logging
 import os
-import subprocess
+import time
 import werkzeug
+import subprocess
+from os import listdir
 
-import odoo
-from odoo import http
+import openerp
+from openerp import http
+from openerp.http import request
+from openerp.tools.translate import _
 
 _logger = logging.getLogger(__name__)
 
@@ -60,7 +62,7 @@ index_template = """
         the posbox version number is independent from Odoo. You can upgrade
         the software on the <a href='/hw_proxy/upgrade/'>upgrade page</a>.
         </p>
-        <p>For any other question, please contact the Odoo support at <a href='mailto:help@odoo.com'>help@odoo.com</a>
+        <p>For any other question, please contact the Odoo support at <a href='mailto:support@odoo.com'>support@odoo.com</a>
         </p>
     </body>
 </html>
@@ -68,7 +70,7 @@ index_template = """
 """
 
 
-class PosboxHomepage(odoo.addons.web.controllers.main.Home):
+class PosboxHomepage(openerp.addons.web.controllers.main.Home):
     @http.route('/', type='http', auth='none', website=True)
     def index(self):
         #return request.render('hw_posbox_homepage.index',mimetype='text/html')

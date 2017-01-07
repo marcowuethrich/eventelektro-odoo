@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<openerp>
+<data>
 
 <template id="subscribe" inherit_id="website.snippets" name="Snippet Subscribe">
 
@@ -29,10 +30,6 @@
                     <i class="fa fa-file-o"/><a href="#" class="js_mg_link"> archives</a> -
                     <i class="fa fa-times"/><a href="#" class="js_unfollow_btn"> unsubscribe</a>
                 </p>
-                <p class="js_mg_confirmation hidden well well-sm">
-                    a confirmation email has been sent.
-                </p>
-
             </div>
 
         </div>
@@ -49,4 +46,6 @@
     </xpath>
 
 </template>
-</odoo>
+
+</data>
+</openerp>

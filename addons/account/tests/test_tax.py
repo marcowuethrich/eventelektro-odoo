@@ -1,6 +1,6 @@
-from odoo.addons.account.tests.account_test_users import AccountTestUsers
-from odoo.tests.common import TransactionCase
-from odoo.tools import float_compare
+from openerp.addons.account.tests.account_test_users import AccountTestUsers
+from openerp.tests.common import TransactionCase
+from openerp.tools import float_compare
 import time
 
 
@@ -156,7 +156,7 @@ class TestTax(AccountTestUsers):
                 })],
             'company_id': company_id,
         }
-        move = self.env['account.move'].with_context(apply_taxes=True).create(vals)
+        move = self.env['account.move'].create(vals)
 
 
         aml_fixed_tax = move.line_ids.filtered(lambda l: l.tax_line_id.id == self.fixed_tax.id)

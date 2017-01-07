@@ -95,7 +95,7 @@ The complete tree should look like
 
     addons/<my_module_name>/
     |-- __init__.py
-    |-- __manifest__.py
+    |-- __openerp__.py
     |-- controllers/
     |   |-- __init__.py
     |   |-- <inherited_module_name>.py
@@ -902,7 +902,7 @@ Javascript and CSS
 
 .. code-block:: javascript
 
-    odoo.website.if_dom_contains('.jquery_class_selector', function () {
+    openerp.website.if_dom_contains('.jquery_class_selector', function () {
         /*your code here*/
     });
 

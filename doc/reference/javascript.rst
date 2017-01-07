@@ -457,8 +457,8 @@ with three differences:
 
 :func:`~Model.query` is a shortcut for a builder-style
 interface to searches (``search`` + ``read`` in Odoo RPC terms). It
-returns a :class:`~odoo.web.Query` object which is immutable but
-allows building new :class:`~odoo.web.Query` instances from the
+returns a :class:`~openerp.web.Query` object which is immutable but
+allows building new :class:`~openerp.web.Query` instances from the
 first one, adding new properties or modifiying the parent object's::
 
     Users.query(['name', 'login', 'user_email', 'signature'])
@@ -469,8 +469,8 @@ first one, adding new properties or modifiying the parent object's::
     });
 
 The query is only actually performed when calling one of the query
-serialization methods, :func:`~odoo.web.Query.all` and
-:func:`~odoo.web.Query.first`. These methods will perform a new
+serialization methods, :func:`~openerp.web.Query.all` and
+:func:`~openerp.web.Query.first`. These methods will perform a new
 RPC call every time they are called.
 
 For that reason, it's actually possible to keep "intermediate" queries
@@ -499,38 +499,38 @@ around and use them differently/add new specifications on them.
 
          :param Array<String> fields: list of fields to fetch during
                                       the search
-         :returns: a :class:`~odoo.web.Query` object
+         :returns: a :class:`~openerp.web.Query` object
                    representing the search to perform
 
-.. class:: odoo.web.Query(fields)
+.. class:: openerp.web.Query(fields)
 
     The first set of methods is the "fetching" methods. They perform
     RPC queries using the internal data of the object they're called
     on.
 
-    .. function:: odoo.web.Query.all()
+    .. function:: openerp.web.Query.all()
 
-        Fetches the result of the current :class:`~odoo.web.Query` object's
+        Fetches the result of the current :class:`~openerp.web.Query` object's
         search.
 
         :rtype: Deferred<Array<>>
 
-    .. function:: odoo.web.Query.first()
+    .. function:: openerp.web.Query.first()
 
        Fetches the **first** result of the current
-       :class:`~odoo.web.Query`, or ``null`` if the current
-       :class:`~odoo.web.Query` does have any result.
+       :class:`~openerp.web.Query`, or ``null`` if the current
+       :class:`~openerp.web.Query` does have any result.
 
        :rtype: Deferred<Object | null>
 
-    .. function:: odoo.web.Query.count()
+    .. function:: openerp.web.Query.count()
 
        Fetches the number of records the current
-       :class:`~odoo.web.Query` would retrieve.
+       :class:`~openerp.web.Query` would retrieve.
 
        :rtype: Deferred<Number>
 
-    .. function:: odoo.web.Query.group_by(grouping...)
+    .. function:: openerp.web.Query.group_by(grouping...)
 
        Fetches the groups for the query, using the first specified
        grouping parameter
@@ -539,18 +539,18 @@ around and use them differently/add new specifications on them.
                                       asked of the server. Grouping
                                       can actually be an array or
                                       varargs.
-       :rtype: Deferred<Array<odoo.web.QueryGroup>> | null
+       :rtype: Deferred<Array<openerp.web.QueryGroup>> | null
 
     The second set of methods is the "mutator" methods, they create a
-    **new** :class:`~odoo.web.Query` object with the relevant
+    **new** :class:`~openerp.web.Query` object with the relevant
     (internal) attribute either augmented or replaced.
 
-    .. function:: odoo.web.Query.context(ctx)
+    .. function:: openerp.web.Query.context(ctx)
 
        Adds the provided ``ctx`` to the query, on top of any existing
        context
 
-    .. function:: odoo.web.Query.filter(domain)
+    .. function:: openerp.web.Query.filter(domain)
 
        Adds the provided domain to the query, this domain is
        ``AND``-ed to the existing query domain.
@@ -560,12 +560,12 @@ around and use them differently/add new specifications on them.
        Sets the provided offset on the query. The new offset
        *replaces* the old one.
 
-    .. function:: odoo.web.Query.limit(limit)
+    .. function:: openerp.web.Query.limit(limit)
 
        Sets the provided limit on the query. The new limit *replaces*
        the old one.
 
-    .. function:: odoo.web.Query.order_by(fields…)
+    .. function:: openerp.web.Query.order_by(fields…)
 
        Overrides the model's natural order with the provided field
        specifications. Behaves much like Django's :py:meth:`QuerySet.order_by
@@ -589,11 +589,11 @@ Aggregation (grouping)
 Odoo has powerful grouping capacities, but they are kind-of strange
 in that they're recursive, and level n+1 relies on data provided
 directly by the grouping at level n. As a result, while
-:py:meth:`odoo.models.Model.read_group` works it's not a very intuitive
+:py:meth:`openerp.models.Model.read_group` works it's not a very intuitive
 API.
 
-Odoo Web eschews direct calls to :py:meth:`~odoo.models.Model.read_group`
-in favor of calling a method of :class:`~odoo.web.Query`, :py:meth:`much
+Odoo Web eschews direct calls to :py:meth:`~openerp.models.Model.read_group`
+in favor of calling a method of :class:`~openerp.web.Query`, :py:meth:`much
 in the way it is one in SQLAlchemy <sqlalchemy.orm.query.Query.group_by>`
 [#terminal]_::
 
@@ -634,12 +634,12 @@ regular query for records):
           }
       });
 
-The result of a (successful) :func:`~odoo.web.Query.group_by` is
-an array of :class:`~odoo.web.QueryGroup`:
+The result of a (successful) :func:`~openerp.web.Query.group_by` is
+an array of :class:`~openerp.web.QueryGroup`:
 
-.. class:: odoo.web.QueryGroup
+.. class:: openerp.web.QueryGroup
 
-    .. function:: odoo.web.QueryGroup.get(key)
+    .. function:: openerp.web.QueryGroup.get(key)
 
         returns the group's attribute ``key``. Known attributes are:
 
@@ -652,16 +652,16 @@ an array of :class:`~odoo.web.QueryGroup`:
         ``aggregates``
             a {field: value} mapping of aggregations for the group
 
-    .. function:: odoo.web.QueryGroup.query([fields...])
+    .. function:: openerp.web.QueryGroup.query([fields...])
 
         equivalent to :func:`Model.query` but pre-filtered to
         only include the records within this group. Returns a
-        :class:`~odoo.web.Query` which can be further manipulated as
+        :class:`~openerp.web.Query` which can be further manipulated as
         usual.
 
-    .. function:: odoo.web.QueryGroup.subgroups()
+    .. function:: openerp.web.QueryGroup.subgroups()
 
-        returns a deferred to an array of :class:`~odoo.web.QueryGroup`
+        returns a deferred to an array of :class:`~openerp.web.QueryGroup`
         below this one
 
 Low-level API: RPC calls to Python side
@@ -720,7 +720,7 @@ It has also some disadvantages:
   that one needs to be careful.
 
 This is obviously a very large change and will require everyone to
-adopt new habits.  For example, the variable odoo does not exist
+adopt new habits.  For example, the variable openerp does not exist
 anymore.  The new way of doing things is to import explicitely the module 
 you need, and declaring explicitely the objects you export.  Here is a
 simple example::
@@ -790,7 +790,7 @@ Here is a description of the current file structure:
   * ``web.Widget`` contains the widget class
   * ``web.Model`` is an abstraction over ``web.ajax`` to make
     calls to the server model methods
-  * ``web.session`` is the former ``odoo.session``
+  * ``web.session`` is the former ``openerp.session``
   * ``web.utils`` for useful code snippets
   * ``web.time`` for every time-related generic functions
 * the ``views/`` folder contains all view definitions
@@ -807,8 +807,8 @@ The ``js/`` folder also contains some important files:
 The two other files are ``tour.js`` for the tours and ``compatibility.js``.
 The latter file is a compatibility layer bridging the old system to the
 new module system.  This is where every module names are exported to the
-global variable ``odoo``.  In theory, our addons should work without
-ever using the variable ``odoo``, and the compatibility module can be
+global variable ``openerp``.  In theory, our addons should work without
+ever using the variable ``openerp``, and the compatibility module can be
 disabled safely.
 
 Javascript conventions
@@ -888,19 +888,19 @@ and allow running all of its (0 so far) tests:
 
 The next step is to create a test case::
 
-    odoo.testing.section('basic section', function (test) {
+    openerp.testing.section('basic section', function (test) {
         test('my first test', function () {
             ok(false, "this test has run");
         });
     });
 
-All testing helpers and structures live in the ``odoo.testing``
-module. Odoo tests live in a :func:`~odoo.testing.section`,
+All testing helpers and structures live in the ``openerp.testing``
+module. Odoo tests live in a :func:`~openerp.testing.section`,
 which is itself part of a module. The first argument to a section is
 the name of the section, the second one is the section body.
 
-:func:`test <odoo.testing.case>`, provided by the
-:func:`~odoo.testing.section` to the callback, is used to
+:func:`test <openerp.testing.case>`, provided by the
+:func:`~openerp.testing.section` to the callback, is used to
 register a given test case which will be run whenever the test runner
 actually does its job. Odoo Web test case use standard `QUnit
 assertions`_ within them.
@@ -995,7 +995,7 @@ test module:
 ::
 
     // src/js/demo.js
-    odoo.web_tests_demo = function (instance) {
+    openerp.web_tests_demo = function (instance) {
         instance.web_tests_demo = {
             value_true: true,
             SomeType: instance.web.Class.extend({
@@ -1022,7 +1022,7 @@ DOM Scratchpad
 
 As in the wider client, arbitrarily accessing document content is
 strongly discouraged during tests. But DOM access is still needed to
-e.g. fully initialize :class:`widgets <~odoo.Widget>` before
+e.g. fully initialize :class:`widgets <~openerp.Widget>` before
 testing them.
 
 Thus, a test case gets a DOM scratchpad as its second positional
@@ -1054,7 +1054,7 @@ To avoid the corresponding processing costs, by default templates are
 not loaded into QWeb. If you need to render e.g. widgets making use of
 QWeb templates, you can request their loading through the
 :attr:`~TestOptions.templates` option to the :func:`test case
-function <odoo.testing.case>`.
+function <openerp.testing.case>`.
 
 This will automatically load all relevant templates in the instance's
 qweb before running the test case:
@@ -1161,7 +1161,7 @@ To enable mock RPC, set the :attr:`rpc option <TestOptions.rpc>` to
     * If it matches the pattern ``model:method`` (if it contains a
       colon, essentially) the call will set up the mocking of an RPC
       call straight to the Odoo server (through XMLRPC) as
-      performed via e.g. :func:`odoo.web.Model.call`.
+      performed via e.g. :func:`openerp.web.Model.call`.
 
       In that case, ``handler`` should be a function taking two
       arguments ``args`` and ``kwargs``, matching the corresponding
@@ -1209,7 +1209,7 @@ To enable mock RPC, set the :attr:`rpc option <TestOptions.rpc>` to
               });
 
               // widget needs that or it blows up
-              instance.webclient = {toggle_bars: odoo.testing.noop};
+              instance.webclient = {toggle_bars: openerp.testing.noop};
               var dbm = new instance.web.DatabaseManager({});
               return dbm.appendTo($s).then(function () {
                   ok(fetched_dbs, "should have fetched databases");
@@ -1228,7 +1228,7 @@ To enable mock RPC, set the :attr:`rpc option <TestOptions.rpc>` to
 Testing API
 -----------
 
-.. function:: odoo.testing.section(name[, options], body)
+.. function:: openerp.testing.section(name[, options], body)
 
     A test section, serves as shared namespace for related tests (for
     constants or values to only set up once). The ``body`` function
@@ -1240,9 +1240,9 @@ Testing API
     :param String name:
     :param TestOptions options:
     :param body:
-    :type body: Function<:func:`~odoo.testing.case`, void>
+    :type body: Function<:func:`~openerp.testing.case`, void>
 
-.. function:: odoo.testing.case(name[, options], callback)
+.. function:: openerp.testing.case(name[, options], callback)
 
     Registers a test case callback in the test runner, the callback
     will only be run once the runner is started (or maybe not at all,
@@ -1256,16 +1256,16 @@ Testing API
 .. class:: TestOptions
 
     the various options which can be passed to
-    :func:`~odoo.testing.section` or
-    :func:`~odoo.testing.case`. Except for
+    :func:`~openerp.testing.section` or
+    :func:`~openerp.testing.case`. Except for
     :attr:`~TestOptions.setup` and
     :attr:`~TestOptions.teardown`, an option on
-    :func:`~odoo.testing.case` will overwrite the corresponding
-    option on :func:`~odoo.testing.section` so
+    :func:`~openerp.testing.case` will overwrite the corresponding
+    option on :func:`~openerp.testing.section` so
     e.g. :attr:`~TestOptions.rpc` can be set for a
-    :func:`~odoo.testing.section` and then differently set for
-    some :func:`~odoo.testing.case` of that
-    :func:`~odoo.testing.section`
+    :func:`~openerp.testing.section` and then differently set for
+    some :func:`~openerp.testing.case` of that
+    :func:`~openerp.testing.section`
 
     .. attribute:: TestOptions.asserts
 

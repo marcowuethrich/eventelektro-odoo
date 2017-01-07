@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
+from openerp.modules.registry import RegistryManager
 
-import odoo
 
 def migrate(cr, version):
-    registry = odoo.registry(cr.dbname)
-    from odoo.addons.account.models.chart_template import migrate_set_tags_and_taxes_updatable
+    registry = RegistryManager.get(cr.dbname)
+    from openerp.addons.account.models.chart_template import migrate_set_tags_and_taxes_updatable
     migrate_set_tags_and_taxes_updatable(cr, registry, 'l10n_nl')

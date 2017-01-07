@@ -1,18 +1,17 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import api, models
+from openerp.osv import osv
 
 
-class AbstractReport(models.AbstractModel):
+class AbstractReport(osv.AbstractModel):
     """Model used to embed old style reports"""
     _name = 'report.abstract_report'
     _template = None
     _wrapped_report_class = None
 
-    @api.model
-    def render_html(self, docids, data=None):
-        context = dict(self.env.context or {})
+    def render_html(self, cr, uid, ids, data=None, context=None):
+        context = dict(context or {})
 
         # If the key 'landscape' is present in data['form'], passing it into the context
         if data and data.get('form', {}).get('landscape'):
@@ -21,18 +20,18 @@ class AbstractReport(models.AbstractModel):
         if context and context.get('active_ids'):
             # Browse the selected objects via their reference in context
             model = context.get('active_model') or context.get('model')
-            objects_model = self.env[model]
-            objects = objects_model.with_context(context).browse(context['active_ids'])
+            objects_model = self.pool[model]
+            objects = objects_model.browse(cr, uid, context['active_ids'], context=context)
         else:
             # If no context is set (for instance, during test execution), build one
-            model = self.env['report']._get_report_from_name(self._template).model
-            objects_model = self.env[model]
-            objects = objects_model.with_context(context).browse(docids)
+            model = self.pool['report']._get_report_from_name(cr, uid, self._template).model
+            objects_model = self.pool[model]
+            objects = objects_model.browse(cr, uid, ids, context=context)
             context['active_model'] = model
-            context['active_ids'] = docids
+            context['active_ids'] = ids
 
         # Generate the old style report
-        wrapped_report = self.with_context(context)._wrapped_report_class(self.env.cr, self.env.uid, '', context=self.env.context)
+        wrapped_report = self._wrapped_report_class(cr, uid, '',  context=context)
         wrapped_report.set_context(objects, data, context['active_ids'])
 
         # Rendering self._template with the wrapped report instance localcontext as
@@ -46,4 +45,4 @@ class AbstractReport(models.AbstractModel):
         docargs['doc_ids'] = context['active_ids']
         docargs['doc_model'] = model
 
-        return self.env['report'].with_context(context).render(self._template, docargs)
+        return self.pool['report'].render(cr, uid, [], self._template, docargs, context=context)

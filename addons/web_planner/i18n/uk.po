@@ -3,17 +3,17 @@
 # * web_planner
 # 
 # Translators:
-# Bohdan Lisnenko <lem8r.ka11a@gmail.com>, 2016
-# ТАрас <tratatuta@i.ua>, 2016
-# Martin Trigaux <mat@odoo.com>, 2016
+# Bohdan Lisnenko, 2015-2016
+# Bohdan Lisnenko, 2016
+# ТАрас <tratatuta@i.ua>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-14 15:55+0000\n"
-"PO-Revision-Date: 2016-11-14 15:55+0000\n"
-"Last-Translator: Martin Trigaux <mat@odoo.com>, 2016\n"
-"Language-Team: Ukrainian (https://www.transifex.com/odoo/teams/41243/uk/)\n"
+"POT-Creation-Date: 2016-02-15 15:34+0000\n"
+"PO-Revision-Date: 2016-11-17 15:10+0000\n"
+"Last-Translator: Bohdan Lisnenko\n"
+"Language-Team: Ukrainian (http://www.transifex.com/odoo/odoo-9/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -24,24 +24,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:web_planner.field_web_planner_active
 #: model:ir.ui.view,arch_db:web_planner.web_planner_view_search
 msgid "Active"
-msgstr "Активно"
-
-#. module: web_planner
-#. openerp-web
-#: code:addons/web_planner/static/src/js/web_planner_common.js:436
-#, python-format
-msgid "Cancel"
-msgstr "Скасувати"
+msgstr "Активний"
 
 #. module: web_planner
 #: model:ir.model.fields,field_description:web_planner.field_web_planner_create_uid
 msgid "Created by"
-msgstr "Створив"
+msgstr "Створено: "
 
 #. module: web_planner
 #: model:ir.model.fields,field_description:web_planner.field_web_planner_create_date
 msgid "Created on"
-msgstr "Дата створення"
+msgstr "Створено на"
 
 #. module: web_planner
 #: model:ir.model.fields,field_description:web_planner.field_web_planner_data
@@ -56,19 +49,14 @@ msgstr "Назва для відображення"
 #. module: web_planner
 #: model:ir.model.fields,field_description:web_planner.field_web_planner_id
 msgid "ID"
-msgstr "ІД"
+msgstr "ID"
 
 #. module: web_planner
 #: model:ir.model.fields,help:web_planner.field_web_planner_active
 msgid ""
 "If the active field is set to False, it will allow you to hide the planner. "
-"This change requires a refresh of your page."
-msgstr ""
-
-#. module: web_planner
-#: model:ir.ui.view,arch_db:web_planner.web_planner_view_search
-msgid "Inactive"
-msgstr "Неактивний"
+"This change requires a refreshing a your page."
+msgstr "Якщо активне поле встановлено як Ні, це дозволить вам приховати планувальник. Ця зміна потребує перезавантаження сторінки."
 
 #. module: web_planner
 #: model:ir.model.fields,field_description:web_planner.field_web_planner___last_update
@@ -110,13 +98,6 @@ msgid "Next step"
 msgstr "Наступний крок"
 
 #. module: web_planner
-#. openerp-web
-#: code:addons/web_planner/static/src/js/web_planner_common.js:446
-#, python-format
-msgid "Odoo Enterprise"
-msgstr "Odoo Корпоративна"
-
-#. module: web_planner
 #: model:ir.model,name:web_planner.model_web_planner
 #: model:ir.ui.view,arch_db:web_planner.web_planner_view_search
 #: model:ir.ui.view,arch_db:web_planner.web_planner_view_tree
@@ -150,8 +131,6 @@ msgid "Template"
 msgstr "Шаблон "
 
 #. module: web_planner
-#. openerp-web
-#: code:addons/web_planner/static/src/js/web_planner_common.js:430
-#, python-format
-msgid "Upgrade now"
-msgstr "Покращити негайно"
+#: model:ir.ui.view,arch_db:web_planner.web_planner_view_search
+msgid "Unactive"
+msgstr "Не активно"

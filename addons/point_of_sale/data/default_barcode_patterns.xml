@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<openerp>
+    <data>
         <record id="barcode_rule_cashier" model="barcode.rule">
             <field name="name">Cashier Barcodes</field>
             <field name="barcode_nomenclature_id" ref="barcodes.default_barcode_nomenclature"/>
@@ -35,4 +36,5 @@
             <field name="encoding">ean13</field>
             <field name="pattern">23.....{NNNDD}</field>
         </record>
-</odoo>
+    </data>
+</openerp>

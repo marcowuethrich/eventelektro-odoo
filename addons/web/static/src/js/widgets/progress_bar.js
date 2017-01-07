@@ -118,7 +118,7 @@ var ProgressBar = Widget.extend({
         if(value <= max_value) {
             widthComplete = value/max_value * 100;
         } else {
-            widthComplete = 100;
+            widthComplete = max_value/value * 100;
         }
 
         this.$('.o_progress').toggleClass('o_progress_overflow', value > max_value);

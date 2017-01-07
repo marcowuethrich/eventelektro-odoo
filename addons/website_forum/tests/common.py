@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo.tests import common
+from openerp.tests import common
 
 KARMA = {
     'ask': 5, 'ans': 10,
@@ -14,7 +13,6 @@ KARMA = {
     'post': 100, 'flag': 500, 'moderate': 1000,
     'gen_que_new': 1, 'gen_que_upv': 5, 'gen_que_dwv': -10,
     'gen_ans_upv': 10, 'gen_ans_dwv': -20, 'gen_ans_flag': -45,
-    'tag_create': 30,
 }
 
 
@@ -35,6 +33,7 @@ class TestForumCommon(common.SavepointCase):
         cls.user_employee = TestUsersEnv.create({
             'name': 'Armande Employee',
             'login': 'Armande',
+            'alias_name': 'armande',
             'email': 'armande.employee@example.com',
             'karma': 0,
             'groups_id': [(6, 0, [group_employee_id])]
@@ -42,6 +41,7 @@ class TestForumCommon(common.SavepointCase):
         cls.user_portal = TestUsersEnv.create({
             'name': 'Beatrice Portal',
             'login': 'Beatrice',
+            'alias_name': 'beatrice',
             'email': 'beatrice.employee@example.com',
             'karma': 0,
             'groups_id': [(6, 0, [group_portal_id])]
@@ -49,6 +49,7 @@ class TestForumCommon(common.SavepointCase):
         cls.user_public = TestUsersEnv.create({
             'name': 'Cedric Public',
             'login': 'Cedric',
+            'alias_name': 'cedric',
             'email': 'cedric.employee@example.com',
             'karma': 0,
             'groups_id': [(6, 0, [group_public_id])]

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<openerp>
+    <data>
         <menuitem id="menu_link_tracker_root" name="Link Tracker" groups="base.group_no_one" sequence="30"/>
-        <menuitem name="UTMs" id="marketing_utm" parent="menu_link_tracker_root" sequence="99" groups="base.group_no_one"/>
+        <menuitem name="UTMs" id="marketing_utm" groups="base.group_configuration" parent="menu_link_tracker_root" sequence="99"/>
 
     	<!-- utm.campaign -->
     	<record model="ir.ui.view" id="utm_campaign_tree">
@@ -107,4 +108,5 @@
         </record>
 
         <menuitem action="utm_source_action" id="menu_utm_source" parent="marketing_utm" sequence="4" groups="base.group_no_one"/>
-</odoo>
+    </data>
+</openerp>

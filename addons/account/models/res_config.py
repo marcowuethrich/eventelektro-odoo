@@ -4,11 +4,11 @@ import time
 import datetime
 from dateutil.relativedelta import relativedelta
 
-import odoo
-from odoo import SUPERUSER_ID
-from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DF
-from odoo import api, fields, models, _
-from odoo.exceptions import UserError
+import openerp
+from openerp import SUPERUSER_ID
+from openerp.tools import DEFAULT_SERVER_DATE_FORMAT as DF
+from openerp import api, fields, models, _
+from openerp.exceptions import UserError
 
 
 class AccountConfigSettings(models.TransientModel):
@@ -34,19 +34,23 @@ class AccountConfigSettings(models.TransientModel):
         help='Check this box if this company is a legal entity.')
     currency_id = fields.Many2one('res.currency', compute='_get_currency_id', inverse='_set_currency_id', required=True,
         string='Default company currency', help="Main currency of the company.")
+    paypal_account = fields.Char(related='company_id.paypal_account', size=128, string='Paypal account',
+        help="""Paypal account (email) for receiving online payments (credit card, etc.)
+             If you set a paypal account, the customer  will be able to pay your invoices or quotations
+             with a button \"Pay with  Paypal\" in automated emails or through the Odoo portal.""")
     company_footer = fields.Text(related='company_id.rml_footer', string='Bank accounts footer preview',
         readonly=True, help="Bank accounts as printed in the footer of each printed document")
 
     has_chart_of_accounts = fields.Boolean(string='Company has a chart of accounts')
     chart_template_id = fields.Many2one('account.chart.template', string='Template',
         domain="[('visible','=', True)]")
-    use_anglo_saxon = fields.Boolean(string='Use Anglo-Saxon Accounting *', related='company_id.anglo_saxon_accounting')
-    code_digits = fields.Integer(string='# of Digits *', related='company_id.accounts_code_digits', help="No. of digits to use for account code")
+    use_anglo_saxon = fields.Boolean(string='Use Anglo-Saxon Accounting', related='company_id.anglo_saxon_accounting')
+    code_digits = fields.Integer(string='# of Digits', related='company_id.accounts_code_digits', help="No. of digits to use for account code")
     tax_calculation_rounding_method = fields.Selection(
         [
         ('round_per_line', 'Round calculation of taxes per line'),
         ('round_globally', 'Round globally calculation of taxes '),
-        ], related='company_id.tax_calculation_rounding_method', string='Tax calculation rounding method *',
+        ], related='company_id.tax_calculation_rounding_method', string='Tax calculation rounding method',
         help="""If you select 'Round per line' : for each tax, the tax amount will first be
              computed and rounded for each PO/SO/invoice line and then these rounded amounts will be summed,
              leading to the total amount for that tax. If you select 'Round globally': for each tax,
@@ -58,8 +62,8 @@ class AccountConfigSettings(models.TransientModel):
     purchase_tax_id = fields.Many2one('account.tax.template', string='Default purchase tax', oldname="purchase_tax")
     sale_tax_rate = fields.Float(string='Sales tax (%)')
     purchase_tax_rate = fields.Float(string='Purchase tax (%)')
-    bank_account_code_prefix = fields.Char(string='Bank Accounts Prefix *', related='company_id.bank_account_code_prefix', help='Define the code prefix for the bank accounts', oldname='bank_account_code_char')
-    cash_account_code_prefix = fields.Char(string='Cash Accounts Prefix *', related='company_id.cash_account_code_prefix', help='Define the code prefix for the cash accounts')
+    bank_account_code_prefix = fields.Char(string='Bank Accounts Prefix', related='company_id.bank_account_code_prefix', help='Define the code prefix for the bank accounts', oldname='bank_account_code_char')
+    cash_account_code_prefix = fields.Char(string='Cash Accounts Prefix', related='company_id.cash_account_code_prefix', help='Define the code prefix for the cash accounts')
     template_transfer_account_id = fields.Many2one('account.account.template', help="Intermediary account used when moving money from a liquidity account to another")
     transfer_account_id = fields.Many2one('account.account',
         related='company_id.transfer_account_id',
@@ -81,26 +85,18 @@ class AccountConfigSettings(models.TransientModel):
     module_account_reports = fields.Boolean("Get dynamic accounting reports")
     group_multi_currency = fields.Boolean(string='Allow multi currencies',
         implied_group='base.group_multi_currency',
-        help="Allows to work in a multi currency environment")
+        help="Allows you multi currency environment")
     group_analytic_accounting = fields.Boolean(string='Analytic accounting',
         implied_group='analytic.group_analytic_accounting',
         help="Allows you to use the analytic accounting.")
-    group_warning_account = fields.Selection([
-            (0, 'All the partners can be used in invoices'),
-            (1, 'An informative or blocking warning can be set on a partner')
-            ], "Warning", implied_group='account.group_warning_account')
     currency_exchange_journal_id = fields.Many2one('account.journal',
         related='company_id.currency_exchange_journal_id',
         string="Rate Difference Journal",)
     module_account_asset = fields.Boolean(string='Assets management',
         help='Asset management: This allows you to manage the assets owned by a company or a person. '
                  'It keeps track of the depreciation occurred on those assets, and creates account move for those depreciation lines.\n\n'
-             '-This installs the module account_asset.')
-    module_account_deferred_revenue = fields.Boolean(string="Revenue Recognition", 
-        help='This allows you to manage the revenue recognition on selling products. '
-             'It keeps track of the installments occurred on those revenue recognitions, '
-             'and creates account moves for those installment lines\n'
-             '-This installs the module account_deferred_revenue.')
+             '-This installs the module account_asset. If you do not check this box, you will be able to do invoicing & payments, '
+             'but not accounting (Journal Items, Chart of Accounts, ...)')
     module_account_budget = fields.Boolean(string='Budget management',
         help='This allows accountants to manage analytic and crossovered budgets. '
              'Once the master budgets and the budgets are defined, '
@@ -130,20 +126,16 @@ class AccountConfigSettings(models.TransientModel):
 
     module_account_plaid = fields.Boolean(string="Plaid Connector",
                                           help='Get your bank statements from you bank and import them through plaid.com.\n'
-                                          '-This installs the module account_plaid.')
+                                          '-that installs the module account_plaid.')
     module_account_yodlee = fields.Boolean("Bank Interface - Sync your bank feeds automatically",
         help='Get your bank statements from your bank and import them through yodlee.com.\n'
-                                          '-This installs the module account_yodlee.')
+                                          '-that installs the module account_yodlee.')
     module_account_bank_statement_import_qif = fields.Boolean("Import .qif files",
         help='Get your bank statements from your bank and import them in Odoo in the .QIF format.\n'
-            '-This installs the module account_bank_statement_import_qif.')
+            'This installs the module account_bank_statement_import_qif.')
     module_account_bank_statement_import_ofx = fields.Boolean("Import in .ofx format",
         help='Get your bank statements from your bank and import them in Odoo in the .OFX format.\n'
-            '-This installs the module account_bank_statement_import_ofx.')
-    module_account_bank_statement_import_csv = fields.Boolean("Import in .csv format",
-        help='Get your bank statements from your bank and import them in Odoo in the .CSV format.\n'
-            '-This installs the module account_bank_statement_import_csv.')
-    overdue_msg = fields.Text(related='company_id.overdue_msg', string='Overdue Payments Message *')
+            'This installs the module account_bank_statement_import_ofx.')
 
 
     @api.model
@@ -163,6 +155,7 @@ class AccountConfigSettings(models.TransientModel):
             self.expects_chart_of_accounts = company.expects_chart_of_accounts
             self.currency_id = company.currency_id
             self.transfer_account_id = company.transfer_account_id
+            self.paypal_account = company.paypal_account
             self.company_footer = company.rml_footer
             self.tax_calculation_rounding_method = company.tax_calculation_rounding_method
             self.bank_account_code_prefix = company.bank_account_code_prefix
@@ -264,11 +257,6 @@ class AccountConfigSettings(models.TransientModel):
     def onchange_analytic_accounting(self):
         if self.group_analytic_accounting:
             self.module_account_accountant = True
-
-    @api.onchange('module_account_budget')
-    def onchange_module_account_budget(self):
-        if self.module_account_budget:
-            self.group_analytic_accounting = True
 
     @api.multi
     def open_company(self):

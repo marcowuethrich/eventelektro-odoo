@@ -3,17 +3,16 @@
 # * website_forum_doc
 # 
 # Translators:
-# krnkris <krnkris@freemail.hu>, 2016
-# Martin Trigaux <mat@odoo.com>, 2016
-# Oregional <geza.nagy@oregional.hu>, 2016
+# krnkris, 2016
+# Zsofia Biro <zsbiro1205@gmail.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:57+0000\n"
-"PO-Revision-Date: 2016-09-07 08:57+0000\n"
-"Last-Translator: Oregional <geza.nagy@oregional.hu>, 2016\n"
-"Language-Team: Hungarian (https://www.transifex.com/odoo/teams/41243/hu/)\n"
+"POT-Creation-Date: 2015-09-07 14:41+0000\n"
+"PO-Revision-Date: 2016-08-27 19:01+0000\n"
+"Last-Translator: krnkris\n"
+"Language-Team: Hungarian (http://www.transifex.com/odoo/odoo-9/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -33,17 +32,17 @@ msgstr "<span class=\"text-muted\">vagy</span>"
 #. module: website_forum_doc
 #: model:forum.documentation.toc,name:website_forum_doc.toc_crm_after_sale
 msgid "After-sale communication"
-msgstr "Értékesítés-utáni kommunikáció"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
 msgid "Bad answer structure"
-msgstr "Rossz válasz felépítés"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
 msgid "Bad questions"
-msgstr "Rossz kérdés"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
@@ -51,23 +50,21 @@ msgid ""
 "Before submiting the question, help us improve its quality by\n"
 "                        editing the question and the main answer."
 msgstr ""
-"Mielőtt egy kérdést benyújtana, segítsen annak tulajdonságait tökéletesebbé\n"
-"                      tenni a kérdés és a legfontosabb válasz szerkesztésével"
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
 msgid "Benefits of having done this setup"
-msgstr "Ennek a beállítás elvégzésének az előnyei"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:forum.documentation.toc,name:website_forum_doc.toc_cms_ecommerce
 msgid "CMS & eCommerce"
-msgstr "CMS tartalomkezelő & eKereskedelem"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.model.fields,field_description:website_forum_doc.field_forum_documentation_toc_child_ids
 msgid "Children Table Of Content"
-msgstr "Tartalom alárendelt lista"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:forum.documentation.toc,name:website_forum_doc.toc_crm_claim
@@ -77,7 +74,7 @@ msgstr "Reklamációk"
 #. module: website_forum_doc
 #: model:ir.model.fields,field_description:website_forum_doc.field_forum_post_color
 msgid "Color Index"
-msgstr "Szín jegyzék"
+msgstr "Szín meghatározó"
 
 #. module: website_forum_doc
 #: model:ir.model.fields,field_description:website_forum_doc.field_forum_documentation_stage_create_uid
@@ -99,7 +96,7 @@ msgstr "Ügyfélkapcsolat kezelés"
 #. module: website_forum_doc
 #: model:forum.documentation.toc,name:website_forum_doc.toc_sale_customer
 msgid "Customers"
-msgstr "Vásárlók"
+msgstr "Vevők"
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.view_forum_post_kanban
@@ -109,13 +106,13 @@ msgstr "Törlés"
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
 msgid "Describe the business solution"
-msgstr "Üzleti megoldás leírása"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.model.fields,field_description:website_forum_doc.field_forum_documentation_stage_display_name
 #: model:ir.model.fields,field_description:website_forum_doc.field_forum_documentation_toc_display_name
 msgid "Display Name"
-msgstr "Megjelenített név"
+msgstr "Név megjelenítése"
 
 #. module: website_forum_doc
 #: model:ir.actions.act_url,name:website_forum_doc.action_open_documentation
@@ -129,24 +126,24 @@ msgstr "Dokumentáció"
 #: model:ir.actions.act_window,name:website_forum_doc.action_forum_doc_post
 #: model:ir.ui.menu,name:website_forum_doc.menu_forum_doc_posts
 msgid "Documentation Posts"
-msgstr "Dokumentáció elküldések"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.model.fields,field_description:website_forum_doc.field_forum_post_documentation_stage_id
 msgid "Documentation Stage"
-msgstr "Dokumentáció állapot"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.view_documentation_toc_list
 msgid "Documentation TOC"
-msgstr "TOC dokumentáció"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.model,name:website_forum_doc.model_forum_documentation_toc
 #: model:ir.model.fields,field_description:website_forum_doc.field_forum_post_documentation_toc_id
 #: model:ir.ui.menu,name:website_forum_doc.menu_documentation
 msgid "Documentation ToC"
-msgstr "ToC dokumentáció"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:forum.documentation.stage,name:website_forum_doc.stage_draft
@@ -164,20 +161,19 @@ msgid "Employee Contract"
 msgstr "Munkavállalói szerződés"
 
 #. module: website_forum_doc
-#: code:addons/website_forum_doc/models/forum_documentation_toc.py:38
-#, python-format
+#: constraint:forum.documentation.toc:0
 msgid "Error ! You cannot create recursive categories."
 msgstr "Hiba! Nem tud ismétlődő kategóriát létrehozni."
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
-msgid "Explain how to configure Odoo"
-msgstr "Odoo rendszer beállításának magyarázata"
+msgid "Explain how to configure in Odoo"
+msgstr "Odoo beállításának magyarázata"
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
 msgid "Explain how to implement it in Odoo"
-msgstr "Hogyan építsük be az Odoo-be magyarázata"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.model.fields,field_description:website_forum_doc.field_forum_documentation_toc_forum_id
@@ -192,27 +188,27 @@ msgstr "Fórum bejegyzés"
 #. module: website_forum_doc
 #: model:forum.documentation.toc,name:website_forum_doc.toc_functional_doc
 msgid "Functional Documentation"
-msgstr "Functionális dokumentáció"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
 msgid "Good answer structure"
-msgstr "Jó válasz felépítés"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
 msgid "Good question titles"
-msgstr "Jó kérdés cím"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
 msgid "How to compute future inventories for a product?"
-msgstr "Hogyan számoljuk ki egy termék jövőbeni készletét?"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
 msgid "How to forecast sales revenues?"
-msgstr "Hogy becsüljük meg az értékesítésekből származó bevételeket?"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:forum.documentation.toc,name:website_forum_doc.toc_hrm
@@ -223,7 +219,7 @@ msgstr "Emberi erőforrás kezelés"
 #: model:ir.model.fields,field_description:website_forum_doc.field_forum_documentation_stage_id
 #: model:ir.model.fields,field_description:website_forum_doc.field_forum_documentation_toc_id
 msgid "ID"
-msgstr "Azonosító ID"
+msgstr "ID"
 
 #. module: website_forum_doc
 #: model:forum.documentation.stage,name:website_forum_doc.stage_ideas
@@ -239,13 +235,13 @@ msgstr "Bemutatás"
 #: model:ir.model.fields,field_description:website_forum_doc.field_forum_documentation_stage___last_update
 #: model:ir.model.fields,field_description:website_forum_doc.field_forum_documentation_toc___last_update
 msgid "Last Modified on"
-msgstr "Utoljára frissítve ekkor"
+msgstr "Utolsó frissítés dátuma"
 
 #. module: website_forum_doc
 #: model:ir.model.fields,field_description:website_forum_doc.field_forum_documentation_stage_write_uid
 #: model:ir.model.fields,field_description:website_forum_doc.field_forum_documentation_toc_write_uid
 msgid "Last Updated by"
-msgstr "Utoljára frissítette"
+msgstr "Utoljára frissítve, által"
 
 #. module: website_forum_doc
 #: model:ir.model.fields,field_description:website_forum_doc.field_forum_documentation_stage_write_date
@@ -256,7 +252,7 @@ msgstr "Utoljára frissítve "
 #. module: website_forum_doc
 #: model:forum.documentation.toc,name:website_forum_doc.toc_crm_lead
 msgid "Lead & Opportunity"
-msgstr "Érdeklődés & lehetőség"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.model.fields,field_description:website_forum_doc.field_forum_documentation_toc_parent_left
@@ -271,27 +267,27 @@ msgstr "Név"
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.documentation_post
 msgid "Need more info?"
-msgstr "Több információra van szüksége?"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
 msgid "No business benefit"
-msgstr "Nincs üzleti előnye"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.model.fields,field_description:website_forum_doc.field_forum_documentation_toc_parent_id
 msgid "Parent Table Of Content"
-msgstr "Fő tartalom jergyzék lista"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.model,name:website_forum_doc.model_forum_documentation_stage
 msgid "Post Stage"
-msgstr "Régi szakasz"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.model.fields,field_description:website_forum_doc.field_forum_documentation_toc_post_ids
 msgid "Posts"
-msgstr "Bejegyzés közzétételek"
+msgstr "Belyegyzések"
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
@@ -301,7 +297,7 @@ msgstr "Bevezető kérdés a dokumentumhoz"
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.forum_question_doc
 msgid "Promote to Doc"
-msgstr "Bevitel dokumentumba"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:forum.documentation.stage,name:website_forum_doc.stage_publish
@@ -311,7 +307,7 @@ msgstr "Publikálás"
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
 msgid "Publish in Chapter:"
-msgstr "Közzététel szakaszokban:"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
@@ -321,22 +317,22 @@ msgstr "Dokumentumba illesztés"
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
 msgid "Question:"
-msgstr "Kérdés:"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.documentation_post
 msgid "Related question"
-msgstr "Idevonatkozó kérdés"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.documentation_post
 msgid "Related topics"
-msgstr "Kapcsolódó témák"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:forum.documentation.stage,name:website_forum_doc.stage_review
 msgid "Review"
-msgstr "Átnézés"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.model.fields,field_description:website_forum_doc.field_forum_documentation_toc_parent_right
@@ -346,22 +342,22 @@ msgstr "A megfelelő szülő"
 #. module: website_forum_doc
 #: model:forum.documentation.toc,name:website_forum_doc.toc_0
 msgid "Sales & Warehouse"
-msgstr "Értékesítés- és raktár"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:forum.documentation.toc,name:website_forum_doc.toc_sale
 msgid "Sales Management"
-msgstr "Értékesítés szervezés"
+msgstr "Értékesítés menedzsment"
 
 #. module: website_forum_doc
 #: model:forum.documentation.toc,name:website_forum_doc.toc_sale_so
 msgid "Sales orders"
-msgstr "Vásárlói megrendelés"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
 msgid "Samples"
-msgstr "Példák"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.documentation
@@ -384,24 +380,22 @@ msgstr "Sorszám"
 #. module: website_forum_doc
 #: model:ir.model.fields,field_description:website_forum_doc.field_forum_documentation_stage_name
 msgid "Stage Name"
-msgstr "Értékesítési szint neve"
+msgstr "Szakasz neve"
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
 msgid "The answer is understandable for someone who does not know Odoo"
-msgstr "A válasz érthető annak, aki nem oismeri az Odoo rendszert"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
 msgid "The question describes a real business problem, not a software problem"
 msgstr ""
-"A kérdés egy létező üzleti problémát ír le, nem egy szoftveres programozói "
-"problémát"
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
 msgid "The question title is short and descriptive"
-msgstr "A kérdés címe rövid és leíró"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:forum.documentation.toc,introduction:website_forum_doc.toc_functional_doc
@@ -414,15 +408,12 @@ msgid ""
 "This documentation page has been extracted\n"
 "                                        from the Q&amp;A section where you can\n"
 "                                        discuss it and get feedback."
-msgstr ""
-"Ez a dokumentum oldal kivonat a \n"
-"                                        K&amp;V részből, ahol meg tudja \n"
-"                                        beszélni és visszajelzést kaphat."
+msgstr "Ez a dokumentum oldal kivonat a \n                                        K&amp;V részből, ahol meg tudja \n                                        beszélni és visszajelzést kaphat."
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.forum_question_doc
 msgid "This question has been included in the"
-msgstr "Ez a kérdés benne van a"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
@@ -430,32 +421,43 @@ msgid ""
 "To be promoted in the official documentation the question\n"
 "                        and answer must satisfy the following criteria:"
 msgstr ""
-"A kérdés és a váalsz hivatalos dokumentumba  \n"
-"                        foglalásához a következő feltételeknek kell eleget tenni:"
 
 #. module: website_forum_doc
 #: model:forum.documentation.toc,introduction:website_forum_doc.toc_sale
 msgid ""
 "Tracks leads, boost opportunities and close deals.\n"
 "                    This serie of how-to will help you develop your business."
-msgstr ""
-"Érdeklődések nyomon követése, elősegíti a lehetőségeket és az üzletkötéseket.\n"
-"                    Ez a hogyan-tovább sorozat segíti az üzleteinek létrehozását."
+msgstr "Érdeklődések nyomonkövetése, elősegíti a lehetőségeket és az üzletkötéseket.\n                    Ez a hogyan-tovább sorozat segíti az üzleteinek létrehozását."
 
 #. module: website_forum_doc
 #: model:forum.documentation.toc,name:website_forum_doc.toc_website
 msgid "Website"
-msgstr "Weboldal"
+msgstr "Honlap"
+
+#. module: website_forum_doc
+#: model:ir.model.fields,field_description:website_forum_doc.field_forum_documentation_toc_website_meta_description
+msgid "Website meta description"
+msgstr "Honlap meta leírás"
+
+#. module: website_forum_doc
+#: model:ir.model.fields,field_description:website_forum_doc.field_forum_documentation_toc_website_meta_keywords
+msgid "Website meta keywords"
+msgstr "Honlap meta kulcsszavai"
+
+#. module: website_forum_doc
+#: model:ir.model.fields,field_description:website_forum_doc.field_forum_documentation_toc_website_meta_title
+msgid "Website meta title"
+msgstr "Honlap meta cím"
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
 msgid "What report should I use to compute probabilities per stage?"
-msgstr "Milyen jelentést használjak szintenkénti valószínűségek számításához?"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
 msgid "What's the available stock field?"
-msgstr "Mit jelent az elérhető készlet mező?"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.promote_question
@@ -470,14 +472,14 @@ msgstr "közösségi fórum"
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.toc
 msgid "essay"
-msgstr "kísérlet"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.toc
 msgid "essays"
-msgstr "kísérletek"
+msgstr ""
 
 #. module: website_forum_doc
 #: model:ir.ui.view,arch_db:website_forum_doc.forum_question_doc
 msgid "official documentation"
-msgstr "hivatalos dokumentáció"
+msgstr ""

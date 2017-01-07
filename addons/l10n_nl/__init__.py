@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- encoding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-# Copyright (C) 2016 ONESTEiN BV (<http://www.onestein.eu>).
+# Copyright (c) 2009 Veritos - Jan Verlaan - www.veritos.nl

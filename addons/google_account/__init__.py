@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
-import models
+import google_account
 import controllers
 
-from models.google_service import TIMEOUT     # noqa
+from .google_account import TIMEOUT     # noqa

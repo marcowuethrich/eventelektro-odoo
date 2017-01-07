@@ -1,13 +1,20 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
 import commands
 import logging
-import math
+import json
 import os
 import os.path
-import subprocess
+import io
+import base64
+import openerp
 import time
+import random
+import math
+import md5
+import openerp.addons.hw_proxy.controllers.main as hw_proxy
+import pickle
+import re
+import subprocess
 import traceback
 
 try: 
@@ -17,17 +24,19 @@ try:
 except ImportError:
     escpos = printer = None
 
-from Queue import Queue
 from threading import Thread, Lock
+from Queue import Queue, Empty
 
 try:
     import usb.core
 except ImportError:
     usb = None
 
-from odoo import http, _
+from PIL import Image
 
-import odoo.addons.hw_proxy.controllers.main as hw_proxy
+from openerp import http
+from openerp.http import request
+from openerp.tools.translate import _
 
 _logger = logging.getLogger(__name__)
 
@@ -77,15 +86,10 @@ class EscposDriver(Thread):
             printers = usb.core.find(find_all=True, idVendor=0x0519)
 
         for printer in printers:
-            try:
-                description = usb.util.get_string(printer, 256, printer.iManufacturer) + " " + usb.util.get_string(printer, 256, printer.iProduct)
-            except Exception as e:
-                _logger.error("Can not get printer description: %s" % (e.message or repr(e)))
-                description = 'Unknown printer'
             connected.append({
                 'vendor': printer.idVendor,
                 'product': printer.idProduct,
-                'name': description
+                'name': usb.util.get_string(printer, 256, printer.iManufacturer) + " " + usb.util.get_string(printer, 256, printer.iProduct)
             })
 
         return connected
@@ -371,3 +375,4 @@ class EscposProxy(hw_proxy.Proxy):
     def print_xml_receipt(self, receipt):
         _logger.info('ESC/POS: PRINT XML RECEIPT') 
         driver.push_task('xml_receipt',receipt)
+

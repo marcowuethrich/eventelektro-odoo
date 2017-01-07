@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import time
-from odoo import api, models
+from openerp import api, models
 
 
 class ReportFinancial(models.AbstractModel):
@@ -142,8 +142,8 @@ class ReportFinancial(models.AbstractModel):
                 lines += sorted(sub_lines, key=lambda sub_line: sub_line['name'])
         return lines
 
-    @api.model
-    def render_html(self, docids, data=None):
+    @api.multi
+    def render_html(self, data):
         self.model = self.env.context.get('active_model')
         docs = self.env[self.model].browse(self.env.context.get('active_id'))
         report_lines = self.get_account_lines(data.get('form'))

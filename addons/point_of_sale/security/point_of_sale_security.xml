@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<openerp>
+<data noupdate="0">
+
     <record id="group_pos_user" model="res.groups">
         <field name="name">User</field>
         <field name="category_id" ref="base.module_category_point_of_sale"/>
@@ -11,11 +13,10 @@
         <field name="users" eval="[(4, ref('base.user_root'))]"/>
     </record>
 
-
     <record id="rule_pos_bank_statement_user" model="ir.rule">
         <field name="name">Point Of Sale Bank Statement POS User</field>
         <field name="model_id" ref="account.model_account_bank_statement" />
-        <field name="groups" eval="[(4, ref('group_pos_user'))]"/>
+	    <field name="groups" eval="[(4, ref('group_pos_user'))]"/>
         <field name="domain_force">[('pos_session_id', '!=', False)]</field>
     </record>
     <record id="rule_pos_bank_statement_account_user" model="ir.rule">
@@ -27,7 +28,7 @@
     <record id="rule_pos_bank_statement_line_user" model="ir.rule">
         <field name="name">Point Of Sale Bank Statement Line POS User</field>
         <field name="model_id" ref="account.model_account_bank_statement_line" />
-        <field name="groups" eval="[(4, ref('group_pos_user'))]"/>
+	    <field name="groups" eval="[(4, ref('group_pos_user'))]"/>
         <field name="domain_force">[('statement_id.pos_session_id', '!=', False)]</field>
     </record>
     <record id="rule_pos_bank_statement_line_account_user" model="ir.rule">
@@ -39,7 +40,7 @@
     <record id="rule_pos_cashbox_line_accountant" model="ir.rule">
         <field name="name">Point Of Sale Cashbox Line Accountant</field>
         <field name="model_id" ref="account.model_account_cashbox_line" />
-        <field name="groups" eval="[(4, ref('account.group_account_user'))]"/>
+	    <field name="groups" eval="[(4, ref('account.group_account_user'))]"/>
         <field name="domain_force">[(1, '=', 1)]</field>
     </record>
     <record id="rule_pos_multi_company" model="ir.rule">
@@ -66,10 +67,5 @@
         <field name="global" eval="True"/>
         <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
     </record>
-
-    <data noupdate="1">
-        <record id="base.default_user" model="res.users">
-            <field name="groups_id" eval="[(4,ref('point_of_sale.group_pos_manager'))]"/>
-        </record>
-    </data>
-</odoo>
+</data>
+</openerp>

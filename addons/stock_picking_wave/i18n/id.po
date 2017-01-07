@@ -3,24 +3,24 @@
 # * stock_picking_wave
 # 
 # Translators:
-# Deddy Ddr <deddy.ddr@gmail.com>, 2016
-# Wahyu Setiawan <wahyusetiaaa@gmail.com>, 2016
-# William Surya Permana <zarambie_game@yahoo.com>, 2016
-# Martin Trigaux <mat@odoo.com>, 2016
-# Febrasari Almania <febrasari.almania@gmail.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:57+0000\n"
-"PO-Revision-Date: 2016-09-07 08:57+0000\n"
-"Last-Translator: Febrasari Almania <febrasari.almania@gmail.com>, 2016\n"
-"Language-Team: Indonesian (https://www.transifex.com/odoo/teams/41243/id/)\n"
+"POT-Creation-Date: 2015-09-18 08:11+0000\n"
+"PO-Revision-Date: 2015-12-03 00:46+0000\n"
+"Last-Translator: Martin Trigaux\n"
+"Language-Team: Indonesian (http://www.transifex.com/odoo/odoo-9/language/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Language: id\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: stock_picking_wave
+#: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_wave_message_needaction
+msgid "Action Needed"
+msgstr "Tindakan diperlukan"
 
 #. module: stock_picking_wave
 #: model:ir.model,name:stock_picking_wave.model_stock_picking_to_wave
@@ -83,6 +83,11 @@ msgid "Created on"
 msgstr "Dibuat pada"
 
 #. module: stock_picking_wave
+#: model:ir.model.fields,help:stock_picking_wave.field_stock_picking_wave_message_last_post
+msgid "Date of the last message posted on the record."
+msgstr "Tanggal pesan terakhir diposting pada catatan."
+
+#. module: stock_picking_wave
 #: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_to_wave_display_name
 #: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_wave_display_name
 msgid "Display Name"
@@ -100,6 +105,21 @@ msgid "Draft"
 msgstr "Konsep"
 
 #. module: stock_picking_wave
+#: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_wave_message_follower_ids
+msgid "Followers"
+msgstr "Pengikut"
+
+#. module: stock_picking_wave
+#: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_wave_message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Pengikut (saluran)"
+
+#. module: stock_picking_wave
+#: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_wave_message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Pengikut (mitra)"
+
+#. module: stock_picking_wave
 #: model:ir.ui.view,arch_db:stock_picking_wave.view_picking_wave_form
 msgid "Force availability"
 msgstr ""
@@ -107,7 +127,7 @@ msgstr ""
 #. module: stock_picking_wave
 #: model:ir.ui.view,arch_db:stock_picking_wave.view_picking_wave_filter
 msgid "Group By"
-msgstr "Dikelompokkan berdasarkan"
+msgstr "Dikelompokan berdasarkan .."
 
 #. module: stock_picking_wave
 #: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_to_wave_id
@@ -124,7 +144,7 @@ msgstr ""
 #. module: stock_picking_wave
 #: model:product.product,description_sale:stock_picking_wave.product_product_ice_cream_choco
 #: model:product.template,description_sale:stock_picking_wave.product_product_ice_cream_choco_product_template
-msgid "Ice Cream Chocolate with sticks"
+msgid "Ice Cream Chocolate with stucks"
 msgstr ""
 
 #. module: stock_picking_wave
@@ -136,27 +156,47 @@ msgid "Ice Cream Vanilla"
 msgstr ""
 
 #. module: stock_picking_wave
+#: model:ir.model.fields,help:stock_picking_wave.field_stock_picking_wave_message_unread
+msgid "If checked new messages require your attention."
+msgstr "Jika dicentang pesan baru membutuhkan perhatian Anda."
+
+#. module: stock_picking_wave
+#: model:ir.model.fields,help:stock_picking_wave.field_stock_picking_wave_message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Jika dicentang, pesan baru memerlukan perhatian Anda."
+
+#. module: stock_picking_wave
 #: model:ir.ui.view,arch_db:stock_picking_wave.view_picking_wave_filter
 msgid "In Progress"
 msgstr "Dalam Proses"
 
 #. module: stock_picking_wave
+#: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_wave_message_is_follower
+msgid "Is Follower"
+msgstr "Adalah pengikut"
+
+#. module: stock_picking_wave
+#: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_wave_message_last_post
+msgid "Last Message Date"
+msgstr "Tanggal pesan terakhir"
+
+#. module: stock_picking_wave
 #: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_to_wave___last_update
 #: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_wave___last_update
 msgid "Last Modified on"
-msgstr "Terakhir diubah pada"
+msgstr "Terakhir Dimodifikasi pada"
 
 #. module: stock_picking_wave
 #: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_to_wave_write_uid
 #: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_wave_write_uid
 msgid "Last Updated by"
-msgstr "Terakhir diperbarui oleh"
+msgstr "Diperbaharui oleh"
 
 #. module: stock_picking_wave
 #: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_to_wave_write_date
 #: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_wave_write_date
 msgid "Last Updated on"
-msgstr "Terakhir Diperbaharui pada"
+msgstr "Diperbaharui pada"
 
 #. module: stock_picking_wave
 #: model:ir.model.fields,help:stock_picking_wave.field_stock_picking_wave_picking_ids
@@ -164,15 +204,40 @@ msgid "List of picking associated to this wave"
 msgstr ""
 
 #. module: stock_picking_wave
+#: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_wave_message_ids
+msgid "Messages"
+msgstr "Pesan"
+
+#. module: stock_picking_wave
+#: model:ir.model.fields,help:stock_picking_wave.field_stock_picking_wave_message_ids
+msgid "Messages and communication history"
+msgstr "Pesan dan riwayat komunikasi"
+
+#. module: stock_picking_wave
 #: model:ir.model.fields,help:stock_picking_wave.field_stock_picking_wave_name
 msgid "Name of the picking wave"
 msgstr ""
 
 #. module: stock_picking_wave
-#: code:addons/stock_picking_wave/models/stock_picking_wave.py:52
+#: code:addons/stock_picking_wave/stock_picking_wave.py:42
 #, python-format
 msgid "Nothing to print."
 msgstr ""
+
+#. module: stock_picking_wave
+#: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_wave_message_needaction_counter
+msgid "Number of Actions"
+msgstr "Jumlah tindakan"
+
+#. module: stock_picking_wave
+#: model:ir.model.fields,help:stock_picking_wave.field_stock_picking_wave_message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Jumlah pesan yang memerlukan tindakan"
+
+#. module: stock_picking_wave
+#: model:ir.model.fields,help:stock_picking_wave.field_stock_picking_wave_message_unread_counter
+msgid "Number of unread messages"
+msgstr "Jumlah pesan yang belum dibaca"
 
 #. module: stock_picking_wave
 #: model:ir.model.fields,help:stock_picking_wave.field_stock_picking_wave_user_id
@@ -180,10 +245,10 @@ msgid "Person responsible for this wave"
 msgstr ""
 
 #. module: stock_picking_wave
-#: code:addons/stock_picking_wave/models/stock_picking_wave.py:64
+#: code:addons/stock_picking_wave/stock_picking_wave.py:60
 #: model:ir.model,name:stock_picking_wave.model_stock_picking_wave
 #: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_to_wave_wave_id
-#: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_wave_id_9894
+#: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_wave_id_9563
 #: model:ir.ui.view,arch_db:stock_picking_wave.view_picking_wave_filter
 #, python-format
 msgid "Picking Wave"
@@ -206,7 +271,7 @@ msgid "Picking Waves not finished"
 msgstr ""
 
 #. module: stock_picking_wave
-#: model:ir.model.fields,help:stock_picking_wave.field_stock_picking_wave_id_9894
+#: model:ir.model.fields,help:stock_picking_wave.field_stock_picking_wave_id_9563
 msgid "Picking wave associated to this picking"
 msgstr ""
 
@@ -218,13 +283,13 @@ msgstr "Hasil"
 
 #. module: stock_picking_wave
 #: model:ir.ui.view,arch_db:stock_picking_wave.view_picking_wave_form
-msgid "Print"
-msgstr "Cetak"
+msgid "Print all pickings"
+msgstr ""
 
 #. module: stock_picking_wave
 #: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_wave_user_id
 msgid "Responsible"
-msgstr "bertanggung jawab"
+msgstr "Tanggung-jawab"
 
 #. module: stock_picking_wave
 #: selection:stock.picking.wave,state:0
@@ -242,7 +307,7 @@ msgid "Select a wave"
 msgstr ""
 
 #. module: stock_picking_wave
-#: code:addons/stock_picking_wave/models/stock_picking_wave.py:59
+#: code:addons/stock_picking_wave/stock_picking_wave.py:59
 #, python-format
 msgid ""
 "Some pickings are still waiting for goods. Please check or force their "
@@ -271,7 +336,7 @@ msgstr "tahap berubah"
 #: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_wave_state
 #: model:ir.ui.view,arch_db:stock_picking_wave.view_picking_wave_filter
 msgid "State"
-msgstr "Pernyataan"
+msgstr "Status"
 
 #. module: stock_picking_wave
 #: model:ir.ui.view,arch_db:stock_picking_wave.view_picking_wave_form
@@ -282,7 +347,7 @@ msgstr ""
 #. module: stock_picking_wave
 #: model:ir.actions.act_window,help:stock_picking_wave.action_picking_wave
 msgid ""
-"The goal of the picking waves is to group operations that may\n"
+"The Goal of the picking waves is to group operations that may \n"
 "                (needs to) be done together in order to increase their efficiency.\n"
 "                It may also be useful to assign jobs (one person = one wave) or\n"
 "                help the timing management of operations (tasks to be done at 1pm)."
@@ -294,10 +359,20 @@ msgid "Transfer"
 msgstr "red cross permindahan darah"
 
 #. module: stock_picking_wave
-#: code:addons/stock_picking_wave/models/stock_picking_wave.py:63
+#: code:addons/stock_picking_wave/stock_picking_wave.py:60
 #, python-format
 msgid "Transferred by"
 msgstr ""
+
+#. module: stock_picking_wave
+#: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_wave_message_unread
+msgid "Unread Messages"
+msgstr "Pesan Belum Dibaca"
+
+#. module: stock_picking_wave
+#: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_wave_message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Pesan yang belum dibaca Counter"
 
 #. module: stock_picking_wave
 #: model:ir.ui.view,arch_db:stock_picking_wave.view_picking_wave_filter
@@ -308,3 +383,13 @@ msgstr "Pengguna"
 #: model:ir.ui.view,arch_db:stock_picking_wave.view_stock_picking_wave_search_inherit
 msgid "Wave"
 msgstr ""
+
+#. module: stock_picking_wave
+#: model:ir.model.fields,field_description:stock_picking_wave.field_stock_picking_wave_website_message_ids
+msgid "Website Messages"
+msgstr "Pesan situs"
+
+#. module: stock_picking_wave
+#: model:ir.model.fields,help:stock_picking_wave.field_stock_picking_wave_website_message_ids
+msgid "Website communication history"
+msgstr "Sejarah komunikasi situs"

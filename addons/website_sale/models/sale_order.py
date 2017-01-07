@@ -1,64 +1,59 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-import logging
 import random
+import openerp
 
-from odoo import api, models, fields, tools, _
-from odoo.http import request
-from odoo.exceptions import UserError, ValidationError
+from openerp import SUPERUSER_ID, tools
+import openerp.addons.decimal_precision as dp
+from openerp.osv import osv, orm, fields
+from openerp.addons.web.http import request
+from openerp.tools.translate import _
+from openerp.exceptions import UserError
 
-_logger = logging.getLogger(__name__)
 
-
-class SaleOrder(models.Model):
+class sale_order(osv.Model):
     _inherit = "sale.order"
 
-    website_order_line = fields.One2many(
-        'sale.order.line', 'order_id',
-        string='Order Lines displayed on Website', readonly=True,
-        help='Order Lines to be displayed on the website. They should not be used for computation purpose.',
-    )
-    cart_quantity = fields.Integer(compute='_compute_cart_info', string='Cart Quantity')
-    payment_acquirer_id = fields.Many2one('payment.acquirer', string='Payment Acquirer', copy=False)
-    payment_tx_id = fields.Many2one('payment.transaction', string='Transaction', copy=False)
-    only_services = fields.Boolean(compute='_compute_cart_info', string='Only Services')
+    def _cart_info(self, cr, uid, ids, field_name, arg, context=None):
+        res = dict()
+        for order in self.browse(cr, uid, ids, context=context):
+            res[order.id] = {
+                'cart_quantity': int(sum(l.product_uom_qty for l in (order.website_order_line or []))),
+                'only_services': all(l.product_id and l.product_id.type in ('service', 'digital') for l in order.website_order_line)
+            }
+        return res
 
-    @api.multi
-    @api.depends('website_order_line.product_uom_qty', 'website_order_line.product_id')
-    def _compute_cart_info(self):
-        for order in self:
-            order.cart_quantity = int(sum(order.mapped('website_order_line.product_uom_qty')))
-            order.only_services = all(l.product_id.type in ('service', 'digital') for l in order.website_order_line)
+    _columns = {
+        'website_order_line': fields.one2many(
+            'sale.order.line', 'order_id',
+            string='Order Lines displayed on Website', readonly=True,
+            help='Order Lines to be displayed on the website. They should not be used for computation purpose.',
+        ),
+        'cart_quantity': fields.function(_cart_info, type='integer', string='Cart Quantity', multi='_cart_info'),
+        'payment_acquirer_id': fields.many2one('payment.acquirer', 'Payment Acquirer', on_delete='set null', copy=False),
+        'payment_tx_id': fields.many2one('payment.transaction', 'Transaction', on_delete='set null', copy=False),
+        'only_services': fields.function(_cart_info, type='boolean', string='Only Services', multi='_cart_info'),
+    }
 
-    @api.model
-    def _get_errors(self, order):
+    def _get_errors(self, cr, uid, order, context=None):
         return []
 
-    @api.model
-    def _get_website_data(self, order):
+    def _get_website_data(self, cr, uid, order, context):
         return {
             'partner': order.partner_id.id,
             'order': order
         }
 
-    @api.multi
-    def _cart_find_product_line(self, product_id=None, line_id=None, **kwargs):
-        self.ensure_one()
-        product = self.env['product.product'].browse(product_id)
+    def _cart_find_product_line(self, cr, uid, ids, product_id=None, line_id=None, context=None, **kwargs):
+        for so in self.browse(cr, uid, ids, context=context):
+            domain = [('order_id', '=', so.id), ('product_id', '=', product_id)]
+            if line_id:
+                domain += [('id', '=', line_id)]
+            return self.pool.get('sale.order.line').search(cr, SUPERUSER_ID, domain, context=context)
 
-        # split lines with the same product if it has untracked attributes
-        if product and product.mapped('attribute_line_ids').filtered(lambda r: not r.attribute_id.create_variant) and not line_id:
-            return self.env['sale.order.line']
-
-        domain = [('order_id', '=', self.id), ('product_id', '=', product_id)]
-        if line_id:
-            domain += [('id', '=', line_id)]
-        return self.env['sale.order.line'].sudo().search(domain)
-
-    @api.multi
-    def _website_product_id_change(self, order_id, product_id, qty=0):
-        order = self.sudo().browse(order_id)
-        product_context = dict(self.env.context)
+    def _website_product_id_change(self, cr, uid, ids, order_id, product_id, qty=0, context=None):
+        context = dict(context or {})
+        order = self.pool['sale.order'].browse(cr, SUPERUSER_ID, order_id, context=context)
+        product_context = context.copy()
         product_context.setdefault('lang', order.partner_id.lang)
         product_context.update({
             'partner': order.partner_id.id,
@@ -66,126 +61,105 @@ class SaleOrder(models.Model):
             'date': order.date_order,
             'pricelist': order.pricelist_id.id,
         })
-        product = self.env['product.product'].with_context(product_context).browse(product_id)
+        product = self.pool['product.product'].browse(cr, uid, product_id, context=product_context)
 
-        return {
+        values = {
             'product_id': product_id,
+            'name': product.display_name,
             'product_uom_qty': qty,
             'order_id': order_id,
             'product_uom': product.uom_id.id,
             'price_unit': product.price,
         }
-
-    @api.multi
-    def _get_line_description(self, order_id, product_id, attributes=None):
-        if not attributes:
-            attributes = {}
-
-        order = self.sudo().browse(order_id)
-        product_context = dict(self.env.context)
-        product_context.setdefault('lang', order.partner_id.lang)
-        product = self.env['product.product'].with_context(product_context).browse(product_id)
-
-        name = product.display_name
-
-        # add untracked attributes in the name
-        untracked_attributes = []
-        for k, v in attributes.items():
-            # attribute should be like 'attribute-48-1' where 48 is the product_id, 1 is the attribute_id and v is the attribute value
-            attribute_value = self.env['product.attribute.value'].sudo().browse(int(v))
-            if attribute_value and not attribute_value.attribute_id.create_variant:
-                untracked_attributes.append(attribute_value.name)
-        if untracked_attributes:
-            name += '\n%s' % (', '.join(untracked_attributes))
-
         if product.description_sale:
-            name += '\n%s' % (product.description_sale)
+            values['name'] += '\n' + product.description_sale
+        return values
 
-        return name
-
-    @api.multi
-    def _cart_update(self, product_id=None, line_id=None, add_qty=0, set_qty=0, attributes=None, **kwargs):
+    def _cart_update(self, cr, uid, ids, product_id=None, line_id=None, add_qty=0, set_qty=0, context=None, **kwargs):
         """ Add or set product quantity, add_qty can be negative """
-        self.ensure_one()
-        SaleOrderLineSudo = self.env['sale.order.line'].sudo()
+        sol = self.pool.get('sale.order.line')
+
         quantity = 0
-        order_line = False
-        if self.state != 'draft':
-            request.session['sale_order_id'] = None
-            raise UserError(_('It is forbidden to modify a sale order which is not in draft status'))
-        if line_id is not False:
-            order_lines = self._cart_find_product_line(product_id, line_id, **kwargs)
-            order_line = order_lines and order_lines[0]
+        for so in self.browse(cr, uid, ids, context=context):
+            if so.state != 'draft':
+                request.session['sale_order_id'] = None
+                raise UserError(_('It is forbidden to modify a sale order which is not in draft status'))
+            if line_id is not False:
+                line_ids = so._cart_find_product_line(product_id, line_id, context=context, **kwargs)
+                if line_ids:
+                    line_id = line_ids[0]
 
-        # Create line if no line with product_id can be located
-        if not order_line:
-            values = self._website_product_id_change(self.id, product_id, qty=1)
-            values['name'] = self._get_line_description(self.id, product_id, attributes=attributes)
-            order_line = SaleOrderLineSudo.create(values)
+            # Create line if no line with product_id can be located
+            if not line_id:
+                values = self._website_product_id_change(cr, uid, ids, so.id, product_id, qty=1, context=context)
+                line_id = sol.create(cr, SUPERUSER_ID, values, context=context)
+                sol._compute_tax_id(cr, SUPERUSER_ID, [line_id], context=context)
+                if add_qty:
+                    add_qty -= 1
 
-            try:
-                order_line._compute_tax_id()
-            except ValidationError as e:
-                # The validation may occur in backend (eg: taxcloud) but should fail silently in frontend
-                _logger.debug("ValidationError occurs during tax compute. %s" % (e))
-            if add_qty:
-                add_qty -= 1
+            # compute new quantity
+            if set_qty:
+                quantity = set_qty
+            elif add_qty is not None:
+                quantity = sol.browse(cr, SUPERUSER_ID, line_id, context=context).product_uom_qty + (add_qty or 0)
 
-        # compute new quantity
-        if set_qty:
-            quantity = set_qty
-        elif add_qty is not None:
-            quantity = order_line.product_uom_qty + (add_qty or 0)
+            # Remove zero of negative lines
+            if quantity <= 0:
+                sol.unlink(cr, SUPERUSER_ID, [line_id], context=context)
+            else:
+                # update line
+                values = self._website_product_id_change(cr, uid, ids, so.id, product_id, qty=quantity, context=context)
+                sol.write(cr, SUPERUSER_ID, [line_id], values, context=context)
 
-        # Remove zero of negative lines
-        if quantity <= 0:
-            order_line.unlink()
-        else:
-            # update line
-            values = self._website_product_id_change(self.id, product_id, qty=quantity)
+        return {'line_id': line_id, 'quantity': quantity}
+
+    def _cart_accessories(self, cr, uid, ids, context=None):
+        for order in self.browse(cr, uid, ids, context=context):
+            s = set(j.id for l in (order.website_order_line or []) for j in (l.product_id.accessory_product_ids or []) if j.website_published)
+            s -= set(l.product_id.id for l in order.order_line)
+            product_ids = random.sample(s, min(len(s), 3))
+            return self.pool['product.product'].browse(cr, uid, product_ids, context=context)
+
+class sale_order_line(osv.Model):
+    _inherit = "sale.order.line"
+
+    def _fnct_get_discounted_price(self, cr, uid, ids, field_name, args, context=None):
+        res = dict.fromkeys(ids, False)
+        for line in self.browse(cr, uid, ids, context=context):
+            res[line.id] = (line.price_unit * (1.0 - (line.discount or 0.0) / 100.0))
+        return res
+
+    _columns = {
+        'discounted_price': fields.function(_fnct_get_discounted_price, string='Discounted price', type='float', digits_compute=dp.get_precision('Product Price')),
+    }
 
 
-
-            if self.pricelist_id.discount_policy == 'with_discount' and not self.env.context.get('fixed_price'):
-                values['price_unit'] = order_line._get_display_price(order_line.product_id)
-
-            order_line.write(values)
-
-        return {'line_id': order_line.id, 'quantity': quantity}
-
-    def _cart_accessories(self):
-        """ Suggest accessories based on 'Accessory Products' of products in cart """
-        for order in self:
-            accessory_products = order.website_order_line.mapped('product_id.accessory_product_ids').filtered(lambda product: product.website_published)
-            accessory_products -= order.website_order_line.mapped('product_id')
-            return random.sample(accessory_products, len(accessory_products))
-
-
-class Website(models.Model):
+class website(orm.Model):
     _inherit = 'website'
 
-    pricelist_id = fields.Many2one('product.pricelist', compute='_compute_pricelist_id', string='Default Pricelist')
-    currency_id = fields.Many2one('res.currency', related='pricelist_id.currency_id', string='Default Currency')
-    salesperson_id = fields.Many2one('res.users', string='Salesperson')
-    salesteam_id = fields.Many2one('crm.team', string='Sales Team')
-    pricelist_ids = fields.One2many('product.pricelist', compute="_compute_pricelist_ids",
-                                    string='Price list available for this Ecommerce/Website')
+    def _get_pricelist_id(self, cr, uid, ids, name, args, context=None):
+        res = {}
+        for data in self.browse(cr, uid, ids, context=context):
+            pricelist = self.get_current_pricelist(cr, uid, context=dict(context, website_id=data.id))
+            res[data.id] = pricelist.id
+        return res
 
-    @api.one
-    def _compute_pricelist_ids(self):
-        self.pricelist_ids = self.env["product.pricelist"].search([("website_id", "=", self.id)])
+    _columns = {
+        'pricelist_id': fields.function(_get_pricelist_id,\
+            type='many2one', relation="product.pricelist", string='Default Pricelist'),
+        'currency_id': fields.related(
+            'pricelist_id', 'currency_id',
+            type='many2one', relation='res.currency', string='Default Currency'),
+        'salesperson_id': fields.many2one('res.users', 'Salesperson'),
+        'salesteam_id': fields.many2one('crm.team', 'Sales Team'),
+        'website_pricelist_ids': fields.one2many('website_pricelist', 'website_id',
+                                                 string='Price list available for this Ecommerce/Website'),
+    }
 
-    @api.multi
-    def _compute_pricelist_id(self):
-        for website in self:
-            if website._context.get('website_id') != website.id:
-                website = website.with_context(website_id=website.id)
-            website.pricelist_id = website.get_current_pricelist()
-
-    # This method is cached, must not return records! See also #8795
-    @tools.ormcache('self.env.uid', 'country_code', 'show_visible', 'website_pl', 'current_pl', 'all_pl', 'partner_pl', 'order_pl')
-    def _get_pl_partner_order(self, country_code, show_visible, website_pl, current_pl, all_pl, partner_pl=False, order_pl=False):
+    @tools.ormcache('uid', 'country_code', 'show_visible', 'website_pl', 'current_pl', 'all_pl', 'partner_pl', 'order_pl')
+    def _get_pl_partner_order(self, cr, uid, country_code, show_visible, website_pl, current_pl, all_pl, partner_pl=False, order_pl=False):
         """ Return the list of pricelists that can be used on website for the current user.
+
         :param str country_code: code iso or False, If set, we search only price list available for this country
         :param bool show_visible: if True, we don't display pricelist where selectable is False (Eg: Code promo)
         :param int website_pl: The default pricelist used on this website
@@ -194,88 +168,93 @@ class Website(models.Model):
         :param list all_pl: List of all pricelist available for this website
         :param int partner_pl: the partner pricelist
         :param int order_pl: the current cart pricelist
+
         :returns: list of pricelist ids
         """
-        pricelists = self.env['product.pricelist']
+        pcs = []
+
         if country_code:
-            for cgroup in self.env['res.country.group'].search([('country_ids.code', '=', country_code)]):
-                for group_pricelists in cgroup.pricelist_ids:
-                    if not show_visible or group_pricelists.selectable or group_pricelists.id in (current_pl, order_pl):
-                        pricelists |= group_pricelists
+            groups = self.pool['res.country.group'].search(cr, uid, [('country_ids.code', '=', country_code)])
+            for cgroup in self.pool['res.country.group'].browse(cr, uid, groups):
+                for pll in cgroup.website_pricelist_ids:
+                    if not show_visible or pll.selectable or pll.pricelist_id.id in (current_pl, order_pl):
+                        pcs.append(pll.pricelist_id)
 
-        partner = self.env.user.partner_id
-        is_public = self.user_id.id == self.env.user.id
-        if not is_public and (not pricelists or (partner_pl or partner.property_product_pricelist.id) != website_pl):
-            if partner.property_product_pricelist.website_id:
-                pricelists |= partner.property_product_pricelist
+        if not pcs:  # no pricelist for this country, or no GeoIP
+            pcs = [pll.pricelist_id for pll in all_pl
+                   if not show_visible or pll.selectable or pll.pricelist_id.id in (current_pl, order_pl)]
 
-        if not pricelists:  # no pricelist for this country, or no GeoIP
-            pricelists |= all_pl.filtered(lambda pl: not show_visible or pl.selectable or pl.id in (current_pl, order_pl))
-        else:
-            pricelists |= all_pl.filtered(lambda pl: not show_visible and pl.code)
+        partner = self.pool['res.users'].browse(cr, SUPERUSER_ID, uid).partner_id
+        if not pcs or partner.property_product_pricelist.id != website_pl:
+            pcs.append(partner.property_product_pricelist)
+        # remove duplicates and sort by name
+        pcs = sorted(set(pcs), key=lambda pl: pl.name)
+        return [pl.id for pl in pcs]
 
-        # This method is cached, must not return records! See also #8795
-        return pricelists.ids
+    @tools.ormcache('uid', 'country_code', 'show_visible', 'website_pl', 'current_pl', 'all_pl')
+    def _get_pl(self, cr, uid, country_code, show_visible, website_pl, current_pl, all_pl):
+        return self._get_pl_partner_order(cr, uid, country_code, show_visible, website_pl, current_pl, all_pl)
 
-    def _get_pl(self, country_code, show_visible, website_pl, current_pl, all_pl):
-        pl_ids = self._get_pl_partner_order(country_code, show_visible, website_pl, current_pl, all_pl)
-        return self.env['product.pricelist'].browse(pl_ids)
-
-    def get_pricelist_available(self, show_visible=False):
-
+    def get_pricelist_available(self, cr, uid, show_visible=False, context=None):
         """ Return the list of pricelists that can be used on website for the current user.
         Country restrictions will be detected with GeoIP (if installed).
+
+        :param str country_code: code iso or False, If set, we search only price list available for this country
         :param bool show_visible: if True, we don't display pricelist where selectable is False (Eg: Code promo)
+
         :returns: pricelist recordset
         """
         website = request.website
         if not request.website:
-            if self.env.context.get('website_id'):
-                website = self.browse(self.env.context['website_id'])
+            if context.get('website_id'):
+                website_id = context['website_id']
             else:
-                website = self.search([], limit=1)
+                website_id = self.search(cr, uid, [], context=context)
+            website = self.browse(cr, uid, website_id, context=context)
         isocountry = request.session.geoip and request.session.geoip.get('country_code') or False
-        partner = self.env.user.partner_id
+        partner = self.pool['res.users'].browse(cr, SUPERUSER_ID, uid, context=context).partner_id
         order_pl = partner.last_website_so_id and partner.last_website_so_id.state == 'draft' and partner.last_website_so_id.pricelist_id
         partner_pl = partner.property_product_pricelist
-        pricelists = website._get_pl_partner_order(isocountry, show_visible,
-                                                   website.user_id.sudo().partner_id.property_product_pricelist.id,
-                                                   request.session.get('website_sale_current_pl'),
-                                                   website.pricelist_ids,
-                                                   partner_pl=partner_pl and partner_pl.id or None,
-                                                   order_pl=order_pl and order_pl.id or None)
-        return self.env['product.pricelist'].browse(pricelists)
+        pl_ids = self._get_pl_partner_order(cr, uid, isocountry, show_visible,
+                                            website.user_id.sudo().partner_id.property_product_pricelist.id,
+                                            request.session.get('website_sale_current_pl'),
+                                            website.website_pricelist_ids,
+                                            partner_pl=partner_pl and partner_pl.id or None,
+                                            order_pl=order_pl and order_pl.id or None)
+        return self.pool['product.pricelist'].browse(cr, uid, pl_ids, context=context)
 
-    def is_pricelist_available(self, pl_id):
+    def is_pricelist_available(self, cr, uid, pl_id, context=None):
         """ Return a boolean to specify if a specific pricelist can be manually set on the website.
         Warning: It check only if pricelist is in the 'selectable' pricelists or the current pricelist.
+
         :param int pl_id: The pricelist id to check
+
         :returns: Boolean, True if valid / available
         """
-        return pl_id in self.get_pricelist_available(show_visible=False).ids
+        return pl_id in [ppl.id for ppl in self.get_pricelist_available(cr, uid, show_visible=False, context=context)]
 
-    def get_current_pricelist(self):
+    def get_current_pricelist(self, cr, uid, context=None):
         """
         :returns: The current pricelist record
         """
         # The list of available pricelists for this user.
         # If the user is signed in, and has a pricelist set different than the public user pricelist
         # then this pricelist will always be considered as available
-        available_pricelists = self.get_pricelist_available()
+        available_pricelists = self.get_pricelist_available(cr, uid, context=context)
         pl = None
-        partner = self.env.user.partner_id
         if request.session.get('website_sale_current_pl'):
             # `website_sale_current_pl` is set only if the user specifically chose it:
             #  - Either, he chose it from the pricelist selection
             #  - Either, he entered a coupon code
-            pl = self.env['product.pricelist'].browse(request.session['website_sale_current_pl'])
+            pl = self.pool['product.pricelist'].browse(cr, uid, [request.session['website_sale_current_pl']], context=context)[0]
             if pl not in available_pricelists:
                 pl = None
                 request.session.pop('website_sale_current_pl')
         if not pl:
+            partner = self.pool['res.users'].browse(cr, SUPERUSER_ID, uid, context=context).partner_id
             # If the user has a saved cart, it take the pricelist of this cart, except if
             # the order is no longer draft (It has already been confirmed, or cancelled, ...)
-            pl = partner.last_website_so_id.state == 'draft' and partner.last_website_so_id.pricelist_id
+            pl = partner.last_website_so_id and partner.last_website_so_id.state == 'draft' and partner.last_website_so_id.pricelist_id
             if not pl:
                 # The pricelist of the user set on its partner form.
                 # If the user is not signed in, it's the public user pricelist
@@ -289,89 +268,75 @@ class Website(models.Model):
                 # then this special pricelist is amongs these available pricelists, and therefore it won't fall in this case.
                 pl = available_pricelists[0]
 
-        if not pl:
-            _logger.error('Fail to find pricelist for partner "%s" (id %s)', partner.name, partner.id)
         return pl
 
-    @api.multi
-    def sale_product_domain(self):
+    def sale_product_domain(self, cr, uid, ids, context=None):
         return [("sale_ok", "=", True)]
 
-    @api.model
-    def sale_get_payment_term(self, partner):
-        DEFAULT_PAYMENT_TERM = 'account.account_payment_term_immediate'
-        return self.env.ref(DEFAULT_PAYMENT_TERM, False).id or partner.property_payment_term_id.id
+    def get_partner(self, cr, uid):
+        return self.pool['res.users'].browse(cr, SUPERUSER_ID, uid).partner_id
 
-    @api.multi
-    def sale_get_order(self, force_create=False, code=None, update_pricelist=False, force_pricelist=False):
+    def sale_get_order(self, cr, uid, ids, force_create=False, code=None, update_pricelist=False, force_pricelist=False, context=None):
         """ Return the current sale order after mofications specified by params.
+
         :param bool force_create: Create sale order if not already existing
         :param str code: Code to force a pricelist (promo code)
                          If empty, it's a special case to reset the pricelist with the first available else the default.
         :param bool update_pricelist: Force to recompute all the lines from sale order to adapt the price with the current pricelist.
         :param int force_pricelist: pricelist_id - if set,  we change the pricelist with this one
+
         :returns: browse record for the current sale order
         """
-        self.ensure_one()
-        partner = self.env.user.partner_id
+        partner = self.get_partner(cr, uid)
+        sale_order_obj = self.pool['sale.order']
         sale_order_id = request.session.get('sale_order_id')
         if not sale_order_id:
             last_order = partner.last_website_so_id
-            available_pricelists = self.get_pricelist_available()
+            available_pricelists = self.get_pricelist_available(cr, uid, context=context)
             # Do not reload the cart of this user last visit if the cart is no longer draft or uses a pricelist no longer available.
-            sale_order_id = last_order.state == 'draft' and last_order.pricelist_id in available_pricelists and last_order.id
+            sale_order_id = last_order and last_order.state == 'draft' and last_order.pricelist_id in available_pricelists and last_order.id
 
-        pricelist_id = request.session.get('website_sale_current_pl') or self.get_current_pricelist().id
+        sale_order = None
+        # Test validity of the sale_order_id
+        if sale_order_id and sale_order_obj.exists(cr, SUPERUSER_ID, sale_order_id, context=context):
+            sale_order = sale_order_obj.browse(cr, SUPERUSER_ID, sale_order_id, context=context)
+        else:
+            sale_order_id = None
+        pricelist_id = request.session.get('website_sale_current_pl') or self.get_current_pricelist(cr, uid, context=context).id
 
-        if self.env['product.pricelist'].browse(force_pricelist).exists():
+        if force_pricelist and self.pool['product.pricelist'].search_count(cr, uid, [('id', '=', force_pricelist)], context=context):
             pricelist_id = force_pricelist
             request.session['website_sale_current_pl'] = pricelist_id
             update_pricelist = True
 
-        if not self._context.get('pricelist'):
-            self = self.with_context(pricelist=pricelist_id)
-
-        # Test validity of the sale_order_id
-        sale_order = self.env['sale.order'].sudo().browse(sale_order_id).exists() if sale_order_id else None
-
         # create so if needed
-        if not sale_order and (force_create or code):
+        if not sale_order_id and (force_create or code):
             # TODO cache partner_id session
+            user_obj = self.pool['res.users']
             affiliate_id = request.session.get('affiliate_id')
-            if self.env['res.users'].sudo().browse(affiliate_id).exists():
-                salesperson_id = affiliate_id
-            else:
-                salesperson_id = request.website.salesperson_id.id
-            addr = partner.address_get(['delivery', 'invoice'])
-            sale_order = self.env['sale.order'].sudo().create({
-                'partner_id': partner.id,
-                'pricelist_id': pricelist_id,
-                'payment_term_id': self.sale_get_payment_term(partner),
-                'team_id': self.salesteam_id.id,
-                'partner_invoice_id': addr['invoice'],
-                'partner_shipping_id': addr['delivery'],
-                'user_id': salesperson_id or self.salesperson_id.id,
-            })
+            salesperson_id = affiliate_id if user_obj.exists(cr, SUPERUSER_ID, affiliate_id, context=context) else request.website.salesperson_id.id
+            for w in self.browse(cr, uid, ids):
+                addr = partner.address_get(['delivery', 'invoice'])
+                values = {
+                    'partner_id': partner.id,
+                    'pricelist_id': pricelist_id,
+                    'payment_term_id': partner.property_payment_term_id.id if partner.property_payment_term_id else False,
+                    'team_id': w.salesteam_id.id,
+                    'partner_invoice_id': addr['invoice'],
+                    'partner_shipping_id': addr['delivery'],
+                    'user_id': salesperson_id or w.salesperson_id.id,
+                }
+                company_id = w.company_id or self.pool['product.pricelist'].browse(cr, SUPERUSER_ID, [pricelist_id], context=context).company_id
+                if company_id:
+                    values['company_id'] = company_id.id
+                sale_order_id = sale_order_obj.create(cr, SUPERUSER_ID, values, context=context)
+                request.session['sale_order_id'] = sale_order_id
+                sale_order = sale_order_obj.browse(cr, SUPERUSER_ID, sale_order_id, context=context)
 
-            # set fiscal position
-            if request.website.partner_id.id != partner.id:
-                sale_order.onchange_partner_shipping_id()
-            else: # For public user, fiscal position based on geolocation
-                country_code = request.session['geoip'].get('country_code')
-                if country_code:
-                    country_id = request.env['res.country'].search([('code', '=', country_code)], limit=1).id
-                    fp_id = request.env['account.fiscal.position'].sudo()._get_fpos_by_region(country_id)
-                    sale_order.fiscal_position_id = fp_id
-                else:
-                    # if no geolocation, use the public user fp
-                    sale_order.onchange_partner_shipping_id()
+                if request.website.partner_id.id != partner.id:
+                    self.pool['res.partner'].write(cr, SUPERUSER_ID, partner.id, {'last_website_so_id': sale_order_id})
 
-            request.session['sale_order_id'] = sale_order.id
-
-            if request.website.partner_id.id != partner.id:
-                partner.write({'last_website_so_id': sale_order_id})
-
-        if sale_order:
+        if sale_order_id:
 
             # check for change of pricelist with a coupon
             pricelist_id = pricelist_id or partner.property_product_pricelist.id
@@ -381,13 +346,11 @@ class Website(models.Model):
                 flag_pricelist = False
                 if pricelist_id != sale_order.pricelist_id.id:
                     flag_pricelist = True
-                fiscal_position = sale_order.fiscal_position_id.id
+                fiscal_position = sale_order.fiscal_position_id and sale_order.fiscal_position_id.id or False
 
                 # change the partner, and trigger the onchange
-                sale_order.write({'partner_id': partner.id})
-                sale_order.onchange_partner_id()
-                sale_order.onchange_partner_shipping_id() # fiscal position
-                sale_order['payment_term_id'] = self.sale_get_payment_term(partner)
+                sale_order_obj.write(cr, SUPERUSER_ID, [sale_order_id], {'partner_id': partner.id}, context=context)
+                sale_order_obj.onchange_partner_id(cr, SUPERUSER_ID, [sale_order_id], context=context)
 
                 # check the pricelist : update it if the pricelist is not the 'forced' one
                 values = {}
@@ -402,17 +365,17 @@ class Website(models.Model):
 
                 # if values, then make the SO update
                 if values:
-                    sale_order.write(values)
+                    sale_order_obj.write(cr, SUPERUSER_ID, [sale_order_id], values, context=context)
 
                 # check if the fiscal position has changed with the partner_id update
-                recent_fiscal_position = sale_order.fiscal_position_id.id
+                recent_fiscal_position = sale_order.fiscal_position_id and sale_order.fiscal_position_id.id or False
                 if flag_pricelist or recent_fiscal_position != fiscal_position:
                     update_pricelist = True
 
             if code and code != sale_order.pricelist_id.code:
-                code_pricelist = self.env['product.pricelist'].search([('code', '=', code)], limit=1)
-                if code_pricelist:
-                    pricelist_id = code_pricelist.id
+                pricelist_ids = self.pool['product.pricelist'].search(cr, uid, [('code', '=', code)], limit=1, context=context)
+                if pricelist_ids:
+                    pricelist_id = pricelist_ids[0]
                     update_pricelist = True
             elif code is not None and sale_order.pricelist_id.code:
                 # code is not None when user removes code and click on "Apply"
@@ -428,23 +391,28 @@ class Website(models.Model):
                     if line.exists():
                         sale_order._cart_update(product_id=line.product_id.id, line_id=line.id, add_qty=0)
 
+            # update browse record
+            if (code and code != sale_order.pricelist_id.code) or sale_order.partner_id.id != partner.id or force_pricelist:
+                sale_order = sale_order_obj.browse(cr, SUPERUSER_ID, sale_order.id, context=context)
+
         else:
             request.session['sale_order_id'] = None
             return None
 
         return sale_order
 
-    def sale_get_transaction(self):
+    def sale_get_transaction(self, cr, uid, ids, context=None):
+        transaction_obj = self.pool.get('payment.transaction')
         tx_id = request.session.get('sale_transaction_id')
         if tx_id:
-            transaction = self.env['payment.transaction'].sudo().browse(tx_id)
-            if transaction.state != 'cancel':
-                return transaction
+            tx_ids = transaction_obj.search(cr, SUPERUSER_ID, [('id', '=', tx_id), ('state', 'not in', ['cancel'])], context=context)
+            if tx_ids:
+                return transaction_obj.browse(cr, SUPERUSER_ID, tx_ids[0], context=context)
             else:
                 request.session['sale_transaction_id'] = False
         return False
 
-    def sale_reset(self):
+    def sale_reset(self, cr, uid, ids, context=None):
         request.session.update({
             'sale_order_id': False,
             'sale_transaction_id': False,
@@ -452,17 +420,58 @@ class Website(models.Model):
         })
 
 
-class ResCountry(models.Model):
-    _inherit = 'res.country'
+class website_pricelist(osv.Model):
+    _name = 'website_pricelist'
+    _description = 'Website Pricelist'
 
-    def get_website_sale_countries(self, mode='billing'):
-        return self.sudo().search([])
+    def _get_display_name(self, cr, uid, ids, name, arg, context=None):
+        result = {}
+        for o in self.browse(cr, uid, ids, context=context):
+            result[o.id] = _("Website Pricelist for %s") % o.pricelist_id.name
+        return result
 
-    def get_website_sale_states(self, mode='billing'):
-        return self.sudo().state_ids
+    _columns = {
+        'name': fields.function(_get_display_name, string='Pricelist Name', type="char"),
+        'website_id': fields.many2one('website', string="Website", required=True),
+        'selectable': fields.boolean('Selectable', help="Allow the end user to choose this price list"),
+        'pricelist_id': fields.many2one('product.pricelist', string='Pricelist'),
+        'country_group_ids': fields.many2many('res.country.group', 'res_country_group_website_pricelist_rel',
+                                              'website_pricelist_id', 'res_country_group_id', string='Country Groups'),
+    }
+
+    def clear_cache(self):
+        # website._get_pl() is cached to avoid to recompute at each request the
+        # list of available pricelists. So, we need to invalidate the cache when
+        # we change the config of website price list to force to recompute.
+        website = self.pool['website']
+        website._get_pl.clear_cache(website)
+        website._get_pl_partner_order.clear_cache(website)
+
+    def create(self, cr, uid, data, context=None):
+        res = super(website_pricelist, self).create(cr, uid, data, context=context)
+        self.clear_cache()
+        return res
+
+    def write(self, cr, uid, ids, data, context=None):
+        res = super(website_pricelist, self).write(cr, uid, ids, data, context=context)
+        self.clear_cache()
+        return res
+
+    def unlink(self, cr, uid, ids, context=None):
+        res = super(website_pricelist, self).unlink(cr, uid, ids, context=context)
+        self.clear_cache()
+        return res
 
 
-class ResPartner(models.Model):
+class CountryGroup(osv.Model):
+    _inherit = 'res.country.group'
+    _columns = {
+        'website_pricelist_ids': fields.many2many('website_pricelist', 'res_country_group_website_pricelist_rel',
+                                                  'res_country_group_id', 'website_pricelist_id', string='Website Price Lists'),
+    }
+
+
+class res_partner(openerp.models.Model):
     _inherit = 'res.partner'
 
-    last_website_so_id = fields.Many2one('sale.order', string='Last Online Sale Order')
+    last_website_so_id = openerp.fields.Many2one('sale.order', 'Last Online Sale Order')

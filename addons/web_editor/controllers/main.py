@@ -1,17 +1,14 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
-import cStringIO
-import io
+from openerp.http import request, STATIC_CACHE
+from openerp.addons.web import http
 import json
-import logging
-import time
-import werkzeug.wrappers
+import io
 from PIL import Image, ImageFont, ImageDraw
-
-from odoo.http import request
-from odoo import http, tools
-
+from openerp import tools
+import cStringIO
+import werkzeug.wrappers
+import time
+import logging
 logger = logging.getLogger(__name__)
 
 
@@ -21,35 +18,38 @@ class Web_Editor(http.Controller):
     #------------------------------------------------------
     @http.route('/web_editor/snippets', type='json', auth="user")
     def snippets(self, **kwargs):
-        return request.env.ref('web_editor.snippets').render(None)
+        return request.registry["ir.ui.view"].render(request.cr, request.uid, 'web_editor.snippets', None, context=request.context)
 
     #------------------------------------------------------
     # Backend html field
     #------------------------------------------------------
     @http.route('/web_editor/field/html', type='http', auth="user")
     def FieldTextHtml(self, model=None, res_id=None, field=None, callback=None, **kwargs):
+        cr, uid, context = request.cr, request.uid, request.context
+
         kwargs.update(
             model=model,
             res_id=res_id,
             field=field,
             datarecord=json.loads(kwargs['datarecord']),
-            debug=request.debug)
+            debug='debug' in kwargs)
 
         for k in kwargs:
             if isinstance(kwargs[k], basestring) and kwargs[k].isdigit():
                 kwargs[k] = int(kwargs[k])
 
         trans = dict(
-            lang=kwargs.get('lang', request.env.context.get('lang')),
+            lang=kwargs.get('lang', context.get('lang')),
             translatable=kwargs.get('translatable'),
             edit_translations=kwargs.get('edit_translations'),
             editable=kwargs.get('enable_editor'))
 
+        context.update(trans)
         kwargs.update(trans)
 
         record = None
         if model and kwargs.get('res_id'):
-            record = request.env[model].with_context(trans).browse(kwargs.get('res_id'))
+            record = request.registry[model].browse(cr, uid, kwargs.get('res_id'), context)
 
         kwargs.update(content=record and getattr(record, field) or "")
 
@@ -74,10 +74,9 @@ class Web_Editor(http.Controller):
         '/web_editor/font_to_img/<icon>/<color>/<int:size>/<int:alpha>',
         ], type='http', auth="none")
     def export_icon_to_png(self, icon, color='#000', size=100, alpha=255, font='/web/static/lib/fontawesome/fonts/fontawesome-webfont.ttf'):
-        """ This method converts an unicode character to an image (using Font
-            Awesome font by default) and is used only for mass mailing because
-            custom fonts are not supported in mail.
-            :param icon : decimal encoding of unicode character
+        """ This method converts FontAwesom pictograms to Images and is Used only
+            for mass mailing becuase custom fonts are not supported in mail.
+            :param icon : character from FontAwesom cheatsheet
             :param color : RGB code of the color
             :param size : Pixels in integer
             :param alpha : transparency of the image from 0 to 255
@@ -90,9 +89,6 @@ class Web_Editor(http.Controller):
         # Initialize font
         addons_path = http.addons_manifest['web']['addons_path']
         font_obj = ImageFont.truetype(addons_path + font, size)
-
-        # if received character is not a number, keep old behaviour (icon is character)
-        icon = unichr(int(icon)) if icon.isdigit() else icon
 
         # Determine the dimensions of the icon
         image = Image.new("RGBA", (size, size), color=(0, 0, 0, 0))
@@ -141,23 +137,23 @@ class Web_Editor(http.Controller):
         # the upload argument doesn't allow us to access the files if more than
         # one file is uploaded, as upload references the first file
         # therefore we have to recover the files from the request object
-        Attachments = request.env['ir.attachment']  # registry for the attachment table
+        Attachments = request.registry['ir.attachment']  # registry for the attachment table
 
         uploads = []
         message = None
         if not upload: # no image provided, storing the link and the image name
             name = url.split("/").pop()                       # recover filename
-            attachment = Attachments.create({
+            attachment_id = Attachments.create(request.cr, request.uid, {
                 'name': name,
                 'type': 'url',
                 'url': url,
                 'public': True,
                 'res_model': 'ir.ui.view',
-            })
-            uploads += attachment.read(['name', 'mimetype', 'checksum', 'url'])
+            }, request.context)
+            uploads += Attachments.read(request.cr, request.uid, [attachment_id], ['name', 'mimetype', 'checksum', 'url'], request.context)
         else:                                                  # images provided
             try:
-                attachments = request.env['ir.attachment']
+                attachment_ids = []
                 for c_file in request.httprequest.files.getlist('upload'):
                     data = c_file.read()
                     try:
@@ -172,15 +168,15 @@ class Web_Editor(http.Controller):
                     except IOError, e:
                         pass
 
-                    attachment = Attachments.create({
+                    attachment_id = Attachments.create(request.cr, request.uid, {
                         'name': c_file.filename,
                         'datas': data.encode('base64'),
                         'datas_fname': c_file.filename,
                         'public': True,
                         'res_model': 'ir.ui.view',
-                    })
-                    attachments += attachment
-                uploads += attachments.read(['name', 'mimetype', 'checksum', 'url'])
+                    }, request.context)
+                    attachment_ids.append(attachment_id)
+                uploads += Attachments.read(request.cr, request.uid, attachment_ids, ['name', 'mimetype', 'checksum', 'url'], request.context)
             except Exception, e:
                 logger.exception("Failed to upload image to attachment")
                 message = unicode(e)
@@ -199,34 +195,25 @@ class Web_Editor(http.Controller):
         Returns a dict mapping attachments which would not be removed (if any)
         mapped to the views preventing their removal
         """
-        Attachment = attachments_to_remove = request.env['ir.attachment']
-        Views = request.env['ir.ui.view']
+        cr, uid, context = request.cr, request.uid, request.context
+        Attachment = request.registry['ir.attachment']
+        Views = request.registry['ir.ui.view']
 
+        attachments_to_remove = []
         # views blocking removal of the attachment
         removal_blocked_by = {}
 
-        for attachment in Attachment.browse(ids):
+        for attachment in Attachment.browse(cr, uid, ids, context=context):
             # in-document URLs are html-escaped, a straight search will not
             # find them
             url = tools.html_escape(attachment.local_url)
-            views = Views.search([
-                "|",
-                ('arch_db', 'like', '"%s"' % url),
-                ('arch_db', 'like', "'%s'" % url)
-            ])
+            ids = Views.search(cr, uid, ["|", ('arch_db', 'like', '"%s"' % url), ('arch_db', 'like', "'%s'" % url)], context=context)
 
-            if views:
-                removal_blocked_by[attachment.id] = views.read(['name'])
+            if ids:
+                removal_blocked_by[attachment.id] = Views.read(
+                    cr, uid, ids, ['name'], context=context)
             else:
-                attachments_to_remove += attachment
+                attachments_to_remove.append(attachment.id)
         if attachments_to_remove:
-            attachments_to_remove.unlink()
+            Attachment.unlink(cr, uid, attachments_to_remove, context=context)
         return removal_blocked_by
-
-    @http.route('/web_editor/customize_template_get', type='json', auth='user', website=True)
-    def customize_template_get(self, key, full=False, bundles=False):
-        """ Get inherit view's informations of the template ``key``.
-            returns templates info (which can be active or not)
-            ``bundles=True`` returns also the asset bundles
-        """
-        return request.env["ir.ui.view"].customize_template_get(key, full=full, bundles=bundles)

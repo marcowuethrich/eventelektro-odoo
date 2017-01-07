@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/eventelektro-odoo.iml" filepath="$PROJECT_DIR$/eventelektro-odoo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/odoo.iml" filepath="$PROJECT_DIR$/odoo.iml" />
     </modules>
   </component>
 </project>

@@ -68,9 +68,7 @@ var Input = Widget.extend( /** @lends instance.web.search.Input# */{
             "get_domain not implemented for widget " + this.attrs.type);
     },
     load_attrs: function (attrs) {
-        if (!_.isObject(attrs.modifiers)) {
-            attrs.modifiers = attrs.modifiers ? JSON.parse(attrs.modifiers) : {};
-        }
+        attrs.modifiers = attrs.modifiers ? JSON.parse(attrs.modifiers) : {};
         this.attrs = attrs;
     },
     /**
@@ -551,7 +549,6 @@ var FilterGroup = Input.extend(/** @lends instance.web.search.FilterGroup# */{
         return {
             category: _t("Filter"),
             icon: this.icon,
-            separator: _t(" or "),
             values: values,
             field: this
         };
@@ -628,7 +625,6 @@ var FilterGroup = Input.extend(/** @lends instance.web.search.FilterGroup# */{
         });
     },
     toggle_filter: function (e) {
-        e.preventDefault();
         e.stopPropagation();
         this.toggle(this.filters[Number($(e.target).parent().data('index'))]);
     },
@@ -698,7 +694,6 @@ var GroupbyGroup = FilterGroup.extend({
         return {
             category: _t("Group By"),
             icon: this.icon,
-            separator: " > ",
             values: values,
             field: this.searchview._s_groupby
         };

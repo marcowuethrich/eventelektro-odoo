@@ -433,30 +433,30 @@ odoo.define_section('Widget.events', ['web.Widget', 'web.core'], function (test)
     });
 });
 
-odoo.define_section('Widget.async', ['web.Widget', 'web.utils'], function (test) {
-    test("alive(alive)", function (assert, Widget, utils) {
+odoo.define_section('Widget.async', ['web.Widget'], function (test) {
+    test("alive(alive)", function (assert, Widget) {
         assert.expect(1);
 
         var widget = new (Widget.extend({}));
 
-        return utils.async_when(widget.start())
-            .then(function () { return widget.alive(utils.async_when()) })
+        return $.async_when(widget.start())
+            .then(function () { return widget.alive($.async_when()) })
             .then(function () { assert.ok(true); });
     });
 
-    test("alive(dead)", function (assert, Widget, utils) {
+    test("alive(dead)", function (assert, Widget) {
         assert.expect(1);
         var widget = new (Widget.extend({}));
 
         return $.Deferred(function (d) {
-            utils.async_when(widget.start())
+            $.async_when(widget.start())
             .then(function () {
                 // destroy widget
                 widget.destroy();
-                var promise = utils.async_when();
+                var promise = $.async_when();
                 // leave time for alive() to do its stuff
                 promise.then(function () {
-                    return utils.async_when();
+                    return $.async_when();
                 }).then(function () {
                     assert.ok(true);
                     d.resolve();
@@ -470,26 +470,26 @@ odoo.define_section('Widget.async', ['web.Widget', 'web.utils'], function (test)
         });
     });
 
-    test("alive(alive, true)", function (assert, Widget, utils) {
+    test("alive(alive, true)", function (assert, Widget) {
         assert.expect(1);
         var widget = new (Widget.extend({}));
-        return utils.async_when(widget.start())
-        .then(function () { return widget.alive(utils.async_when(), true) })
+        return $.async_when(widget.start())
+        .then(function () { return widget.alive($.async_when(), true) })
         .then(function () { assert.ok(true); });
     });
 
-    test("alive(dead, true)", function (assert, Widget, utils) {
+    test("alive(dead, true)", function (assert, Widget) {
         assert.expect(1);
         var done = assert.async();
 
         var widget = new (Widget.extend({}));
 
-        utils.async_when(widget.start())
+        $.async_when(widget.start())
         .then(function () {
             // destroy widget
             widget.destroy();
             console.log('destroyed');
-            return widget.alive(utils.async_when().done(function () { console.log('when'); }), true);
+            return widget.alive($.async_when().done(function () { console.log('when'); }), true);
         }).then(function () {
             console.log('unfailed')
             assert.ok(false, "alive(p, true) should fail its promise");
@@ -630,3 +630,4 @@ odoo.define_section('server-formats', ['web.time'], function (test) {
     });
 
 });
+

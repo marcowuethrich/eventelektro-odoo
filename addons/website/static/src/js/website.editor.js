@@ -22,81 +22,82 @@ website.TopBar.include({
         'click [data-action="edit"]': 'edit',
     },
     start: function () {
+        var self = this;
+        $("#wrapwrap").on('click', '.o_editable, [data-oe-model]', function (event) {
+            var $this = $(event.srcElement);
+            var tag = $this[0] && $this[0].tagName.toLowerCase();
+            if (!(tag === 'a' || tag === "button") && !$this.parents("a, button").length) {
+                self.$('[data-action="edit"]').parent().effect('bounce', {distance: 18, times: 5}, 250);
+            }
+        });
+
         $("#wrapwrap").find("[data-oe-model] .oe_structure.oe_empty, [data-oe-model].oe_structure.oe_empty, [data-oe-type=html]:empty")
             .filter(".oe_not_editable")
             .filter(".oe_no_empty")
-            .addClass("oe_empty");
+            .addClass("oe_empty")
+            .attr("data-oe-placeholder", _t("Press The Top-Left Edit Button"));
 
-        if (location.search.indexOf("enable_editor") >= 0 && $('html').attr('lang').match(/en[-_]US/)) {
-            this.$el.addClass('editing_mode');
-            this.delayed_hide();
+        if (location.search.indexOf("enable_editor") >= 0 && $('html').attr('lang') === "en_US") {
+            this.$el.hide();
         }
 
-        return this._super.apply(this, arguments);
+        return this._super();
     },
     edit: function () {
         this.$('button[data-action=edit]').prop('disabled', true);
-        this.$el.addClass('editing_mode');
+        this.$el.hide();
         editor.editor_bar = new editor.Class(this);
         editor.editor_bar.prependTo(document.body);
-        $('.o_homepage_editor_welcome_message').remove();
-
-        this.delayed_hide();
-    },
-    delayed_hide: function () {
-        _.delay((function () {
-            this.do_hide();
-        }).bind(this), 800);
-    },
+    }
 });
 
 /* ----- Customize Template ---- */
 
 website.TopBarCustomize = Widget.extend({
     events: {
-        'click > ul a[data-view-id]': 'do_customize',
+        'mousedown a.dropdown-toggle': 'load_menu',
+        'click ul a[data-view-id]': 'do_customize',
     },
-    start: function () {
+    start: function() {
+        var self = this;
+        this.$menu = self.$el.find('ul');
         this.view_name = $(document.documentElement).data('view-xmlid');
         if (!this.view_name) {
             this.$el.hide();
         }
-
-        if (this.$el.is(".open")) {
-            this.load_menu();
-        } else {
-            this.$el.one("mousedown", "> a.dropdown-toggle", this.load_menu.bind(this));
-        }
+        this.loaded = false;
     },
     load_menu: function () {
-        var $menu = this.$el.children("ul");
-        ajax.jsonRpc('/website/customize_template_get', 'call', {
-            key: this.view_name,
-            full: false
-        }).then(function (result) {
-            var current_group = "";
-            _.each(result, function (item) {
-                if (current_group !== item.inherit_id[1]) {
-                    current_group = item.inherit_id[1];
-                    $menu.append("<li class=\"dropdown-header\">" + current_group + "</li>");
-                }
-                var $li = $('<li/>', {role: 'presentation'})
-                            .append($('<a/>', {href: '#', 'data-view-id': item.id, role: 'menuitem'})
-                                .append(qweb.render('web_editor.components.switch', {id: 'switch-' + item.id, label: item.name})));
-                $li.find('input').prop('checked', !!item.active);
-                $menu.append($li);
-            });
-        });
+        var self = this;
+        if(this.loaded) {
+            return;
+        }
+        ajax.jsonRpc('/website/customize_template_get', 'call', { 'key': this.view_name }).then(
+            function(result) {
+                _.each(result, function (item) {
+                    if (item.key === "website.debugger" && !window.location.search.match(/[&?]debug(&|$)/)) return;
+                    if (item.header) {
+                        self.$menu.append('<li class="dropdown-header">' + item.name + '</li>');
+                    } else {
+                        self.$menu.append(_.str.sprintf('<li role="presentation"><a href="#" data-view-id="%s" role="menuitem"><strong class="fa fa%s-square-o"></strong> %s</a></li>',
+                            item.id, item.active ? '-check' : '', item.name));
+                    }
+                });
+                self.loaded = true;
+            }
+        );
     },
-    do_customize: function (e) {
-        e.preventDefault();
-        var view_id = $(e.currentTarget).data('view-id');
+    do_customize: function (event) {
+        var view_id = $(event.currentTarget).data('view-id');
         return ajax.jsonRpc('/web/dataset/call_kw', 'call', {
             model: 'ir.ui.view',
             method: 'toggle',
-            args: [[parseInt(view_id, 10)]],
-            kwargs: {context: base.get_context()}
-        }).then(function () {
+            args: [],
+            kwargs: {
+                ids: [parseInt(view_id, 10)],
+                context: base.get_context()
+            }
+        }).then( function() {
             window.location.reload();
         });
     },
@@ -116,12 +117,12 @@ widget.LinkDialog.include({
         var self = this;
         var href = this.data.url;
         var last;
-
+        
         this.$('#link-page').select2({
             minimumInputLength: 1,
             placeholder: _t("New or existing page"),
             query: function (q) {
-                if (q.term === last) return;
+                if (q.term == last) return;
                 last = q.term;
                 $.when(
                     self.page_exists(q.term),
@@ -203,24 +204,10 @@ widget.LinkDialog.include({
     },
     fetch_pages: function (term) {
         return this.call('search_pages', [null, term], {
-            limit: 100,
+            limit: 9,
             context: base.get_context(),
         });
     },
-});
-
-/**
- * Display a welcome message on the homepage when it is empty and that the user is connected.
- */
-base.ready().then(function () {
-    if (location.search.indexOf("enable_editor") < 0 && $(".editor_enable").length === 0) {
-        var $wrap = $("#wrapwrap.homepage #wrap");
-        if ($wrap.length && $wrap.html().trim() === "") {
-            var $welcome_message = $(qweb.render("website.homepage_editor_welcome_message"));
-            $welcome_message.css("min-height", $wrap.parent("main").height() - ($wrap.outerHeight(true) - $wrap.height()));
-            $wrap.empty().append($welcome_message);
-        }
-    }
 });
 
 });

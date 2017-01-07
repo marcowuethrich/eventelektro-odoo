@@ -1,4 +1,4 @@
-from odoo.tests import HttpCase
+from openerp.tests import HttpCase
 
 class TestUi(HttpCase):
     post_install = True

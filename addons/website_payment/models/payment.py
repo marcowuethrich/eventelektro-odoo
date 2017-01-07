@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-from odoo import api, fields, models
+from openerp import models
+
 
 class PaymentAcquirer(models.Model):
     _name = 'payment.acquirer'

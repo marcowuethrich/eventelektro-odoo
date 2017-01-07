@@ -5,6 +5,7 @@ var core = require('web.core');
 var Model = require('web.Model');
 var base = require('web_editor.base');
 var options = require('web_editor.snippets.options');
+var snippet_editor = require('web_editor.snippet.editor');
 var website = require('website.website');
 
 var _t = core._t;

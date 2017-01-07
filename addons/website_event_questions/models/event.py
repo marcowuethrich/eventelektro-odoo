@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import fields, models
+from openerp import models, fields
 
 
 class EventEvent(models.Model):
     """ Override Event model to add optional questions when buying tickets. """
     _inherit = 'event.event'
 
-    question_ids = fields.One2many('event.question', 'event_id', 'Questions', copy=True)
-    general_question_ids = fields.One2many('event.question', 'event_id', 'General Questions',
+    question_ids = fields.One2many('event.question', 'event_id', 'Questions')
+    general_question_ids = fields.One2many('event.question', 'event_id', 'Questions',
                                            domain=[('is_individual', '=', False)])
-    specific_question_ids = fields.One2many('event.question', 'event_id', 'Specific Questions',
+    specific_question_ids = fields.One2many('event.question', 'event_id', 'Questions',
                                             domain=[('is_individual', '=', True)])
 
 
@@ -42,7 +41,7 @@ class EventQuestion(models.Model):
 
     title = fields.Char(required=True, translate=True)
     event_id = fields.Many2one('event.event', required=True, ondelete='cascade')
-    answer_ids = fields.One2many('event.answer', 'question_id', "Answers", required=True, copy=True)
+    answer_ids = fields.One2many('event.answer', 'question_id', "Answers", required=True)
     sequence = fields.Integer(default=10)
     is_individual = fields.Boolean('Ask each attendee',
                                    help="If True, this question will be asked for every attendee of a reservation. If "

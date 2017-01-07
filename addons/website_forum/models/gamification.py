@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import models, fields
+from openerp import models, fields, api
 
 
-class Challenge(models.Model):
+class gamification_challenge(models.Model):
     _inherit = 'gamification.challenge'
 
-    category = fields.Selection(selection_add=[('forum', 'Website / Forum')])
+    @api.model
+    def _get_categories(self):
+        res = super(gamification_challenge, self)._get_categories()
+        res.append(('forum', 'Website / Forum'))
+        return res
 
 
 class Badge(models.Model):

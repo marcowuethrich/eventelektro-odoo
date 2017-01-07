@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
-from odoo import fields, models
-
+from openerp.osv import osv
+from openerp import api, fields, models
+from openerp.http import request
 
 class Website(models.Model):
 
