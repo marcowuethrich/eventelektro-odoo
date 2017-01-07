@@ -11,23 +11,6 @@
 # ./odoo-install
 ################################################################################
 
-##fixed parameters
-#odoo
-OE_USER="odoo"
-OE_HOME="/$OE_USER"
-OE_HOME_EXT="/$OE_USER/${OE_USER}-server"
-#The default port where this Odoo instance will run under (provided you use the command -c in the terminal)
-#Set to true if you want to install it, false if you don't need it or have it already installed.
-INSTALL_WKHTMLTOPDF="True"
-#Set the default Odoo port (you still have to use -c /etc/odoo-server.conf for example to use this.)
-OE_PORT="8069"
-#Choose the Odoo version which you want to install. For example: 10.0, 9.0, 8.0, 7.0 or saas-6. When using 'trunk' the master version will be installed.
-#IMPORTANT! This script contains extra libraries that are specifically needed for Odoo 10.0
-OE_VERSION="9.0"
-#set the superadmin password
-OE_SUPERADMIN="admin"
-OE_CONFIG="${OE_USER}-server"
-
 ##
 ###  WKHTMLTOPDF download links
 ## === Ubuntu Trusty x64 & x32 === (for other distributions please replace these two links,
@@ -53,194 +36,95 @@ sudo apt-get intall git
 # Open Corresponding Firewall Ports
 #--------------------------------------------------
 echo -e "\n---- Open Firewall Ports ----"
-#sudo ufw allow ssh
-#sudo ufw allow 8069/tcp
-#sudo ufw enable
+sudo ufw allow ssh
+sudo ufw allow 8069/tcp
+sudo ufw enable
 
 #--------------------------------------------------
 # Install PostgreSQL Server
 #--------------------------------------------------
 echo -e "\n---- Install PostgreSQL Server ----"
-sudo apt-get install postgresql -y
+sudo apt-get install subversion git bzr bzrtools python-pip postgresql postgresql-server-dev-9.3 python-all-dev python-dev python-setuptools libxml2-dev libxslt1-dev libevent-dev libsasl2-dev libldap2-dev pkg-config libtiff5-dev libjpeg8-dev libjpeg-dev zlib1g-dev libfreetype6-dev liblcms2-dev liblcms2-utils libwebp-dev tcl8.6-dev tk8.6-dev python-tk libyaml-dev fontconfig
 
 echo -e "\n---- Creating the ODOO PostgreSQL User  ----"
-sudo su - postgres -c "createuser -s $OE_USER" 2> /dev/null || true
+sudo su - postgres -c "createuser -s odoo" 2> /dev/null || true
+
+#--------------------------------------------------
+# Create Oddo Userand Log Direcotry
+#--------------------------------------------------
+echo -e "\n---- Creating odoo User  ----"
+sudo adduser --system --home=/opt/odoo --group odoo
+
+echo -e "\n---- Creating Log dir  ----"
+sudo mkdir /var/log/odoo
 
 #--------------------------------------------------
 # Install Dependencies
 #--------------------------------------------------
-echo -e "\n---- Install tool packages ----"
-sudo apt-get install wget git python-pip gdebi-core -y
-	
-echo -e "\n---- Install python packages ----"
-sudo apt-get install python-dateutil python-feedparser python-ldap python-libxslt1 python-lxml python-mako python-openid python-psycopg2 python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi python-docutils python-psutil python-mock python-unittest2 python-jinja2 python-pypdf python-decorator python-requests python-passlib python-pil -y python-suds
-	
-echo -e "\n---- Install python libraries ----"
-sudo pip install gdata psycogreen ofxparse XlsxWriter
 
-echo -e "\n--- Install other required packages"
-sudo apt-get install node-clean-css -y
-sudo apt-get install node-less -y
-sudo apt-get install python-gevent -y
+echo -e "\n---- Install Python lib  ----"
+sudo pip install -r /opt/odoo/doc/requirements.txt
+sudo pip install -r /opt/odoo/requirements.txt
+
+echo -e "\n---- Install Less CSS via nodejs and npm  ----"
+wget -qO- https://deb.nodesource.com/setup | sudo bash -
+sudo apt-get install nodejs
+sudo npm install -g less less-plugin-clean-css
 
 #--------------------------------------------------
 # Install Wkhtmltopdf if needed
 #--------------------------------------------------
-if [ $INSTALL_WKHTMLTOPDF = "True" ]; then
-  echo -e "\n---- Install wkhtml and place shortcuts on correct place for ODOO 10 ----"
-  #pick up correct one from x64 & x32 versions:
-  if [ "`getconf LONG_BIT`" == "64" ];then
-      _url=$WKHTMLTOX_X64
-  else
-      _url=$WKHTMLTOX_X32
-  fi
-  sudo wget $_url
-  sudo gdebi --n `basename $_url`
-  sudo ln -s /usr/local/bin/wkhtmltopdf /usr/bin
-  sudo ln -s /usr/local/bin/wkhtmltoimage /usr/bin
-else
-  echo "Wkhtmltopdf isn't installed due to the choice of the user!"
-fi
-	
-echo -e "\n---- Create ODOO system user ----"
-sudo adduser --system --quiet --shell=/bin/bash --home=$OE_HOME --gecos 'ODOO' --group $OE_USER
-#The user should also be added to the sudo'ers group.
-sudo adduser $OE_USER sudo
 
-echo -e "\n---- Create Log directory ----"
-sudo mkdir /var/log/$OE_USER
-sudo chown $OE_USER:$OE_USER /var/log/$OE_USER
+echo -e "\n---- Install wkhtml and place shortcuts on correct place for odoo ----"
+#pick up correct one from x64 & x32 versions:
+if [ "`getconf LONG_BIT`" == "64" ];then
+      _url=${WKHTMLTOX_X64}
+else
+    _url=${WKHTMLTOX_X32}
+fi
+sudo wget ${_url}
+sudo gdebi --n `basename ${_url}`
+sudo ln -s /usr/local/bin/wkhtmltopdf /usr/bin
+sudo ln -s /usr/local/bin/wkhtmltoimage /usr/bin
+
 
 #--------------------------------------------------
 # Install ODOO
 #--------------------------------------------------
 
-echo -e "\n---- Set permission on odoo Server ----"
-sudo chmod 755 -R ~/odoo/odoo-server/
-
 echo -e "\n---- Create custom module directory ----"
-sudo su $OE_USER -c "mkdir $OE_HOME/custom"
-sudo su $OE_USER -c "mkdir $OE_HOME/custom/addons"
-	
-echo -e "\n---- Setting permissions on home folder ----"
-sudo chown -R $OE_USER:$OE_USER $OE_HOME/*
+sudo mkdir /opt/odoo/custom
+sudo mkdir /opt/odoo/custom/addons
+
+echo -e "\n---- Set permission on odoo Server ----"
+sudo chmod 755 -R /opt/odoo/
+sudo chmod 755 -R /opt/odoo/custom/
 
 echo -e "* Create server config file"
-sudo cp ~/odoo/odoo-server/debian/openerp-server.conf /etc/odoo-server.conf
-sudo chown $OE_USER:$OE_USER /etc/odoo-server.conf
+sudo cp /opt/odoo/debian/openerp-server.conf /etc/odoo-server.conf
 sudo chmod 640 /etc/odoo-server.conf
 
-# echo -e "* Change server config file"
-# sudo sed -i s/"db_user = .*"/"db_user = $OE_USER"/g /etc/odoo-server.conf
-# sudo sed -i s/"; admin_passwd.*"/"admin_passwd = $OE_SUPERADMIN"/g /etc/odoo-server.conf
-# sudo su root -c "echo '[options]' >> /etc/odoo-server.conf"
-# sudo su root -c "echo 'logfile = /var/log/$OE_USER/$OE_CONFIG$1.log' >> /etc/odoo-server.conf"
-# sudo su root -c "echo 'addons_path=/odoo/odoo-server/addons,$OE_HOME/custom/addons' >> /etc/odoo-server.conf"
+sudo chown -R odoo: /opt/odoo/
+sudo chown odoo:root /var/log/odoo
+
+sudo chown odoo: /etc/odoo-server.conf
+sudo chmod 640 /etc/odoo-server.conf
 
 echo -e "* Create startup file"
-# sudo su root -c "echo '#!/bin/sh' >> ~/odoo/odoo-server/start.sh"
-# sudo su root -c "echo 'sudo -u odoo ~/odoo/odoo-server/openerp-server --config=/etc/odoo-server.conf' >> ~/odoo/odoo-server/start.sh"
-sudo chmod 755 ~/odoo/odoo-server/start.sh
-
-#--------------------------------------------------
-# Adding ODOO as a deamon (initscript)
-#--------------------------------------------------
-
-echo -e "* Create init file"
-cat <<EOF > ~/$OE_CONFIG
-#!/bin/sh
-### BEGIN INIT INFO
-# Provides: $OE_CONFIG
-# Required-Start: \$remote_fs \$syslog
-# Required-Stop: \$remote_fs \$syslog
-# Should-Start: \$network
-# Should-Stop: \$network
-# Default-Start: 2 3 4 5
-# Default-Stop: 0 1 6
-# Short-Description: Enterprise Business Applications
-# Description: ODOO Business Applications
-### END INIT INFO
-PATH=/bin:/sbin:/usr/bin
-DAEMON=$OE_HOME_EXT/odoo-bin
-NAME=$OE_CONFIG
-DESC=$OE_CONFIG
-
-# Specify the user name (Default: odoo).
-USER=$OE_USER
-
-# Specify an alternate config file (Default: /etc/openerp-server.conf).
-CONFIGFILE="/etc/${OE_CONFIG}.conf"
-
-# pidfile
-PIDFILE=/var/run/\${NAME}.pid
-
-# Additional options that are passed to the Daemon.
-DAEMON_OPTS="-c \$CONFIGFILE"
-[ -x \$DAEMON ] || exit 0
-[ -f \$CONFIGFILE ] || exit 0
-checkpid() {
-[ -f \$PIDFILE ] || return 1
-pid=\`cat \$PIDFILE\`
-[ -d /proc/\$pid ] && return 0
-return 1
-}
-
-case "\${1}" in
-start)
-echo -n "Starting \${DESC}: "
-start-stop-daemon --start --quiet --pidfile \$PIDFILE \
---chuid \$USER --background --make-pidfile \
---exec \$DAEMON -- \$DAEMON_OPTS
-echo "\${NAME}."
-;;
-stop)
-echo -n "Stopping \${DESC}: "
-start-stop-daemon --stop --quiet --pidfile \$PIDFILE \
---oknodo
-echo "\${NAME}."
-;;
-
-restart|force-reload)
-echo -n "Restarting \${DESC}: "
-start-stop-daemon --stop --quiet --pidfile \$PIDFILE \
---oknodo
-sleep 1
-start-stop-daemon --start --quiet --pidfile \$PIDFILE \
---chuid \$USER --background --make-pidfile \
---exec \$DAEMON -- \$DAEMON_OPTS
-echo "\${NAME}."
-;;
-*)
-N=/etc/init.d/\$NAME
-echo "Usage: \$NAME {start|stop|restart|force-reload}" >&2
-exit 1
-;;
-
-esac
-exit 0
-EOF
-
-echo -e "* Security Init File"
-sudo mv ~/$OE_CONFIG /etc/init.d/$OE_CONFIG
-sudo chmod 755 /etc/init.d/$OE_CONFIG
-sudo chown root: /etc/init.d/$OE_CONFIG
-
-echo -e "* Change default xmlrpc port"
-sudo su root -c "echo 'xmlrpc_port = $OE_PORT' >> /etc/${OE_CONFIG}.conf"
-
-echo -e "* Start ODOO on Startup"
-sudo update-rc.d $OE_CONFIG defaults
+sudo cp /opt/odoo/odoo-server.sh /etc/init.d/odoo-server.sh
+sudo chmod 755 /etc/init.d/odoo-server
+sudo chown root: /etc/init.d/odoo-server
 
 echo -e "* Starting Odoo Service"
-sudo su root -c "/etc/init.d/$OE_CONFIG start"
+sudo su root -c "/etc/init.d/odoo-server start"
 echo "-----------------------------------------------------------"
 echo "Done! The Odoo server is up and running. Specifications:"
-echo "Port: $OE_PORT"
-echo "User service: $OE_USER"
-echo "User PostgreSQL: $OE_USER"
-echo "Code location: $OE_USER"
-echo "Addons folder: $OE_USER/$OE_CONFIG/addons/"
-echo "Start Odoo service: sudo service $OE_CONFIG start"
-echo "Stop Odoo service: sudo service $OE_CONFIG stop"
-echo "Restart Odoo service: sudo service $OE_CONFIG restart"
+echo "Port: 8069"
+echo "User service: odoo"
+echo "User PostgreSQL: odoo"
+echo "Code location: odoo"
+echo "Addons folder: /opt/odoo/addons/"
+echo "Start Odoo service: sudo service odoo-server start"
+echo "Stop Odoo service: sudo service odoo-server stop"
+echo "Restart Odoo service: sudo service odoo-server restart"
 echo "-----------------------------------------------------------"
