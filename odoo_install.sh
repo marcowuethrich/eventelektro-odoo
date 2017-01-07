@@ -1,20 +1,16 @@
 #!/bin/bash
 ################################################################################
-# Script for installing Odoo V10 on Ubuntu 16.04, 15.04, 14.04 (could be used for other version too)
-# Author: Yenthe Van Ginneken
+# Author: Marco Wüthrich
 #-------------------------------------------------------------------------------
-# This script will install Odoo on your Ubuntu 14.04 server. It can install multiple Odoo instances
+# This script will install Odoo on your Ubuntu 14.04 server. It can install  Odoo instances
 # in one Ubuntu because of the different xmlrpc_ports
 #-------------------------------------------------------------------------------
-# Make a new file:
-# sudo nano odoo-install.sh
-# Place this content in it and then make the file executable:
+# Make the file executable:
 # sudo chmod +x odoo-install.sh
 # Execute the script to install Odoo:
 # ./odoo-install
 ################################################################################
 
- /odoo/odoo-server/
 ##fixed parameters
 #odoo
 OE_USER="odoo"
@@ -57,9 +53,9 @@ sudo apt-get intall git
 # Open Corresponding Firewall Ports
 #--------------------------------------------------
 echo -e "\n---- Open Firewall Ports ----"
-sudo ufw allow ssh
-sudo ufw allow 8069/tcp
-sudo ufw enable
+#sudo ufw allow ssh
+#sudo ufw allow 8069/tcp
+#sudo ufw enable
 
 #--------------------------------------------------
 # Install PostgreSQL Server
@@ -118,8 +114,6 @@ sudo chown $OE_USER:$OE_USER /var/log/$OE_USER
 #--------------------------------------------------
 # Install ODOO
 #--------------------------------------------------
-echo -e "\n==== Installing ODOO Server ===="
-sudo git clone https://github.com/marcowuethrich/odoo.git -b "version/odoo9" --depth 1 --single-branch $OE_HOME_EXT/
 
 echo -e "\n---- Create custom module directory ----"
 sudo su $OE_USER -c "mkdir $OE_HOME/custom"
