@@ -1,2 +1,2 @@
-debian/odoo.conf /etc/odoo
+debian/openerp-server.conf /etc/odoo
 README.md /usr/share/doc/odoo

@@ -1,58 +1,59 @@
-# -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
-from odoo import http
-from odoo.http import request
+import openerp.addons.web.http as http
+from openerp.addons.web.http import request
 
 
-class GoogleCalendarController(http.Controller):
+class google_calendar_controller(http.Controller):
 
     @http.route('/google_calendar/sync_data', type='json', auth='user')
     def sync_data(self, arch, fields, model, **kw):
-        """ This route/function is called when we want to synchronize openERP calendar with Google Calendar
+        """
+            This route/function is called when we want to synchronize openERP calendar with Google Calendar
             Function return a dictionary with the status :  need_config_from_admin, need_auth, need_refresh, success if not calendar_event
             The dictionary may contains an url, to allow OpenERP Client to redirect user on this URL for authorization for example
         """
+
         if model == 'calendar.event':
-            GoogleService = request.env['google.service']
-            GoogleCal = request.env['google.calendar']
+            gs_obj = request.registry['google.service']
+            gc_obj = request.registry['google.calendar']
 
             # Checking that admin have already configured Google API for google synchronization !
-            context = kw.get('local_context', {})
-            client_id = GoogleService.with_context(context).get_client_id('calendar')
+            client_id = gs_obj.get_client_id(request.cr, request.uid, 'calendar', context=kw.get('local_context'))
 
             if not client_id or client_id == '':
-                action_id = ''
-                if GoogleCal.can_authorize_google():
-                    action_id = request.env.ref('google_calendar.action_config_settings_google_calendar').id
+                action = ''
+                if gc_obj.can_authorize_google(request.cr, request.uid):
+                    dummy, action = request.registry.get('ir.model.data').get_object_reference(request.cr, request.uid,
+                                                                                               'google_calendar', 'action_config_settings_google_calendar')
+
                 return {
                     "status": "need_config_from_admin",
                     "url": '',
-                    "action": action_id
+                    "action": action
                 }
 
             # Checking that user have already accepted OpenERP to access his calendar !
-            if GoogleCal.need_authorize():
-                url = GoogleCal.with_context(context).authorize_google_uri(from_url=kw.get('fromurl'))
+            if gc_obj.need_authorize(request.cr, request.uid, context=kw.get('local_context')):
+                url = gc_obj.authorize_google_uri(request.cr, request.uid, from_url=kw.get('fromurl'), context=kw.get('local_context'))
                 return {
                     "status": "need_auth",
                     "url": url
                 }
 
             # If App authorized, and user access accepted, We launch the synchronization
-            return GoogleCal.with_context(context).synchronize_events()
+            return gc_obj.synchronize_events(request.cr, request.uid, [], context=kw.get('local_context'))
 
         return {"status": "success"}
 
     @http.route('/google_calendar/remove_references', type='json', auth='user')
     def remove_references(self, model, **kw):
-        """ This route/function is called when we want to remove all the references between one calendar OpenERP and one Google Calendar """
+        """
+            This route/function is called when we want to remove all the references between one calendar OpenERP and one Google Calendar
+        """
         status = "NOP"
         if model == 'calendar.event':
-            GoogleCal = request.env['google.calendar']
+            gc_obj = request.registry['google.calendar']
             # Checking that user have already accepted OpenERP to access his calendar !
-            context = kw.get('local_context', {})
-            if GoogleCal.with_context(context).remove_references():
+            if gc_obj.remove_references(request.cr, request.uid, context=kw.get('local_context')):
                 status = "OK"
             else:
                 status = "KO"

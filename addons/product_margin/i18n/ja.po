@@ -4,18 +4,14 @@
 # 
 # Translators:
 # Yoshi Tashiro <tashiro@roomsfor.hk>, 2016
-# Martin Trigaux <mat@odoo.com>, 2016
-# Manami Hashi <manami@roomsfor.hk>, 2016
-# どりる <drill.dev@outlook.jp>, 2016
-# Norimichi Sugimoto <norimichi.sugimoto@tls-ltd.co.jp>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:57+0000\n"
-"PO-Revision-Date: 2016-09-07 08:57+0000\n"
-"Last-Translator: Norimichi Sugimoto <norimichi.sugimoto@tls-ltd.co.jp>, 2016\n"
-"Language-Team: Japanese (https://www.transifex.com/odoo/teams/41243/ja/)\n"
+"POT-Creation-Date: 2015-09-07 14:41+0000\n"
+"PO-Revision-Date: 2016-12-09 00:37+0000\n"
+"Last-Translator: Yoshi Tashiro <tashiro@roomsfor.hk>\n"
+"Language-Team: Japanese (http://www.transifex.com/odoo/odoo-9/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -34,8 +30,8 @@ msgstr "請求済販売数"
 
 #. module: product_margin
 #: model:ir.ui.view,arch_db:product_margin.view_product_margin_tree
-msgid "# Purchased"
-msgstr ""
+msgid "#Purchased"
+msgstr "仕入済数"
 
 #. module: product_margin
 #: model:ir.ui.view,arch_db:product_margin.view_product_margin_form
@@ -198,7 +194,7 @@ msgstr "予備日 至"
 #. module: product_margin
 #: model:ir.ui.view,arch_db:product_margin.view_product_margin_form
 msgid "Margins"
-msgstr "マージン"
+msgstr "利鞘"
 
 #. module: product_margin
 #: model:ir.model.fields,field_description:product_margin.field_product_product_membership
@@ -258,7 +254,7 @@ msgid "Product Margin"
 msgstr "製品利鞘"
 
 #. module: product_margin
-#: code:addons/product_margin/wizard/product_margin.py:49
+#: code:addons/product_margin/wizard/product_margin.py:66
 #: model:ir.actions.act_window,name:product_margin.product_margin_act_window
 #: model:ir.ui.menu,name:product_margin.menu_action_product_margin
 #: model:ir.ui.view,arch_db:product_margin.view_product_margin_form
@@ -349,13 +345,13 @@ msgstr "このアカウントは、現在の製品の売上を評価するため
 #. module: product_margin
 #: model:ir.model.fields,field_description:product_margin.field_product_margin_to_date
 msgid "To"
-msgstr "終了日"
+msgstr "宛先"
 
 #. module: product_margin
 #: model:ir.model.fields,field_description:product_margin.field_product_product_total_cost
 #: model:ir.ui.view,arch_db:product_margin.view_product_margin_tree
 msgid "Total Cost"
-msgstr "合計原価"
+msgstr "合計経費"
 
 #. module: product_margin
 #: model:ir.model.fields,field_description:product_margin.field_product_product_total_margin
@@ -376,7 +372,7 @@ msgstr "合計利鞘 * 100 / 売上高"
 #: model:ir.model.fields,field_description:product_margin.field_product_product_turnover
 #: model:ir.ui.view,arch_db:product_margin.view_product_margin_tree
 msgid "Turnover"
-msgstr "売上高"
+msgstr "取引高"
 
 #. module: product_margin
 #: model:ir.model.fields,help:product_margin.field_product_product_total_margin
@@ -394,6 +390,4 @@ msgid ""
 "When validating an invoice, an email will be sent to the customer based on "
 "this template. The customer will receive an email for each product linked to"
 " an email template."
-msgstr ""
-"請求書の検証時に、このテンプレートに基づいて顧客に電子メールが送信されます。 "
-"顧客は、電子メールテンプレートにリンクされた各製品の電子メールを受信します。"
+msgstr "請求書の検証時に、このテンプレートに基づいて顧客に電子メールが送信されます。 顧客は、電子メールテンプレートにリンクされた各製品の電子メールを受信します。"

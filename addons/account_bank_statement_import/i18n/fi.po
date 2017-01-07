@@ -5,19 +5,14 @@
 # Translators:
 # Eino Mäkitalo <eino.makitalo@netitbe.fi>, 2016
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
-# Kari Lindgren <kari.lindgren@emsystems.fi>, 2016
-# Tuomo Aura <tuomo.aura@web-veistamo.fi>, 2016
-# Martin Trigaux <mat@odoo.com>, 2016
-# Miku Laitinen <miku.laitinen@gmail.com>, 2016
-# Tommi Rintala <tommi.rintala@gmail.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:56+0000\n"
-"PO-Revision-Date: 2016-09-07 08:56+0000\n"
-"Last-Translator: Tommi Rintala <tommi.rintala@gmail.com>, 2016\n"
-"Language-Team: Finnish (https://www.transifex.com/odoo/teams/41243/fi/)\n"
+"POT-Creation-Date: 2015-09-07 14:40+0000\n"
+"PO-Revision-Date: 2016-11-17 22:22+0000\n"
+"Last-Translator: Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>\n"
+"Language-Team: Finnish (http://www.transifex.com/odoo/odoo-9/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -25,13 +20,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_bank_statement_import
-#: code:addons/account_bank_statement_import/account_bank_statement_import.py:236
+#: code:addons/account_bank_statement_import/account_bank_statement_import.py:226
 #, python-format
 msgid "%d transactions had already been imported and were ignored."
-msgstr "%d tapatumaa on jo aiemmin luettu sisään ja ohitettiin"
+msgstr "%d tapatumaa on jo aiemmin tuotu, joten ne ohitettiin."
 
 #. module: account_bank_statement_import
-#: code:addons/account_bank_statement_import/account_bank_statement_import.py:236
+#: code:addons/account_bank_statement_import/account_bank_statement_import.py:226
 #, python-format
 msgid "1 transaction had already been imported and was ignored."
 msgstr "Yksi (1) tapahtuma on aiemmin tuotu  ja ohitettin."
@@ -62,7 +57,7 @@ msgid "Allow Cancelling Entries"
 msgstr "Salli peruutusviennit"
 
 #. module: account_bank_statement_import
-#: code:addons/account_bank_statement_import/account_bank_statement_import.py:238
+#: code:addons/account_bank_statement_import/account_bank_statement_import.py:228
 #, python-format
 msgid "Already imported items"
 msgstr "Aiemmin ladatut rivit"
@@ -78,16 +73,16 @@ msgid "At least one outbound"
 msgstr "Vähintään yksi lähtevä"
 
 #. module: account_bank_statement_import
-#: code:addons/account_bank_statement_import/account_bank_statement_import.py:76
+#: code:addons/account_bank_statement_import/account_bank_statement_import.py:75
 #: model:ir.model.fields,field_description:account_bank_statement_import.field_account_bank_statement_import_journal_creation_bank_id
 #, python-format
 msgid "Bank"
-msgstr "Banco"
+msgstr "Pankki"
 
 #. module: account_bank_statement_import
 #: model:ir.model.fields,field_description:account_bank_statement_import.field_account_bank_statement_import_journal_creation_bank_account_id
 msgid "Bank Account"
-msgstr "Pankkitili"
+msgstr "Tilinumero"
 
 #. module: account_bank_statement_import
 #: model:ir.model.fields,field_description:account_bank_statement_import.field_account_bank_statement_import_journal_creation_bank_statements_source
@@ -110,43 +105,32 @@ msgid "Bank Statement Line"
 msgstr "Pankkitiliotteen rivi"
 
 #. module: account_bank_statement_import
-#: model:ir.model.fields,field_description:account_bank_statement_import.field_account_bank_statement_import_journal_creation_belongs_to_company
-msgid "Belong to the user's current company"
-msgstr "Kuuluu käyttäjän nykyiseen yritykseen"
-
-#. module: account_bank_statement_import
 #: model:ir.ui.view,arch_db:account_bank_statement_import.account_bank_statement_import_journal_creation_view
 #: model:ir.ui.view,arch_db:account_bank_statement_import.account_bank_statement_import_view
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "Peruuta"
 
 #. module: account_bank_statement_import
-#: code:addons/account_bank_statement_import/account_bank_statement_import.py:165
+#: code:addons/account_bank_statement_import/account_bank_statement_import.py:160
 #, python-format
 msgid ""
 "Cannot find in which journal import this statement. Please manually select a"
 " journal."
-msgstr ""
-"Odoo ei pysty päättelemään päiväkirjaa, mihin tapahtuma luetaan. Ole hyvä ja"
-" valitse päiväkirja."
+msgstr "Odoo ei pysty päättelemään päiväkirjaa, mihin tapahtuma luetaan. Ole hyvä ja valitse päiväkirja."
 
 #. module: account_bank_statement_import
 #: model:ir.model.fields,help:account_bank_statement_import.field_account_bank_statement_import_journal_creation_refund_sequence
 msgid ""
 "Check this box if you don't want to share the same sequence for invoices and"
 " refunds made from this journal"
-msgstr ""
-"Valitse tämä, josa haluat saman järjestyksen laskuille ja hyvityksille, "
-"jotka tästä päiväkirjasta luodaan."
+msgstr "Valitse tämä, jos et halua  yhteistä  järjestystä laskuille ja hyvityksille, jotka tästä päiväkirjasta luodaan"
 
 #. module: account_bank_statement_import
 #: model:ir.model.fields,help:account_bank_statement_import.field_account_bank_statement_import_journal_creation_update_posted
 msgid ""
 "Check this box if you want to allow the cancellation the entries related to "
 "this journal or of the invoice related to this journal"
-msgstr ""
-"Valitse tämä, jos haluat  sallia tähän päiväkirjaan liittyvien tapahtumien "
-"ja laskujen peruutuksen."
+msgstr "Valitse tämä, jos haluat  sallia tähän päiväkirjaan liittyvien tapahtumien ja laskujen peruutuksen."
 
 #. module: account_bank_statement_import
 #: model:ir.ui.view,arch_db:account_bank_statement_import.account_bank_statement_import_view
@@ -164,14 +148,12 @@ msgid "Company related to this journal"
 msgstr "Päiväkirjaan liittyvä yritys"
 
 #. module: account_bank_statement_import
-#: code:addons/account_bank_statement_import/account_bank_statement_import.py:106
+#: code:addons/account_bank_statement_import/account_bank_statement_import.py:105
 #, python-format
 msgid ""
 "Could not make sense of the given file.\n"
 "Did you install the module to support this type of file ?"
-msgstr ""
-"Tiedoston muoto ei ollut ymmärrettävä.\n"
-"Oletko asentanut modulin, joka tulee tämän tyyppisiä tiedostoja?"
+msgstr "Tiedoston muoto ei ollut ymmärrettävä.\nOletko asentanut modulin, joka tulee tämän tyyppisiä tiedostoja?"
 
 #. module: account_bank_statement_import
 #: model:ir.model.fields,field_description:account_bank_statement_import.field_account_bank_statement_import_create_uid
@@ -214,24 +196,21 @@ msgstr "Oletusarvoinen debet-tili"
 #: model:ir.model.fields,field_description:account_bank_statement_import.field_account_bank_statement_import_display_name
 #: model:ir.model.fields,field_description:account_bank_statement_import.field_account_bank_statement_import_journal_creation_display_name
 msgid "Display Name"
-msgstr "Näyttönimi"
+msgstr "Näytettävä nimi"
 
 #. module: account_bank_statement_import
 #: model:ir.model.fields,help:account_bank_statement_import.field_account_bank_statement_import_journal_creation_display_on_footer
 msgid ""
 "Display this bank account on the footer of printed documents like invoices "
 "and sales orders."
-msgstr ""
-"Näytä tämä pankkitili tulosteiden, kuten lasku tai myyntitilaus, "
-"alatunnisteessa."
+msgstr "Näytä tämä pankkitili tulosteiden, kuten lasku tai myyntitilaus, alatunnisteessa."
 
 #. module: account_bank_statement_import
 #: model:ir.ui.view,arch_db:account_bank_statement_import.account_bank_statement_import_view
 msgid ""
 "Download a bank statement from your bank and import it here. Supported "
 "formats:"
-msgstr ""
-"Lataaa tiliote pankistasi ja lue se sisään täällä.  Tuetut muodot ovat:"
+msgstr "Lataaa tiliote pankistasi ja lue se sisään täällä.  Tuetut muodot ovat:"
 
 #. module: account_bank_statement_import
 #: model:ir.model.fields,field_description:account_bank_statement_import.field_account_bank_statement_import_journal_creation_sequence_id
@@ -239,17 +218,11 @@ msgid "Entry Sequence"
 msgstr "Kirjaussarja"
 
 #. module: account_bank_statement_import
-#: model:ir.model.fields,field_description:account_bank_statement_import.field_account_bank_statement_import_filename
-msgid "Filename"
-msgstr "Tiedostonnimi"
-
-#. module: account_bank_statement_import
 #: model:ir.model.fields,help:account_bank_statement_import.field_account_bank_statement_import_data_file
 msgid ""
 "Get you bank statements in electronic format from your bank and select them "
 "here."
-msgstr ""
-"Hae pankin tiliotteet sähköisessä muodossa pankistasi ja valitse ne täällä."
+msgstr "Hae pankin tiliotteet sähköisessä muodossa pankistasi ja valitse ne täällä."
 
 #. module: account_bank_statement_import
 #: model:ir.model.fields,field_description:account_bank_statement_import.field_account_bank_statement_import_journal_creation_group_invoice_lines
@@ -260,16 +233,14 @@ msgstr "Ryhmän laskurivit"
 #: model:ir.model.fields,field_description:account_bank_statement_import.field_account_bank_statement_import_id
 #: model:ir.model.fields,field_description:account_bank_statement_import.field_account_bank_statement_import_journal_creation_id
 msgid "ID"
-msgstr "Tunniste (ID)"
+msgstr "ID"
 
 #. module: account_bank_statement_import
 #: model:ir.model.fields,help:account_bank_statement_import.field_account_bank_statement_import_journal_creation_group_invoice_lines
 msgid ""
 "If this box is checked, the system will try to group the accounting lines "
 "when generating them from invoices."
-msgstr ""
-"Jos tämä on valittu, järjestelmä yrittää järjestää kirjanpidon rivit kun "
-"niitä luodaan laskutuksesta."
+msgstr "Jos tämä on valittu, järjestelmä yrittää järjestää kirjanpidon rivit kun niitä luodaan laskutuksesta."
 
 #. module: account_bank_statement_import
 #: model:ir.actions.act_window,name:account_bank_statement_import.action_account_bank_statement_import
@@ -304,7 +275,7 @@ msgstr "Tuo tiliote"
 #. module: account_bank_statement_import
 #: model:ir.model.fields,help:account_bank_statement_import.field_account_bank_statement_import_journal_creation_default_credit_account_id
 msgid "It acts as a default account for credit amount"
-msgstr "Toimii oletus kredit-tilinä"
+msgstr "Toimii oletusarvoisena kredit-tilinä"
 
 #. module: account_bank_statement_import
 #: model:ir.model.fields,help:account_bank_statement_import.field_account_bank_statement_import_journal_creation_default_debit_account_id
@@ -317,7 +288,7 @@ msgid "Journal"
 msgstr "Päiväkirja"
 
 #. module: account_bank_statement_import
-#: code:addons/account_bank_statement_import/account_bank_statement_import.py:67
+#: code:addons/account_bank_statement_import/account_bank_statement_import.py:66
 #: model:ir.ui.view,arch_db:account_bank_statement_import.account_bank_statement_import_journal_creation_view
 #, python-format
 msgid "Journal Creation"
@@ -338,9 +309,7 @@ msgstr "Päiväkirjan id"
 msgid ""
 "Just click OK to create the account/journal and finish the import. If this "
 "was a mistake, hit cancel to abort the import."
-msgstr ""
-"Tökkäse OK luodaksesi tilin/päiväkirjan ja päte sisäänluku. Jos tämä oli "
-"erehdys, läimäise peruuta keskeyttääksesi sisäänluvun."
+msgstr "Valitse OK luodaksesi tilin/päiväkirjan ja päätä sisäänluku. Jos tämä oli erehdys, valitse peruuta keskeyttääksesi sisäänluvun."
 
 #. module: account_bank_statement_import
 #: model:ir.model.fields,field_description:account_bank_statement_import.field_account_bank_statement_import_journal_creation_kanban_dashboard
@@ -381,10 +350,7 @@ msgid ""
 "Means of payment for collecting money. Odoo modules offer various payments "
 "handling facilities, but you can always use the 'Manual' payment method in "
 "order to manage payments outside of the software."
-msgstr ""
-"Maksutavat rahan keräämiseksi. Odoo modulit tarjotavat erilaisia maksun "
-"käsittelyominaisuuksia,mutta voit aina käyttää 'Manuaalinen' maksutapaa "
-"hallitaksesi maksuja sovelluksen ulkopuolella."
+msgstr "Maksutavat rahan keräämiseksi. Odoo modulit tarjotavat erilaisia maksun käsittelyominaisuuksia,mutta voit aina käyttää 'Manuaalinen' maksutapaa hallitaksesi maksuja sovelluksen ulkopuolella."
 
 #. module: account_bank_statement_import
 #: model:ir.model.fields,help:account_bank_statement_import.field_account_bank_statement_import_journal_creation_outbound_payment_method_ids
@@ -392,13 +358,10 @@ msgid ""
 "Means of payment for sending money. Odoo modules offer various payments "
 "handling facilities, but you can always use the 'Manual' payment method in "
 "order to manage payments outside of the software."
-msgstr ""
-"Maksutavat rahan lähettämiseksi. Odoo modulit tarjotavat erilaisia maksun "
-"käsittelyominaisuuksia,mutta voit aina käyttää 'Manuaalinen' maksutapaa "
-"hallitaksesi maksuja sovelluksen ulkopuolella."
+msgstr "Maksutavat rahan lähettämiseksi. Odoo modulit tarjotavat erilaisia maksun käsittelyominaisuuksia,mutta voit aina käyttää 'Manuaalinen' maksutapaa hallitaksesi maksuja sovelluksen ulkopuolella."
 
 #. module: account_bank_statement_import
-#: code:addons/account_bank_statement_import/account_bank_statement_import.py:136
+#: code:addons/account_bank_statement_import/account_bank_statement_import.py:132
 #, python-format
 msgid "No currency found matching '%s'."
 msgstr "Ei löydetty valuuttaa joka vastaisi  '%s'."
@@ -426,11 +389,12 @@ msgstr "Hyvitystapahtumien järjestys"
 #. module: account_bank_statement_import
 #: model:ir.model.fields,help:account_bank_statement_import.field_account_bank_statement_import_journal_creation_type
 msgid ""
-"Select 'Sale' for customer invoices journals.\n"
-"Select 'Purchase' for vendor bills journals.\n"
-"Select 'Cash' or 'Bank' for journals that are used in customer or vendor payments.\n"
-"Select 'General' for miscellaneous operations journals."
-msgstr ""
+"Select 'Sale' for customer invoices journals. Select 'Purchase' for vendor "
+"bills journals. Select 'Cash' or 'Bank' for journals that are used in "
+"customer or vendor payments. Select 'General' for miscellaneous operations "
+"journals. Select 'Opening/Closing Situation' for entries generated for new "
+"fiscal years."
+msgstr "Valitse 'Myynti' asiakaslaskujen päiväkirjoille. Valitse 'Osto' ostolaskujen päiväkirjoille. Valitse 'Käteinen' tai 'Pankki' päiväkirjoille, joilla käsitellään asiakkaiden ja toimittajien maksuja. Valitse 'Yleinen' muille päiväkirjatapahtumille. Valitse 'Avaus/Sulku -tilanne' tapahtumille, jotka luodaan tilivuoden luomisen yhteydessä. "
 
 #. module: account_bank_statement_import
 #: model:ir.ui.view,arch_db:account_bank_statement_import.account_bank_statement_import_view
@@ -463,25 +427,22 @@ msgid ""
 "The account of the statement you are importing is not yet recorded in Odoo. "
 "In order to proceed with the import, you need to create a bank journal for "
 "this account."
-msgstr ""
-"Pankkitiliä, jonka tilitapahtumia yrität lukea sisään, ei ole Odoon tuntema."
-" Jatkaaksesi sisäänlukua, sinun pitää luoda pankkipäiväkirja tälle tilille."
+msgstr "Pankkitiliä, jonka tilitapahtumia yrität lukea sisään, ei ole Odoon tuntema. Jatkaaksesi sisäänlukua, sinun pitää luoda pankkipäiväkirja tälle tilille."
 
 #. module: account_bank_statement_import
-#: code:addons/account_bank_statement_import/account_bank_statement_import.py:151
+#: code:addons/account_bank_statement_import/account_bank_statement_import.py:143
 #, python-format
 msgid ""
 "The account of this statement (%s) is not the same as the journal (%s)."
 msgstr "Tiiotteen tili  (%s) ei vastaa päiväkirjaa (%s)."
 
 #. module: account_bank_statement_import
-#: code:addons/account_bank_statement_import/account_bank_statement_import.py:161
+#: code:addons/account_bank_statement_import/account_bank_statement_import.py:156
 #, python-format
 msgid ""
 "The currency of the bank statement (%s) is not the same as the currency of "
 "the journal (%s) !"
-msgstr ""
-"Pankkitiliotteen valuutta (%s) ei täsmää päiväkirjan valuutan (%s) kanssa!"
+msgstr "Pankkitiliotteen valuutta (%s) ei täsmää päiväkirjan valuutan (%s) kanssa!"
 
 #. module: account_bank_statement_import
 #: model:ir.model.fields,help:account_bank_statement_import.field_account_bank_statement_import_journal_creation_currency_id
@@ -505,17 +466,16 @@ msgstr "Tämä kenttä sisältää tietoa päiväkirjan tapahtumien numeroinnist
 msgid ""
 "This field contains the information related to the numbering of the refund "
 "entries of this journal."
-msgstr ""
-"Tämä kenttä sisältää tietoa päiväkirjan hyvitystapahtumien numeroinnista."
+msgstr "Tämä kenttä sisältää tietoa päiväkirjan hyvitystapahtumien numeroinnista."
 
 #. module: account_bank_statement_import
-#: code:addons/account_bank_statement_import/account_bank_statement_import.py:111
+#: code:addons/account_bank_statement_import/account_bank_statement_import.py:110
 #, python-format
 msgid "This file doesn't contain any statement."
 msgstr "Tiedosto ei sisällä lainkaan tiliotteita."
 
 #. module: account_bank_statement_import
-#: code:addons/account_bank_statement_import/account_bank_statement_import.py:119
+#: code:addons/account_bank_statement_import/account_bank_statement_import.py:118
 #, python-format
 msgid "This file doesn't contain any transaction."
 msgstr "Tiedostossa ei ole lainkaan tapahtumia."
@@ -535,18 +495,14 @@ msgstr "Käytetään järjestämään päiväkirjat työpöytänäkymässä"
 msgid ""
 "Used to register a loss when the ending balance of a cash register differs "
 "from what the system computes"
-msgstr ""
-"Tämän kirjataan tappio, joka syntyy jos kassan loppuarvo poikkeaa systeemin "
-"laskemasta."
+msgstr "Kirjataan tappio, joka syntyy jos kassan loppuarvo poikkeaa systeemin laskemasta."
 
 #. module: account_bank_statement_import
 #: model:ir.model.fields,help:account_bank_statement_import.field_account_bank_statement_import_journal_creation_profit_account_id
 msgid ""
 "Used to register a profit when the ending balance of a cash register differs"
 " from what the system computes"
-msgstr ""
-"Kirjataan voitto, joka syntyy jos kassan loppuarvo poikkeaa systeemin "
-"laskemasta."
+msgstr "Kirjataan voitto, joka syntyy jos kassan loppuarvo poikkeaa systeemin laskemasta."
 
 #. module: account_bank_statement_import
 #: model:ir.model.fields,help:account_bank_statement_import.field_account_bank_statement_import_journal_creation_show_on_dashboard
@@ -554,7 +510,7 @@ msgid "Whether this journal should be displayed on the dashboard or not"
 msgstr "Näytetäänkö tämä päiväkirja työpöydällä vai ei"
 
 #. module: account_bank_statement_import
-#: code:addons/account_bank_statement_import/account_bank_statement_import.py:228
+#: code:addons/account_bank_statement_import/account_bank_statement_import.py:218
 #, python-format
 msgid "You have already imported that file."
 msgstr "Olet lukenut tämän tiedoston sisään jo aiemmin."
@@ -562,4 +518,4 @@ msgstr "Olet lukenut tämän tiedoston sisään jo aiemmin."
 #. module: account_bank_statement_import
 #: model:ir.ui.view,arch_db:account_bank_statement_import.account_bank_statement_import_view
 msgid "_Import"
-msgstr "_Tuo"
+msgstr "_Import"

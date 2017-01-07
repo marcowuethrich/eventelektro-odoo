@@ -1,3 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import payment
+import account_invoice
+import paypal
+import res_company

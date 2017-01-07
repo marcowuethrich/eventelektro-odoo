@@ -5,16 +5,14 @@
 # Translators:
 # Yoshi Tashiro <tashiro@roomsfor.hk>, 2016
 # 高木正勝 <masakatsu.takagi@pro-spire.co.jp>, 2016
-# Martin Trigaux <mat@odoo.com>, 2016
-# Norimichi Sugimoto <norimichi.sugimoto@tls-ltd.co.jp>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:57+0000\n"
-"PO-Revision-Date: 2016-09-07 08:57+0000\n"
-"Last-Translator: Norimichi Sugimoto <norimichi.sugimoto@tls-ltd.co.jp>, 2016\n"
-"Language-Team: Japanese (https://www.transifex.com/odoo/teams/41243/ja/)\n"
+"POT-Creation-Date: 2015-09-07 14:41+0000\n"
+"PO-Revision-Date: 2016-12-09 06:33+0000\n"
+"Last-Translator: Yoshi Tashiro <tashiro@roomsfor.hk>\n"
+"Language-Team: Japanese (http://www.transifex.com/odoo/odoo-9/language/ja/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -34,13 +32,13 @@ msgstr "決済サービス"
 #. module: website_payment
 #: model:ir.ui.view,arch_db:website_payment.pay_methods
 msgid "Add a new payment method:"
-msgstr "新しい支払い方法を追加："
+msgstr "新しいお支払い方法を追加："
 
 #. module: website_payment
 #: model:ir.ui.view,arch_db:website_payment.confirm
 #: model:ir.ui.view,arch_db:website_payment.pay
 msgid "Amount"
-msgstr "時間数"
+msgstr "金額"
 
 #. module: website_payment
 #: model:ir.ui.view,arch_db:website_payment.website_settings_payment
@@ -57,7 +55,7 @@ msgstr "デフォルトの決済サービス"
 msgid ""
 "Default payment acquirer for website payments; your provider needs to be "
 "visible in the website."
-msgstr "ウェブサイト支払いのためのデフォルトの決済サービス。 プロバイダをWebサイトに表示する必要があります。"
+msgstr "ウェブサイト支払いのためのデフォルトの支払取得社。 プロバイダをWebサイトに表示する必要があります。"
 
 #. module: website_payment
 #: model:ir.ui.view,arch_db:website_payment.pay_methods
@@ -67,7 +65,7 @@ msgstr "削除 <span class=\"fa fa-long-arrow-right\"/>"
 #. module: website_payment
 #: model:ir.ui.view,arch_db:website_payment.pay_methods
 msgid "Delete a payment method:"
-msgstr "支払い方法を削除する："
+msgstr "お支払い方法を削除する："
 
 #. module: website_payment
 #: model:ir.ui.view,arch_db:website_payment.website_settings_payment
@@ -77,7 +75,7 @@ msgstr "E-コマース"
 #. module: website_payment
 #: model:ir.ui.view,arch_db:website_payment.confirm
 msgid "From"
-msgstr "開始日"
+msgstr "差出人"
 
 #. module: website_payment
 #: model:ir.ui.view,arch_db:website_payment.pay_meth_link
@@ -85,7 +83,12 @@ msgid "Manage your payment methods"
 msgstr "お支払い方法の管理"
 
 #. module: website_payment
-#: code:addons/website_payment/controllers/main.py:45
+#: model:ir.ui.view,arch_db:website_payment.pay_methods
+msgid "My Account"
+msgstr "マイアカウント"
+
+#. module: website_payment
+#: code:addons/website_payment/controllers/main.py:42
 #, python-format
 msgid "Pay Now"
 msgstr "今、支払い"
@@ -123,14 +126,24 @@ msgid "Reference"
 msgstr "参照"
 
 #. module: website_payment
+#: model:ir.model.fields,help:website_payment.field_payment_acquirer_website_url
+msgid "The full URL to access the document through the website."
+msgstr "ウェブサイトを介してドキュメントにアクセスするために完全なURLです。"
+
+#. module: website_payment
 #: model:ir.ui.view,arch_db:website_payment.pay
 msgid "This transaction will be processed by"
-msgstr "この取引の処理会社"
+msgstr "この取引の処理者"
 
 #. module: website_payment
 #: model:ir.model,name:website_payment.model_website
 msgid "Website"
 msgstr "ウェブサイト"
+
+#. module: website_payment
+#: model:ir.model.fields,field_description:website_payment.field_payment_acquirer_website_url
+msgid "Website URL"
+msgstr "ウェブサイトURL"
 
 #. module: website_payment
 #: model:ir.model,name:website_payment.model_account_config_settings

@@ -3,7 +3,6 @@ odoo.testing = {};
 
 odoo.testing.start_services = function () {
     var factories = odoo.__DEBUG__.factories;
-    delete factories['mail.chat_manager'];
     var jobs = _.map(factories, function (factory, name) {
         return {
             name: name,
@@ -11,7 +10,11 @@ odoo.testing.start_services = function () {
             deps: factory.deps,
         };
     });
-    var services = Object.create({});
+    var services = Object.create({
+        qweb: new QWeb2.Engine(),
+        $: $,
+        _: _,
+    });
   return odoo.process_jobs(jobs, services);
 };
 
@@ -92,7 +95,7 @@ odoo.define_section = function (name, section_deps) {
         QUnit.test(name, function (assert) {
             var services = odoo.testing.start_services();
             var deps = _.map(section_deps.concat(dep_names), function (name) { return services[name]; });
-            services['web.core'].qweb.add_template(odoo.testing.templates);
+            services.qweb.add_template(odoo.testing.templates);
             mock.clear();
             mock.interceptRPC(services['web.session']);
             var info = {
@@ -141,3 +144,4 @@ QUnit.moduleDone(function(result) {
     }
 
 });
+

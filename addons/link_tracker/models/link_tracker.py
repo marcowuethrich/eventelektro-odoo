@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
 import datetime
 import random
 import re
@@ -12,8 +10,8 @@ from urlparse import urljoin
 from urlparse import urlparse
 from werkzeug import url_encode
 
-from odoo import models, fields, api, _
-from odoo.tools import ustr
+from openerp import models, fields, api, _
+from openerp.tools import ustr
 
 URL_REGEX = r'(\bhref=[\'"](?!mailto:)([^\'"]+)[\'"])'
 

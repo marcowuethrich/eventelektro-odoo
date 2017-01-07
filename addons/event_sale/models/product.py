@@ -1,27 +1,29 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models
+from openerp.osv import fields, osv
 
 
-class ProductTemplate(models.Model):
+class product_template(osv.osv):
     _inherit = 'product.template'
+    _columns = {
+        'event_ok': fields.boolean('Event Subscription', help='Determine if a product needs to create automatically an event registration at the confirmation of a sales order line.'),
+        'event_type_id': fields.many2one('event.type', 'Type of Event', help='Select event types so when we use this product in sales order lines, it will filter events of this type only.'),
+    }
 
-    event_ok = fields.Boolean(string='Event Registration', help='Determine if a product needs '
-      'to create automatically an event registration at the confirmation of a sales order line.')
-
-    @api.onchange('event_ok')
-    def _onchange_event_ok(self):
-        if self.event_ok:
-            self.type = 'service'
+    def onchange_event_ok(self, cr, uid, ids, type, event_ok, context=None):
+        if event_ok:
+            return {'value': {'type': 'service'}}
+        return {}
 
 
-class Product(models.Model):
+class product(osv.osv):
     _inherit = 'product.product'
+    _columns = {
+        'event_ticket_ids': fields.one2many('event.event.ticket', 'product_id', 'Event Tickets'),
+    }
 
-    event_ticket_ids = fields.One2many('event.event.ticket', 'product_id', string='Event Tickets')
-
-    @api.onchange('event_ok')
-    def _onchange_event_ok(self):
+    def onchange_event_ok(self, cr, uid, ids, type, event_ok, context=None):
         """ Redirection, inheritance mechanism hides the method on the model """
-        if self.event_ok:
-            self.type = 'service'
+        if event_ok:
+            return {'value': {'type': 'service'}}
+        return {}

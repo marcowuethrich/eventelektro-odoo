@@ -1,7 +1,4 @@
-# -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
-from odoo import api, fields, models
+from openerp import api, fields, models
 
 
 class PaymentConfigSettings(models.TransientModel):
@@ -26,6 +23,6 @@ class PaymentConfigSettings(models.TransientModel):
     def set_default_acquirer(self):
         for wizard in self:
             ir_values = self.env['ir.values']
-            if self.user_has_groups('base.group_erp_manager'):
+            if self.user_has_groups('base.group_configuration'):
                 ir_values = ir_values.sudo()
             ir_values.set_default('payment.transaction', 'acquirer_id', wizard.default_acquirer.id, company_id=self.env.user.company_id.id)

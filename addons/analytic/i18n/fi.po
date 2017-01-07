@@ -4,21 +4,15 @@
 # 
 # Translators:
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
-# Kari Lindgren <karisatu@gmail.com>, 2016
-# Martin Trigaux <mat@odoo.com>, 2016
-# Kari Lindgren <kari.lindgren@emsystems.fi>, 2016
-# Tuomo Aura <tuomo.aura@web-veistamo.fi>, 2016
-# Timo Koukkari <timo.koukkari@seamk.fi>, 2016
 # Jussi Lehto <jussi@gulfeo.com>, 2016
-# Tommi Rintala <tommi.rintala@gmail.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:56+0000\n"
-"PO-Revision-Date: 2016-09-07 08:56+0000\n"
-"Last-Translator: Tommi Rintala <tommi.rintala@gmail.com>, 2016\n"
-"Language-Team: Finnish (https://www.transifex.com/odoo/teams/41243/fi/)\n"
+"POT-Creation-Date: 2016-09-22 13:16+0000\n"
+"PO-Revision-Date: 2016-12-29 19:21+0000\n"
+"Last-Translator: Jussi Lehto <jussi@gulfeo.com>\n"
+"Language-Team: Finnish (http://www.transifex.com/odoo/odoo-9/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -26,14 +20,30 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: analytic
+#: model:ir.ui.view,arch_db:analytic.account_analytic_chart_view
+msgid "(Keep empty to open the current situation)"
+msgstr "Jätä tyhjäksi avataksesi nykyisen tilanteen"
+
+#. module: analytic
+#: model:ir.model,name:analytic.model_account_analytic_chart
+msgid "Account Analytic Chart"
+msgstr "Analyyttisen kirjanpidon kartat"
+
+#. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_currency_id
 msgid "Account Currency"
 msgstr "Tilin valuutta"
 
 #. module: analytic
-#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_active
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_needaction
+msgid "Action Needed"
+msgstr "Vaatii toimia"
+
+#. module: analytic
+#: selection:account.analytic.account,account_type:0
+#: model:ir.ui.view,arch_db:analytic.view_account_analytic_account_search
 msgid "Active"
-msgstr "Active"
+msgstr "Aktiivinen"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_amount
@@ -49,7 +59,12 @@ msgstr "Määrä"
 #: model:ir.ui.view,arch_db:analytic.view_account_analytic_account_search
 #: model:ir.ui.view,arch_db:analytic.view_account_analytic_line_filter
 msgid "Analytic Account"
-msgstr "Kustannuspaikka"
+msgstr "Analyyttinen tili"
+
+#. module: analytic
+#: model:ir.ui.view,arch_db:analytic.account_analytic_chart_view
+msgid "Analytic Account Charts"
+msgstr "Analyyttisen kirjanpidon kartat"
 
 #. module: analytic
 #: model:res.groups,name:analytic.group_analytic_accounting
@@ -61,13 +76,6 @@ msgstr "Analyyttinen kirjanpito"
 #: model:ir.ui.view,arch_db:analytic.view_account_analytic_account_list
 msgid "Analytic Accounts"
 msgstr "Analyyttiset tilit"
-
-#. module: analytic
-#: model:ir.actions.act_window,name:analytic.account_analytic_tag_action
-#: model:ir.ui.view,arch_db:analytic.account_analytic_tag_form_view
-#: model:ir.ui.view,arch_db:analytic.account_analytic_tag_tree_view
-msgid "Analytic Accounts Tags"
-msgstr "Analyyttisten tilien tunnisteet"
 
 #. module: analytic
 #: model:ir.actions.act_window,name:analytic.account_analytic_line_action_entries
@@ -103,7 +111,7 @@ msgid "Analytic Tags"
 msgstr "Analyyttiset tunnisteet"
 
 #. module: analytic
-#: model:ir.ui.view,arch_db:analytic.view_account_analytic_account_search
+#: selection:account.analytic.account,account_type:0
 msgid "Archived"
 msgstr "Arkistoitu"
 
@@ -115,17 +123,18 @@ msgstr "Yhteistyökumppani"
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_balance
 msgid "Balance"
-msgstr "Balance"
+msgstr "Saldo"
 
 #. module: analytic
+#: model:ir.ui.view,arch_db:analytic.account_analytic_chart_view
+msgid "Cancel"
+msgstr "Peruuta"
+
+#. module: analytic
+#: model:ir.actions.act_window,name:analytic.action_account_analytic_chart
 #: model:ir.actions.act_window,name:analytic.action_analytic_account_form
 msgid "Chart of Analytic Accounts"
 msgstr "Analyyttiset tilikartat"
-
-#. module: analytic
-#: model:ir.actions.act_window,help:analytic.account_analytic_tag_action
-msgid "Click to add a new tag."
-msgstr "Klikkaa lisätäksesi uusi tunniste."
 
 #. module: analytic
 #: model:ir.actions.act_window,help:analytic.action_analytic_account_form
@@ -146,7 +155,7 @@ msgstr "Yritys"
 #. module: analytic
 #: model:ir.ui.view,arch_db:analytic.view_account_analytic_account_form
 msgid "Cost/Revenue"
-msgstr "Kulut/Tulot"
+msgstr "Kustannus/Tulot"
 
 #. module: analytic
 #: model:ir.actions.act_window,name:analytic.account_analytic_line_action
@@ -159,12 +168,11 @@ msgstr "Kustannukset ja tulot"
 msgid ""
 "Costs will be created automatically when you register supplier\n"
 "                invoices, expenses or timesheets."
-msgstr ""
-"Kulut luodaan automaattisesti kirjatessasi ostolaskuja, kuluja tai \n"
-"tuntikortteja."
+msgstr "Kirjatessasi ostolaskuja, kuluja tai tuntikortteja, luodaan kulut \nautomaattisesti."
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_create_uid
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_create_uid
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_create_uid
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag_create_uid
 msgid "Created by"
@@ -172,6 +180,7 @@ msgstr "Luonut"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_create_date
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_create_date
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_create_date
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag_create_date
 msgid "Created on"
@@ -180,7 +189,7 @@ msgstr "Luotu"
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_credit
 msgid "Credit"
-msgstr "Kredit"
+msgstr "Luotto"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_currency_id
@@ -190,7 +199,7 @@ msgstr "Valuutta"
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_partner_id
 msgid "Customer"
-msgstr "Partner"
+msgstr "Asiakas"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_date
@@ -198,9 +207,14 @@ msgid "Date"
 msgstr "Päivämäärä"
 
 #. module: analytic
+#: model:ir.model.fields,help:analytic.field_account_analytic_account_message_last_post
+msgid "Date of the last message posted on the record."
+msgstr "Viimeisen viestin päivämäärä"
+
+#. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_debit
 msgid "Debit"
-msgstr "Debit"
+msgstr "Debet"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_name
@@ -209,30 +223,55 @@ msgstr "Kuvaus"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_display_name
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_display_name
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_display_name
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag_display_name
 msgid "Display Name"
-msgstr "Näyttönimi"
+msgstr "Näytä nimi"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_follower_ids
+msgid "Followers"
+msgstr "Seuraajat"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Seuraajat (kanavat)"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seuraajat (kumppanit)"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_from_date
+msgid "From"
+msgstr "Alkaen"
 
 #. module: analytic
 #: model:ir.ui.view,arch_db:analytic.view_account_analytic_account_search
 #: model:ir.ui.view,arch_db:analytic.view_account_analytic_line_filter
 msgid "Group By..."
-msgstr "Ryhmittele.."
+msgstr "Ryhmittely.."
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_id
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_id
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_id
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag_id
 msgid "ID"
-msgstr "Tunniste (ID)"
+msgstr "ID"
 
 #. module: analytic
-#: model:ir.model.fields,help:analytic.field_account_analytic_account_active
-msgid ""
-"If the active field is set to False, it will allow you to hide the account "
-"without removing it."
-msgstr ""
+#: model:ir.model.fields,help:analytic.field_account_analytic_account_message_unread
+msgid "If checked new messages require your attention."
+msgstr "Jos valittu, uudet viestit vaativat huomiotasi."
+
+#. module: analytic
+#: model:ir.model.fields,help:analytic.field_account_analytic_account_message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Jos valittu, uudet viestit vaativat huomiotasi."
 
 #. module: analytic
 #: model:ir.actions.act_window,help:analytic.account_analytic_line_action
@@ -241,13 +280,21 @@ msgid ""
 "In Odoo, sale orders and projects are implemented using\n"
 "                analytic accounts. You can track costs and revenues to analyse\n"
 "                your margins easily."
-msgstr ""
-"Odoossa myyntitilaukset ja projektit on implementoitu käyttäen \n"
-"analyyttisiä tilejä. Voit seurata menoja ja tuloja analysoidaksesi \n"
-"marginaleeja vaivattomasti."
+msgstr "Odoossa myyntitilaukset ja projektit on implementoitu käyttäen \nanalyyttisiä tilejä. Voit seurata menoja ja tuloja analysoidaksesi \nmarginaaleja vaivattomasti."
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_is_follower
+msgid "Is Follower"
+msgstr "on seuraaja"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_last_post
+msgid "Last Message Date"
+msgstr "Viimeinen viestipvm"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account___last_update
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart___last_update
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line___last_update
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag___last_update
 msgid "Last Modified on"
@@ -255,6 +302,7 @@ msgstr "Viimeksi muokattu"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_write_uid
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_write_uid
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_write_uid
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag_write_uid
 msgid "Last Updated by"
@@ -262,10 +310,16 @@ msgstr "Viimeksi päivittänyt"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_write_date
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_write_date
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_write_date
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag_write_date
 msgid "Last Updated on"
 msgstr "Viimeksi päivitetty"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_ids
+msgid "Messages"
+msgstr "Viestit"
 
 #. module: analytic
 #: model:ir.actions.act_window,help:analytic.account_analytic_line_action
@@ -276,6 +330,26 @@ msgstr "Tällä tilillä ei ole vielä toimintaa."
 #: model:ir.actions.act_window,help:analytic.account_analytic_line_action_entries
 msgid "No activity yet."
 msgstr "Ei vielä toimintaa."
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_needaction_counter
+msgid "Number of Actions"
+msgstr "Toimenpiteiden määrä"
+
+#. module: analytic
+#: model:ir.model.fields,help:analytic.field_account_analytic_account_message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Toimenpiteitä vaativien viestien määrä"
+
+#. module: analytic
+#: model:ir.model.fields,help:analytic.field_account_analytic_account_message_unread_counter
+msgid "Number of unread messages"
+msgstr "Lukemattomien viestien määrä"
+
+#. module: analytic
+#: model:ir.ui.view,arch_db:analytic.account_analytic_chart_view
+msgid "Open Charts"
+msgstr "Avoimet kartat"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_partner_id
@@ -291,7 +365,7 @@ msgstr "Määrä"
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_code
 msgid "Reference"
-msgstr "Referencia"
+msgstr "Viite"
 
 #. module: analytic
 #: model:ir.actions.act_window,help:analytic.account_analytic_line_action
@@ -301,16 +375,22 @@ msgid ""
 "                invoices. Customer invoices can be created based on sale orders\n"
 "                (fixed price invoices), on timesheets (based on the work done) or\n"
 "                on expenses (e.g. reinvoicing of travel costs)."
-msgstr ""
-"Tulot luodaan automaattisesti luodessasi uuden myyntilaskun.\n"
-"Myyntilaskut voidaan luoda perustuen joko myyntitilauksiin \n"
-"(kiinteähintaiset laskut), tuntikortteihin (perustuen tehtyyn työhön) \n"
-"tai kuluihin (esim. matkalaskut)."
+msgstr "Tulot luodaan automaattisesti luodessasi uuden myyntilaskun.\nMyyntilaskut voidaan luoda perustuen joko myyntitilauksiin \n(kiinteähintaiset laskut), tuntikortteihin (perustuen tehtyyn työhön) \ntai kuluihin (esim. matkalaskut)."
 
 #. module: analytic
 #: model:ir.ui.view,arch_db:analytic.view_account_analytic_line_filter
 msgid "Search Analytic Lines"
 msgstr "Hae analyyttisiä rivejä"
+
+#. module: analytic
+#: model:ir.ui.view,arch_db:analytic.account_analytic_chart_view
+msgid "Select the Period for Analysis"
+msgstr "Valitse analysointijakso"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_account_type
+msgid "State"
+msgstr "Tila"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_tag_ids
@@ -326,12 +406,32 @@ msgstr "Tehtävän kuukausi"
 #. module: analytic
 #: model:ir.model.fields,help:analytic.field_account_analytic_line_currency_id
 msgid "The related account currency if not equal to the company one."
-msgstr "Liittyvän tilin valuutta jos ei sama kun yrityksen valuutta."
+msgstr "Liittyvän tilin valuutta, jos ei sama kuin yrityksen valuutta."
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_to_date
+msgid "To"
+msgstr "Vastaanottaja"
 
 #. module: analytic
 #: model:ir.ui.view,arch_db:analytic.view_account_analytic_line_tree
 msgid "Total"
 msgstr "Yhteensä"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_account_type
+msgid "Type of Account"
+msgstr "Tilin tyyppi"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_unread
+msgid "Unread Messages"
+msgstr "Lukemattomia viestejä"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Lukemattomien viestien laskuri"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_user_id
@@ -341,4 +441,4 @@ msgstr "Käyttäjä"
 #. module: analytic
 #: model:ir.ui.view,arch_db:analytic.view_account_analytic_account_form
 msgid "e.g. Project XYZ"
-msgstr ""
+msgstr "esim. Projekti XYZ"

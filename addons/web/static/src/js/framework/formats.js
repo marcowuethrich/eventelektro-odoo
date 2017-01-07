@@ -1,11 +1,11 @@
 odoo.define('web.formats', function (require) {
 "use strict";
 
-var translation = require('web.translation');
+var core = require('web.core');
 var time = require('web.time');
 var utils = require('web.utils');
 
-var _t = translation._t;
+var _t = core._t;
 
 /**
  * Formats a single atomic value based on a field descriptor

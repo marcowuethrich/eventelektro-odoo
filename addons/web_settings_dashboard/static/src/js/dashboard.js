@@ -51,7 +51,7 @@ var Dashboard = Widget.extend({
     },
 
     load_share: function(data){
-        return new DashboardShare(this, data.share).replace(this.$('.o_web_settings_dashboard_share'));
+        return new DashboardShare(this, {}).replace(this.$('.o_web_settings_dashboard_share'));
     },
 
     load_invitations: function(data){
@@ -245,7 +245,7 @@ var DashboardApps = Widget.extend({
 
     start: function() {
         this._super.apply(this, arguments);
-        if (odoo.db_info && _.last(odoo.db_info.server_version_info) !== 'e') {
+        if (odoo.db_info && odoo.db_info.server_version_info[5] === 'c') {
             $(QWeb.render("DashboardEnterprise")).appendTo(this.$el);
         }
     },

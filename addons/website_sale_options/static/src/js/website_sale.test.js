@@ -1,103 +1,101 @@
 odoo.define('website_sale.test', function (require) {
 'use strict';
 
-require("website_sale.tour");
-var tour = require("web_tour.tour");
-var base = require("web_editor.base");
+var core = require('web.core');
+var Tour = require('web.Tour');
 
-var steps = tour.tours.shop_buy_product.steps;
+var _t = core._t;
+
+var steps = Tour.tours.shop_buy_product.steps;
 for (var k=0; k<steps.length; k++) {
-    if (steps[k].content === "click on add to cart") {
+    if (steps[k].title === "click on add to cart") {
         steps.splice(k+1, 0, {
-            content: "click in modal on 'Proceed to checkout' button",
-            trigger: 'a:contains("Proceed to checkout")',
+            title:     _t("click in modal on 'Proceed to checkout' button"),
+            element:   '.modal a:contains("Proceed to checkout")',
         });
         break;
     }
 }
 
-tour.register('shop_customize', {
-    test: true,
-    url: '/shop',
-    wait_for: base.ready()
-},
-    [
+Tour.register({
+    id:   'shop_customize',
+    name: "Customize the page and search a product",
+    path: '/shop',
+    mode: 'test',
+    steps: [
         {
-            content: "open customize menu",
-            trigger: '#customize-menu-button',
+            title:     "open customize menu",
+            element:   '#customize-menu-button',
+            wait: 250
         },
         {
-            content: "click on 'Product Attribute's Filters'",
-            trigger: "#customize-menu a:contains(Product Attribute's Filters)",
+            title:     "click on 'Product Attribute's Filters'",
+            element:   "#customize-menu a:contains(Product Attribute's Filters)",
         },
         {
-            content: "select product attribute memory 16 GB",
-            extra_trigger: 'body:not(:has(#customize-menu:visible .dropdown-menu:visible))',
-            trigger: 'form.js_attributes label:contains(16 GB) input:not(:checked)',
+            title:     "select product attribute memory 16 GB",
+            waitNot:   '#customize-menu:visible .dropdown-menu:visible',
+            element:   'form.js_attributes label:contains(16 GB) input:not(:checked)',
         },
         {
-            content: "check the selection",
-            trigger: 'form.js_attributes label:contains(16 GB) input:checked',
-            run: function () {}, // it's a check
+            title:     "check the selection",
+            waitFor:   'form.js_attributes label:contains(16 GB) input:checked',
         },
         {
-            content: "select iPad",
-            extra_trigger: 'body:not(:has(.oe_website_sale .oe_product_cart:eq(2)))',
-            trigger: '.oe_product_cart a:contains("iPad")',
+            title:     "select iPad",
+            waitNot:   '.oe_website_sale .oe_product_cart:eq(2)',
+            element:   '.oe_product_cart a:contains("iPad")',
         },
         {
-            content: "click on 'Add to Cart' button",
-            trigger: "a:contains(Add to Cart)",
+            title:     "click on 'Add to Cart' button",
+            element:   "a:contains(Add to Cart)",
         },
         {
-            content: "add an optional Warranty",
-            trigger: ".js_product:contains(Warranty) a:contains(Add to Cart)",
+            title:     "add an optional Warranty",
+            element:   ".js_product:contains(Warranty) a:contains(Add to Cart)",
         },
         {
-            content: "click in modal on 'Proceed to checkout' button",
-            extra_trigger: 'body:has(.js_product:contains(Warranty) a:contains(Add to Cart):hidden)',
-            trigger: '.modal-dialog a:contains("Proceed to checkout")',
+            title:     "click in modal on 'Proceed to checkout' button",
+            waitFor:   '.js_product:contains(Warranty) a:contains(Add to Cart):hidden',
+            element:   '.modal-dialog a:contains("Proceed to checkout")',
         },
         {
-            content: "check quantity",
-            trigger: '.my_cart_quantity:containsExact(2)',
-            run: function () {}, // it's a check
+            title:     "check quantity",
+            waitFor:   '.my_cart_quantity:containsExact(2)',
         },
         {
-            content: "check optional product",
-            trigger: '.optional_product',
-            run: function () {}, // it's a check
+            title:     "check optional product",
+            waitFor:   '.optional_product',
         },
         {
-            content: "remove iPad from cart",
-            trigger: '#cart_products a.js_add_cart_json:first',
+            title:     "remove iPad from cart",
+            element:   '#cart_products a.js_add_cart_json:first',
         },
         {
-            content: "check optional product is removed",
-            trigger: '#wrap:not(:has(.optional_product))',
-            run: function () {}, // it's a check
+            title:     "check optional product is removed",
+            waitNot:   '.optional_product',
         },
         {
-            content: "click on shop",
-            trigger: "a:contains(Continue Shopping)",
-            extra_trigger: 'body:not(:has(#products_grid_before .js_attributes))',
+            title:     "click on shop",
+            element:   "a:contains(Continue Shopping)",
+            waitNot:   '#products_grid_before .js_attributes',
         },
         {
-            content: "open customize menu bis",
-            extra_trigger: '#products_grid_before .js_attributes',
-            trigger: '#customize-menu-button',
+            title:     "open customize menu bis",
+            waitFor:   '#products_grid_before .js_attributes',
+            element:   '#customize-menu-button',
+            wait: 250
         },
         {
-            content: "remove 'Product Attribute's Filters'",
-            trigger: "#customize-menu a:contains(Product Attribute's Filters):has(input:checked)",
+            title:     "remove 'Product Attribute's Filters'",
+            element:   "#customize-menu a:contains(Product Attribute's Filters):has(.fa-check-square-o)",
         },
         {
-            content: "finish",
-            extra_trigger: 'body:not(:has(#products_grid_before .js_attributes))',
-            trigger: '#wrap:not(:has(li:has(.my_cart_quantity):visible))',
-            run: function () {}, // it's a check
+            title:     "finish",
+            waitNot:   '#products_grid_before .js_attributes',
+            waitFor:   'li:has(.my_cart_quantity):hidden',
         },
     ]
-);
+});
 
 });

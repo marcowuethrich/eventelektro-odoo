@@ -3,19 +3,17 @@
 # * account_asset
 # 
 # Translators:
-# Yenthe Van Ginneken <yenthespam@gmail.com>, 2016
+# Erwin van der Ploeg <erwin@odooexperts.nl>, 2015
 # Erwin van der Ploeg <erwin@odooexperts.nl>, 2016
-# Martin Trigaux <mat@odoo.com>, 2016
-# Cas Vissers <casvissers@brahoo.nl>, 2016
-# Eric Geens <ericgeens@yahoo.com>, 2016
+# Yenthe Van Ginneken <yenthespam@gmail.com>, 2015-2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:56+0000\n"
-"PO-Revision-Date: 2016-09-07 08:56+0000\n"
-"Last-Translator: Eric Geens <ericgeens@yahoo.com>, 2016\n"
-"Language-Team: Dutch (https://www.transifex.com/odoo/teams/41243/nl/)\n"
+"POT-Creation-Date: 2016-09-22 13:16+0000\n"
+"PO-Revision-Date: 2016-11-01 12:07+0000\n"
+"Last-Translator: Erwin van der Ploeg <erwin@odooexperts.nl>\n"
+"Language-Team: Dutch (http://www.transifex.com/odoo/odoo-9/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -23,16 +21,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_asset
-#: code:addons/account_asset/models/account_asset.py:376
+#: code:addons/account_asset/account_asset.py:350
 #, python-format
 msgid " (copy)"
 msgstr " (kopie)"
-
-#. module: account_asset
-#: code:addons/account_asset/models/account_asset.py:511
-#, python-format
-msgid " (grouped)"
-msgstr "(gegroepeerd)"
 
 #. module: account_asset
 #: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_entry_count
@@ -52,7 +44,7 @@ msgstr "# Tremijn regels"
 #. module: account_asset
 #: model:ir.model.fields,field_description:account_asset.field_asset_depreciation_confirmation_wizard_date
 msgid "Account Date"
-msgstr "Boekhouddatum"
+msgstr "Rekeningdatum"
 
 #. module: account_asset
 #: model:ir.model,name:account_asset.model_account_move
@@ -60,28 +52,9 @@ msgid "Account Entry"
 msgstr "Boeking"
 
 #. module: account_asset
-#: model:ir.model.fields,help:account_asset.field_account_asset_category_account_depreciation_id
-msgid "Account used in the depreciation entries, to decrease the asset value."
-msgstr ""
-"Grootboekrekening gebruikt in de afschrijvingsboekingen, om uw activa af te "
-"schrijven."
-
-#. module: account_asset
-#: model:ir.model.fields,help:account_asset.field_account_asset_category_account_depreciation_expense_id
-msgid ""
-"Account used in the periodical entries, to record a part of the asset as "
-"expense."
-msgstr ""
-"Grootboek gebruikt voor periodieke boekingen om een deel van de activa als "
-"kosten af te schrijven."
-
-#. module: account_asset
-#: model:ir.model.fields,help:account_asset.field_account_asset_category_account_asset_id
-msgid ""
-"Account used to record the purchase of the asset at its original price."
-msgstr ""
-"Grootboek gebruikt om de inkoopwaarde van de activa tegen kostprijs te "
-"boeken. "
+#: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_message_needaction
+msgid "Action Needed"
+msgstr "Vereist actie"
 
 #. module: account_asset
 #: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_active
@@ -90,12 +63,7 @@ msgid "Active"
 msgstr "Actief"
 
 #. module: account_asset
-#: model:ir.ui.view,arch_db:account_asset.view_account_asset_category_form
-msgid "Additional Options"
-msgstr "Additionele opties"
-
-#. module: account_asset
-#: code:addons/account_asset/models/account_asset.py:568
+#: code:addons/account_asset/account_asset.py:486
 #, python-format
 msgid "Amount"
 msgstr "Bedrag"
@@ -113,10 +81,11 @@ msgstr "Aantal termijn regels"
 #. module: account_asset
 #: model:ir.model.fields,field_description:account_asset.field_account_asset_category_account_analytic_id
 msgid "Analytic Account"
-msgstr "Kostenplaats"
+msgstr "Kostenplaatsen"
 
 #. module: account_asset
 #: model:ir.model.fields,field_description:account_asset.field_account_asset_depreciation_line_asset_id
+#: model:ir.model.fields,field_description:account_asset.field_account_move_asset_id
 #: model:ir.model.fields,field_description:account_asset.field_asset_asset_report_asset_id
 #: model:ir.ui.view,arch_db:account_asset.view_account_asset_asset_form
 #: model:ir.ui.view,arch_db:account_asset.view_account_asset_search
@@ -167,7 +136,7 @@ msgstr "Startdatum activa"
 #: model:ir.model.fields,field_description:account_asset.field_product_template_asset_category_id
 #: model:ir.ui.view,arch_db:account_asset.view_account_asset_category_form
 msgid "Asset Type"
-msgstr "Activa Type"
+msgstr "Soort activa"
 
 #. module: account_asset
 #: model:ir.actions.act_window,name:account_asset.action_account_asset_asset_list_normal_purchase
@@ -184,7 +153,7 @@ msgid "Asset category"
 msgstr "Activa categorie"
 
 #. module: account_asset
-#: code:addons/account_asset/models/account_asset.py:263
+#: code:addons/account_asset/account_asset.py:238
 #, python-format
 msgid "Asset created"
 msgstr "Activa aangemaakt"
@@ -195,7 +164,7 @@ msgid "Asset depreciation line"
 msgstr "Activa afschrijvingssregel"
 
 #. module: account_asset
-#: code:addons/account_asset/models/account_asset.py:296
+#: code:addons/account_asset/account_asset.py:271
 #, python-format
 msgid "Asset sold or disposed. Accounting entry awaiting for validation."
 msgstr "Activa verkocht of afgesloten. Financiële boeking wacht op validatie."
@@ -224,11 +193,6 @@ msgid "Assets Analysis"
 msgstr "Activa analyse"
 
 #. module: account_asset
-#: model:ir.model.fields,field_description:account_asset.field_account_move_asset_depreciation_ids
-msgid "Assets Depreciation Lines"
-msgstr "Activa afschrijvingssregel"
-
-#. module: account_asset
 #: model:ir.ui.menu,name:account_asset.menu_finance_config_assets
 msgid "Assets and Revenues"
 msgstr "Activa en inkomsten"
@@ -254,15 +218,10 @@ msgid "Assets in running state"
 msgstr "Lopende activa"
 
 #. module: account_asset
-#: model:ir.model.fields,field_description:account_asset.field_account_asset_category_open_asset
-msgid "Auto-confirm Assets"
-msgstr "Bevestig activa automatisch"
-
-#. module: account_asset
 #: model:ir.ui.view,arch_db:account_asset.asset_modify_form
 #: model:ir.ui.view,arch_db:account_asset.view_asset_depreciation_confirmation_wizard
 msgid "Cancel"
-msgstr "Annuleer"
+msgstr "Annuleren"
 
 #. module: account_asset
 #: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_category_id
@@ -274,22 +233,14 @@ msgstr "Categorie"
 #. module: account_asset
 #: model:ir.ui.view,arch_db:account_asset.view_account_asset_asset_form
 msgid "Category of asset"
-msgstr "Categorie van activa"
+msgstr "Categorie van asset"
 
 #. module: account_asset
 #: model:ir.model.fields,help:account_asset.field_account_asset_category_open_asset
 msgid ""
 "Check this if you want to automatically confirm the assets of this category "
 "when created by invoices."
-msgstr ""
-"Vink dit aan als u automatisch de activa van deze categorie wilt bevestigen "
-"als deze worden aangemaakt door een facturen."
-
-#. module: account_asset
-#: model:ir.model.fields,help:account_asset.field_account_asset_category_group_entries
-msgid "Check this if you want to group the generated entries by categories."
-msgstr ""
-"Kies deze optie wanneer u boekingen wilt groeperen per activa categorie."
+msgstr "Vink dit aan als u automatisch de activa van deze categorie wilt bevestigen als deze worden aangemaakt door een facturen."
 
 #. module: account_asset
 #: model:ir.model.fields,help:account_asset.field_account_asset_asset_method
@@ -298,10 +249,7 @@ msgid ""
 "Choose the method to use to compute the amount of depreciation lines.\n"
 "  * Linear: Calculated on basis of: Gross Value / Number of Depreciations\n"
 "  * Degressive: Calculated on basis of: Residual Value * Degressive Factor"
-msgstr ""
-"Kies de methode welke gebruikt kan worden om de hoeveelheid afschrijvingsregels te berekenen.\n"
-"   * Lineaire: Berekend op basis van: Bruto waarde / Aantal Afschrijvingen\n"
-"   * Degressief: Berekend op basis van: Restwaarde * Degressief Factor"
+msgstr "Kies de methode welke gebruikt kan worden om de hoeveelheid afschrijvingsregels te berekenen.\n   * Lineaire: Berekend op basis van: Bruto waarde / Aantal Afschrijvingen\n   * Degressief: Berekend op basis van: Restwaarde * Degressief Factor"
 
 #. module: account_asset
 #: model:ir.model.fields,help:account_asset.field_account_asset_asset_method_time
@@ -310,29 +258,24 @@ msgid ""
 "Choose the method to use to compute the dates and number of depreciation lines.\n"
 "  * Number of Depreciations: Fix the number of depreciation lines and the time between 2 depreciations.\n"
 "  * Ending Date: Choose the time between 2 depreciations and the date the depreciations won't go beyond."
-msgstr ""
-"Kies de methode welke gebruikt kan worden om de datums en het aantal afschrijvingsregels te berekenen.\n"
-"   * Aantal Afschrijvingen: Bevestig het aantal afschrijvingsregels en de tijd tussen twee afschrijvingen.\n"
-"   * Einddatum: Kies de tijd tussen twee afschrijvingen en de datum waarop de afschrijvingen niet verder zal gaan."
+msgstr "Kies de methode welke gebruikt kan worden om de datums en het aantal afschrijvingsregels te berekenen.\n   * Aantal Afschrijvingen: Bevestig het aantal afschrijvingsregels en de tijd tussen twee afschrijvingen.\n   * Einddatum: Kies de tijd tussen twee afschrijvingen en de datum waarop de afschrijvingen niet verder zal gaan."
 
 #. module: account_asset
 #: model:ir.model.fields,help:account_asset.field_asset_depreciation_confirmation_wizard_date
 msgid ""
 "Choose the period for which you want to automatically post the depreciation "
 "lines of running assets"
-msgstr ""
-"Kies de periode waarvoor u automatisch de afschrijvingsregels van de lopende"
-" activa wilt boeken."
+msgstr "Kies de periode waarvoor u automatisch de afschrijvingsregels van de lopende activa wilt boeken."
 
 #. module: account_asset
 #: selection:account.asset.asset,state:0 selection:asset.asset.report,state:0
 msgid "Close"
-msgstr "Sluiten"
+msgstr "Afsluiten"
 
 #. module: account_asset
 #: model:ir.ui.view,arch_db:account_asset.view_account_asset_search
 msgid "Closed"
-msgstr "Afgesloten"
+msgstr "Gesloten"
 
 #. module: account_asset
 #: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_company_id
@@ -340,7 +283,7 @@ msgstr "Afgesloten"
 #: model:ir.model.fields,field_description:account_asset.field_asset_asset_report_company_id
 #: model:ir.ui.view,arch_db:account_asset.view_asset_asset_report_search
 msgid "Company"
-msgstr "Bedijf"
+msgstr "Bedrijf"
 
 #. module: account_asset
 #: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_method
@@ -356,24 +299,24 @@ msgstr "Bereken activa"
 #. module: account_asset
 #: model:ir.ui.view,arch_db:account_asset.view_account_asset_asset_form
 msgid "Compute Depreciation"
-msgstr "Afschrijvingen berekenen"
+msgstr "Afschrijving berekenen"
 
 #. module: account_asset
 #: model:ir.ui.view,arch_db:account_asset.view_account_asset_asset_form
 msgid "Confirm"
-msgstr "Bevestigen"
+msgstr "Bevestig"
 
 #. module: account_asset
-#: code:addons/account_asset/wizard/asset_depreciation_confirmation_wizard.py:20
+#: code:addons/account_asset/wizard/wizard_asset_compute.py:18
 #, python-format
 msgid "Created Asset Moves"
 msgstr "Maak activa mutaties"
 
 #. module: account_asset
-#: code:addons/account_asset/wizard/asset_depreciation_confirmation_wizard.py:20
+#: code:addons/account_asset/wizard/wizard_asset_compute.py:20
 #, python-format
 msgid "Created Revenue Moves"
-msgstr "Aangemaakte inkomsten boekingen"
+msgstr "Aangemaakte inkomsten mutaties"
 
 #. module: account_asset
 #: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_create_uid
@@ -399,7 +342,7 @@ msgid "Cumulative Depreciation"
 msgstr "Cumulatieve afschrijving"
 
 #. module: account_asset
-#: code:addons/account_asset/models/account_asset.py:568
+#: code:addons/account_asset/account_asset.py:486
 #: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_currency_id
 #, python-format
 msgid "Currency"
@@ -437,6 +380,11 @@ msgid "Date of depreciation"
 msgstr "Datum van waardevermindering"
 
 #. module: account_asset
+#: model:ir.model.fields,help:account_asset.field_account_asset_asset_message_last_post
+msgid "Date of the last message posted on the record."
+msgstr "Datum van het laatste bericht verstuurt op deze regel."
+
+#. module: account_asset
 #: model:ir.ui.view,arch_db:account_asset.view_account_asset_category_form
 msgid "Deferred Revenue Account"
 msgstr "Uitgestelde omzetrekening"
@@ -470,6 +418,11 @@ msgid "Depreciation"
 msgstr "Afschrijving"
 
 #. module: account_asset
+#: model:ir.model.fields,field_description:account_asset.field_account_asset_category_account_depreciation_id
+msgid "Depreciation Account"
+msgstr "Afschrijvingsrekening"
+
+#. module: account_asset
 #: model:ir.ui.view,arch_db:account_asset.view_account_asset_category_form
 msgid "Depreciation Asset Account"
 msgstr "Activa afschrijvingsrekening"
@@ -486,17 +439,6 @@ msgid "Depreciation Date"
 msgstr "Afschrijvingsdatum"
 
 #. module: account_asset
-#: model:ir.model.fields,field_description:account_asset.field_account_asset_category_account_depreciation_id
-#: model:ir.ui.view,arch_db:account_asset.view_account_asset_asset_form
-msgid "Depreciation Entries: Asset Account"
-msgstr "Afschrijvingsboekingen: activarekening"
-
-#. module: account_asset
-#: model:ir.model.fields,field_description:account_asset.field_account_asset_category_account_depreciation_expense_id
-msgid "Depreciation Entries: Expense Account"
-msgstr "Afschrijvingsboekingen: kostenrekening"
-
-#. module: account_asset
 #: model:ir.model.fields,field_description:account_asset.field_account_asset_depreciation_line_move_id
 msgid "Depreciation Entry"
 msgstr "Afschrijvingsboeking"
@@ -504,7 +446,7 @@ msgstr "Afschrijvingsboeking"
 #. module: account_asset
 #: model:ir.ui.view,arch_db:account_asset.view_account_asset_category_form
 msgid "Depreciation Expense Account"
-msgstr "Cumulatieve afschrijvingsrekening "
+msgstr "Kosten afschrijvingsrekening"
 
 #. module: account_asset
 #: model:ir.ui.view,arch_db:account_asset.view_account_asset_asset_form
@@ -533,13 +475,13 @@ msgid "Depreciation Name"
 msgstr "Afschrijvingsnaam"
 
 #. module: account_asset
-#: code:addons/account_asset/wizard/asset_modify.py:85
+#: code:addons/account_asset/wizard/account_asset_change_duration.py:82
 #, python-format
 msgid "Depreciation board modified"
 msgstr "Afgeschreven bord gewijzigd"
 
 #. module: account_asset
-#: code:addons/account_asset/models/account_asset.py:571
+#: code:addons/account_asset/account_asset.py:489
 #, python-format
 msgid "Depreciation line posted."
 msgstr "Afgeschreven lijn geboekt."
@@ -552,22 +494,22 @@ msgstr "Afgeschreven lijn geboekt."
 #: model:ir.model.fields,field_description:account_asset.field_asset_depreciation_confirmation_wizard_display_name
 #: model:ir.model.fields,field_description:account_asset.field_asset_modify_display_name
 msgid "Display Name"
-msgstr "Weergave naam"
+msgstr "Schermnaam"
 
 #. module: account_asset
-#: code:addons/account_asset/models/account_asset.py:299
+#: code:addons/account_asset/account_asset.py:274
 #, python-format
 msgid "Disposal Move"
 msgstr "Afschrijving mutatie"
 
 #. module: account_asset
-#: code:addons/account_asset/models/account_asset.py:302
+#: code:addons/account_asset/account_asset.py:277
 #, python-format
 msgid "Disposal Moves"
 msgstr "Afschrijvingsmutaties"
 
 #. module: account_asset
-#: code:addons/account_asset/models/account_asset.py:550
+#: code:addons/account_asset/account_asset.py:468
 #, python-format
 msgid "Document closed."
 msgstr "Document gesloten."
@@ -592,18 +534,41 @@ msgid "Ending date"
 msgstr "Einddatum"
 
 #. module: account_asset
+#: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_account_move_ids
+msgid "Entries"
+msgstr "Boekingen"
+
+#. module: account_asset
+#: model:ir.ui.view,arch_db:account_asset.view_account_asset_category_form
+msgid "Every"
+msgstr "Elke"
+
+#. module: account_asset
 #: model:ir.ui.view,arch_db:account_asset.view_asset_asset_report_search
 msgid "Extended Filters..."
 msgstr "Uitgebreide filters..."
+
+#. module: account_asset
+#: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_message_follower_ids
+msgid "Followers"
+msgstr "Volgers"
+
+#. module: account_asset
+#: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Volgers (Kanalen)"
+
+#. module: account_asset
+#: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Volgers (Partners)"
 
 #. module: account_asset
 #: model:ir.actions.act_window,help:account_asset.action_asset_asset_report
 msgid ""
 "From this report, you can have an overview on all depreciations. The\n"
 "            search bar can also be used to personalize your assets depreciation reporting."
-msgstr ""
-"Vanuit dit rapport kan u een overzicht hebben van alle activa. De\n"
-"zoekbalk kan ook gebruikt worden om uw activa afschrijving rapporten te personaliseren."
+msgstr "Vanuit dit rapport kan u een overzicht hebben van alle activa. De\nzoekbalk kan ook gebruikt worden om uw activa afschrijving rapporten te personaliseren."
 
 #. module: account_asset
 #: model:ir.ui.menu,name:account_asset.menu_asset_depreciation_confirmation_wizard
@@ -633,18 +598,13 @@ msgstr "Bruto waarde van activa"
 #. module: account_asset
 #: model:ir.ui.view,arch_db:account_asset.view_asset_asset_report_search
 msgid "Group By"
-msgstr "Groepeer op"
+msgstr "Groeperen op"
 
 #. module: account_asset
 #: model:ir.ui.view,arch_db:account_asset.view_account_asset_category_search
 #: model:ir.ui.view,arch_db:account_asset.view_account_asset_search
 msgid "Group By..."
 msgstr "Groepeer op..."
-
-#. module: account_asset
-#: model:ir.model.fields,field_description:account_asset.field_account_asset_category_group_entries
-msgid "Group Journal Entries"
-msgstr "Groepeer boekingen"
 
 #. module: account_asset
 #: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_id
@@ -657,24 +617,34 @@ msgid "ID"
 msgstr "ID"
 
 #. module: account_asset
+#: model:ir.model.fields,help:account_asset.field_account_asset_asset_message_unread
+msgid "If checked new messages require your attention."
+msgstr "Indien aangevinkt zullen nieuwe berichten uw aandacht vragen."
+
+#. module: account_asset
+#: model:ir.model.fields,help:account_asset.field_account_asset_asset_message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Indien aangevinkt vragen nieuwe berichten uw aandacht."
+
+#. module: account_asset
+#: model:ir.ui.view,arch_db:account_asset.view_account_asset_category_form
+msgid "Income Account"
+msgstr "Omzetrekening"
+
+#. module: account_asset
 #: model:ir.model.fields,help:account_asset.field_account_asset_asset_prorata
 msgid ""
 "Indicates that the first depreciation entry for this asset have to be done "
 "from the purchase date instead of the first January / Start date of fiscal "
 "year"
-msgstr ""
-"Geeft aan dat de eerste afschrijving mutatie voor deze activa moet gedaan "
-"zijn van de inkoopdatum in plaats van de eerste van januari / startdatum van"
-" het fiscale jaar"
+msgstr "Geeft aan dat de eerste afschrijving mutatie voor deze activa moet gedaan zijn van de inkoopdatum in plaats van de eerste van januari / startdatum van het fiscale jaar"
 
 #. module: account_asset
 #: model:ir.model.fields,help:account_asset.field_account_asset_category_prorata
 msgid ""
 "Indicates that the first depreciation entry for this asset have to be done "
 "from the purchase date instead of the first of January"
-msgstr ""
-"Geeft aan dat de eerste afschrijvingsboeking voor deze activa moet zijn "
-"gedaan voor de inkoopdatum in plaats van de eerste van januari"
+msgstr "Geeft aan dat de eerste afschrijvingsboeking voor deze activa moet zijn gedaan voor de inkoopdatum in plaats van de eerste van januari"
 
 #. module: account_asset
 #: model:ir.model,name:account_asset.model_account_invoice
@@ -689,11 +659,14 @@ msgid "Invoice Line"
 msgstr "Factuurregel"
 
 #. module: account_asset
+#: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_message_is_follower
+msgid "Is Follower"
+msgstr "Is een volger"
+
+#. module: account_asset
 #: model:ir.model.fields,help:account_asset.field_account_asset_asset_salvage_value
 msgid "It is the amount you plan to have that you cannot depreciate."
-msgstr ""
-"Het is het bedrag dat u van plan bent te hebben, dat u niet kunt "
-"afschrijven."
+msgstr "Het is het bedrag dat u van plan bent te hebben, dat u niet kunt afschrijven."
 
 #. module: account_asset
 #: model:ir.ui.view,arch_db:account_asset.view_account_asset_asset_form
@@ -706,11 +679,16 @@ msgid "Journal"
 msgstr "Dagboek"
 
 #. module: account_asset
-#: code:addons/account_asset/models/account_asset.py:410
+#: code:addons/account_asset/account_asset.py:376
 #: model:ir.ui.view,arch_db:account_asset.view_account_asset_category_form
 #, python-format
 msgid "Journal Entries"
 msgstr "Boekingen"
+
+#. module: account_asset
+#: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_message_last_post
+msgid "Last Message Date"
+msgstr "Laatste bericht datum"
 
 #. module: account_asset
 #: model:ir.model.fields,field_description:account_asset.field_account_asset_asset___last_update
@@ -747,9 +725,9 @@ msgid "Linear"
 msgstr "Lineair"
 
 #. module: account_asset
-#: model:ir.model.fields,field_description:account_asset.field_account_asset_depreciation_line_move_check
-msgid "Linked"
-msgstr "Gekoppeld"
+#: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_message_ids
+msgid "Messages"
+msgstr "Berichten"
 
 #. module: account_asset
 #: model:ir.ui.view,arch_db:account_asset.asset_modify_form
@@ -789,6 +767,11 @@ msgid "Note"
 msgstr "Notitie"
 
 #. module: account_asset
+#: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_message_needaction_counter
+msgid "Number of Actions"
+msgstr "Aantal acties"
+
+#. module: account_asset
 #: selection:account.asset.asset,method_time:0
 #: selection:account.asset.category,method_time:0
 #: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_method_number
@@ -808,12 +791,17 @@ msgid "Number of Months in a Period"
 msgstr "Aantal maanden in de periode"
 
 #. module: account_asset
-#: model:ir.ui.view,arch_db:account_asset.view_account_asset_category_form
-msgid "One Entry Every"
-msgstr "Eén boeking elke"
+#: model:ir.model.fields,help:account_asset.field_account_asset_asset_message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Aantal berichten die actie vereisen"
 
 #. module: account_asset
-#: code:addons/account_asset/models/account_asset.py:570
+#: model:ir.model.fields,help:account_asset.field_account_asset_asset_message_unread_counter
+msgid "Number of unread messages"
+msgstr "Aantal ongelezen berichten"
+
+#. module: account_asset
+#: code:addons/account_asset/account_asset.py:488
 #: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_partner_id
 #: model:ir.model.fields,field_description:account_asset.field_asset_asset_report_partner_id
 #, python-format
@@ -837,9 +825,14 @@ msgid "Post Depreciation Lines"
 msgstr "Boek afschrijvingsregels"
 
 #. module: account_asset
+#: model:ir.model.fields,field_description:account_asset.field_account_asset_category_open_asset
+msgid "Post Journal Entries"
+msgstr "Boekingsregels boeken"
+
+#. module: account_asset
 #. openerp-web
-#: code:addons/account_asset/static/src/js/account_asset.js:28
-#: model:ir.model.fields,field_description:account_asset.field_account_asset_depreciation_line_move_posted_check
+#: code:addons/account_asset/static/src/js/account_asset.js:24
+#: model:ir.model.fields,field_description:account_asset.field_account_asset_depreciation_line_move_check
 #: model:ir.model.fields,field_description:account_asset.field_asset_asset_report_move_check
 #: model:ir.ui.view,arch_db:account_asset.view_asset_asset_report_search
 #, python-format
@@ -849,7 +842,7 @@ msgstr "Geboekt"
 #. module: account_asset
 #: model:ir.model.fields,field_description:account_asset.field_asset_asset_report_posted_value
 msgid "Posted Amount"
-msgstr "Geboekt bedrag"
+msgstr "Geboekte bedrag"
 
 #. module: account_asset
 #: model:ir.ui.view,arch_db:account_asset.view_asset_asset_report_search
@@ -868,19 +861,17 @@ msgid "Prorata Temporis"
 msgstr "Prorata Temporis"
 
 #. module: account_asset
-#: code:addons/account_asset/models/account_asset.py:342
+#: code:addons/account_asset/account_asset.py:316
 #, python-format
 msgid ""
 "Prorata temporis can be applied only for time method \"number of "
 "depreciations\"."
-msgstr ""
-"Prorata temporis kan  alleen worden toegepast voor de tijd-methode \"aantal "
-"afschrijvingen\"."
+msgstr "Prorata temporis kan  alleen worden toegepast voor de tijd-methode \"aantal afschrijvingen\"."
 
 #. module: account_asset
 #: model:ir.ui.view,arch_db:account_asset.view_account_asset_category_search
 msgid "Purchase"
-msgstr "Inkopen"
+msgstr "Inkoop"
 
 #. module: account_asset
 #: model:ir.ui.view,arch_db:account_asset.view_asset_asset_report_search
@@ -898,12 +889,7 @@ msgid "Reason"
 msgstr "Reden"
 
 #. module: account_asset
-#: model:ir.ui.view,arch_db:account_asset.view_account_asset_category_form
-msgid "Recognition Account"
-msgstr "Inkomsten grootboek"
-
-#. module: account_asset
-#: model:ir.ui.view,arch_db:account_asset.view_account_asset_category_form
+#: model:ir.model.fields,field_description:account_asset.field_account_asset_category_account_income_recognition_id
 msgid "Recognition Income Account"
 msgstr "Omzet afschrijving rekening"
 
@@ -995,9 +981,7 @@ msgstr "Het aantal afschrijvingen nodig om de activa af te schrijven."
 msgid ""
 "This wizard will post installment/depreciation lines for the selected month.<br/>\n"
 "                        This will generate journal entries for all related installment lines on this period of asset/revenue recognition as well."
-msgstr ""
-"Deze wizard boekt termijnen/afschrijvingsregels voor de geselecteerde maand.<br/>\n"
-"Dit genereert ook dagboekboekingen voor alle gerelateerde installatieregels op deze periode van activa/inkomsten afschrijvingen."
+msgstr "Deze wizard boekt termijnen/afschrijvingsregels voor de geselecteerde maand.<br/>\nDit genereert ook dagboekmutaties voor alle gerelateerde installatieregels op deze periode van activa/inkomsten afschrijvingen."
 
 #. module: account_asset
 #: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_method_time
@@ -1006,7 +990,6 @@ msgid "Time Method"
 msgstr "Tijdmethode"
 
 #. module: account_asset
-#: model:ir.ui.view,arch_db:account_asset.view_account_asset_asset_form
 #: model:ir.ui.view,arch_db:account_asset.view_account_asset_category_form
 msgid "Time Method Based On"
 msgstr "Tijdmethode gebaseerd op"
@@ -1020,7 +1003,7 @@ msgstr "Soort"
 
 #. module: account_asset
 #. openerp-web
-#: code:addons/account_asset/static/src/js/account_asset.js:28
+#: code:addons/account_asset/static/src/js/account_asset.js:24
 #, python-format
 msgid "Unposted"
 msgstr "Ongeboekt"
@@ -1031,10 +1014,30 @@ msgid "Unposted Amount"
 msgstr "Ongeboekt bedrag"
 
 #. module: account_asset
+#: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_message_unread
+msgid "Unread Messages"
+msgstr "Ongelezen berichten"
+
+#. module: account_asset
+#: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Teller ongelezen berichten"
+
+#. module: account_asset
 #: model:ir.ui.view,arch_db:account_asset.view_account_asset_asset_form
 #: model:ir.ui.view,arch_db:account_asset.view_account_asset_asset_purchase_tree
 msgid "Vendor"
 msgstr "Leverancier"
+
+#. module: account_asset
+#: model:ir.model.fields,field_description:account_asset.field_account_asset_asset_website_message_ids
+msgid "Website Messages"
+msgstr "Website berichten"
+
+#. module: account_asset
+#: model:ir.model.fields,help:account_asset.field_account_asset_asset_website_message_ids
+msgid "Website communication history"
+msgstr "Website communicatie geschiedenis"
 
 #. module: account_asset
 #: model:ir.model.fields,help:account_asset.field_account_asset_asset_state
@@ -1043,10 +1046,7 @@ msgid ""
 "When an asset is created, the status is 'Draft'.\n"
 "If the asset is confirmed, the status goes in 'Running' and the depreciation lines can be posted in the accounting.\n"
 "You can manually close an asset when the depreciation is over. If the last line of depreciation is posted, the asset automatically goes in that status."
-msgstr ""
-"Wanneer een activa is aangemaakt is de status 'Concept'.\n"
-"Als de activa is bevestigd, wordt de status gezet op 'In bewerking' en kunnen de afschrijvingsregels  wporden geboekt in de boekhouding.\n"
-"Het is mogelijk een activa handmatig af te sluiten als de afschrijving is voltooid. Als de laatste afschrijvingsregels is geboekt, wordt deze status automatisch ingesteld"
+msgstr "Wanneer een activa is aangemaakt is de status 'Concept'.\nAls de activa is bevestigd, wordt de status gezet op 'In bewerking' en kunnen de afschrijvingsregels  wporden geboekt in de boekhouding.\nHet is mogelijk een activa handmatig af te sluiten als de afschrijving is voltooid. Als de laatste afschrijvingsregels is geboekt, wordt deze status automatisch ingesteld"
 
 #. module: account_asset
 #: model:ir.model.fields,field_description:account_asset.field_asset_asset_report_name
@@ -1054,25 +1054,25 @@ msgid "Year"
 msgstr "Jaar"
 
 #. module: account_asset
-#: code:addons/account_asset/models/account_asset.py:107
+#: code:addons/account_asset/account_asset.py:97
 #, python-format
 msgid "You cannot delete a document is in %s state."
 msgstr "U kan een document niet verwijderen dat zich bevind in de %s status."
 
 #. module: account_asset
-#: code:addons/account_asset/models/account_asset.py:110
+#: code:addons/account_asset/account_asset.py:99
 #, python-format
 msgid "You cannot delete a document that contains posted entries."
 msgstr "U kan geen document verwijderen dat geboekte regel bevat."
 
 #. module: account_asset
-#: code:addons/account_asset/models/account_asset.py:579
+#: code:addons/account_asset/account_asset.py:497
 #, python-format
 msgid "You cannot delete posted depreciation lines."
 msgstr "U kan geen geboekte afschrijvingsregels verwijderen."
 
 #. module: account_asset
-#: code:addons/account_asset/models/account_asset.py:581
+#: code:addons/account_asset/account_asset.py:499
 #, python-format
 msgid "You cannot delete posted installment lines."
 msgstr "U kan geen geboekte installatieregels verwijderen."

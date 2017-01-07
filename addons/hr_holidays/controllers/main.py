@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo.addons.mail.controllers.main import MailController
-from odoo import http
+from openerp.addons.mail.controllers.main import MailController
+from openerp import http
 
 
 class HrHolidaysController(http.Controller):
@@ -12,7 +12,7 @@ class HrHolidaysController(http.Controller):
         comparison, record, redirect = MailController._check_token_and_record_or_redirect('hr.holidays', int(res_id), token)
         if comparison and record:
             try:
-                record.action_validate()
+                record.signal_workflow('validate')
             except Exception:
                 return MailController._redirect_to_messaging()
         return redirect
@@ -22,7 +22,7 @@ class HrHolidaysController(http.Controller):
         comparison, record, redirect = MailController._check_token_and_record_or_redirect('hr.holidays', int(res_id), token)
         if comparison and record:
             try:
-                record.action_refuse()
+                record.signal_workflow('refuse')
             except Exception:
                 return MailController._redirect_to_messaging()
         return redirect

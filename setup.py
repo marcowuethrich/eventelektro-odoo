@@ -8,15 +8,15 @@ from setuptools import find_packages, setup
 from os.path import join, dirname
 
 
-execfile(join(dirname(__file__), 'odoo', 'release.py'))  # Load release variables
-lib_name = 'odoo'
+execfile(join(dirname(__file__), 'openerp', 'release.py'))  # Load release variables
+lib_name = 'openerp'
 
 
 def py2exe_datafiles():
     data_files = {}
     data_files['Microsoft.VC90.CRT'] = glob('C:\Microsoft.VC90.CRT\*.*')
 
-    for root, dirnames, filenames in os.walk('odoo'):
+    for root, dirnames, filenames in os.walk('openerp'):
         for filename in filenames:
             if not re.match(r'.*(\.pyc|\.pyo|\~)$', filename):
                 data_files.setdefault(root, []).append(join(root, filename))
@@ -59,7 +59,9 @@ def py2exe_options():
         import py2exe
         return {
             'console': [
-                {'script': 'odoo-bin', 'icon_resources': [
+                {'script': 'odoo.py'},
+                {'script': 'openerp-gevent'},
+                {'script': 'openerp-server', 'icon_resources': [
                     (1, join('setup', 'win32', 'static', 'pixmaps', 'openerp-icon.ico'))
                 ]},
             ],
@@ -85,7 +87,7 @@ def py2exe_options():
                         'markupsafe',
                         'mock',
                         'ofxparse',
-                        'odoo',
+                        'openerp',
                         'openid',
                         'passlib',
                         'PIL',
@@ -106,7 +108,6 @@ def py2exe_options():
                         'vobject',
                         'win32service', 'win32serviceutil',
                         'xlrd',
-                        'xlsxwriter',
                         'xlwt',
                         'xml', 'xml.dom',
                         'yaml',
@@ -130,9 +131,9 @@ setup(
     author_email=author_email,
     classifiers=filter(None, classifiers.split('\n')),
     license=license,
-    scripts=['setup/odoo'],
+    scripts=['openerp-server', 'openerp-gevent', 'odoo.py'],
     packages=find_packages(),
-    package_dir={'%s' % lib_name: 'odoo'},
+    package_dir={'%s' % lib_name: 'openerp'},
     include_package_data=True,
     install_requires=[
         'babel >= 1.0',
@@ -168,7 +169,6 @@ setup(
         'vatnumber',
         'vobject',
         'werkzeug',
-        'xlsxwriter',
         'xlwt',
     ],
     extras_require={

@@ -2,7 +2,6 @@ odoo.define('web_editor.editor', function (require) {
 "use strict";
 
 var ajax = require('web.ajax');
-var Dialog = require('web.Dialog');
 var Widget = require('web.Widget');
 var core = require('web.core');
 var base = require('web_editor.base');
@@ -16,26 +15,27 @@ var editor = {};
 
 editor.dummy = function () {return true;}; // used for snippets, options...
 
-editor.editable = !!($('html').data('editable') || $("[data-oe-model]").length); // temporary hack, this should be done in python
+editor.editable = !!$('html').data('editable');
 
 ajax.loadXML('/web_editor/static/src/xml/editor.xml', qweb);
 
-$(document).on('click', '.note-editable', function (ev) {
-    ev.preventDefault();
-});
-
-$(document).on('submit', '.note-editable form .btn', function (ev) {
-    ev.preventDefault(); // Disable form submition in editable mode
-});
-
-$(document).on('hide.bs.dropdown', '.dropdown', function (ev) {
-    // Prevent dropdown closing when a contenteditable children is focused
-    if (ev.originalEvent
-            && $(ev.target).has(ev.originalEvent.target).length
-            && $(ev.originalEvent.target).is('[contenteditable]')) {
+    $(document).on('click', '.note-editable', function (ev) {
         ev.preventDefault();
-    }
-});
+    });
+
+    $(document).on('submit', '.note-editable form .btn', function (ev) {
+        // Disable form submition in editable mode
+        ev.preventDefault();
+    });
+
+    $(document).on('hide.bs.dropdown', '.dropdown', function (ev) {
+        // Prevent dropdown closing when a contenteditable children is focused
+        if (ev.originalEvent
+                && $(ev.target).has(ev.originalEvent.target).length
+                && $(ev.originalEvent.target).is('[contenteditable]')) {
+            ev.preventDefault();
+        }
+    });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -63,9 +63,9 @@ editor.Class = Widget.extend({
     template: 'web_editor.editorbar',
     events: {
         'click button[data-action=save]': 'save',
-        'click button[data-action=cancel]': 'cancel',
+        'click a[data-action=cancel]': 'cancel',
     },
-    init: function (parent) {
+    init: function(parent) {
         var self = this;
         var res = this._super.apply(this, arguments);
         this.parent = parent;
@@ -75,7 +75,9 @@ editor.Class = Widget.extend({
         });
         return res;
     },
-    start: function () {
+    start: function() {
+        var self = this;
+
         $('.dropdown-toggle').dropdown();
 
         this.display_placeholder();
@@ -84,15 +86,15 @@ editor.Class = Widget.extend({
         this.rte.start();
 
         var flag = false;
-        window.onbeforeunload = function (event) {
+        window.onbeforeunload = function(event) {
             if (rte.history.getEditableHasUndo().length && !flag) {
                 flag = true;
-                _.defer(function () { flag=false; });
+                setTimeout(function () {flag=false;},0);
                 return _t('This document is not saved!');
             }
         };
-
-        return this._super.apply(this, arguments);
+        this.$('button[data-action="save"]').prop('disabled', true);
+        return this._super();
     },
     display_placeholder: function () {
         var $area = $("#wrapwrap").find("[data-oe-model] .oe_structure.oe_empty, [data-oe-model].oe_structure.oe_empty, [data-oe-type=html]")
@@ -117,7 +119,9 @@ editor.Class = Widget.extend({
             }
         });
     },
-    rte_changed: function () {},
+    rte_changed: function () {
+        this.$('button[data-action=save]').prop('disabled', !rte.history.getEditableHasUndo().length);
+    },
     save: function () {
         return this.rte.save().then(function () {
             editor.reload();
@@ -130,14 +134,22 @@ editor.Class = Widget.extend({
         return this.rte.save();
     },
     cancel: function () {
-        return new $.Deferred(function (d) {
+        new $.Deferred(function (d) {
             if (!rte.history.getEditableHasUndo().length) {
                 return d.resolve();
             }
-            var confirm = Dialog.confirm(null, _t("If you discard the current edition, all unsaved changes will be lost. You can cancel to return to the edition mode."), {
-                confirm_callback: d.resolve.bind(d)
+            var $dialog = $(qweb.render('web_editor.discard')).appendTo(document.body);
+            $dialog.on('click', '.btn-danger', function () {
+                d.resolve();
+            }).on('hidden.bs.modal', function () {
+                d.reject();
+            }).on('keydown.dismiss.bs.modal', function (event) {
+                event.stopImmediatePropagation();
             });
-            confirm.on("closed", d, d.reject);
+            d.always(function () {
+                $dialog.remove();
+            });
+            $dialog.modal('show');
         }).then(function () {
             window.onbeforeunload = null;
             editor.reload();
@@ -146,4 +158,5 @@ editor.Class = Widget.extend({
 });
 
 return editor;
+
 });

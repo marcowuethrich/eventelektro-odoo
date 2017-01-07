@@ -3,18 +3,14 @@
 # * account_test
 # 
 # Translators:
-# Martin Trigaux <mat@odoo.com>, 2016
-# Morten Schou <ms@msteknik.dk>, 2016
-# Jesper Carstensen <jc@danodoo.dk>, 2016
-# jonas jensen <j.jensen@tcomp.dk>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:56+0000\n"
-"PO-Revision-Date: 2016-09-07 08:56+0000\n"
-"Last-Translator: jonas jensen <j.jensen@tcomp.dk>, 2016\n"
-"Language-Team: Danish (https://www.transifex.com/odoo/teams/41243/da/)\n"
+"POT-Creation-Date: 2015-09-07 14:40+0000\n"
+"PO-Revision-Date: 2016-04-11 12:48+0000\n"
+"Last-Translator: Morten Schou <ms@msteknik.dk>\n"
+"Language-Team: Danish (http://www.transifex.com/odoo/odoo-9/language/da/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -79,9 +75,7 @@ msgstr ""
 msgid ""
 "Check that reconciled invoice for Sales/Purchases has reconciled entries for"
 " Payable and Receivable Accounts"
-msgstr ""
-"Tjek om udlignede købs-/salgsfakturaer har udlignede posteringer på debitor "
-"og kreditor konti."
+msgstr "Tjek om udlignede købs-/salgsfakturaer har udlignede posteringer på debitor og kreditor konti."
 
 #. module: account_test
 #: model:accounting.assert.test,desc:account_test.account_test_01
@@ -96,7 +90,7 @@ msgstr ""
 #. module: account_test
 #: model:ir.ui.view,arch_db:account_test.account_assert_form
 msgid "Code Help"
-msgstr "Kode Hjælp"
+msgstr ""
 
 #. module: account_test
 #: model:ir.ui.view,arch_db:account_test.account_assert_form
@@ -142,7 +136,7 @@ msgstr "Beskrivelse"
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test_display_name
 #: model:ir.model.fields,field_description:account_test.field_report_account_test_report_accounttest_display_name
 msgid "Display Name"
-msgstr "Vis navn"
+msgstr "Vist navn"
 
 #. module: account_test
 #: model:ir.ui.view,arch_db:account_test.account_assert_form
@@ -153,7 +147,7 @@ msgstr "Udtryk"
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test_id
 #: model:ir.model.fields,field_description:account_test.field_report_account_test_report_accounttest_id
 msgid "ID"
-msgstr "ID"
+msgstr "Id"
 
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test___last_update
@@ -234,7 +228,7 @@ msgid "Tests"
 msgstr "Test"
 
 #. module: account_test
-#: code:addons/account_test/report/report_account_test.py:51
+#: code:addons/account_test/report/account_test_report.py:49
 #, python-format
 msgid "The test was passed successfully"
 msgstr "Testen blev gennemført med succes"

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<openerp>
+<data>
     <!-- TODO: make test suite -->
     <record id="base.main_company" model="res.company">
         <field name="name">The base company is noupdate=1</field>
@@ -46,4 +47,5 @@
         </xpath>
     </template>
 
-</odoo>
+</data>
+</openerp>

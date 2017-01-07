@@ -3,17 +3,16 @@
 # * base_import_module
 # 
 # Translators:
-# krnkris <krnkris@freemail.hu>, 2016
-# Oregional <geza.nagy@oregional.hu>, 2016
-# Martin Trigaux <mat@odoo.com>, 2016
+# krnkris, 2015
+# krnkris, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:56+0000\n"
-"PO-Revision-Date: 2016-09-07 08:56+0000\n"
-"Last-Translator: Martin Trigaux <mat@odoo.com>, 2016\n"
-"Language-Team: Hungarian (https://www.transifex.com/odoo/teams/41243/hu/)\n"
+"POT-Creation-Date: 2015-09-07 14:40+0000\n"
+"PO-Revision-Date: 2016-06-06 19:55+0000\n"
+"Last-Translator: krnkris\n"
+"Language-Team: Hungarian (http://www.transifex.com/odoo/odoo-9/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -23,18 +22,12 @@ msgstr ""
 #. module: base_import_module
 #: model:ir.ui.view,arch_db:base_import_module.view_base_module_import
 msgid "Cancel"
-msgstr "Érvénytelenít"
+msgstr "Megszakítás"
 
 #. module: base_import_module
 #: model:ir.ui.view,arch_db:base_import_module.view_base_module_import
 msgid "Close"
-msgstr "Bezárás"
-
-#. module: base_import_module
-#: code:addons/base_import_module/controllers/main.py:31
-#, python-format
-msgid "Could not select database '%s'"
-msgstr "Nemlehet választani a '%s' adatbázist"
+msgstr "Bezár"
 
 #. module: base_import_module
 #: model:ir.model.fields,field_description:base_import_module.field_base_import_module_create_uid
@@ -52,13 +45,13 @@ msgid "Display Name"
 msgstr "Megjelenített név"
 
 #. module: base_import_module
-#: code:addons/base_import_module/models/ir_module.py:96
+#: code:addons/base_import_module/models/ir_module.py:94
 #, python-format
 msgid "File '%s' exceed maximum allowed file size"
 msgstr "Fájl '%s' túllépte a megengedett maximális fájlméretet"
 
 #. module: base_import_module
-#: code:addons/base_import_module/models/ir_module.py:88
+#: code:addons/base_import_module/models/ir_module.py:86
 #, python-format
 msgid "File is not a zip file!"
 msgstr "A fájl nem zip fájl!"
@@ -72,14 +65,12 @@ msgstr "Eröltetett indítás"
 #: model:ir.model.fields,help:base_import_module.field_base_import_module_force
 msgid ""
 "Force init mode even if installed. (will update `noupdate='1'` records)"
-msgstr ""
-"Eröltetett indítási mód akkor is ha telepítve van. (frissíteni fogja a "
-"`noupdate='1'` rekordokat)"
+msgstr "Eröltetett indítási mód akkor is ha telepítve van. (frissíteni fogja a `noupdate='1'` rekordokat)"
 
 #. module: base_import_module
 #: model:ir.model.fields,field_description:base_import_module.field_base_import_module_id
 msgid "ID"
-msgstr "Azonosító ID"
+msgstr "ID"
 
 #. module: base_import_module
 #: model:ir.ui.view,arch_db:base_import_module.view_base_module_import
@@ -112,12 +103,12 @@ msgstr "Importált modul"
 #. module: base_import_module
 #: model:ir.model.fields,field_description:base_import_module.field_base_import_module___last_update
 msgid "Last Modified on"
-msgstr "Utoljára frissítve ekkor"
+msgstr "Utolsó frissítés dátuma"
 
 #. module: base_import_module
 #: model:ir.model.fields,field_description:base_import_module.field_base_import_module_write_uid
 msgid "Last Updated by"
-msgstr "Utoljára frissítette"
+msgstr "Utoljára frissítve, által"
 
 #. module: base_import_module
 #: model:ir.model.fields,field_description:base_import_module.field_base_import_module_write_date
@@ -135,18 +126,6 @@ msgid "Module .ZIP file"
 msgstr "Modul .ZIP fájl"
 
 #. module: base_import_module
-#: code:addons/base_import_module/models/ir_module.py:86
-#, python-format
-msgid "No file sent."
-msgstr "Nem történt fájlküldés."
-
-#. module: base_import_module
-#: code:addons/base_import_module/controllers/main.py:25
-#, python-format
-msgid "Only administrators can upload a module"
-msgstr "Kizárólag rendszergazda tud modult feltölten"
-
-#. module: base_import_module
 #: model:ir.ui.view,arch_db:base_import_module.view_base_module_import
 msgid "Open Modules"
 msgstr "Modulok megnyitása"
@@ -162,7 +141,7 @@ msgid "Status"
 msgstr "Állapot"
 
 #. module: base_import_module
-#: code:addons/base_import_module/models/ir_module.py:35
+#: code:addons/base_import_module/models/ir_module.py:33
 #, python-format
 msgid "Unmet module dependencies: %s"
 msgstr "Rendszertelen modul függőségek: %s"
@@ -175,4 +154,4 @@ msgstr "kész"
 #. module: base_import_module
 #: selection:base.import.module,state:0
 msgid "init"
-msgstr "kezd"
+msgstr "init"

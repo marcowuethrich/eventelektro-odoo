@@ -3,18 +3,18 @@
 # * analytic
 # 
 # Translators:
-# Bohdan Lisnenko <lem8r.ka11a@gmail.com>, 2016
-# Zoriana Zaiats <sorenabell@quintagroup.com>, 2016
+# Bohdan Lisnenko, 2015-2016
+# Bohdan Lisnenko, 2016
+# Zoriana Zaiats, 2015
 # ТАрас <tratatuta@i.ua>, 2016
-# Martin Trigaux <mat@odoo.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:56+0000\n"
-"PO-Revision-Date: 2016-09-07 08:56+0000\n"
-"Last-Translator: Martin Trigaux <mat@odoo.com>, 2016\n"
-"Language-Team: Ukrainian (https://www.transifex.com/odoo/teams/41243/uk/)\n"
+"POT-Creation-Date: 2016-09-22 13:16+0000\n"
+"PO-Revision-Date: 2016-09-23 08:42+0000\n"
+"Last-Translator: Martin Trigaux\n"
+"Language-Team: Ukrainian (http://www.transifex.com/odoo/odoo-9/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -22,14 +22,30 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. module: analytic
+#: model:ir.ui.view,arch_db:analytic.account_analytic_chart_view
+msgid "(Keep empty to open the current situation)"
+msgstr "(Залиште порожнім для відображення поточного стану)"
+
+#. module: analytic
+#: model:ir.model,name:analytic.model_account_analytic_chart
+msgid "Account Analytic Chart"
+msgstr "План аналітичних рахунків"
+
+#. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_currency_id
 msgid "Account Currency"
 msgstr "Валюта рахунку"
 
 #. module: analytic
-#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_active
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_needaction
+msgid "Action Needed"
+msgstr "Необхідна дія"
+
+#. module: analytic
+#: selection:account.analytic.account,account_type:0
+#: model:ir.ui.view,arch_db:analytic.view_account_analytic_account_search
 msgid "Active"
-msgstr "Активно"
+msgstr ""
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_amount
@@ -48,6 +64,11 @@ msgid "Analytic Account"
 msgstr "Аналітичний рахунок"
 
 #. module: analytic
+#: model:ir.ui.view,arch_db:analytic.account_analytic_chart_view
+msgid "Analytic Account Charts"
+msgstr "Списки аналітичних рахунків"
+
+#. module: analytic
 #: model:res.groups,name:analytic.group_analytic_accounting
 msgid "Analytic Accounting"
 msgstr "Аналітичний облік"
@@ -57,13 +78,6 @@ msgstr "Аналітичний облік"
 #: model:ir.ui.view,arch_db:analytic.view_account_analytic_account_list
 msgid "Analytic Accounts"
 msgstr "Аналітичні рахунки"
-
-#. module: analytic
-#: model:ir.actions.act_window,name:analytic.account_analytic_tag_action
-#: model:ir.ui.view,arch_db:analytic.account_analytic_tag_form_view
-#: model:ir.ui.view,arch_db:analytic.account_analytic_tag_tree_view
-msgid "Analytic Accounts Tags"
-msgstr ""
 
 #. module: analytic
 #: model:ir.actions.act_window,name:analytic.account_analytic_line_action_entries
@@ -99,9 +113,9 @@ msgid "Analytic Tags"
 msgstr "Мітки аналітики"
 
 #. module: analytic
-#: model:ir.ui.view,arch_db:analytic.view_account_analytic_account_search
+#: selection:account.analytic.account,account_type:0
 msgid "Archived"
-msgstr "Заархівовано"
+msgstr ""
 
 #. module: analytic
 #: model:ir.ui.view,arch_db:analytic.view_account_analytic_account_search
@@ -114,14 +128,15 @@ msgid "Balance"
 msgstr "Баланс"
 
 #. module: analytic
+#: model:ir.ui.view,arch_db:analytic.account_analytic_chart_view
+msgid "Cancel"
+msgstr "Скасувати"
+
+#. module: analytic
+#: model:ir.actions.act_window,name:analytic.action_account_analytic_chart
 #: model:ir.actions.act_window,name:analytic.action_analytic_account_form
 msgid "Chart of Analytic Accounts"
 msgstr "План аналітичних рахунків"
-
-#. module: analytic
-#: model:ir.actions.act_window,help:analytic.account_analytic_tag_action
-msgid "Click to add a new tag."
-msgstr "Натисніть, щоб додати нову мітку"
 
 #. module: analytic
 #: model:ir.actions.act_window,help:analytic.action_analytic_account_form
@@ -155,12 +170,11 @@ msgstr "Витрати та прибутки"
 msgid ""
 "Costs will be created automatically when you register supplier\n"
 "                invoices, expenses or timesheets."
-msgstr ""
-"Витрати будуть автоматично створені, коли ви зареєструєте\n"
-"рахунок від постачальника, витрати або табель робочого часу."
+msgstr "Витрати будуть автоматично створені, коли ви зареєструєте\nрахунок від постачальника, витрати або табель робочого часу."
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_create_uid
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_create_uid
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_create_uid
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag_create_uid
 msgid "Created by"
@@ -168,6 +182,7 @@ msgstr "Створив"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_create_date
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_create_date
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_create_date
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag_create_date
 msgid "Created on"
@@ -194,6 +209,11 @@ msgid "Date"
 msgstr "Дата"
 
 #. module: analytic
+#: model:ir.model.fields,help:analytic.field_account_analytic_account_message_last_post
+msgid "Date of the last message posted on the record."
+msgstr "Дата останнього повідомлення по запису."
+
+#. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_debit
 msgid "Debit"
 msgstr "Дебет"
@@ -205,30 +225,55 @@ msgstr "Опис"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_display_name
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_display_name
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_display_name
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag_display_name
 msgid "Display Name"
 msgstr "Назва для відображення"
 
 #. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_follower_ids
+msgid "Followers"
+msgstr "Підписники"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Підписники (Канали)"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Підписники (Партнери)"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_from_date
+msgid "From"
+msgstr "From"
+
+#. module: analytic
 #: model:ir.ui.view,arch_db:analytic.view_account_analytic_account_search
 #: model:ir.ui.view,arch_db:analytic.view_account_analytic_line_filter
 msgid "Group By..."
-msgstr "Групувати за..."
+msgstr "Група"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_id
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_id
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_id
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag_id
 msgid "ID"
-msgstr "ІД"
+msgstr "ID"
 
 #. module: analytic
-#: model:ir.model.fields,help:analytic.field_account_analytic_account_active
-msgid ""
-"If the active field is set to False, it will allow you to hide the account "
-"without removing it."
-msgstr ""
+#: model:ir.model.fields,help:analytic.field_account_analytic_account_message_unread
+msgid "If checked new messages require your attention."
+msgstr "Якщо позначено, то повідомленя потребує вашої уваги"
+
+#. module: analytic
+#: model:ir.model.fields,help:analytic.field_account_analytic_account_message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Якщо відмічено, то нові повідомлення будуть потребувати вашої уваги."
 
 #. module: analytic
 #: model:ir.actions.act_window,help:analytic.account_analytic_line_action
@@ -237,13 +282,21 @@ msgid ""
 "In Odoo, sale orders and projects are implemented using\n"
 "                analytic accounts. You can track costs and revenues to analyse\n"
 "                your margins easily."
-msgstr ""
-"В Odoo замовлення на продаж і проекти реалізовані на\n"
-"основі аналітичних рахунків. Ви можете легко відслідковувати\n"
-"ваші доходи і витрати для оцінки прибутку."
+msgstr "В Odoo замовлення на продаж і проекти реалізовані на\nоснові аналітичних рахунків. Ви можете легко відслідковувати\nваші доходи і витрати для оцінки прибутку."
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_is_follower
+msgid "Is Follower"
+msgstr "Стежить"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_last_post
+msgid "Last Message Date"
+msgstr "Дата останнього повідомлення"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account___last_update
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart___last_update
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line___last_update
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag___last_update
 msgid "Last Modified on"
@@ -251,6 +304,7 @@ msgstr "Остання модифікація"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_write_uid
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_write_uid
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_write_uid
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag_write_uid
 msgid "Last Updated by"
@@ -258,10 +312,16 @@ msgstr "Востаннє оновив"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_write_date
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_write_date
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_write_date
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag_write_date
 msgid "Last Updated on"
 msgstr "Останнє оновлення"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_ids
+msgid "Messages"
+msgstr "Повідомлення"
 
 #. module: analytic
 #: model:ir.actions.act_window,help:analytic.account_analytic_line_action
@@ -272,6 +332,26 @@ msgstr "Поки що ніякої активності на цьому раху
 #: model:ir.actions.act_window,help:analytic.account_analytic_line_action_entries
 msgid "No activity yet."
 msgstr "Поки ніякої активності."
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_needaction_counter
+msgid "Number of Actions"
+msgstr "Кількість дій"
+
+#. module: analytic
+#: model:ir.model.fields,help:analytic.field_account_analytic_account_message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Кількість повідомлень, які потебують дії"
+
+#. module: analytic
+#: model:ir.model.fields,help:analytic.field_account_analytic_account_message_unread_counter
+msgid "Number of unread messages"
+msgstr "Кількість непрочитаних повідомлень"
+
+#. module: analytic
+#: model:ir.ui.view,arch_db:analytic.account_analytic_chart_view
+msgid "Open Charts"
+msgstr "Відкрити план рахунків"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_partner_id
@@ -287,7 +367,7 @@ msgstr "Кількість"
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_code
 msgid "Reference"
-msgstr "Референс"
+msgstr "Посилання"
 
 #. module: analytic
 #: model:ir.actions.act_window,help:analytic.account_analytic_line_action
@@ -297,17 +377,22 @@ msgid ""
 "                invoices. Customer invoices can be created based on sale orders\n"
 "                (fixed price invoices), on timesheets (based on the work done) or\n"
 "                on expenses (e.g. reinvoicing of travel costs)."
-msgstr ""
-"Доходи будуть автоматично створені, коли ви зареєструєте\n"
-"рахунок клієнту. Рахунки можуть бути створені на основі\n"
-"замовлення на продаж (фіксована сума), табелю робочого\n"
-"часу (на основі виконаної роботи) або на основі понесених\n"
-"витрат (компенсація витрат на відрядження)."
+msgstr "Доходи будуть автоматично створені, коли ви зареєструєте\nрахунок клієнту. Рахунки можуть бути створені на основі\nзамовлення на продаж (фіксована сума), табелю робочого\nчасу (на основі виконаної роботи) або на основі понесених\nвитрат (компенсація витрат на відрядження)."
 
 #. module: analytic
 #: model:ir.ui.view,arch_db:analytic.view_account_analytic_line_filter
 msgid "Search Analytic Lines"
 msgstr "Пошук аналітичних рядків"
+
+#. module: analytic
+#: model:ir.ui.view,arch_db:analytic.account_analytic_chart_view
+msgid "Select the Period for Analysis"
+msgstr "Оберіть період для аналізу"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_account_type
+msgid "State"
+msgstr ""
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_tag_ids
@@ -326,9 +411,29 @@ msgid "The related account currency if not equal to the company one."
 msgstr "Заявлена валюта рахунку не співпадає з валютою компанії."
 
 #. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_to_date
+msgid "To"
+msgstr "До"
+
+#. module: analytic
 #: model:ir.ui.view,arch_db:analytic.view_account_analytic_line_tree
 msgid "Total"
 msgstr "Разом"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_account_type
+msgid "Type of Account"
+msgstr "Тип рахунку"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_unread
+msgid "Unread Messages"
+msgstr "Непрочитані повідомлення"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Кількість непрочитаних повідомлень"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_user_id

@@ -25,10 +25,6 @@ contentMenu.TopBar.include({
     },
 });
 
-if(!$('.js_sale').length) {
-    return $.Deferred().reject("DOM doesn't contain '.js_sale'");
-}
-
 options.registry.website_sale = options.Class.extend({
     start: function () {
         var self = this;

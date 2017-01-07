@@ -3,17 +3,15 @@
 # * web_calendar
 # 
 # Translators:
-# Martin Trigaux <mat@odoo.com>, 2016
-# krnkris <krnkris@freemail.hu>, 2016
-# Oregional <geza.nagy@oregional.hu>, 2016
+# Kris Krnacs, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:57+0000\n"
-"PO-Revision-Date: 2016-09-07 08:57+0000\n"
-"Last-Translator: Oregional <geza.nagy@oregional.hu>, 2016\n"
-"Language-Team: Hungarian (https://www.transifex.com/odoo/teams/41243/hu/)\n"
+"POT-Creation-Date: 2015-09-07 14:41+0000\n"
+"PO-Revision-Date: 2015-09-30 15:39+0000\n"
+"Last-Translator: Kris Krnacs\n"
+"Language-Team: Hungarian (http://www.transifex.com/odoo/odoo-9/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -22,57 +20,57 @@ msgstr ""
 
 #. module: web_calendar
 #. openerp-web
-#: code:addons/web_calendar/static/src/js/web_calendar.js:52
+#: code:addons/web_calendar/static/src/js/web_calendar.js:33
 #, python-format
 msgid "All day"
 msgstr "Egész nap"
 
 #. module: web_calendar
 #. openerp-web
-#: code:addons/web_calendar/static/src/js/web_calendar.js:992
+#: code:addons/web_calendar/static/src/js/web_calendar.js:940
 #, python-format
 msgid "Are you sure you want to delete this record ?"
-msgstr "Biztosan törölni szeretné ezt a bejegyzés rekordot?"
+msgstr "Biztosan törölni szeretné ezt a bejegyzést?"
 
 #. module: web_calendar
 #. openerp-web
-#: code:addons/web_calendar/static/src/js/web_calendar.js:98
+#: code:addons/web_calendar/static/src/js/web_calendar.js:65
 #, python-format
 msgid "Calendar"
 msgstr "Naptár"
 
 #. module: web_calendar
 #. openerp-web
-#: code:addons/web_calendar/static/src/js/web_calendar.js:123
+#: code:addons/web_calendar/static/src/js/web_calendar.js:115
 #, python-format
 msgid "Calendar view has not defined 'date_start' attribute."
 msgstr "Naptár nézetnek nincs definiálva 'induló_dátum' értéke"
 
 #. module: web_calendar
 #. openerp-web
-#: code:addons/web_calendar/static/src/js/widgets.js:44
+#: code:addons/web_calendar/static/src/js/widgets.js:45
 #, python-format
 msgid "Cancel"
-msgstr "Érvénytelenít"
+msgstr "Megszakítás"
 
 #. module: web_calendar
 #. openerp-web
-#: code:addons/web_calendar/static/src/js/web_calendar.js:937
+#: code:addons/web_calendar/static/src/js/web_calendar.js:885
 #, python-format
 msgid "Close"
-msgstr "Bezárás"
+msgstr "Bezár"
 
 #. module: web_calendar
 #. openerp-web
-#: code:addons/web_calendar/static/src/js/widgets.js:36
-#: code:addons/web_calendar/static/src/js/widgets.js:52
+#: code:addons/web_calendar/static/src/js/widgets.js:37
+#: code:addons/web_calendar/static/src/js/widgets.js:53
 #, python-format
 msgid "Create"
-msgstr "Létrehozás"
+msgstr "Létrehoz"
 
 #. module: web_calendar
 #. openerp-web
-#: code:addons/web_calendar/static/src/js/widgets.js:57
+#: code:addons/web_calendar/static/src/js/widgets.js:58
 #, python-format
 msgid "Create: "
 msgstr "Létrehoz: "
@@ -86,18 +84,18 @@ msgstr "Nap"
 
 #. module: web_calendar
 #. openerp-web
-#: code:addons/web_calendar/static/src/js/web_calendar.js:933
+#: code:addons/web_calendar/static/src/js/web_calendar.js:881
 #, python-format
 msgid "Delete"
 msgstr "Törlés"
 
 #. module: web_calendar
 #. openerp-web
-#: code:addons/web_calendar/static/src/js/web_calendar.js:928
-#: code:addons/web_calendar/static/src/js/widgets.js:41
+#: code:addons/web_calendar/static/src/js/web_calendar.js:876
+#: code:addons/web_calendar/static/src/js/widgets.js:42
 #, python-format
 msgid "Edit"
-msgstr "Szerkesztés"
+msgstr "Szerkeszt"
 
 #. module: web_calendar
 #. openerp-web
@@ -129,7 +127,7 @@ msgstr "Hét"
 
 #. module: web_calendar
 #. openerp-web
-#: code:addons/web_calendar/static/src/js/web_calendar.js:312
+#: code:addons/web_calendar/static/src/js/web_calendar.js:288
 #, python-format
 msgid "Week "
 msgstr "Hét "

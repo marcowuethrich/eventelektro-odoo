@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import time
-from odoo import api, models
+from openerp import api, models
 
 
 class ReportTrialBalance(models.AbstractModel):
@@ -55,8 +55,8 @@ class ReportTrialBalance(models.AbstractModel):
         return account_res
 
 
-    @api.model
-    def render_html(self, docids, data=None):
+    @api.multi
+    def render_html(self, data):
         self.model = self.env.context.get('active_model')
         docs = self.env[self.model].browse(self.env.context.get('active_ids', []))
         display_account = data['form'].get('display_account')

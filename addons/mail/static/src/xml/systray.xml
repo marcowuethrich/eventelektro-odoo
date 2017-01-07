@@ -53,5 +53,9 @@
         </t>
     </t>
 
+    <t t-name="mail.chat.Spinner">
+        <div class="o_spinner"> <i class="fa fa-spinner fa-spin"/> </div>
+    </t>
+
 </templates>
 

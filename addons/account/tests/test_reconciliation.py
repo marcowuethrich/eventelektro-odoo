@@ -1,4 +1,4 @@
-from odoo.addons.account.tests.account_test_classes import AccountingTestCase
+from openerp.addons.account.tests.account_test_classes import AccountingTestCase
 import time
 import unittest
 
@@ -56,14 +56,13 @@ class TestReconciliation(AccountingTestCase):
         })
 
         #validate invoice
-        invoice.action_invoice_open()
+        invoice.signal_workflow('invoice_open')
         return invoice
 
     def make_payment(self, invoice_record, bank_journal, amount=0.0, amount_currency=0.0, currency_id=None):
         bank_stmt = self.acc_bank_stmt_model.create({
             'journal_id': bank_journal.id,
             'date': time.strftime('%Y') + '-07-15',
-            'name': 'payment' + invoice_record.number
         })
 
         bank_stmt_line = self.acc_bank_stmt_line_model.create({'name': 'payment',
@@ -97,11 +96,13 @@ class TestReconciliation(AccountingTestCase):
             self.assertEquals(round(move_line.amount_currency, 2), aml_dict[move_line.account_id.id]['amount_currency'])
             self.assertEquals(move_line.currency_id.id, aml_dict[move_line.account_id.id]['currency_id'])
             if 'currency_diff' in aml_dict[move_line.account_id.id]:
-                currency_diff_move = move_line.full_reconcile_id.exchange_move_id
-                for currency_diff_line in currency_diff_move.line_ids:
-                    if aml_dict[move_line.account_id.id].get('currency_diff') == 0:
-                        if currency_diff_line.account_id.id == move_line.account_id.id:
-                            self.assertAlmostEquals(currency_diff_line.amount_currency, aml_dict[move_line.account_id.id].get('amount_currency_diff'))
+                if move_line.credit:
+                    rec_ids = [r.id for r in move_line.matched_debit_ids]
+                else:
+                    rec_ids = [r.id for r in move_line.matched_credit_ids]
+                currency_diff_move = self.env['account.move'].search([('rate_diff_partial_rec_id', 'in', rec_ids)])
+                self.assertEqual(len(currency_diff_move), 1)
+                for currency_diff_line in currency_diff_move[0].line_ids:
                     if aml_dict[move_line.account_id.id].get('currency_diff') == 0:
                         if currency_diff_line.account_id.id == move_line.account_id.id:
                             self.assertAlmostEquals(currency_diff_line.amount_currency, aml_dict[move_line.account_id.id].get('amount_currency_diff'))
@@ -259,15 +260,15 @@ class TestReconciliation(AccountingTestCase):
         # For instance, with a company set in EUR, and a USD rate set to 0.033,
         # the reconciliation of an invoice of 2.00 USD (60.61 EUR) and a bank statement of two lines of 1.00 USD (30.30 EUR)
         # will lead to an exchange loss, that should be handled correctly within the journal items.
-        env = api.Environment(self.cr, self.uid, {})
+        cr, uid = self.cr, self.uid
         # We update the currency rate of the currency USD in order to force the gain/loss exchanges in next steps
-        rateUSDbis = env.ref("base.rateUSDbis")
-        rateUSDbis.write({
+        rateUSDbis_id = self.registry("ir.model.data").get_object_reference(self.cr, self.uid, "base", "rateUSDbis")[1]
+        self.res_currency_rate_model.write(cr, uid, rateUSDbis_id, {
             'name': time.strftime('%Y-%m-%d') + ' 00:00:00',
             'rate': 0.033,
         })
         # We create a customer invoice of 2.00 USD
-        invoice = self.account_invoice_model.create({
+        invoice_id = self.account_invoice_model.create(cr, uid, {
             'partner_id': self.partner_agrolait_id,
             'currency_id': self.currency_usd_id,
             'name': 'Foreign invoice with exchange gain',
@@ -283,9 +284,10 @@ class TestReconciliation(AccountingTestCase):
                 })
             ]
         })
-        invoice.action_invoice_open()
+        self.registry('account.invoice').signal_workflow(cr, uid, [invoice_id], 'invoice_open')
+        invoice = self.account_invoice_model.browse(cr, uid, invoice_id)
         # We create a bank statement with two lines of 1.00 USD each.
-        statement = self.acc_bank_stmt_model.create({
+        bank_stmt_id = self.acc_bank_stmt_model.create(cr, uid, {
             'journal_id': self.bank_journal_usd_id,
             'date': time.strftime('%Y-%m-%d'),
             'line_ids': [
@@ -304,6 +306,8 @@ class TestReconciliation(AccountingTestCase):
             ]
         })
 
+        statement = self.acc_bank_stmt_model.browse(cr, uid, bank_stmt_id)
+
         # We process the reconciliation of the invoice line with the two bank statement lines
         line_id = None
         for l in invoice.move_id.line_id:
@@ -311,7 +315,7 @@ class TestReconciliation(AccountingTestCase):
                 line_id = l
                 break
         for statement_line in statement.line_ids:
-            statement_line.process_reconciliation([
+            self.acc_bank_stmt_line_model.process_reconciliation(cr, uid, statement_line.id, [
                 {'counterpart_move_line_id': line_id.id, 'credit': 1.0, 'debit': 0.0, 'name': line_id.name}
             ])
 

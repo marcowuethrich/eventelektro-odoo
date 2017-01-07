@@ -3,19 +3,16 @@
 # * website_links
 # 
 # Translators:
-# Yenthe Van Ginneken <yenthespam@gmail.com>, 2016
-# Martin Trigaux <mat@odoo.com>, 2016
-# Erwin van der Ploeg <erwin@odooexperts.nl>, 2016
-# Eric Geens <ericgeens@yahoo.com>, 2016
-# Cas Vissers <casvissers@brahoo.nl>, 2016
+# Erwin van der Ploeg <erwin@odooexperts.nl>, 2015
+# Yenthe Van Ginneken <yenthespam@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-19 12:36+0000\n"
-"PO-Revision-Date: 2016-09-19 12:36+0000\n"
-"Last-Translator: Cas Vissers <casvissers@brahoo.nl>, 2016\n"
-"Language-Team: Dutch (https://www.transifex.com/odoo/teams/41243/nl/)\n"
+"POT-Creation-Date: 2015-09-07 14:41+0000\n"
+"PO-Revision-Date: 2016-08-06 09:49+0000\n"
+"Last-Translator: Erwin van der Ploeg <erwin@odooexperts.nl>\n"
+"Language-Team: Dutch (http://www.transifex.com/odoo/odoo-9/language/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -24,9 +21,8 @@ msgstr ""
 
 #. module: website_links
 #: model:ir.ui.view,arch_db:website_links.share_page_menu
-msgid "<span title=\"Track this page to count clicks\">Track this Page</span>"
-msgstr ""
-"<span title=\"Volg deze pagina om kikken te tellen\">Volg deze pagina</span>"
+msgid "<span title=\"Track this page to count clicks\">Share this Page</span>"
+msgstr "<span title=\"Traceer deze pagina om het aantal klikken te tellen\">Deel deze pagina</span>"
 
 #. module: website_links
 #: model:ir.ui.view,arch_db:website_links.graphs
@@ -69,10 +65,7 @@ msgid ""
 "Campaign <i class=\"fa fa-info-circle\" data-toggle=\"tooltip\" data-"
 "placement=\"top\" title=\"Defines the context of your link. It might be an "
 "event you want to promote or a special promotion.\"/>"
-msgstr ""
-"Campagne <i class=\"fa fa-info-circle\" data-toggle=\"tooltip\" data-"
-"placement=\"top\" title=\"Definieert de context van uw link. Het kan een "
-"evenement link zijn die u wilt promoten of een speciale promotie.\"/>"
+msgstr "Campagne <i class=\"fa fa-info-circle\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Definieert de context van uw link. Het kan een evenement link zijn die u wilt promoten of een speciale promotie.\"/>"
 
 #. module: website_links
 #. openerp-web
@@ -96,7 +89,7 @@ msgstr "Krijg gevolgde link"
 #. module: website_links
 #: model:ir.ui.view,arch_db:website_links.graphs
 msgid "Last Month"
-msgstr " Vorige maand"
+msgstr "Laatste maand"
 
 #. module: website_links
 #: model:ir.ui.view,arch_db:website_links.graphs
@@ -107,7 +100,7 @@ msgstr "Laatste week"
 #: model:ir.ui.view,arch_db:website_links.create_shorten_url
 #: model:ir.ui.view,arch_db:website_links.graphs
 msgid "Link Tracker"
-msgstr "Opvolging links"
+msgstr "Beheer links"
 
 #. module: website_links
 #: model:ir.ui.view,arch_db:website_links.create_shorten_url
@@ -115,10 +108,7 @@ msgid ""
 "Medium <i class=\"fa fa-info-circle\" data-toggle=\"tooltip\" data-"
 "placement=\"top\" title=\"Defines the medium used to share your link. It "
 "might be an email, or a Facebook Ads for instance.\"/>"
-msgstr ""
-"Kanaal <i class=\"fa fa-info-circle\" data-toggle=\"tooltip\" data-"
-"placement=\"top\" title=\"Geeft het kanaal aan waar u uw link deelt. Het kan"
-" een e-mail of Facebook advertentie zijn bijvoorbeeld.\"/>"
+msgstr "Kanaal <i class=\"fa fa-info-circle\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Geeft het kanaal aan waar u uw link deelt. Het kan een e-mail of Facebook advertentie zijn bijvoorbeeld.\"/>"
 
 #. module: website_links
 #: model:ir.ui.view,arch_db:website_links.create_shorten_url
@@ -140,9 +130,7 @@ msgstr "Recentelijk gebruikt"
 msgid ""
 "Share this page with a <strong>short link</strong> that includes "
 "<strong>analytics trackers</strong>."
-msgstr ""
-"Deel deze pagina met een <strong>short link</strong> die <strong>analytische"
-" trackers</strong> bevat."
+msgstr "Deel deze pagina met een <strong>short link</strong> die <strong>analytische trackers</strong> bevat."
 
 #. module: website_links
 #: model:ir.ui.view,arch_db:website_links.create_shorten_url
@@ -150,10 +138,7 @@ msgid ""
 "Source <i class=\"fa fa-info-circle\" data-toggle=\"tooltip\" data-"
 "placement=\"top\" title=\"Defines the source from which your traffic will "
 "come from, Facebook or Twitter for instance.\"/>"
-msgstr ""
-"Bron <i class=\"fa fa-info-circle\" data-toggle=\"tooltip\" data-"
-"placement=\"top\" title=\"Geeft de bron aan van waar uw trafiek komt, "
-"Facebook of Twitter bijvoorbeeld.\"/>"
+msgstr "Bron <i class=\"fa fa-info-circle\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Geeft de bron aan van waar uw trafiek komt, Facebook of Twitter bijvoorbeeld.\"/>"
 
 #. module: website_links
 #: model:ir.ui.view,arch_db:website_links.graphs
@@ -170,11 +155,9 @@ msgstr "Statistieken"
 #. module: website_links
 #: model:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid ""
-"Those trackers can be used in Google Analytics to track clicks and visitors,"
-" or in Odoo reports to track opportunities and related revenues."
-msgstr ""
-"Deze trackers kunnen worden gebruikt in Google Analytics om klikken en "
-"bezoekers te volgen, of in Odoo rapportages om prospects en omzet te volgen."
+"Thoses trackers can be used in Google Analytics to track clicks and "
+"visitors, or in Odoo reports to track opportunities and related revenues."
+msgstr "Deze trackers kunnen worden gebruikt in Google Analytics om klikken en bezoekers te volgen, of in Odoo rapportages om prospects en omzet te volgen."
 
 #. module: website_links
 #: model:ir.ui.view,arch_db:website_links.create_shorten_url

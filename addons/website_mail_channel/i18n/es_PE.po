@@ -1,22 +1,21 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * website_mail_channel
-#
+# 
 # Translators:
 # Carlos Eduardo Rodriguez Rossi <crodriguez@samemotion.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-18 14:08+0000\n"
+"POT-Creation-Date: 2015-09-07 14:41+0000\n"
 "PO-Revision-Date: 2016-06-13 20:49+0000\n"
 "Last-Translator: Carlos Eduardo Rodriguez Rossi <crodriguez@samemotion.com>\n"
-"Language-Team: Spanish (Peru) (http://www.transifex.com/odoo/odoo-9/language/"
-"es_PE/)\n"
-"Language: es_PE\n"
+"Language-Team: Spanish (Peru) (http://www.transifex.com/odoo/odoo-9/language/es_PE/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
+"Language: es_PE\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: website_mail_channel
@@ -26,7 +25,7 @@ msgstr "<span class=\"oe_snippet_thumbnail_title\">Grupo de Discusión</span>"
 
 #. module: website_mail_channel
 #. openerp-web
-#: code:addons/website_mail_channel/static/src/js/website_mail_channel.editor.js:18
+#: code:addons/website_mail_channel/static/src/js/website_mail_channel.editor.js:19
 #, python-format
 msgid "Add a Subscribe Button"
 msgstr "Agregar un Botón de Suscripción"
@@ -65,7 +64,7 @@ msgstr "Cambiar Lista de Discusión"
 
 #. module: website_mail_channel
 #. openerp-web
-#: code:addons/website_mail_channel/static/src/js/website_mail_channel.editor.js:19
+#: code:addons/website_mail_channel/static/src/js/website_mail_channel.editor.js:20
 #, python-format
 msgid "Discussion List"
 msgstr "Lista de Discusión"
@@ -112,9 +111,7 @@ msgstr "Descripción del Mensaje: o bien el asunto o el inicio del cuerpo"
 msgid ""
 "Need to unsubscribe? It's right here! <span class=\"fa fa-2x fa-arrow-down "
 "pull-right\"/>"
-msgstr ""
-"¿Necesita darse de baja? ¡Es justo aquí! <span class=\"fa fa-2x fa-arrow-"
-"down pull-right\"/>"
+msgstr "¿Necesita darse de baja? ¡Es justo aquí! <span class=\"fa fa-2x fa-arrow-down pull-right\"/>"
 
 #. module: website_mail_channel
 #: model:ir.model,name:website_mail_channel.model_mail_mail
@@ -143,7 +140,6 @@ msgid "Stay in touch with our Community"
 msgstr "Mantenerse en contacto con nuestra Comunidad"
 
 #. module: website_mail_channel
-#: model:ir.ui.view,arch_db:website_mail_channel.mail_channels
 #: model:ir.ui.view,arch_db:website_mail_channel.subscribe
 msgid "Subscribe"
 msgstr "Suscribirse"
@@ -158,9 +154,7 @@ msgstr "Darse de baja"
 #: model:ir.model.fields,help:website_mail_channel.field_mail_mail_path
 msgid ""
 "Used to display messages in a paragraph-based chatter using a unique path;"
-msgstr ""
-"Usado para mostrar mensajes en un mensajero basado en párrafos en un camino "
-"único;"
+msgstr "Usado para mostrar mensajes en un mensajero basado en párrafos en un camino único;"
 
 #. module: website_mail_channel
 #: model:ir.model.fields,help:website_mail_channel.field_mail_mail_website_published
@@ -168,7 +162,6 @@ msgid "Visible on the website as a comment"
 msgstr "Visible en Sitio Web como un comentario"
 
 #. module: website_mail_channel
-#: model:ir.ui.view,arch_db:website_mail_channel.mail_channels
 #: model:ir.ui.view,arch_db:website_mail_channel.subscribe
 msgid "archives"
 msgstr "archivos"
@@ -195,9 +188,7 @@ msgstr "archivos de lista de correos"
 msgid ""
 "members<br/>\n"
 "                    <i class=\"fa fa-fw fa-envelope-o\"/>"
-msgstr ""
-"miembros<br/>\n"
-"<i class=\"fa fa-fw fa-envelope-o\"/>"
+msgstr "miembros<br/>\n<i class=\"fa fa-fw fa-envelope-o\"/>"
 
 #. module: website_mail_channel
 #: model:ir.ui.view,arch_db:website_mail_channel.mail_channels
@@ -215,7 +206,6 @@ msgid "replies"
 msgstr "respuestas"
 
 #. module: website_mail_channel
-#: model:ir.ui.view,arch_db:website_mail_channel.mail_channels
 #: model:ir.ui.view,arch_db:website_mail_channel.subscribe
 msgid "send mail"
 msgstr "enviar correo"
@@ -231,13 +221,11 @@ msgid "unknown"
 msgstr "desconocido"
 
 #. module: website_mail_channel
-#: model:ir.ui.view,arch_db:website_mail_channel.mail_channels
 #: model:ir.ui.view,arch_db:website_mail_channel.subscribe
 msgid "unsubscribe"
 msgstr "darse de baja"
 
 #. module: website_mail_channel
-#: model:ir.ui.view,arch_db:website_mail_channel.mail_channels
 #: model:ir.ui.view,arch_db:website_mail_channel.subscribe
 msgid "your email..."
 msgstr "su email..."

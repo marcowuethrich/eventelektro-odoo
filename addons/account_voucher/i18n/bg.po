@@ -3,18 +3,14 @@
 # * account_voucher
 # 
 # Translators:
-# kalatchev <kalatchev@gmail.com>, 2016
-# Kaloyan Naumov <kaloyan@lumnus.net>, 2016
-# Martin Trigaux <mat@odoo.com>, 2016
-# preslav <hackerz99999@gmail.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:56+0000\n"
-"PO-Revision-Date: 2016-09-07 08:56+0000\n"
-"Last-Translator: preslav <hackerz99999@gmail.com>, 2016\n"
-"Language-Team: Bulgarian (https://www.transifex.com/odoo/teams/41243/bg/)\n"
+"POT-Creation-Date: 2016-09-22 13:16+0000\n"
+"PO-Revision-Date: 2016-09-23 08:31+0000\n"
+"Last-Translator: Martin Trigaux\n"
+"Language-Team: Bulgarian (http://www.transifex.com/odoo/odoo-9/language/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -42,19 +38,19 @@ msgid "Account Date"
 msgstr ""
 
 #. module: account_voucher
-#: model:ir.model.fields,field_description:account_voucher.field_account_voucher_account_date
-msgid "Accounting Date"
-msgstr ""
-
-#. module: account_voucher
 #: model:ir.model,name:account_voucher.model_account_voucher
 msgid "Accounting Voucher"
 msgstr ""
 
 #. module: account_voucher
+#: model:ir.model.fields,field_description:account_voucher.field_account_voucher_message_needaction
+msgid "Action Needed"
+msgstr "Нужно е действие"
+
+#. module: account_voucher
 #: model:ir.model.fields,field_description:account_voucher.field_account_voucher_line_price_subtotal
 msgid "Amount"
-msgstr "Сума"
+msgstr "Количество"
 
 #. module: account_voucher
 #: model:ir.model.fields,field_description:account_voucher.field_account_voucher_line_account_analytic_id
@@ -68,9 +64,7 @@ msgid "Are you sure you want to cancel this receipt?"
 msgstr ""
 
 #. module: account_voucher
-#: model:ir.model.fields,field_description:account_voucher.field_account_voucher_date
 #: model:ir.ui.view,arch_db:account_voucher.view_purchase_receipt_form
-#: model:ir.ui.view,arch_db:account_voucher.view_voucher_filter_vendor
 msgid "Bill Date"
 msgstr ""
 
@@ -87,7 +81,7 @@ msgstr ""
 #. module: account_voucher
 #: model:ir.ui.view,arch_db:account_voucher.view_purchase_receipt_form
 msgid "Cancel"
-msgstr "Отказ"
+msgstr "Откажи"
 
 #. module: account_voucher
 #: model:ir.ui.view,arch_db:account_voucher.view_sale_receipt_form
@@ -97,10 +91,10 @@ msgstr ""
 #. module: account_voucher
 #: selection:account.voucher,state:0
 msgid "Cancelled"
-msgstr "Отменено"
+msgstr "Отказанa"
 
 #. module: account_voucher
-#: code:addons/account_voucher/models/account_voucher.py:159
+#: code:addons/account_voucher/account_voucher.py:144
 #, python-format
 msgid "Cannot delete voucher(s) which are already opened or paid."
 msgstr ""
@@ -125,7 +119,7 @@ msgstr "Фирма"
 #: model:ir.model.fields,help:account_voucher.field_account_voucher_company_id
 #: model:ir.model.fields,help:account_voucher.field_account_voucher_line_company_id
 msgid "Company related to this journal"
-msgstr "Предприятие свързано с този дневник"
+msgstr ""
 
 #. module: account_voucher
 #: model:ir.model.fields,field_description:account_voucher.field_account_voucher_create_uid
@@ -153,9 +147,16 @@ msgid "Customer"
 msgstr "Клиент"
 
 #. module: account_voucher
+#: model:ir.model.fields,field_description:account_voucher.field_account_voucher_date
 #: model:ir.ui.view,arch_db:account_voucher.view_voucher_filter
+#: model:ir.ui.view,arch_db:account_voucher.view_voucher_filter_vendor
 msgid "Date"
 msgstr "Дата"
+
+#. module: account_voucher
+#: model:ir.model.fields,help:account_voucher.field_account_voucher_message_last_post
+msgid "Date of the last message posted on the record."
+msgstr "Дата на последното съобщение, публикувано на записа."
 
 #. module: account_voucher
 #: model:ir.model.fields,field_description:account_voucher.field_account_voucher_line_name
@@ -174,7 +175,7 @@ msgstr "Име за показване"
 #: model:ir.ui.view,arch_db:account_voucher.view_voucher_filter_sale
 #: model:ir.ui.view,arch_db:account_voucher.view_voucher_filter_vendor
 msgid "Draft"
-msgstr "Проект"
+msgstr "Чернова "
 
 #. module: account_voucher
 #: model:ir.ui.view,arch_db:account_voucher.view_voucher_filter
@@ -189,9 +190,24 @@ msgid "Due Date"
 msgstr "Насрочена дата"
 
 #. module: account_voucher
-#: model:ir.model.fields,help:account_voucher.field_account_voucher_account_date
+#: model:ir.model.fields,help:account_voucher.field_account_voucher_date
 msgid "Effective date for accounting entries"
 msgstr ""
+
+#. module: account_voucher
+#: model:ir.model.fields,field_description:account_voucher.field_account_voucher_message_follower_ids
+msgid "Followers"
+msgstr "Последователи"
+
+#. module: account_voucher
+#: model:ir.model.fields,field_description:account_voucher.field_account_voucher_message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Последователи (канали)"
+
+#. module: account_voucher
+#: model:ir.model.fields,field_description:account_voucher.field_account_voucher_message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Последователи (партньори)"
 
 #. module: account_voucher
 #: model:ir.model.fields,help:account_voucher.field_account_voucher_line_sequence
@@ -212,6 +228,16 @@ msgid "ID"
 msgstr "ID"
 
 #. module: account_voucher
+#: model:ir.model.fields,help:account_voucher.field_account_voucher_message_unread
+msgid "If checked new messages require your attention."
+msgstr "Ако е отбелязано, новите съобщения ще изискват внимание."
+
+#. module: account_voucher
+#: model:ir.model.fields,help:account_voucher.field_account_voucher_message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Ако е отбелязано, новите съобщения ще изискват внимание."
+
+#. module: account_voucher
 #: model:ir.model.fields,help:account_voucher.field_account_voucher_tax_correction
 msgid ""
 "In case we have a rounding problem in the tax, use this field to correct it"
@@ -224,12 +250,17 @@ msgid "Internal Notes"
 msgstr "Вътрешни бележки"
 
 #. module: account_voucher
+#: model:ir.model.fields,field_description:account_voucher.field_account_voucher_message_is_follower
+msgid "Is Follower"
+msgstr "е последовател"
+
+#. module: account_voucher
 #: model:ir.model.fields,field_description:account_voucher.field_account_voucher_journal_id
 #: model:ir.ui.view,arch_db:account_voucher.view_voucher_filter
 #: model:ir.ui.view,arch_db:account_voucher.view_voucher_filter_sale
 #: model:ir.ui.view,arch_db:account_voucher.view_voucher_filter_vendor
 msgid "Journal"
-msgstr "Дневник"
+msgstr "Журнал"
 
 #. module: account_voucher
 #: model:ir.model.fields,field_description:account_voucher.field_account_voucher_move_id
@@ -241,6 +272,11 @@ msgstr "Дневников запис"
 #: model:ir.ui.view,arch_db:account_voucher.view_sale_receipt_form
 msgid "Journal Items"
 msgstr ""
+
+#. module: account_voucher
+#: model:ir.model.fields,field_description:account_voucher.field_account_voucher_message_last_post
+msgid "Last Message Date"
+msgstr "Дата на последното съобщение"
 
 #. module: account_voucher
 #: model:ir.model.fields,field_description:account_voucher.field_account_voucher___last_update
@@ -261,6 +297,11 @@ msgid "Last Updated on"
 msgstr "Последно обновено на"
 
 #. module: account_voucher
+#: model:ir.model.fields,field_description:account_voucher.field_account_voucher_message_ids
+msgid "Messages"
+msgstr "Съобщения"
+
+#. module: account_voucher
 #: model:ir.model.fields,field_description:account_voucher.field_account_voucher_narration
 msgid "Notes"
 msgstr "Бележки"
@@ -268,7 +309,22 @@ msgstr "Бележки"
 #. module: account_voucher
 #: model:ir.model.fields,field_description:account_voucher.field_account_voucher_number
 msgid "Number"
-msgstr "Число"
+msgstr "Номер"
+
+#. module: account_voucher
+#: model:ir.model.fields,field_description:account_voucher.field_account_voucher_message_needaction_counter
+msgid "Number of Actions"
+msgstr "Брой действия"
+
+#. module: account_voucher
+#: model:ir.model.fields,help:account_voucher.field_account_voucher_message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Брой съобщения, които изискват внимание"
+
+#. module: account_voucher
+#: model:ir.model.fields,help:account_voucher.field_account_voucher_message_unread_counter
+msgid "Number of unread messages"
+msgstr "Брой непрочетени съобщения"
 
 #. module: account_voucher
 #: model:ir.model.fields,help:account_voucher.field_account_voucher_line_tax_ids
@@ -276,9 +332,14 @@ msgid "Only for tax excluded from price"
 msgstr ""
 
 #. module: account_voucher
+#: model:ir.actions.client,name:account_voucher.action_client_invoice_menu
+msgid "Open Invoicing Menu"
+msgstr ""
+
+#. module: account_voucher
 #: model:ir.model.fields,field_description:account_voucher.field_account_voucher_paid
 msgid "Paid"
-msgstr "Платено"
+msgstr "Платен"
 
 #. module: account_voucher
 #: model:ir.model.fields,field_description:account_voucher.field_account_voucher_partner_id
@@ -307,13 +368,13 @@ msgid "Payment Reference"
 msgstr ""
 
 #. module: account_voucher
-#: code:addons/account_voucher/models/account_voucher.py:195
+#: code:addons/account_voucher/account_voucher.py:180
 #, python-format
 msgid "Please activate the sequence of selected journal !"
 msgstr ""
 
 #. module: account_voucher
-#: code:addons/account_voucher/models/account_voucher.py:198
+#: code:addons/account_voucher/account_voucher.py:183
 #, python-format
 msgid "Please define a sequence on the journal."
 msgstr ""
@@ -475,7 +536,7 @@ msgstr "Обща сума"
 #. module: account_voucher
 #: model:ir.model.fields,field_description:account_voucher.field_account_voucher_voucher_type
 msgid "Type"
-msgstr "Тип"
+msgstr "Вид"
 
 #. module: account_voucher
 #: model:ir.model.fields,field_description:account_voucher.field_account_voucher_line_price_unit
@@ -483,10 +544,20 @@ msgid "Unit Price"
 msgstr "Единична цена"
 
 #. module: account_voucher
+#: model:ir.model.fields,field_description:account_voucher.field_account_voucher_message_unread
+msgid "Unread Messages"
+msgstr "Непрочетени съобщения"
+
+#. module: account_voucher
+#: model:ir.model.fields,field_description:account_voucher.field_account_voucher_message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Брой непрочетени съобщения"
+
+#. module: account_voucher
 #: model:ir.ui.view,arch_db:account_voucher.view_purchase_receipt_form
 #: model:ir.ui.view,arch_db:account_voucher.view_sale_receipt_form
 msgid "Validate"
-msgstr "Проверка"
+msgstr "Потвърждаване"
 
 #. module: account_voucher
 #: model:ir.ui.view,arch_db:account_voucher.view_purchase_receipt_form
@@ -501,7 +572,7 @@ msgid "Vendor Voucher"
 msgstr ""
 
 #. module: account_voucher
-#: code:addons/account_voucher/models/account_voucher.py:97
+#: code:addons/account_voucher/account_voucher.py:28
 #: model:ir.model.fields,field_description:account_voucher.field_account_voucher_line_voucher_id
 #: model:ir.ui.view,arch_db:account_voucher.view_voucher_filter
 #: model:ir.ui.view,arch_db:account_voucher.view_voucher_filter_sale
@@ -538,6 +609,16 @@ msgid "Vouchers Entries"
 msgstr ""
 
 #. module: account_voucher
+#: model:ir.model.fields,field_description:account_voucher.field_account_voucher_website_message_ids
+msgid "Website Messages"
+msgstr "Съобщения от уебсайта"
+
+#. module: account_voucher
+#: model:ir.model.fields,help:account_voucher.field_account_voucher_website_message_ids
+msgid "Website communication history"
+msgstr "История на комуникацията в уебсайта"
+
+#. module: account_voucher
 #: model:ir.actions.act_window,help:account_voucher.action_purchase_receipt
 msgid ""
 "When the purchase receipt is confirmed, you can record the\n"
@@ -552,7 +633,7 @@ msgid ""
 msgstr ""
 
 #. module: account_voucher
-#: code:addons/account_voucher/models/account_voucher.py:361
+#: code:addons/account_voucher/account_voucher.py:345
 #, python-format
 msgid "You must first select a partner!"
 msgstr ""

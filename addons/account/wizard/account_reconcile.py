@@ -1,6 +1,6 @@
-from odoo import models, fields, api, _
-from odoo.tools.float_utils import float_round
-from odoo.exceptions import UserError
+from openerp import models, fields, api, _
+from openerp.tools.float_utils import float_round
+from openerp.exceptions import UserError
 
 
 class AccountMoveLineReconcile(models.TransientModel):
@@ -85,7 +85,7 @@ class AccountMoveLineReconcileWriteoff(models.TransientModel):
     writeoff_acc_id = fields.Many2one('account.account', string='Write-Off account', required=True, domain=[('deprecated', '=', False)])
     date_p = fields.Date(string='Date', default=fields.Date.context_today)
     comment = fields.Char(required=True, default='Write-off')
-    analytic_id = fields.Many2one('account.analytic.account', string='Analytic Account')
+    analytic_id = fields.Many2one('account.analytic.account', string='Analytic Account', domain=[('account_type', '=', 'normal')])
 
     @api.multi
     def trans_rec_addendum(self):

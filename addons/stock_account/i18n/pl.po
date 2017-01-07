@@ -3,20 +3,16 @@
 # * stock_account
 # 
 # Translators:
-# Marcin Młynarczyk <mlynarczyk@gmail.com>, 2016
-# Martin Trigaux <mat@odoo.com>, 2016
-# Grzegorz Grzelak <grzegorz.grzelak@openglobe.pl>, 2016
-# Judyta Kaźmierczak <judyta.kazmierczak@openglobe.pl>, 2016
 # zbik2607 <darek@krokus.com.pl>, 2016
 # Piotr Szlązak <szlazakpiotr@gmail.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:56+0000\n"
-"PO-Revision-Date: 2016-09-07 08:56+0000\n"
-"Last-Translator: Piotr Szlązak <szlazakpiotr@gmail.com>, 2016\n"
-"Language-Team: Polish (https://www.transifex.com/odoo/teams/41243/pl/)\n"
+"POT-Creation-Date: 2015-10-01 06:26+0000\n"
+"PO-Revision-Date: 2016-10-16 12:00+0000\n"
+"Last-Translator: zbik2607 <darek@krokus.com.pl>\n"
+"Language-Team: Polish (http://www.transifex.com/odoo/odoo-9/language/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -34,16 +30,31 @@ msgid "Account Stock Properties"
 msgstr "Właściwości konta zapasów"
 
 #. module: stock_account
+#: model:ir.ui.view,arch_db:stock_account.view_stock_config_settings_inherit
+msgid "Accounting"
+msgstr "Księgowość"
+
+#. module: stock_account
 #: model:ir.ui.view,arch_db:stock_account.view_location_form_inherit
 msgid "Accounting Information"
 msgstr "Informacje księgowe"
 
 #. module: stock_account
+#: code:addons/stock_account/wizard/stock_change_standard_price.py:58
+#, python-format
+msgid "Active ID is not set in Context."
+msgstr "Aktrywne ID nie jest ustawione w kontekście."
+
+#. module: stock_account
 #: model:ir.model.fields,help:stock_account.field_stock_config_settings_group_stock_inventory_valuation
 msgid ""
 "Allows to configure inventory valuations on products and product categories."
-msgstr ""
-"Pozwala konfigurować wycenę zapasów dla produktów lub kategorii produktów."
+msgstr "Pozwala konfigurować wycenę zapasów dla produktów lub kategorii produktów."
+
+#. module: stock_account
+#: model:ir.model.fields,field_description:stock_account.field_product_product_asset_category_id
+msgid "Asset Type"
+msgstr "Typ środka trwałego"
 
 #. module: stock_account
 #: selection:product.category,property_cost_method:0
@@ -52,27 +63,15 @@ msgid "Average Price"
 msgstr "Cena przeciętna"
 
 #. module: stock_account
+#: model:ir.model.fields,field_description:stock_account.field_product_product_can_be_expensed
+msgid "Can be expensed"
+msgstr "Może być wydatkiem"
+
+#. module: stock_account
 #: model:ir.ui.view,arch_db:stock_account.view_change_standard_price
 #: model:ir.ui.view,arch_db:stock_account.view_wizard_valuation_history
 msgid "Cancel"
 msgstr "Anuluj"
-
-#. module: stock_account
-#: code:addons/stock_account/models/stock.py:244
-#, python-format
-msgid ""
-"Cannot find a stock input account for the product %s. You must define one on"
-" the product category, or on the location, before processing this operation."
-msgstr ""
-
-#. module: stock_account
-#: code:addons/stock_account/models/stock.py:246
-#, python-format
-msgid ""
-"Cannot find a stock output account for the product %s. You must define one "
-"on the product category, or on the location, before processing this "
-"operation."
-msgstr ""
 
 #. module: stock_account
 #: model:ir.ui.view,arch_db:stock_account.view_change_standard_price
@@ -104,35 +103,27 @@ msgid "Choose your date"
 msgstr "Wybierz swoją datę"
 
 #. module: stock_account
+#: model:ir.model.fields,help:stock_account.field_product_product_uos_coeff
+msgid ""
+"Coefficient to convert default Unit of Measure to Unit of Sale uos = uom * "
+"coeff"
+msgstr "Coefficient to convert default Unit of Measure to Unit of Sale uos = uom * coeff"
+
+#. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_history_company_id
 #: model:ir.ui.view,arch_db:stock_account.view_stock_history_report_search
 msgid "Company"
 msgstr "Firma"
 
 #. module: stock_account
-#: model:ir.ui.view,arch_db:stock_account.product_variant_easy_edit_view_inherit
 #: model:ir.ui.view,arch_db:stock_account.view_template_property_form
 msgid "Compute from average price"
 msgstr "Oblicz z ceny przeciętnej"
 
 #. module: stock_account
-#: code:addons/stock_account/models/stock.py:319
-#, python-format
-msgid ""
-"Configuration error. Please configure the price difference account on the "
-"product or its category to process this operation."
-msgstr ""
-
-#. module: stock_account
 #: model:ir.ui.view,arch_db:stock_account.view_change_standard_price
 msgid "Cost"
 msgstr "Koszt"
-
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_product_cost_method
-#: model:ir.model.fields,field_description:stock_account.field_product_template_cost_method
-msgid "Cost method"
-msgstr "Metoda wyceny"
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_product_category_property_cost_method
@@ -142,21 +133,16 @@ msgid "Costing Method"
 msgstr "Metoda wyceny"
 
 #. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_change_standard_price_counterpart_account_id
-msgid "Counter-Part Account"
-msgstr "Konto przeciwstawne"
-
-#. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_change_standard_price_create_uid
 #: model:ir.model.fields,field_description:stock_account.field_wizard_valuation_history_create_uid
 msgid "Created by"
-msgstr "Utworzona przez"
+msgstr "Utworzone przez"
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_change_standard_price_create_date
 #: model:ir.model.fields,field_description:stock_account.field_wizard_valuation_history_create_date
 msgid "Created on"
-msgstr "Data utworzenia"
+msgstr "Utworzono"
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_wizard_valuation_history_date
@@ -164,11 +150,16 @@ msgid "Date"
 msgstr "Data"
 
 #. module: stock_account
+#: model:ir.model.fields,field_description:stock_account.field_product_product_deferred_revenue_category_id
+msgid "Deferred Revenue Type"
+msgstr "Typ odroczonego przychodu"
+
+#. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_change_standard_price_display_name
 #: model:ir.model.fields,field_description:stock_account.field_stock_history_display_name
 #: model:ir.model.fields,field_description:stock_account.field_wizard_valuation_history_display_name
 msgid "Display Name"
-msgstr "Nazwa wyświetlana"
+msgstr "Wyświetlana nazwa "
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_inventory_accounting_date
@@ -178,7 +169,7 @@ msgstr "Wymuś datę księgowania"
 #. module: stock_account
 #: model:ir.ui.view,arch_db:stock_account.view_stock_history_report_search
 msgid "Group By"
-msgstr "Grupuj wg"
+msgstr "Pogrupuj wg"
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_change_standard_price_id
@@ -192,9 +183,7 @@ msgstr "ID"
 msgid ""
 "If cost price is increased, stock variation account will be debited and stock output account will be credited with the value = (difference of amount * quantity available).\n"
 "If cost price is decreased, stock variation account will be creadited and stock input account will be debited."
-msgstr ""
-"jeśli cena kosztowa zostanie zwiększona, to konto wyceny będzie zapisane po stronie Winien, a konto zapasów wychodzących po stronie Ma wartością = (różnica wartości * ilość bieżąca).\n"
-"Jeśli cena kosztowa jest zmniejszana, to konto wyceny będzie zapisane po stronie Ma a konto zapasów wchodzących po stronie Winien."
+msgstr "jeśli cena kosztowa zostanie zwiększona, to konto wyceny będzie zapisane po stronie Winien, a konto zapasów wychodzących po stronie Ma wartością = (różnica wartości * ilość bieżąca).\nJeśli cena kosztowa jest zmniejszana, to konto wyceny będzie zapisane po stronie Ma a konto zapasów wchodzących po stronie Winien."
 
 #. module: stock_account
 #: model:ir.model.fields,help:stock_account.field_product_category_property_valuation
@@ -234,7 +223,7 @@ msgstr ""
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_stock_inventory
 msgid "Inventory"
-msgstr "Magazynowanie"
+msgstr "Inwentaryzacja"
 
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_stock_location
@@ -270,7 +259,7 @@ msgstr "Faktura"
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_account_invoice_line
 msgid "Invoice Line"
-msgstr "linia faktury"
+msgstr "Pozycja faktury"
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_config_settings_module_stock_landed_costs
@@ -282,31 +271,25 @@ msgstr "Koszty nabycia"
 #: model:ir.model.fields,field_description:stock_account.field_stock_history___last_update
 #: model:ir.model.fields,field_description:stock_account.field_wizard_valuation_history___last_update
 msgid "Last Modified on"
-msgstr "Data ostatniej modyfikacji"
+msgstr "Ostatnio modyfikowano"
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_change_standard_price_write_uid
 #: model:ir.model.fields,field_description:stock_account.field_wizard_valuation_history_write_uid
 msgid "Last Updated by"
-msgstr "Ostatnio aktualizowane przez"
+msgstr "Ostatnio modyfikowane przez"
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_change_standard_price_write_date
 #: model:ir.model.fields,field_description:stock_account.field_wizard_valuation_history_write_date
 msgid "Last Updated on"
-msgstr "Data ostatniej aktualizacji"
+msgstr "Ostatnia zmiana"
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_history_location_id
 #: model:ir.ui.view,arch_db:stock_account.view_stock_history_report_search
 msgid "Location"
-msgstr "Miejsce"
-
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_stock_history_serial_number
-#: model:ir.ui.view,arch_db:stock_account.view_stock_history_report_search
-msgid "Lot/Serial Number"
-msgstr "Partia/Numer seryjny"
+msgstr "Strefa"
 
 #. module: stock_account
 #: model:res.groups,name:stock_account.group_inventory_valuation
@@ -314,7 +297,12 @@ msgid "Manage Inventory Valuation and Costing Methods"
 msgstr "Zarządzaj wyceną magazynu oraz metodami wyceny"
 
 #. module: stock_account
-#: code:addons/stock_account/models/product.py:109
+#: model:ir.ui.view,arch_db:stock_account.view_stock_history_report_search
+msgid "Move"
+msgstr "Przesunięcie"
+
+#. module: stock_account
+#: code:addons/stock_account/product.py:124
 #, python-format
 msgid "No difference between standard price and new price!"
 msgstr "Nie ma różnicy między ceną ewidencyjną a nową ceną!"
@@ -350,14 +338,12 @@ msgstr "Na bieżąco (automatycznie)"
 #: selection:stock.config.settings,group_stock_inventory_valuation:0
 msgid ""
 "Perpetual inventory valuation (stock move generates accounting entries)"
-msgstr ""
-"Natychmiastowa wycena magazynu (przesunięcia magazynowe generują zapisy "
-"księgowe)"
+msgstr "Natychmiastowa wycena magazynu (przesunięcia magazynowe generują zapisy księgowe)"
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_change_standard_price_new_price
 msgid "Price"
-msgstr "Kwota"
+msgstr "Cena"
 
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_product_product
@@ -367,11 +353,21 @@ msgid "Product"
 msgstr "Produkt"
 
 #. module: stock_account
+#: model:ir.model.fields,field_description:stock_account.field_product_product_alert_time
+msgid "Product Alert Time"
+msgstr "Czas alertu dla produktu"
+
+#. module: stock_account
 #: model:ir.model,name:stock_account.model_product_category
 #: model:ir.model.fields,field_description:stock_account.field_stock_history_product_categ_id
 #: model:ir.ui.view,arch_db:stock_account.view_stock_history_report_search
 msgid "Product Category"
-msgstr "Kategoria produktu"
+msgstr "Kategoria Produktu"
+
+#. module: stock_account
+#: model:ir.model.fields,field_description:stock_account.field_product_product_life_time
+msgid "Product Life Time"
+msgstr "Czas przydatności produktu"
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_history_quantity
@@ -379,11 +375,21 @@ msgid "Product Quantity"
 msgstr "Ilość produktu"
 
 #. module: stock_account
+#: model:ir.model.fields,field_description:stock_account.field_product_product_removal_time
+msgid "Product Removal Time"
+msgstr "Czas usunięcia produktu"
+
+#. module: stock_account
 #: model:ir.model,name:stock_account.model_product_template
 #: model:ir.model.fields,field_description:stock_account.field_stock_history_product_template_id
 #: model:ir.ui.view,arch_db:stock_account.view_stock_history_report_search
 msgid "Product Template"
 msgstr "Szablon produktu"
+
+#. module: stock_account
+#: model:ir.model.fields,field_description:stock_account.field_product_product_use_time
+msgid "Product Use Time"
+msgstr "Czas ważności produktu"
 
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_stock_quant
@@ -407,15 +413,27 @@ msgid "Retrieve the curent stock valuation."
 msgstr ""
 
 #. module: stock_account
-#: model:ir.ui.view,arch_db:stock_account.product_variant_easy_edit_view_inherit
-#: model:ir.ui.view,arch_db:stock_account.view_template_property_form
-msgid "Set standard price"
-msgstr "Ustaw cenę ewidencyjną"
+#: model:ir.model.fields,field_description:stock_account.field_stock_history_serial_number
+#: model:ir.ui.view,arch_db:stock_account.view_stock_history_report_search
+msgid "Serial Number"
+msgstr "Numer Seryjny"
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_history_source
 msgid "Source"
 msgstr "Źródło"
+
+#. module: stock_account
+#: model:ir.model.fields,help:stock_account.field_product_product_uos_id
+msgid ""
+"Specify a unit of measure here if invoicing is made in another unit of "
+"measure than inventory. Keep empty to use the default unit of measure."
+msgstr "Podaj jednostkę miary, jesli chcesz fakturować w innej jednostce niż domyślna. Pozostaw puste, aby stosować w fakturowaniu jednostkę domyślną."
+
+#. module: stock_account
+#: model:ir.model.fields,help:stock_account.field_product_product_can_be_expensed
+msgid "Specify whether the product can be selected in an HR expense."
+msgstr ""
 
 #. module: stock_account
 #: selection:product.category,property_cost_method:0
@@ -424,8 +442,8 @@ msgid "Standard Price"
 msgstr "Cena ewidencyjna"
 
 #. module: stock_account
-#: code:addons/stock_account/models/product.py:126
-#: code:addons/stock_account/models/product.py:131
+#: code:addons/stock_account/product.py:145
+#: code:addons/stock_account/product.py:152
 #, python-format
 msgid "Standard Price changed"
 msgstr "Zmiana ceny kosztowej"
@@ -435,8 +453,8 @@ msgstr "Zmiana ceny kosztowej"
 #: model:ir.model.fields,help:stock_account.field_product_template_property_cost_method
 msgid ""
 "Standard Price: The cost price is manually updated at the end of a specific period (usually once a year).\n"
-"                Average Price: The cost price is recomputed at each incoming shipment and used for the product valuation.\n"
-"                Real Price: The cost price displayed is the price of the last outgoing product (will be use in case of inventory loss for example)."
+"                    Average Price: The cost price is recomputed at each incoming shipment and used for the product valuation.\n"
+"                    Real Price: The cost price displayed is the price of the last outgoing product (will be use in case of inventory loss for example)."
 msgstr ""
 
 #. module: stock_account
@@ -448,11 +466,6 @@ msgid ""
 msgstr ""
 
 #. module: stock_account
-#: model:ir.ui.view,arch_db:stock_account.view_stock_config_settings_inherit
-msgid "Stock Accounting"
-msgstr "Księgowość magazynowa"
-
-#. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_product_category_property_stock_account_input_categ_id
 #: model:ir.model.fields,field_description:stock_account.field_product_product_property_stock_account_input
 #: model:ir.model.fields,field_description:stock_account.field_product_template_property_stock_account_input
@@ -460,7 +473,7 @@ msgid "Stock Input Account"
 msgstr "Konto dla zapasów wchodzących"
 
 #. module: stock_account
-#: code:addons/stock_account/models/account_chart_template.py:15
+#: code:addons/stock_account/stock_account.py:418
 #: model:ir.model.fields,field_description:stock_account.field_product_category_property_stock_journal
 #, python-format
 msgid "Stock Journal"
@@ -469,7 +482,6 @@ msgstr "Dziennik magazynowy"
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_stock_move
 #: model:ir.model.fields,field_description:stock_account.field_stock_history_move_id
-#: model:ir.ui.view,arch_db:stock_account.view_stock_history_report_search
 msgid "Stock Move"
 msgstr "Przesunięcie zapasu"
 
@@ -496,7 +508,7 @@ msgid "Stock Valuation Account (Outgoing)"
 msgstr "Konto wyceny zapasów (wydania)"
 
 #. module: stock_account
-#: code:addons/stock_account/wizard/wizard_valuation_history.py:24
+#: code:addons/stock_account/wizard/stock_valuation_history.py:31
 #: model:ir.ui.view,arch_db:stock_account.view_stock_history_report_graph
 #: model:ir.ui.view,arch_db:stock_account.view_stock_history_report_pivot
 #: model:ir.ui.view,arch_db:stock_account.view_stock_history_report_search
@@ -508,21 +520,22 @@ msgstr "Wartość magazynu na dzień"
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_account_chart_template
 msgid "Templates for Account Chart"
-msgstr "Szablony planów kont"
-
-#. module: stock_account
-#: code:addons/stock_account/models/stock.py:273
-#, python-format
-msgid ""
-"The found valuation amount for product %s is zero. Which means there is "
-"probably a configuration error. Check the costing method and the standard "
-"price"
-msgstr ""
+msgstr "Szablon planu kont"
 
 #. module: stock_account
 #: model:ir.ui.view,arch_db:stock_account.view_stock_history_report_tree
 msgid "Total Value"
 msgstr "Wartość Razem"
+
+#. module: stock_account
+#: model:ir.model.fields,field_description:stock_account.field_product_product_uos_coeff
+msgid "Unit of Measure -> UOS Coeff"
+msgstr "JM -> współczynnik JS"
+
+#. module: stock_account
+#: model:ir.model.fields,field_description:stock_account.field_product_product_uos_id
+msgid "Unit of Sale"
+msgstr "Jednostka sprzedaży (JS)"
 
 #. module: stock_account
 #: model:ir.model.fields,help:stock_account.field_stock_location_valuation_in_account_id
@@ -532,11 +545,7 @@ msgid ""
 "being moved from an internal location into this location, instead of the "
 "generic Stock Output Account set on the product. This has no effect for "
 "internal locations."
-msgstr ""
-"Stosowane przy wycenie w czasie rzeczywistym. Jeśli ustawione w strefie "
-"wirtualnej, to konto to będzie stosowane do wartości produktów przesuwanych "
-"ze strefy wewnętrznej (do wirtualnej)  zamiast konta dla wychodzących "
-"ustawionego w produkcie."
+msgstr "Stosowane przy wycenie w czasie rzeczywistym. Jeśli ustawione w strefie wirtualnej, to konto to będzie stosowane do wartości produktów przesuwanych ze strefy wewnętrznej (do wirtualnej)  zamiast konta dla wychodzących ustawionego w produkcie."
 
 #. module: stock_account
 #: model:ir.model.fields,help:stock_account.field_stock_location_valuation_out_account_id
@@ -546,22 +555,40 @@ msgid ""
 "being moved out of this location and into an internal location, instead of "
 "the generic Stock Output Account set on the product. This has no effect for "
 "internal locations."
-msgstr ""
-"Stosowane przy wycenie w czasie rzeczywistym. Jeśli ustawione w strefie "
-"wirtualnej, to konto to będzie stosowane do wartości produktów przesuwanych "
-"z tej strefy wirtualnej (do wewnętrznej) zamiast konta dla wychodzących "
-"ustawionego w produkcie."
-
-#. module: stock_account
-#: model:ir.model.fields,field_description:stock_account.field_product_product_valuation
-#: model:ir.model.fields,field_description:stock_account.field_product_template_valuation
-msgid "Valuation"
-msgstr "Wycena"
+msgstr "Stosowane przy wycenie w czasie rzeczywistym. Jeśli ustawione w strefie wirtualnej, to konto to będzie stosowane do wartości produktów przesuwanych z tej strefy wirtualnej (do wewnętrznej) zamiast konta dla wychodzących ustawionego w produkcie."
 
 #. module: stock_account
 #: model:ir.model.fields,field_description:stock_account.field_stock_history_price_unit_on_quant
 msgid "Value"
 msgstr "Wartość"
+
+#. module: stock_account
+#: model:ir.model.fields,help:stock_account.field_product_product_alert_time
+msgid ""
+"When a new a Serial Number is issued, this is the number of days before an "
+"alert should be notified."
+msgstr "To jest liczba dni od utworzenia numeru seryjnego do powiadomienia o upływie przydatności."
+
+#. module: stock_account
+#: model:ir.model.fields,help:stock_account.field_product_product_life_time
+msgid ""
+"When a new a Serial Number is issued, this is the number of days before the "
+"goods may become dangerous and must not be consumed."
+msgstr "To jest liczba dni od utworzenia nowego numeru seryjnego, po której produkt może być niebezpieczny i powinien być zutylizowany."
+
+#. module: stock_account
+#: model:ir.model.fields,help:stock_account.field_product_product_removal_time
+msgid ""
+"When a new a Serial Number is issued, this is the number of days before the "
+"goods should be removed from the stock."
+msgstr "To jest liczba dni od utworzenia numeru seryjnego, po której produkty powinny być usunięte ze stanu."
+
+#. module: stock_account
+#: model:ir.model.fields,help:stock_account.field_product_product_use_time
+msgid ""
+"When a new a Serial Number is issued, this is the number of days before the "
+"goods starts deteriorating, without being dangerous yet."
+msgstr "Kiedy tworzony jest nowy numer seryjny, to to jest liczba dni przydatności produktu. Produkt nie będzie wtedy jeszcze niebezpieczny."
 
 #. module: stock_account
 #: model:ir.model.fields,help:stock_account.field_product_category_property_stock_account_input_categ_id
@@ -571,11 +598,7 @@ msgid ""
 "specific valuation account set on the source location. This is the default "
 "value for all products in this category. It can also directly be set on each"
 " product"
-msgstr ""
-"Przy wycenie w czasie rzeczywistym koszt będzie księgowany na tym koncie "
-"jako przeciwstawnym przy przyjęciach zewnętrznych. Wyjątkiem będą sytuacje "
-"kiedy inne konto będzie ustawione w strefie źródłowej. Jeśli konto nie jest "
-"ustawione w produkcie, to zostanie użyte konto z kategorii produktu."
+msgstr "Przy wycenie w czasie rzeczywistym koszt będzie księgowany na tym koncie jako przeciwstawnym przy przyjęciach zewnętrznych. Wyjątkiem będą sytuacje kiedy inne konto będzie ustawione w strefie źródłowej. Jeśli konto nie jest ustawione w produkcie, to zostanie użyte konto z kategorii produktu."
 
 #. module: stock_account
 #: model:ir.model.fields,help:stock_account.field_product_product_property_stock_account_input
@@ -585,11 +608,7 @@ msgid ""
 "incoming stock moves will be posted in this account, unless there is a "
 "specific valuation account set on the source location. When not set on the "
 "product, the one from the product category is used."
-msgstr ""
-"Przy wycenie w czasie rzeczywistym koszt będzie księgowany na tym koncie "
-"jako przeciwstawnym przy przyjęciach zewnętrznych. Wyjątkiem będą sytuacje "
-"kiedy inne konto będzie ustawione w strefie źródłowej. Jeśli konto nie jest "
-"ustawione w produkcie, to zostanie użyte konto z kategorii produktu."
+msgstr "Przy wycenie w czasie rzeczywistym koszt będzie księgowany na tym koncie jako przeciwstawnym przy przyjęciach zewnętrznych. Wyjątkiem będą sytuacje kiedy inne konto będzie ustawione w strefie źródłowej. Jeśli konto nie jest ustawione w produkcie, to zostanie użyte konto z kategorii produktu."
 
 #. module: stock_account
 #: model:ir.model.fields,help:stock_account.field_product_category_property_stock_account_output_categ_id
@@ -599,11 +618,7 @@ msgid ""
 "specific valuation account set on the destination location. This is the "
 "default value for all products in this category. It can also directly be set"
 " on each product"
-msgstr ""
-"Przy wycenie w czasie rzeczywistym koszt będzie księgowany na tym koncie "
-"jako przeciwstawnym przy wydaniach zewnętrznych. Wyjątkiem będą sytuacje "
-"kiedy inne konto będzie ustawione w strefie docelowej. Jeśli konto nie jest "
-"ustawione w produkcie, to zostanie użyte konto z kategorii produktu."
+msgstr "Przy wycenie w czasie rzeczywistym koszt będzie księgowany na tym koncie jako przeciwstawnym przy wydaniach zewnętrznych. Wyjątkiem będą sytuacje kiedy inne konto będzie ustawione w strefie docelowej. Jeśli konto nie jest ustawione w produkcie, to zostanie użyte konto z kategorii produktu."
 
 #. module: stock_account
 #: model:ir.model.fields,help:stock_account.field_product_product_property_stock_account_output
@@ -613,29 +628,21 @@ msgid ""
 "outgoing stock moves will be posted in this account, unless there is a "
 "specific valuation account set on the destination location. When not set on "
 "the product, the one from the product category is used."
-msgstr ""
-"Przy wycenie w czasie rzeczywistym koszt będzie księgowany na tym koncie "
-"jako przeciwstawnym. Wyjątkiem będą sytuacje kiedy inne konto będzie "
-"ustawione w strefie docelowej. Jeśli konto nie jest ustawione w produkcie, "
-"to zostanie użyte konto z kategorii produktu."
+msgstr "Przy wycenie w czasie rzeczywistym koszt będzie księgowany na tym koncie jako przeciwstawnym. Wyjątkiem będą sytuacje kiedy inne konto będzie ustawione w strefie docelowej. Jeśli konto nie jest ustawione w produkcie, to zostanie użyte konto z kategorii produktu."
 
 #. module: stock_account
 #: model:ir.model.fields,help:stock_account.field_product_category_property_stock_journal
 msgid ""
 "When doing real-time inventory valuation, this is the Accounting Journal in "
 "which entries will be automatically posted when stock moves are processed."
-msgstr ""
-"Jeśli jest prowadzona bieżąca wycena zapasów, to to jest dziennik do "
-"księgowania zapisów z przesunięć magazynowych."
+msgstr "Jeśli jest prowadzona bieżąca wycena zapasów, to to jest dziennik do księgowania zapisów z przesunięć magazynowych."
 
 #. module: stock_account
 #: model:ir.model.fields,help:stock_account.field_product_category_property_stock_valuation_account_id
 msgid ""
 "When real-time inventory valuation is enabled on a product, this account "
 "will hold the current value of the products."
-msgstr ""
-"Jeśli w produkcie jest stosowana bieżąca wycena zapasów, to to konto będzie "
-"stosowane do księgowania bieżącej wartości danego produktu w magazynie."
+msgstr "Jeśli w produkcie jest stosowana bieżąca wycena zapasów, to to konto będzie stosowane do księgowania bieżącej wartości danego produktu w magazynie."
 
 #. module: stock_account
 #: model:ir.model,name:stock_account.model_wizard_valuation_history
@@ -643,20 +650,11 @@ msgid "Wizard that opens the stock valuation history table"
 msgstr ""
 
 #. module: stock_account
-#: code:addons/stock_account/models/stock.py:242
+#: code:addons/stock_account/stock_account.py:275
 #, python-format
 msgid ""
 "You don't have any stock journal defined on your product category, check if "
 "you have installed a chart of accounts"
-msgstr ""
-
-#. module: stock_account
-#: code:addons/stock_account/models/product.py:111
-#: code:addons/stock_account/models/stock.py:248
-#, python-format
-msgid ""
-"You don't have any stock valuation account defined on your product category."
-" You must define one before processing this operation."
 msgstr ""
 
 #. module: stock_account
@@ -673,3 +671,11 @@ msgstr "stock.config.settings"
 #: model:ir.model,name:stock_account.model_stock_history
 msgid "stock.history"
 msgstr ""
+
+#. module: stock_account
+#: model:ir.model.fields,field_description:stock_account.field_product_product_cost_method
+#: model:ir.model.fields,field_description:stock_account.field_product_product_valuation
+#: model:ir.model.fields,field_description:stock_account.field_product_template_cost_method
+#: model:ir.model.fields,field_description:stock_account.field_product_template_valuation
+msgid "unknown"
+msgstr "nieznane"

@@ -3,19 +3,15 @@
 # * website_rating_project_issue
 # 
 # Translators:
-# Эдуард Манятовский <manyatovskiy@gmail.com>, 2016
-# Martin Trigaux <mat@odoo.com>, 2016
 # Viktor Pogrebniak <vp@aifil.ru>, 2016
-# Denis Trepalin <zekarious@gmail.com>, 2016
-# dr&mx <dronmax@gmail.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:58+0000\n"
-"PO-Revision-Date: 2016-09-07 08:58+0000\n"
-"Last-Translator: dr&mx <dronmax@gmail.com>, 2016\n"
-"Language-Team: Russian (https://www.transifex.com/odoo/teams/41243/ru/)\n"
+"POT-Creation-Date: 2015-09-07 14:41+0000\n"
+"PO-Revision-Date: 2016-03-30 00:27+0000\n"
+"Last-Translator: Viktor Pogrebniak <vp@aifil.ru>\n"
+"Language-Team: Russian (http://www.transifex.com/odoo/odoo-9/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -39,43 +35,43 @@ msgstr "<i class=\"fa fa-envelope\"/> Email:"
 
 #. module: website_rating_project_issue
 #: model:ir.ui.view,arch_db:website_rating_project_issue.project_rating_data
-msgid "Average"
-msgstr "Среднее"
+msgid "Bad Feedback"
+msgstr "Негативный отзыв"
+
+#. module: website_rating_project_issue
+#: model:ir.ui.view,arch_db:website_rating_project_issue.project_rating_page
+msgid "Customer Satisfaction"
+msgstr "Удовлетворённость клиента"
 
 #. module: website_rating_project_issue
 #: model:ir.ui.view,arch_db:website_rating_project_issue.project_rating_data
-msgid "Bad"
-msgstr "Плохо"
+msgid "Happy Feedback"
+msgstr "Позитивный отзыв"
 
 #. module: website_rating_project_issue
-#: model:ir.ui.view,arch_db:website_rating_project_issue.project_data_satisfaction
-msgid "Customer Satisfaction of"
-msgstr "Удовлетворенность клиентов"
-
-#. module: website_rating_project_issue
-#: model:ir.ui.view,arch_db:website_rating_project_issue.project_rating_data
-msgid "Happy"
-msgstr "Счастлив"
-
-#. module: website_rating_project_issue
-#: model:ir.ui.view,arch_db:website_rating_project_issue.project_data_satisfaction
+#: model:ir.ui.view,arch_db:website_rating_project_issue.project_rating_page
 msgid "Last 3 months"
 msgstr "последние 3 месяца"
 
 #. module: website_rating_project_issue
-#: model:ir.ui.view,arch_db:website_rating_project_issue.project_data_satisfaction
+#: model:ir.ui.view,arch_db:website_rating_project_issue.project_rating_page
 msgid "Last 30 days"
 msgstr "последние 30 дней"
 
 #. module: website_rating_project_issue
-#: model:ir.ui.view,arch_db:website_rating_project_issue.project_data_satisfaction
+#: model:ir.ui.view,arch_db:website_rating_project_issue.project_rating_page
 msgid "Last 7 days"
 msgstr "последние 7 дней"
 
 #. module: website_rating_project_issue
-#: model:ir.ui.view,arch_db:website_rating_project_issue.project_data_satisfaction
+#: model:ir.ui.view,arch_db:website_rating_project_issue.project_rating_page
 msgid "Latest Feedbacks"
 msgstr "Свежие отзывы"
+
+#. module: website_rating_project_issue
+#: model:ir.ui.view,arch_db:website_rating_project_issue.project_rating_data
+msgid "Normal Feedback"
+msgstr "Нейтральный отзыв"
 
 #. module: website_rating_project_issue
 #: model:ir.model,name:website_rating_project_issue.model_project_project
@@ -85,14 +81,29 @@ msgstr "Проект"
 #. module: website_rating_project_issue
 #: model:ir.ui.view,arch_db:website_rating_project_issue.header_footer_custom
 msgid "Project Customer Satisfaction"
-msgstr "Проект удовлетворённость клиента"
+msgstr "Проект: удовлетворённость клиента"
 
 #. module: website_rating_project_issue
 #: model:ir.ui.view,arch_db:website_rating_project_issue.index
 msgid "Project Satisfaction"
-msgstr "Проект удовлетворённость"
+msgstr "Проект: удовлетворённость"
 
 #. module: website_rating_project_issue
 #: model:ir.ui.view,arch_db:website_rating_project_issue.index
 msgid "Projects"
 msgstr "Проекты"
+
+#. module: website_rating_project_issue
+#: model:ir.model.fields,help:website_rating_project_issue.field_project_project_website_url
+msgid "The full URL to access the document through the website."
+msgstr "Полный URL, чтобы получить доступ к документу через веб-сайт."
+
+#. module: website_rating_project_issue
+#: model:ir.model.fields,field_description:website_rating_project_issue.field_project_project_website_published
+msgid "Visible in Website"
+msgstr "Видимый на веб-сайте"
+
+#. module: website_rating_project_issue
+#: model:ir.model.fields,field_description:website_rating_project_issue.field_project_project_website_url
+msgid "Website URL"
+msgstr "URL веб-сайта"

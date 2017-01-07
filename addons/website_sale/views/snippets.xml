@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<openerp>
+<data>
 <template id="website_sale" inherit_id="website.snippets" name="Snippet Ecommerce">
 
     <xpath expr="//div[@id='snippet_options']" position="inside">
@@ -38,4 +39,5 @@
     </xpath>
 
 </template>
-</odoo>
+</data>
+</openerp>

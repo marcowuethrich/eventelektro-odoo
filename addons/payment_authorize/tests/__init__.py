@@ -1,3 +1,4 @@
 # -*- coding: utf-8 -*-
 
-from . import test_authorize
+from openerp.addons.payment_authorize.tests import test_authorize
+

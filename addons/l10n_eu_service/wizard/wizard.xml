@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<openerp>
+    <data>
+
         <record id="eu_service_view" model="ir.ui.view">
             <field name="name">l10n_eu_service.wizard.form</field>
             <field name="model">l10n_eu_service.wizard</field>
@@ -66,4 +68,6 @@
                 </field>         
             </field>
         </record>
-</odoo>
+
+    </data>
+</openerp>

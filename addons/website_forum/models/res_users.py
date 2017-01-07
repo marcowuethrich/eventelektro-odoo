@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
-import hashlib
 
 from datetime import datetime
+import hashlib
 from urllib import urlencode
 
-from odoo import api, fields, models
+from openerp import models, fields, api
 
 
 class Users(models.Model):
@@ -14,7 +12,7 @@ class Users(models.Model):
 
     def __init__(self, pool, cr):
         init_res = super(Users, self).__init__(pool, cr)
-        type(self).SELF_WRITEABLE_FIELDS = list(
+        self.SELF_WRITEABLE_FIELDS = list(
             set(
                 self.SELF_WRITEABLE_FIELDS +
                 ['country_id', 'city', 'website', 'website_description', 'website_published']))
@@ -26,7 +24,6 @@ class Users(models.Model):
     gold_badge = fields.Integer('Gold badges count', compute="_get_user_badge_level")
     silver_badge = fields.Integer('Silver badges count', compute="_get_user_badge_level")
     bronze_badge = fields.Integer('Bronze badges count', compute="_get_user_badge_level")
-    forum_waiting_posts_count = fields.Integer('Waiting post', compute="_get_user_waiting_post")
 
     @api.multi
     @api.depends('badge_ids')
@@ -51,13 +48,6 @@ class Users(models.Model):
         for (user_id, level, count) in self.env.cr.fetchall():
             # levels are gold, silver, bronze but fields have _badge postfix
             self.browse(user_id)['{}_badge'.format(level)] = count
-
-    @api.multi
-    def _get_user_waiting_post(self):
-        for user in self:
-            Post = self.env['forum.post']
-            domain = [('parent_id', '=', False), ('state', '=', 'pending'), ('create_uid', '=', user.id)]
-            user.forum_waiting_posts_count = Post.search_count(domain)
 
     @api.model
     def _generate_forum_token(self, user_id, email):
@@ -112,6 +102,15 @@ class Users(models.Model):
         for user in self:
             user.karma += karma
         return True
+
+    @api.model
+    def get_serialised_gamification_summary(self, excluded_categories=None):
+        if isinstance(excluded_categories, list):
+            if 'forum' not in excluded_categories:
+                excluded_categories.append('forum')
+        else:
+            excluded_categories = ['forum']
+        return super(Users, self).get_serialised_gamification_summary(excluded_categories=excluded_categories)
 
     # Wrapper for call_kw with inherits
     @api.multi

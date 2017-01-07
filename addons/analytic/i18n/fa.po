@@ -3,18 +3,14 @@
 # * analytic
 # 
 # Translators:
-# Martin Trigaux <mat@odoo.com>, 2016
-# Hamid Darabi <hamid.darabi@gmail.com>, 2016
-# Sahar Daraye <sahar.daraye.1369@gmail.com>, 2016
-# Faraz Sadri <ifarazir@gmail.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:56+0000\n"
-"PO-Revision-Date: 2016-09-07 08:56+0000\n"
-"Last-Translator: Faraz Sadri <ifarazir@gmail.com>, 2016\n"
-"Language-Team: Persian (https://www.transifex.com/odoo/teams/41243/fa/)\n"
+"POT-Creation-Date: 2016-09-22 13:16+0000\n"
+"PO-Revision-Date: 2016-09-23 08:42+0000\n"
+"Last-Translator: Martin Trigaux\n"
+"Language-Team: Persian (http://www.transifex.com/odoo/odoo-9/language/fa/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -22,14 +18,30 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: analytic
+#: model:ir.ui.view,arch_db:analytic.account_analytic_chart_view
+msgid "(Keep empty to open the current situation)"
+msgstr ""
+
+#. module: analytic
+#: model:ir.model,name:analytic.model_account_analytic_chart
+msgid "Account Analytic Chart"
+msgstr "جدول تحلیلی حساب"
+
+#. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_currency_id
 msgid "Account Currency"
 msgstr "ارز حساب"
 
 #. module: analytic
-#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_active
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_needaction
+msgid "Action Needed"
+msgstr "اقدام مورد نیاز است"
+
+#. module: analytic
+#: selection:account.analytic.account,account_type:0
+#: model:ir.ui.view,arch_db:analytic.view_account_analytic_account_search
 msgid "Active"
-msgstr "فعال"
+msgstr ""
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_amount
@@ -48,6 +60,11 @@ msgid "Analytic Account"
 msgstr "حساب تحلیلی"
 
 #. module: analytic
+#: model:ir.ui.view,arch_db:analytic.account_analytic_chart_view
+msgid "Analytic Account Charts"
+msgstr ""
+
+#. module: analytic
 #: model:res.groups,name:analytic.group_analytic_accounting
 msgid "Analytic Accounting"
 msgstr "حسابداری تحلیلی"
@@ -57,13 +74,6 @@ msgstr "حسابداری تحلیلی"
 #: model:ir.ui.view,arch_db:analytic.view_account_analytic_account_list
 msgid "Analytic Accounts"
 msgstr "حساب های تحلیلی"
-
-#. module: analytic
-#: model:ir.actions.act_window,name:analytic.account_analytic_tag_action
-#: model:ir.ui.view,arch_db:analytic.account_analytic_tag_form_view
-#: model:ir.ui.view,arch_db:analytic.account_analytic_tag_tree_view
-msgid "Analytic Accounts Tags"
-msgstr ""
 
 #. module: analytic
 #: model:ir.actions.act_window,name:analytic.account_analytic_line_action_entries
@@ -99,9 +109,9 @@ msgid "Analytic Tags"
 msgstr ""
 
 #. module: analytic
-#: model:ir.ui.view,arch_db:analytic.view_account_analytic_account_search
+#: selection:account.analytic.account,account_type:0
 msgid "Archived"
-msgstr "بایگانی شده"
+msgstr ""
 
 #. module: analytic
 #: model:ir.ui.view,arch_db:analytic.view_account_analytic_account_search
@@ -114,14 +124,15 @@ msgid "Balance"
 msgstr "تراز"
 
 #. module: analytic
+#: model:ir.ui.view,arch_db:analytic.account_analytic_chart_view
+msgid "Cancel"
+msgstr "لغو"
+
+#. module: analytic
+#: model:ir.actions.act_window,name:analytic.action_account_analytic_chart
 #: model:ir.actions.act_window,name:analytic.action_analytic_account_form
 msgid "Chart of Analytic Accounts"
 msgstr "جدول حساب های تحلیلی"
-
-#. module: analytic
-#: model:ir.actions.act_window,help:analytic.account_analytic_tag_action
-msgid "Click to add a new tag."
-msgstr ""
 
 #. module: analytic
 #: model:ir.actions.act_window,help:analytic.action_analytic_account_form
@@ -159,6 +170,7 @@ msgstr ""
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_create_uid
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_create_uid
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_create_uid
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag_create_uid
 msgid "Created by"
@@ -166,6 +178,7 @@ msgstr "ایجاد شده توسط"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_create_date
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_create_date
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_create_date
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag_create_date
 msgid "Created on"
@@ -192,6 +205,11 @@ msgid "Date"
 msgstr "تاریخ"
 
 #. module: analytic
+#: model:ir.model.fields,help:analytic.field_account_analytic_account_message_last_post
+msgid "Date of the last message posted on the record."
+msgstr "تاریخ آخرین پیغام پست شده از این رکورد"
+
+#. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_debit
 msgid "Debit"
 msgstr "بدهکار"
@@ -203,10 +221,31 @@ msgstr "توصیف"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_display_name
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_display_name
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_display_name
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag_display_name
 msgid "Display Name"
 msgstr "نام نمایشی"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_follower_ids
+msgid "Followers"
+msgstr "دنبال‌کنندگان"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_channel_ids
+msgid "Followers (Channels)"
+msgstr "پیروان (کانال ها)"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_partner_ids
+msgid "Followers (Partners)"
+msgstr "پیروان (شرکاء)"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_from_date
+msgid "From"
+msgstr "از"
 
 #. module: analytic
 #: model:ir.ui.view,arch_db:analytic.view_account_analytic_account_search
@@ -216,17 +255,21 @@ msgstr "گروه بتدی بر اساس ..."
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_id
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_id
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_id
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag_id
 msgid "ID"
 msgstr "شناسه"
 
 #. module: analytic
-#: model:ir.model.fields,help:analytic.field_account_analytic_account_active
-msgid ""
-"If the active field is set to False, it will allow you to hide the account "
-"without removing it."
-msgstr ""
+#: model:ir.model.fields,help:analytic.field_account_analytic_account_message_unread
+msgid "If checked new messages require your attention."
+msgstr "اگر این گزینه را انتخاب کنید، پیام‌های جدید به توجه شما نیاز خواهند داشت"
+
+#. module: analytic
+#: model:ir.model.fields,help:analytic.field_account_analytic_account_message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "اگر این گزینه را انتخاب کنید، پیام‌های جدید به توجه شما نیاز خواهند داشت."
 
 #. module: analytic
 #: model:ir.actions.act_window,help:analytic.account_analytic_line_action
@@ -238,14 +281,26 @@ msgid ""
 msgstr ""
 
 #. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_is_follower
+msgid "Is Follower"
+msgstr "دنبال می کند"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_last_post
+msgid "Last Message Date"
+msgstr "تاریخ آخرین پیام"
+
+#. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account___last_update
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart___last_update
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line___last_update
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag___last_update
 msgid "Last Modified on"
-msgstr "آخرین به‌روزرسانی در تاریخ "
+msgstr "تاریخ آخرین به‌روزرسانی"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_write_uid
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_write_uid
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_write_uid
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag_write_uid
 msgid "Last Updated by"
@@ -253,10 +308,16 @@ msgstr "آخرین به روز رسانی توسط"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_write_date
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_write_date
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_write_date
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag_write_date
 msgid "Last Updated on"
 msgstr "آخرین به روز رسانی در"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_ids
+msgid "Messages"
+msgstr "پیام‌ها"
 
 #. module: analytic
 #: model:ir.actions.act_window,help:analytic.account_analytic_line_action
@@ -266,6 +327,26 @@ msgstr ""
 #. module: analytic
 #: model:ir.actions.act_window,help:analytic.account_analytic_line_action_entries
 msgid "No activity yet."
+msgstr ""
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_needaction_counter
+msgid "Number of Actions"
+msgstr "تعداد اقدامات"
+
+#. module: analytic
+#: model:ir.model.fields,help:analytic.field_account_analytic_account_message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "تعداد پیام ها که نیاز به عمل"
+
+#. module: analytic
+#: model:ir.model.fields,help:analytic.field_account_analytic_account_message_unread_counter
+msgid "Number of unread messages"
+msgstr "تعداد پیام‌های خوانده نشده"
+
+#. module: analytic
+#: model:ir.ui.view,arch_db:analytic.account_analytic_chart_view
+msgid "Open Charts"
 msgstr ""
 
 #. module: analytic
@@ -300,6 +381,16 @@ msgid "Search Analytic Lines"
 msgstr ""
 
 #. module: analytic
+#: model:ir.ui.view,arch_db:analytic.account_analytic_chart_view
+msgid "Select the Period for Analysis"
+msgstr "انتخاب یک دوره برای تحلیل"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_account_type
+msgid "State"
+msgstr ""
+
+#. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_tag_ids
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_tag_ids
 msgid "Tags"
@@ -316,9 +407,29 @@ msgid "The related account currency if not equal to the company one."
 msgstr ""
 
 #. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_to_date
+msgid "To"
+msgstr "به"
+
+#. module: analytic
 #: model:ir.ui.view,arch_db:analytic.view_account_analytic_line_tree
 msgid "Total"
-msgstr "جمع کل:"
+msgstr "جمع کل"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_account_type
+msgid "Type of Account"
+msgstr "حالت حساب"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_unread
+msgid "Unread Messages"
+msgstr "پیام های ناخوانده"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "شمارنده پیام‌های خوانده‌نشده"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_user_id

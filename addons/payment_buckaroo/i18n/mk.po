@@ -1,34 +1,34 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * payment_buckaroo
-#
+# 
 # Translators:
+# Anica Milanova, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-18 14:07+0000\n"
-"PO-Revision-Date: 2016-04-20 11:07+0000\n"
-"Last-Translator: Martin Trigaux\n"
-"Language-Team: Macedonian (http://www.transifex.com/odoo/odoo-9/language/"
-"mk/)\n"
-"Language: mk\n"
+"POT-Creation-Date: 2015-09-18 08:11+0000\n"
+"PO-Revision-Date: 2016-12-02 13:52+0000\n"
+"Last-Translator: Anica Milanova\n"
+"Language-Team: Macedonian (http://www.transifex.com/odoo/odoo-9/language/mk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
+"Language: mk\n"
 "Plural-Forms: nplurals=2; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : 1;\n"
 
 #. module: payment_buckaroo
-#: code:addons/payment_buckaroo/models/buckaroo.py:150
+#: code:addons/payment_buckaroo/models/buckaroo.py:132
 #, python-format
 msgid "; multiple order found"
-msgstr ""
+msgstr "; пронајдени се повеќе налози"
 
 #. module: payment_buckaroo
-#: code:addons/payment_buckaroo/models/buckaroo.py:148
+#: code:addons/payment_buckaroo/models/buckaroo.py:130
 #, python-format
 msgid "; no order found"
-msgstr ""
+msgstr "; нема ниеден пронајден налог"
 
 #. module: payment_buckaroo
 #: model:payment.acquirer,cancel_msg:payment_buckaroo.payment_acquirer_buckaroo
@@ -40,7 +40,7 @@ msgstr "<span><i>Откажи,</i> Вашата наплата Ви беше о�
 msgid ""
 "<span><i>Done,</i> Your online payment has been successfully processed. "
 "Thank you for your order.</span>"
-msgstr ""
+msgstr "<span><i>Завршено,</i> Вашето онлајн плаќање беше успешно процесирано. Ви благодариме за вашата нарачка.</span>"
 
 #. module: payment_buckaroo
 #: model:payment.acquirer,error_msg:payment_buckaroo.payment_acquirer_buckaroo
@@ -63,19 +63,19 @@ msgid "Buckaroo"
 msgstr ""
 
 #. module: payment_buckaroo
-#: code:addons/payment_buckaroo/models/buckaroo.py:158
+#: code:addons/payment_buckaroo/models/buckaroo.py:140
 #, python-format
 msgid "Buckaroo: invalid shasign, received %s, computed %s, for data %s"
 msgstr ""
 
 #. module: payment_buckaroo
-#: code:addons/payment_buckaroo/models/buckaroo.py:146
+#: code:addons/payment_buckaroo/models/buckaroo.py:128
 #, python-format
 msgid "Buckaroo: received data for reference %s"
 msgstr ""
 
 #. module: payment_buckaroo
-#: code:addons/payment_buckaroo/models/buckaroo.py:140
+#: code:addons/payment_buckaroo/models/buckaroo.py:122
 #, python-format
 msgid ""
 "Buckaroo: received data with missing reference (%s) or pay_id (%s) or "
@@ -110,6 +110,6 @@ msgstr "WebsiteKey"
 #. module: payment_buckaroo
 #: model:payment.acquirer,pre_msg:payment_buckaroo.payment_acquirer_buckaroo
 msgid ""
-"You will be redirected to the Buckaroo website after clicking on the payment "
-"button."
+"You will be redirected to the Buckaroo website after clicking on the payment"
+" button."
 msgstr ""

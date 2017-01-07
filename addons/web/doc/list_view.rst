@@ -46,7 +46,7 @@ various situations:
 
         Action button (``button`` tag in the view) inside the cell
 
-    ``.o_readonly``
+    ``.oe_readonly``
 
         Readonly field cell
 
@@ -66,7 +66,7 @@ Editable list view
 The editable list view module adds a few supplementary style hook
 classes, for edition situations:
 
-``.o_list_editable``
+``.oe_list_editable``
 
     Added to the ``.oe_list`` when the list is editable (however that
     was done). The class may be removed on-the-fly if the list becomes

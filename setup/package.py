@@ -17,14 +17,12 @@ from os.path import abspath, dirname, join
 from sys import stdout
 from tempfile import NamedTemporaryFile
 
-# apt-get install rsync python-pexpect debhelper python-setuptools
 
 #----------------------------------------------------------
 # Utils
 #----------------------------------------------------------
-execfile(join(dirname(__file__), '..', 'odoo', 'release.py'))
+execfile(join(dirname(__file__), '..', 'openerp', 'release.py'))
 version = version.split('-')[0]
-docker_version = version.replace('+', '')
 timestamp = time.strftime("%Y%m%d", time.gmtime())
 GPGPASSPHRASE = os.getenv('GPGPASSPHRASE')
 GPGID = os.getenv('GPGID')
@@ -35,6 +33,7 @@ PUBLISH_DIRS = {
     'windows': 'exe',
 }
 ADDONS_NOT_TO_PUBLISH = [
+    'web_analytics'
 ]
 
 def mkdir(d):
@@ -197,11 +196,9 @@ class KVM(object):
 class KVMWinBuildExe(KVM):
     def run(self):
         with open(join(self.o.build_dir, 'setup/win32/Makefile.version'), 'w') as f:
-            f.write("VERSION=%s\n" % version)
+            f.write("VERSION=%s\n" % self.o.version_full)
         with open(join(self.o.build_dir, 'setup/win32/Makefile.python'), 'w') as f:
             f.write("PYTHON_VERSION=%s\n" % self.o.vm_winxp_python_version.replace('.', ''))
-        with open(join(self.o.build_dir, 'setup/win32/Makefile.servicename'), 'w') as f:
-            f.write("SERVICENAME=%s\n" % nt_service_name)
 
         self.ssh("mkdir -p build")
         self.rsync('%s/ %s@127.0.0.1:build/server/' % (self.o.build_dir, self.login))
@@ -211,6 +208,8 @@ class KVMWinBuildExe(KVM):
 
 class KVMWinTestExe(KVM):
     def run(self):
+        # Cannot use o.version_full when the version is not correctly parsed
+        # (for instance, containing *rc* or *dev*)
         setuppath = glob("%s/openerp-server-setup-*.exe" % self.o.build_dir)[0]
         setupfile = setuppath.split('/')[-1]
         setupversion = setupfile.split('openerp-server-setup-')[1].split('.exe')[0]
@@ -218,8 +217,8 @@ class KVMWinTestExe(KVM):
         self.rsync('"%s" %s@127.0.0.1:' % (setuppath, self.login))
         self.ssh("TEMP=/tmp ./%s /S" % setupfile)
         self.ssh('PGPASSWORD=openpgpwd /cygdrive/c/"Program Files"/"Odoo %s"/PostgreSQL/bin/createdb.exe -e -U openpg mycompany' % setupversion)
-        self.ssh('/cygdrive/c/"Program Files"/"Odoo %s"/server/odoo-bin.exe -d mycompany -i base --stop-after-init' % setupversion)
-        self.ssh('net start %s' % nt_service_name)
+        self.ssh('/cygdrive/c/"Program Files"/"Odoo %s"/server/openerp-server.exe -d mycompany -i base --stop-after-init' % setupversion)
+        self.ssh('net start odoo-server-%s' % version)
         _rpc_count_modules(port=18069)
 
 #----------------------------------------------------------
@@ -233,9 +232,9 @@ def _prepare_build_dir(o, win32=False):
     try:
         for addon_path in glob(join(o.build_dir, 'addons/*')):
             if addon_path.split(os.path.sep)[-1] not in ADDONS_NOT_TO_PUBLISH:
-                shutil.move(addon_path, join(o.build_dir, 'odoo/addons'))
+                shutil.move(addon_path, join(o.build_dir, 'openerp/addons'))
     except shutil.Error:
-        # Thrown when the add-on is already in odoo/addons (if _prepare_build_dir
+        # Thrown when the add-on is already in openerp/addons (if _prepare_build_dir
         # has already been called once)
         pass
 
@@ -280,7 +279,7 @@ def _prepare_testing(o):
         # Use rsync to copy requirements.txt in order to keep original permissions
         subprocess.call(["rsync", "-a", "requirements.txt", os.path.join(o.build_dir, "docker_src")],
                         cwd=os.path.join(o.odoo_dir))
-        subprocess.call(["docker", "build", "-t", "odoo-%s-src-nightly-tests" % docker_version, "."],
+        subprocess.call(["docker", "build", "-t", "odoo-%s-src-nightly-tests" % version, "."],
                         cwd=os.path.join(o.build_dir, "docker_src"))
     if not o.no_debian:
         subprocess.call(["mkdir", "docker_debian"], cwd=o.build_dir)
@@ -289,17 +288,17 @@ def _prepare_testing(o):
         # Use rsync to copy requirements.txt in order to keep original permissions
         subprocess.call(["rsync", "-a", "requirements.txt", os.path.join(o.build_dir, "docker_debian")],
                         cwd=os.path.join(o.odoo_dir))
-        subprocess.call(["docker", "build", "-t", "odoo-%s-debian-nightly-tests" % docker_version, "."],
+        subprocess.call(["docker", "build", "-t", "odoo-%s-debian-nightly-tests" % version, "."],
                         cwd=os.path.join(o.build_dir, "docker_debian"))
     if not o.no_rpm:
-        subprocess.call(["mkdir", "docker_fedora"], cwd=o.build_dir)
-        subprocess.call(["cp", "package.dffedora", os.path.join(o.build_dir, "docker_fedora", "Dockerfile")],
+        subprocess.call(["mkdir", "docker_centos"], cwd=o.build_dir)
+        subprocess.call(["cp", "package.dfcentos", os.path.join(o.build_dir, "docker_centos", "Dockerfile")],
                         cwd=os.path.join(o.odoo_dir, "setup"))
-        subprocess.call(["docker", "build", "-t", "odoo-%s-fedora-nightly-tests" % docker_version, "."],
-                        cwd=os.path.join(o.build_dir, "docker_fedora"))
+        subprocess.call(["docker", "build", "-t", "odoo-%s-centos-nightly-tests" % version, "."],
+                        cwd=os.path.join(o.build_dir, "docker_centos"))
 
 def test_tgz(o):
-    with docker('odoo-%s-src-nightly-tests' % docker_version, o.build_dir, o.pub) as wheezy:
+    with docker('odoo-%s-src-nightly-tests' % version, o.build_dir, o.pub) as wheezy:
         wheezy.release = '*.tar.gz'
         wheezy.system("service postgresql start")
         wheezy.system('pip install /opt/release/%s' % wheezy.release)
@@ -308,30 +307,30 @@ def test_tgz(o):
         wheezy.system('su postgres -s /bin/bash -c "createdb mycompany"')
         wheezy.system('mkdir /var/lib/odoo')
         wheezy.system('chown odoo:odoo /var/lib/odoo')
-        wheezy.system('su odoo -s /bin/bash -c "odoo --addons-path=/usr/local/lib/python2.7/dist-packages/odoo/addons -d mycompany -i base --stop-after-init"')
-        wheezy.system('su odoo -s /bin/bash -c "odoo --addons-path=/usr/local/lib/python2.7/dist-packages/odoo/addons -d mycompany &"')
+        wheezy.system('su odoo -s /bin/bash -c "odoo.py --addons-path=/usr/local/lib/python2.7/dist-packages/openerp/addons -d mycompany -i base --stop-after-init"')
+        wheezy.system('su odoo -s /bin/bash -c "odoo.py --addons-path=/usr/local/lib/python2.7/dist-packages/openerp/addons -d mycompany &"')
 
 def test_deb(o):
-    with docker('odoo-%s-debian-nightly-tests' % docker_version, o.build_dir, o.pub) as wheezy:
+    with docker('odoo-%s-debian-nightly-tests' % version, o.build_dir, o.pub) as wheezy:
         wheezy.release = '*.deb'
         wheezy.system("service postgresql start")
         wheezy.system('su postgres -s /bin/bash -c "createdb mycompany"')
         wheezy.system('/usr/bin/dpkg -i /opt/release/%s' % wheezy.release)
         wheezy.system('/usr/bin/apt-get install -f -y')
-        wheezy.system('su odoo -s /bin/bash -c "odoo -c /etc/odoo/odoo.conf -d mycompany -i base --stop-after-init"')
-        wheezy.system('su odoo -s /bin/bash -c "odoo -c /etc/odoo/odoo.conf -d mycompany &"')
+        wheezy.system('su odoo -s /bin/bash -c "odoo.py -c /etc/odoo/openerp-server.conf -d mycompany -i base --stop-after-init"')
+        wheezy.system('su odoo -s /bin/bash -c "odoo.py -c /etc/odoo/openerp-server.conf -d mycompany &"')
 
 def test_rpm(o):
-    with docker('odoo-%s-fedora-nightly-tests' % docker_version, o.build_dir, o.pub) as fedora24:
-        fedora24.release = '*.noarch.rpm'
+    with docker('odoo-%s-centos-nightly-tests' % version, o.build_dir, o.pub) as centos7:
+        centos7.release = '*.noarch.rpm'
         # Start postgresql
-        fedora24.system('su postgres -c "/usr/bin/pg_ctl -D /var/lib/postgres/data start"')
-        fedora24.system('sleep 5')
-        fedora24.system('su postgres -c "createdb mycompany"')
+        centos7.system('su postgres -c "/usr/bin/pg_ctl -D /var/lib/postgres/data start"')
+        centos7.system('sleep 5')
+        centos7.system('su postgres -c "createdb mycompany"')
         # Odoo install
-        fedora24.system('dnf install -d 0 -e 0 /opt/release/%s -y' % fedora24.release)
-        fedora24.system('su odoo -s /bin/bash -c "odoo -c /etc/odoo/odoo.conf -d mycompany -i base --stop-after-init"')
-        fedora24.system('su odoo -s /bin/bash -c "odoo -c /etc/odoo/odoo.conf -d mycompany &"')
+        centos7.system('yum install -d 0 -e 0 /opt/release/%s -y' % centos7.release)
+        centos7.system('su odoo -s /bin/bash -c "openerp-server -c /etc/odoo/openerp-server.conf -d mycompany -i base --stop-after-init"')
+        centos7.system('su odoo -s /bin/bash -c "openerp-server -c /etc/odoo/openerp-server.conf -d mycompany &"')
 
 def test_exe(o):
     KVMWinTestExe(o, o.vm_winxp_image, o.vm_winxp_ssh_key, o.vm_winxp_login).start()
@@ -403,6 +402,7 @@ def options():
     op.add_option("-b", "--build-dir", default=build_dir, help="build directory (%default)", metavar="DIR")
     op.add_option("-p", "--pub", default=None, help="pub directory (%default)", metavar="DIR")
     op.add_option("", "--no-testing", action="store_true", help="don't test the builded packages")
+    op.add_option("-v", "--version", default='9.0', help="version (%default)")
 
     op.add_option("", "--no-debian", action="store_true", help="don't build the debian package")
     op.add_option("", "--no-rpm", action="store_true", help="don't build the rpm package")
@@ -419,8 +419,9 @@ def options():
     # derive other options
     o.odoo_dir = root
     o.pkg = join(o.build_dir, 'pkg')
-    o.work = join(o.build_dir, 'openerp-%s' % version)
-    o.work_addons = join(o.work, 'odoo', 'addons')
+    o.version_full = '%s-%s' % (o.version, timestamp)
+    o.work = join(o.build_dir, 'openerp-%s' % o.version_full)
+    o.work_addons = join(o.work, 'openerp', 'addons')
 
     return o
 

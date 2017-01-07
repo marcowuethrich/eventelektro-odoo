@@ -9,8 +9,7 @@ var Widget = require('web.Widget');
 var _t = core._t;
 
 var Loading = Widget.extend({
-    template: "Loading",
-
+    template: _t("Loading"),
     init: function(parent) {
         this._super(parent);
         this.count = 0;

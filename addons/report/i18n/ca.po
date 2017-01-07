@@ -3,20 +3,15 @@
 # * report
 # 
 # Translators:
-# Carles Antoli <carlesantoli@hotmail.com>, 2016
-# Marc Tormo i Bochaca <mtbochaca@gmail.com>, 2016
-# Josep Sànchez <papapep@gmx.com>, 2016
-# Martin Trigaux <mat@odoo.com>, 2016
-# RGB Consulting <odoo@rgbconsulting.com>, 2016
-# Eric Antones <eantones@users.noreply.github.com>, 2016
+# Marc Tormo i Bochaca <mtbochaca@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:57+0000\n"
-"PO-Revision-Date: 2016-09-07 08:57+0000\n"
-"Last-Translator: Eric Antones <eantones@users.noreply.github.com>, 2016\n"
-"Language-Team: Catalan (https://www.transifex.com/odoo/teams/41243/ca/)\n"
+"POT-Creation-Date: 2016-12-07 10:39+0000\n"
+"PO-Revision-Date: 2016-12-08 08:38+0000\n"
+"Last-Translator: Martin Trigaux\n"
+"Language-Team: Catalan (http://www.transifex.com/odoo/odoo-9/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -149,7 +144,7 @@ msgid "B9  23  33 x 62 mm"
 msgstr "B9 23 33 x 62 mm"
 
 #. module: report
-#: code:addons/report/models/report.py:273
+#: code:addons/report/models/report.py:274
 #, python-format
 msgid "Bad Report Reference"
 msgstr "Referència d'informe errònia"
@@ -172,7 +167,7 @@ msgstr "Comm10E 25 105 x 241 mm, Sobre U.S. Comú 10"
 #. module: report
 #: model:ir.model,name:report.model_res_company
 msgid "Companies"
-msgstr "Empreses"
+msgstr "Companyies"
 
 #. module: report
 #: model:ir.model.fields,field_description:report.field_report_create_uid
@@ -202,19 +197,12 @@ msgid "Default paper format ?"
 msgstr "Quin és el format de paper predeterminat?"
 
 #. module: report
-#. openerp-web
-#: code:addons/report/static/src/xml/report.xml:12
-#, python-format
-msgid "Discard"
-msgstr "Rebutgi"
-
-#. module: report
 #: model:ir.model.fields,field_description:report.field_ir_qweb_field_barcode_display_name
 #: model:ir.model.fields,field_description:report.field_report_abstract_report_display_name
 #: model:ir.model.fields,field_description:report.field_report_display_name
 #: model:ir.model.fields,field_description:report.field_report_paperformat_display_name
 msgid "Display Name"
-msgstr "Mostrar Nom"
+msgstr "Mostra Nom"
 
 #. module: report
 #: model:ir.model.fields,field_description:report.field_report_paperformat_header_line
@@ -222,24 +210,17 @@ msgid "Display a header line"
 msgstr "Mostra una línia de capçalera"
 
 #. module: report
-#. openerp-web
-#: code:addons/report/static/src/xml/report.xml:8
-#, python-format
-msgid "Edit"
-msgstr "Editar"
-
-#. module: report
-#: model:ir.ui.view,arch_db:report.base_config_settings_inherited
+#: model:ir.ui.view,arch_db:report.reporting_settings_form_inherited
 msgid "Edit external footer"
 msgstr "Edita el peu de pagina extern"
 
 #. module: report
-#: model:ir.ui.view,arch_db:report.base_config_settings_inherited
+#: model:ir.ui.view,arch_db:report.reporting_settings_form_inherited
 msgid "Edit external header"
 msgstr "Edita la capçalera externa"
 
 #. module: report
-#: model:ir.ui.view,arch_db:report.base_config_settings_inherited
+#: model:ir.ui.view,arch_db:report.reporting_settings_form_inherited
 msgid "Edit internal header"
 msgstr "Edita la capçalera interna"
 
@@ -249,10 +230,9 @@ msgid "Email:"
 msgstr "Correu electrònic:"
 
 #. module: report
-#: code:addons/report/models/report_paperformat.py:68
-#, python-format
-msgid "Error ! You cannot select a format AND specific page width/height."
-msgstr ""
+#: constraint:report.paperformat:0
+msgid "Error ! You cannot select a format AND speficic page width/height."
+msgstr "Error: no podeu seleccionar un format i especificar les mides de pàgina."
 
 #. module: report
 #: selection:report.paperformat,format:0
@@ -273,11 +253,6 @@ msgstr "Fax:"
 #: selection:report.paperformat,format:0
 msgid "Folio 27  210 x 330 mm"
 msgstr "Foli 27 210 x 330 mm"
-
-#. module: report
-#: model:ir.model,name:report.model_ir_http
-msgid "HTTP routing"
-msgstr "Enrutament HTTP "
 
 #. module: report
 #: model:ir.model.fields,field_description:report.field_report_paperformat_header_spacing
@@ -303,19 +278,19 @@ msgstr "Horitzontal"
 #: model:ir.model.fields,field_description:report.field_report_abstract_report___last_update
 #: model:ir.model.fields,field_description:report.field_report_paperformat___last_update
 msgid "Last Modified on"
-msgstr "Última modificació el "
+msgstr "Darrera modificació feta el"
 
 #. module: report
 #: model:ir.model.fields,field_description:report.field_report_paperformat_write_uid
 #: model:ir.model.fields,field_description:report.field_report_write_uid
 msgid "Last Updated by"
-msgstr "Última actualització per"
+msgstr "Actualitzat per última vegada per"
 
 #. module: report
 #: model:ir.model.fields,field_description:report.field_report_paperformat_write_date
 #: model:ir.model.fields,field_description:report.field_report_write_date
 msgid "Last Updated on"
-msgstr "Última actualització el"
+msgstr "Actualitzat per última vegada el dia"
 
 #. module: report
 #: selection:report.paperformat,format:0
@@ -384,11 +359,6 @@ msgid "Paper format"
 msgstr "Format de paper"
 
 #. module: report
-#: model:ir.model.fields,field_description:report.field_base_config_settings_paperformat_id
-msgid "Paper format *"
-msgstr ""
-
-#. module: report
 #: model:ir.ui.view,arch_db:report.paperformat_view_form
 #: model:ir.ui.view,arch_db:report.paperformat_view_tree
 msgid "Paper format configuration"
@@ -411,36 +381,22 @@ msgstr "Retrat"
 
 #. module: report
 #: model:ir.actions.report.xml,name:report.action_report_externalpreview
-#: model:ir.ui.view,arch_db:report.base_config_settings_inherited
+#: model:ir.ui.view,arch_db:report.reporting_settings_form_inherited
 msgid "Preview External Report"
 msgstr "Vistar prèvia de l'informe extern"
 
 #. module: report
 #: model:ir.actions.report.xml,name:report.action_report_internalpreview
-#: model:ir.ui.view,arch_db:report.base_config_settings_inherited
+#: model:ir.ui.view,arch_db:report.reporting_settings_form_inherited
 msgid "Preview Internal Report"
 msgstr "Vista prèvia de l'informe intern "
 
 #. module: report
 #. openerp-web
-#: code:addons/report/static/src/xml/report.xml:5
-#, python-format
-msgid "Print"
-msgstr "Imprimeix"
-
-#. module: report
-#: model:ir.model.fields,field_description:report.field_ir_act_report_xml_print_report_name
-msgid "Printed Report Name"
-msgstr ""
-
-#. module: report
-#: model:ir.ui.view,arch_db:report.act_report_xml_view_inherit
-msgid "QWeb views"
-msgstr ""
-
-#. module: report
-#. openerp-web
-#: code:addons/report/static/src/js/qwebactionmanager.js:95
+#: code:addons/report/static/src/js/qwebactionmanager.js:76
+#: code:addons/report/static/src/js/qwebactionmanager.js:84
+#: code:addons/report/static/src/js/qwebactionmanager.js:91
+#: code:addons/report/static/src/js/qwebactionmanager.js:96
 #: model:ir.model,name:report.model_report
 #, python-format
 msgid "Report"
@@ -459,11 +415,9 @@ msgid "Right Margin (mm)"
 msgstr "Marge dret (mm)"
 
 #. module: report
-#. openerp-web
-#: code:addons/report/static/src/xml/report.xml:11
-#, python-format
-msgid "Save"
-msgstr "Desar"
+#: model:ir.ui.view,arch_db:report.act_report_xml_view_inherit
+msgid "Search associated QWeb views"
+msgstr "Cerca les vistes QWeb associades"
 
 #. module: report
 #: model:ir.model.fields,help:report.field_report_paperformat_format
@@ -491,15 +445,7 @@ msgid "This is a sample of an internal report."
 msgstr "Això és un exemple d'un informe intern."
 
 #. module: report
-#: model:ir.model.fields,help:report.field_ir_act_report_xml_print_report_name
-msgid ""
-"This is the filename of the report going to download. Keep empty to not "
-"change the report filename. You can use a python expression with the object "
-"and time variables."
-msgstr ""
-
-#. module: report
-#: code:addons/report/models/report.py:273
+#: code:addons/report/models/report.py:274
 #, python-format
 msgid "This report is not loaded into the database: %s."
 msgstr "Aquest informe no és a la base de dades: %s."
@@ -511,16 +457,13 @@ msgstr "Marge superior (mm)"
 
 #. module: report
 #. openerp-web
-#: code:addons/report/static/src/js/qwebactionmanager.js:18
+#: code:addons/report/static/src/js/qwebactionmanager.js:76
 #, python-format
 msgid ""
 "Unable to find Wkhtmltopdf on this \n"
 "system. The report will be shown in html.<br><br><a href=\"http://wkhtmltopdf.org/\" target=\"_blank\">\n"
 "wkhtmltopdf.org</a>"
-msgstr ""
-"No s'ha pogut trobar Wkhtmltopdf en \n"
-"aquest sistema. Es mostrarà l'informe en html.<br><br><a href=\"http://wkhtmltopdf.org/\" target=\"_blank\">\n"
-"wkhtmltopdf.org</a>"
+msgstr "No s'ha pogut trobar Wkhtmltopdf en \naquest sistema. Es mostrarà l'informe en html.<br><br><a href=\"http://wkhtmltopdf.org/\" target=\"_blank\">\nwkhtmltopdf.org</a>"
 
 #. module: report
 #: code:addons/report/models/report.py:164
@@ -534,42 +477,30 @@ msgid "Website:"
 msgstr "Lloc web:"
 
 #. module: report
-#: code:addons/report/models/report.py:435
+#: code:addons/report/models/report.py:464
 #, python-format
 msgid "Wkhtmltopdf failed (error code: %s). Message: %s"
 msgstr "S'ha produït un error Wkhtmltopdf (codi d'error: %s). Missatge: %s"
 
 #. module: report
 #. openerp-web
-#: code:addons/report/static/src/js/qwebactionmanager.js:19
+#: code:addons/report/static/src/js/qwebactionmanager.js:84
 #, python-format
 msgid ""
 "You need to start OpenERP with at least two \n"
 "workers to print a pdf version of the reports."
-msgstr ""
-"Necessitu iniciar l'OpenErp amb un mínim de \n"
-"dos workers per imprimir la versió PDF dels\n"
-"informes."
+msgstr "Necessitu iniciar l'OpenErp amb un mínim de \ndos workers per imprimir la versió PDF dels\ninformes."
 
 #. module: report
 #. openerp-web
-#: code:addons/report/static/src/js/qwebactionmanager.js:20
+#: code:addons/report/static/src/js/qwebactionmanager.js:91
 #, python-format
 msgid ""
 "You should upgrade your version of\n"
 "Wkhtmltopdf to at least 0.12.0 in order to get a correct display of headers and footers as well as\n"
 "support for table-breaking between pages.<br><br><a href=\"http://wkhtmltopdf.org/\" \n"
 "target=\"_blank\">wkhtmltopdf.org</a>"
-msgstr ""
-"Heu d'actualitzar la vostra versió de\n"
-"Wkhtmltopdf com a mínim a 0.12.0 amb la finalitat de tenir una correcta visualització de les capçaleres i els peus de pàgina així com\n"
-"suport de ruptura de taules entre pàgines.<br><br><a href=\"http://wkhtmltopdf.org/\"\n"
-"target=\"_blank\">wkhtmltopdf.org</a>"
-
-#. module: report
-#: model:ir.model,name:report.model_base_config_settings
-msgid "base.config.settings"
-msgstr "base.config.settings"
+msgstr "Heu d'actualitzar la vostra versió de\nWkhtmltopdf com a mínim a 0.12.0 amb la finalitat de tenir una correcta visualització de les capçaleres i els peus de pàgina així com\nsuport de ruptura de taules entre pàgines.<br><br><a href=\"http://wkhtmltopdf.org/\"\ntarget=\"_blank\">wkhtmltopdf.org</a>"
 
 #. module: report
 #. openerp-web
@@ -578,9 +509,4 @@ msgstr "base.config.settings"
 msgid ""
 "Your installation of Wkhtmltopdf seems to be broken. The \n"
 "report will be shown in html.<br><br><a href=\"http://wkhtmltopdf.org/\" target=\"_blank\">wkhtmltopdf.org</a>"
-msgstr ""
-
-#. module: report
-#: model:ir.model,name:report.model_ir_qweb_field_barcode
-msgid "ir.qweb.field.barcode"
 msgstr ""

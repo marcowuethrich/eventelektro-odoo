@@ -1,67 +1,22 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * event
-#
+# 
 # Translators:
 # Aleksandar Vangelovski <aleksandarv@hbee.eu>, 2016
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-18 14:07+0000\n"
-"PO-Revision-Date: 2016-07-12 11:00+0000\n"
+"POT-Creation-Date: 2015-10-01 06:27+0000\n"
+"PO-Revision-Date: 2016-08-12 14:50+0000\n"
 "Last-Translator: Aleksandar Vangelovski <aleksandarv@hbee.eu>\n"
-"Language-Team: Macedonian (http://www.transifex.com/odoo/odoo-9/language/"
-"mk/)\n"
-"Language: mk\n"
+"Language-Team: Macedonian (http://www.transifex.com/odoo/odoo-9/language/mk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"#-#-#-#-#  mk.po (Odoo 9.0)  #-#-#-#-#\n"
+"Language: mk\n"
 "Plural-Forms: nplurals=2; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : 1;\n"
-"#-#-#-#-#  mk.po (Odoo 9.0)  #-#-#-#-#\n"
-"Plural-Forms: nplurals=2; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : 1;\n"
-
-#. module: event
-#: model:mail.template,body_html:event.event_registration_mail_template_badge
-msgid ""
-"\n"
-"<p>Dear ${object.name},</p>\n"
-"<p>Thank you for your inquiry.</p>\n"
-"<p>Here is your badge for the event ${object.event_id.name}.</p>\n"
-"<p>If you have any questions, please let us know.</p>\n"
-"<p>Best regards,</p>"
-msgstr ""
-
-#. module: event
-#: model:mail.template,body_html:event.event_subscription
-msgid ""
-"\n"
-"<p>Dear ${object.name},</p>\n"
-"<p>Thank you for your inquiry.</p>\n"
-"<p>We confirm your subscription to the event <b>${object.event_id.name}</b>. "
-"You will receive emails with practical information.</p>\n"
-"<p>If you have any questions, please let us know.</p>\n"
-"<p>Best regards,</p>"
-msgstr ""
-
-#. module: event
-#: model:mail.template,body_html:event.event_reminder
-msgid ""
-"\n"
-"<p>Dear ${object.name},</p>\n"
-"<p>Thank you for your registration to the event ${object.event_id.name}.</"
-"p>\n"
-"<p>The event will take place at ${object.event_id.address_id.city}\n"
-"% if object.event_id.address_id.street\n"
-", ${object.event_id.address_id.street}\n"
-"% endif\n"
-"from ${object.event_id.date_begin_located} to ${object.event_id."
-"date_end_located}.</p>\n"
-"<p>If you have any questions, please let us know.</p>\n"
-"<p>Best regards,</p>"
-msgstr ""
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_report_event_registration_cancel_state
@@ -97,8 +52,8 @@ msgstr "5 Интензивни дена"
 #. module: event
 #: model:event.event,description:event.event_2
 msgid ""
-"<em>(Chamber Works reserves the right to cancel, re-name or re-locate<br>the "
-"event or change the dates on which it is held.)</em>"
+"<em>(Chamber Works reserves the right to cancel, re-name or re-"
+"locate<br/>the event or change the dates on which it is held.)</em>"
 msgstr ""
 
 #. module: event
@@ -123,9 +78,7 @@ msgstr ""
 msgid ""
 "<i>You will be able to develop a full application with backend and user "
 "interface.</i>"
-msgstr ""
-"<i>Ќе бидете во можност да создадете целосна апликација со бекенд и "
-"кориснички интерфејс.</i>"
+msgstr "<i>Ќе бидете во можност да создадете целосна апликација со бекенд и кориснички интерфејс.</i>"
 
 #. module: event
 #: model:event.event,description:event.event_0
@@ -142,10 +95,60 @@ msgid "<i>to</i>"
 msgstr ""
 
 #. module: event
+#: model:mail.template,body_html:event.event_reminder
+msgid ""
+"<p>Hello ${object.name},</p>\n"
+"<p>This is a reminder for ${object.event_id.name} that you registered for is confirmed and will be held from ${object.event_id.date_begin_located} to ${object.event_id.date_end_located}.\n"
+"For any further information please contact our event department.</p>\n"
+"<p>Thank you for your participation!</p>\n"
+"<p>Best regards</p>"
+msgstr ""
+
+#. module: event
+#: model:mail.template,body_html:event.event_registration_mail_template_badge
+msgid ""
+"<p>Hello ${object.name},</p>\n"
+"<p>We confirm that your subscription to the event ${object.event_id.name} has been recorded.\n"
+"Please, Find your <b>Event Badge</b> attached with this mail.</p>\n"
+"<p>Thank you for your participation!</p>\n"
+"<p>Best regards</p>"
+msgstr ""
+
+#. module: event
+#: model:mail.template,body_html:event.event_subscription
+msgid ""
+"<p>Hello ${object.name},</p>\n"
+"<p>We confirm that your subscription to the event ${object.event_id.name} has been recorded.\n"
+"You will automatically receive an email providing you more practical information (such as the schedule, the agenda...) as soon as the event is confirmed.</p>\n"
+"<p>Thank you for your participation!</p>\n"
+"<p>Best regards</p>"
+msgstr ""
+
+#. module: event
+#: model:mail.template,body_html:event.event_thanks
+msgid ""
+"<p>Hello ${object.name},</p>\n"
+"<p>We would like to thank you for your presence at our event ${object.event_id.name}.\n"
+"<br/><br/>\n"
+"    % if object.event_id.organizer_id and object.event_id.organizer_id.is_company:\n"
+"        <strong>The ${object.event_id.organizer_id.name} Team</strong>\n"
+"    % elif object.event_id.organizer_id:\n"
+"        <strong>${object.event_id.organizer_id.name}</strong>\n"
+"    % endif\n"
+"</p>"
+msgstr ""
+
+#. module: event
+#: model:event.event,description:event.event_0
+#: model:event.event,description:event.event_1
+#: model:event.event,description:event.event_3
+msgid "<small>John Doe, CEO</small>"
+msgstr ""
+
+#. module: event
 #: model:ir.ui.view,arch_db:event.view_event_form
 msgid ""
-"<span attrs=\"{'invisible': [('seats_availability', '=', 'unlimited')]}\" "
-"class=\"oe_read_only\">\n"
+"<span attrs=\"{'invisible': [('seats_availability', '=', 'unlimited')]}\" class=\"oe_read_only\">\n"
 "                                                to \n"
 "                                            </span>"
 msgstr ""
@@ -155,10 +158,10 @@ msgstr ""
 #: model:event.event,description:event.event_1
 #: model:event.event,description:event.event_3
 msgid ""
-"<span style=\"text-align: -webkit-center; \">This course is dedicated "
-"to developers who need to grasp knowledge of the <strong>business "
-"applications development </strong>process. This course is for new developers "
-"or for IT professionals eager to learn more about technical aspects.</span>"
+"<span style=\"text-align: -webkit-center; \">This course is dedicated to "
+"developers who need to grasp knowledge of the <strong>business applications "
+"development </strong>process. This course is for new developers or for IT "
+"professionals eager to learn more about technical aspects.</span>"
 msgstr ""
 
 #. module: event
@@ -171,7 +174,8 @@ msgstr "<strong>Конференција за бизнис апликации</s
 #: model:event.event,description:event.event_1
 #: model:event.event,description:event.event_3
 msgid ""
-"<strong>Having attended this course, participants should be able to:</strong>"
+"<strong>Having attended this course, participants should be able "
+"to:</strong>"
 msgstr ""
 
 #. module: event
@@ -205,6 +209,12 @@ msgstr "<strong>Побарувања:</strong>"
 #: model:event.event,description:event.event_2
 msgid "<strong>Where to find us:</strong>"
 msgstr "<strong>Каде да не најдете:</strong>"
+
+#. module: event
+#: model:ir.model.fields,field_description:event.field_event_event_message_needaction
+#: model:ir.model.fields,field_description:event.field_event_registration_message_needaction
+msgid "Action Needed"
+msgstr "Потребна е акција"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_event_active
@@ -325,15 +335,14 @@ msgid "Badge Front"
 msgstr ""
 
 #. module: event
-#: model:ir.model.fields,field_description:event.field_event_event_badge_innerleft
-#, fuzzy
-msgid "Badge Inner Left"
-msgstr "Значка внатрешно лево"
-
-#. module: event
 #: model:ir.model.fields,field_description:event.field_event_event_badge_innerright
 msgid "Badge Inner Right"
 msgstr "Значка внатрешно десно"
+
+#. module: event
+#: model:ir.model.fields,field_description:event.field_event_event_badge_innerleft
+msgid "Badge Innner Left"
+msgstr "Значка внатрешно лево"
 
 #. module: event
 #: model:event.event,description:event.event_0
@@ -420,7 +429,7 @@ msgid "Click to add a new event."
 msgstr "Кликнете да додадете нов настан."
 
 #. module: event
-#: code:addons/event/models/event.py:206
+#: code:addons/event/models/event.py:204
 #, python-format
 msgid "Closing Date cannot be set before Beginning Date."
 msgstr "Датум на затварање не може да биде пред датум на почеток."
@@ -434,7 +443,7 @@ msgid "Company"
 msgstr "Компанија"
 
 #. module: event
-#: code:addons/event/models/event.py:402
+#: code:addons/event/models/event.py:397
 #, python-format
 msgid "Compose Email"
 msgstr "Состави е-пошта"
@@ -512,8 +521,7 @@ msgstr "Контакт"
 #: model:event.event,description:event.event_0
 #: model:event.event,description:event.event_1
 #: model:event.event,description:event.event_3
-#, fuzzy
-msgid "Controllers and Views"
+msgid "Controlers and Views"
 msgstr "Контролери и прикази"
 
 #. module: event
@@ -531,11 +539,9 @@ msgstr "Резиме на курс"
 #. module: event
 #: model:web.tip,description:event.event_tip_1
 msgid ""
-"Create and manage registrations for this event, send emails to attendees and "
-"print identification badges."
-msgstr ""
-"Креирај и менаџирај регистрации за овој настан, испраќај емаил адреси кон "
-"посетители и печати идентификациски значки"
+"Create and manage registrations for this event, send emails to attendees and"
+" print identification badges."
+msgstr "Креирај и менаџирај регистрации за овој настан, испраќај емаил адреси кон посетители и печати идентификациски значки"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_config_settings_create_uid
@@ -565,16 +571,22 @@ msgid "Creation Date"
 msgstr "Датум на креирање"
 
 #. module: event
-#: code:addons/event/models/event.py:379
+#: code:addons/event/models/event.py:378
 #, python-format
 msgid "Customer"
 msgstr "Купувач"
 
 #. module: event
-#: code:addons/event/models/event.py:381
+#: code:addons/event/models/event.py:376
 #, python-format
 msgid "Customer Email"
 msgstr "Е-пошта на купувач"
+
+#. module: event
+#: model:ir.model.fields,help:event.field_event_event_message_last_post
+#: model:ir.model.fields,help:event.field_event_registration_message_last_post
+msgid "Date of the last message posted on the record."
+msgstr "Датум на испраќање на последната порака"
 
 #. module: event
 #: model:event.event,description:event.event_0
@@ -670,9 +682,7 @@ msgstr "Нацрт"
 msgid ""
 "During this conference, our team will give a detailed overview of our "
 "business applications. You’ll know all the benefits of using it."
-msgstr ""
-"Во текот на оваа конференција, нашиот тим ќе ви прикаже детален преглед на "
-"нашите бизнис апликации и потоа ќе ги знаете сите бенефиции при користењето."
+msgstr "Во текот на оваа конференција, нашиот тим ќе ви прикаже детален преглед на нашите бизнис апликации и потоа ќе ги знаете сите бенефиции при користењето."
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_registration_email
@@ -885,6 +895,24 @@ msgid "Finish Event"
 msgstr "Заврши настан"
 
 #. module: event
+#: model:ir.model.fields,field_description:event.field_event_event_message_follower_ids
+#: model:ir.model.fields,field_description:event.field_event_registration_message_follower_ids
+msgid "Followers"
+msgstr "Пратители"
+
+#. module: event
+#: model:ir.model.fields,field_description:event.field_event_event_message_channel_ids
+#: model:ir.model.fields,field_description:event.field_event_registration_message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Пратители (Канали)"
+
+#. module: event
+#: model:ir.model.fields,field_description:event.field_event_event_message_partner_ids
+#: model:ir.model.fields,field_description:event.field_event_registration_message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Пратители (Партнери)"
+
+#. module: event
 #: model:event.event,description:event.event_2
 msgid "For any additional information, please contact us at"
 msgstr "За секоја дополнителна иформација, ве молиме контактирајте нè на"
@@ -894,9 +922,7 @@ msgstr "За секоја дополнителна иформација, ве м
 msgid ""
 "For each event you can define a maximum registration of seats(number of "
 "attendees), above this numbers the registrations are not accepted."
-msgstr ""
-"За секој настан можете да дефинирате максимум закажувања на седишта(број на "
-"посетители), над овој број закажувањата се прекинуваат."
+msgstr "За секој настан можете да дефинирате максимум закажувања на седишта(број на посетители), над овој број закажувањата се прекинуваат."
 
 #. module: event
 #: model:ir.model.fields,help:event.field_event_event_seats_min
@@ -904,10 +930,7 @@ msgid ""
 "For each event you can define a minimum reserved seats (number of "
 "attendees), if it does not reach the mentioned registrations the event can "
 "not be confirmed (keep 0 to ignore this rule)"
-msgstr ""
-"За секој настан можете да дефинирате максимум закажувања на седишта(број на "
-"посетители), доколку се постигне лимитот, настанот нема да може да ви биде "
-"потврден (запиши со 0 за да се игнорира ова правило)"
+msgstr "За секој настан можете да дефинирате максимум закажувања на седишта(број на посетители), доколку се постигне лимитот, настанот нема да може да ви биде потврден (запиши со 0 за да се игнорира ова правило)"
 
 #. module: event
 #: model:event.event,name:event.event_1
@@ -936,8 +959,7 @@ msgstr "Групирај по"
 #. module: event
 #: model:event.event,description:event.event_2
 msgid "Having attended this conference, participants should be able to:"
-msgstr ""
-"Имајќи ја посетено оваа конференција, посетителите би требало да можат да:"
+msgstr "Имајќи ја посетено оваа конференција, посетителите би требало да можат да:"
 
 #. module: event
 #: model:event.event,description:event.event_0
@@ -959,6 +981,15 @@ msgid "How to Debug"
 msgstr ""
 
 #. module: event
+#: model:event.event,description:event.event_0
+#: model:event.event,description:event.event_1
+#: model:event.event,description:event.event_3
+msgid ""
+"I did not expect such a great learning experience. I feel like I can develop"
+" anything now."
+msgstr "Не очекував толку солидно искуство од учењето. Се чувствувам дека би можел да испрограмирам било што сега."
+
+#. module: event
 #: model:ir.model.fields,field_description:event.field_event_config_settings_id
 #: model:ir.model.fields,field_description:event.field_event_confirm_id
 #: model:ir.model.fields,field_description:event.field_event_event_id
@@ -971,17 +1002,25 @@ msgid "ID"
 msgstr "ID"
 
 #. module: event
+#: model:ir.model.fields,help:event.field_event_event_message_unread
+#: model:ir.model.fields,help:event.field_event_registration_message_unread
+msgid "If checked new messages require your attention."
+msgstr "Доколку е штиклирано, новите пораки го бараат вашето внимание."
+
+#. module: event
+#: model:ir.model.fields,help:event.field_event_event_message_needaction
+#: model:ir.model.fields,help:event.field_event_registration_message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Доколку е штиклирано, новите пораки го бараат вашето вниманите."
+
+#. module: event
 #: model:ir.model.fields,help:event.field_event_event_state
 msgid ""
 "If event is created, the status is 'Draft'. If event is confirmed for the "
-"particular dates the status is set to 'Confirmed'. If the event is over, the "
-"status is set to 'Done'. If event is cancelled the status is set to "
+"particular dates the status is set to 'Confirmed'. If the event is over, the"
+" status is set to 'Done'. If event is cancelled the status is set to "
 "'Cancelled'."
-msgstr ""
-"Доколку настанот е креиран, статусот е 'Нацрт'. Доколку настанот е потврден "
-"за одредените датуми статусот се променува во 'Потврден'. Доколку настанот е "
-"завршен, статусот се променува во 'Завршен'. Доколку настанот е откажан "
-"статусот се променува во 'Откажан'."
+msgstr "Доколку настанот е креиран, статусот е 'Нацрт'. Доколку настанот е потврден за одредените датуми статусот се променува во 'Потврден'. Доколку настанот е завршен, статусот се променува во 'Завршен'. Доколку настанот е откажан статусот се променува во 'Откажан'."
 
 #. module: event
 #: selection:event.mail,interval_unit:0
@@ -1049,23 +1088,31 @@ msgid "Introduction, CRM, Sales Management"
 msgstr "Вовед во CRM, Продажен менаџмент"
 
 #. module: event
+#: model:ir.model.fields,field_description:event.field_event_event_message_is_follower
+#: model:ir.model.fields,field_description:event.field_event_registration_message_is_follower
+msgid "Is Follower"
+msgstr "е следач"
+
+#. module: event
 #: model:ir.model.fields,help:event.field_event_type_default_registration_max
 msgid "It will select this default maximum value when you choose this event"
-msgstr ""
-"Ќе ја избере оваа стандардна максимална вредност кога ќе го изберете овој "
-"настан"
+msgstr "Ќе ја избере оваа стандардна максимална вредност кога ќе го изберете овој настан"
 
 #. module: event
 #: model:ir.model.fields,help:event.field_event_type_default_registration_min
 msgid "It will select this default minimum value when you choose this event"
-msgstr ""
-"Ќе ја избере оваа стандардна минимална вредност кога ќе го изберете овој "
-"настан"
+msgstr "Ќе ја избере оваа стандардна минимална вредност кога ќе го изберете овој настан"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_event_color
 msgid "Kanban Color Index"
 msgstr "Индекс на бои во Канбан"
+
+#. module: event
+#: model:ir.model.fields,field_description:event.field_event_event_message_last_post
+#: model:ir.model.fields,field_description:event.field_event_registration_message_last_post
+msgid "Last Message Date"
+msgstr "Датум на последна порака"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_config_settings___last_update
@@ -1180,6 +1227,18 @@ msgid "Maximum Attendees Number"
 msgstr "Максимален број на посетители"
 
 #. module: event
+#: model:ir.model.fields,field_description:event.field_event_event_message_ids
+#: model:ir.model.fields,field_description:event.field_event_registration_message_ids
+msgid "Messages"
+msgstr "Пораки"
+
+#. module: event
+#: model:ir.model.fields,help:event.field_event_event_message_ids
+#: model:ir.model.fields,help:event.field_event_registration_message_ids
+msgid "Messages and communication history"
+msgstr "Пораки и историја на комуникација"
+
+#. module: event
 #: model:ir.model.fields,field_description:event.field_event_event_seats_min
 msgid "Minimum Attendees"
 msgstr "Минимум посетители"
@@ -1222,13 +1281,13 @@ msgid "No mini website per event"
 msgstr "Нема мини вебстрана по настан"
 
 #. module: event
-#: code:addons/event/models/event.py:200
+#: code:addons/event/models/event.py:198
 #, python-format
 msgid "No more available seats."
 msgstr "Нема повеќе слободни места."
 
 #. module: event
-#: code:addons/event/models/event.py:300
+#: code:addons/event/models/event.py:298
 #, python-format
 msgid "No more seats available for this event."
 msgstr "Нема повеќе слободни седишта за овој настан."
@@ -1237,6 +1296,12 @@ msgstr "Нема повеќе слободни седишта за овој на
 #: selection:event.config.settings,auto_confirmation:0
 msgid "No validation step on subscription"
 msgstr "Нема валидирачки чекор на претплата"
+
+#. module: event
+#: model:ir.model.fields,field_description:event.field_event_event_message_needaction_counter
+#: model:ir.model.fields,field_description:event.field_event_registration_message_needaction_counter
+msgid "Number of Actions"
+msgstr "Број на акции"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_report_event_registration_nbevent
@@ -1259,6 +1324,18 @@ msgid "Number of Registrations"
 msgstr "Број на регистрации"
 
 #. module: event
+#: model:ir.model.fields,help:event.field_event_event_message_needaction_counter
+#: model:ir.model.fields,help:event.field_event_registration_message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Број на пораки за кои ѝм е потребна акција"
+
+#. module: event
+#: model:ir.model.fields,help:event.field_event_event_message_unread_counter
+#: model:ir.model.fields,help:event.field_event_registration_message_unread_counter
+msgid "Number of unread messages"
+msgstr "Број на непрочитани пораки"
+
+#. module: event
 #: model:event.event,description:event.event_0
 #: model:event.event,description:event.event_1
 #: model:event.event,description:event.event_3
@@ -1276,18 +1353,19 @@ msgstr "Odoo веб клиент"
 #: model:ir.actions.act_window,help:event.action_event_view
 msgid ""
 "Odoo helps you schedule and efficiently organize your events:\n"
-"    track subscriptions and participations, automate the confirmation "
-"emails,\n"
+"    track subscriptions and participations, automate the confirmation emails,\n"
 "    sell tickets, etc."
-msgstr ""
-"Odoo ви помага во распоредување и ефикасно организирање на вашите настани:\n"
-"следи претплати и посетеност, автоматизирај ги потврдувачките меилови,\n"
-"продавај влезници итн."
+msgstr "Odoo ви помага во распоредување и ефикасно организирање на вашите настани:\nследи претплати и посетеност, автоматизирај ги потврдувачките меилови,\nпродавај влезници итн."
 
 #. module: event
 #: model:event.event,name:event.event_0
 msgid "Open Days in Los Angeles"
 msgstr "Отворени денови во Лос Анџелес"
+
+#. module: event
+#: model:ir.actions.client,name:event.action_client_event_menu
+msgid "Open Event Menu"
+msgstr "Отвори мени Настани"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_event_organizer_id
@@ -1311,9 +1389,7 @@ msgstr "Име на учесник/контакт"
 msgid ""
 "Participants are expected to have some knowledge in programming. A basic "
 "knowledge of the Python programming is recommended."
-msgstr ""
-"Посетителите се очекуваат да имаат основни познавања во програмирање. "
-"Основното знаење во Python програмирањето е препорачано."
+msgstr "Посетителите се очекуваат да имаат основни познавања во програмирање. Основното знаење во Python програмирањето е препорачано."
 
 #. module: event
 #: model:event.event,description:event.event_0
@@ -1322,9 +1398,7 @@ msgstr ""
 msgid ""
 "Participants preferably have a functional knowledge of our software (see "
 "Functional Training)."
-msgstr ""
-"Посетителите се очекуваат да имаат функционално познавање на нашиот софтвер "
-"(погледни функционален тренинг)"
+msgstr "Посетителите се очекуваат да имаат функционално познавање на нашиот софтвер (погледни функционален тренинг)"
 
 #. module: event
 #: model:ir.ui.view,arch_db:event.view_registration_search
@@ -1349,8 +1423,7 @@ msgstr "Проектен менаџмент, човечки ресурси, ме
 #. module: event
 #: model:event.event,description:event.event_2
 msgid "Purchase, Sales &amp; Purchase management, Financial accounting."
-msgstr ""
-"Набавка, Продажби &amp; Менаџирање со набавки, финансиско сметководство"
+msgstr "Набавка, Продажби &amp; Менаџирање со набавки, финансиско сметководство"
 
 #. module: event
 #: model:event.event,description:event.event_0
@@ -1360,12 +1433,18 @@ msgid "Python Objects"
 msgstr "Python објекти"
 
 #. module: event
+#: model:event.event,description:event.event_0
+#: model:event.event,description:event.event_1
+#: model:event.event,description:event.event_3
+msgid "Read Great Contents"
+msgstr "Читај одлична содржина"
+
+#. module: event
 #: model:ir.model.fields,help:event.field_event_registration_origin
 msgid ""
 "Reference of the document that created the registration, for example a sale "
 "order"
-msgstr ""
-"Референца на документот што ја креирал регистрацијата, пр. налог за продажба"
+msgstr "Референца на документот што ја креирал регистрацијата, пр. налог за продажба"
 
 #. module: event
 #: model:ir.ui.view,arch_db:event.view_event_form
@@ -1579,12 +1658,26 @@ msgid "Technical Training"
 msgstr "Техничка обука"
 
 #. module: event
+#: model:mail.template,subject:event.event_thanks
+msgid "Thanks for attending ${object.event_id.name}"
+msgstr ""
+
+#. module: event
 #: model:ir.model.fields,help:event.field_event_event_reply_to
 msgid ""
-"The email address of the organizer is likely to be put here, with the effect "
-"to be in the 'Reply-To' of the mails sent automatically at event or "
+"The email address of the organizer is likely to be put here, with the effect"
+" to be in the 'Reply-To' of the mails sent automatically at event or "
 "registrations confirmation. You can also put the email address of your mail "
 "gateway if you use one."
+msgstr ""
+
+#. module: event
+#: model:event.event,description:event.event_0
+#: model:event.event,description:event.event_1
+#: model:event.event,description:event.event_3
+msgid ""
+"This course help me build my first application within a month. Definetly "
+"worth its price."
 msgstr ""
 
 #. module: event
@@ -1668,10 +1761,18 @@ msgid "Unlimited"
 msgstr "Неограничено"
 
 #. module: event
+#: model:ir.model.fields,field_description:event.field_event_event_message_unread
+#: model:ir.model.fields,field_description:event.field_event_registration_message_unread
 #: model:ir.ui.view,arch_db:event.view_event_search
 #: model:ir.ui.view,arch_db:event.view_registration_search
 msgid "Unread Messages"
 msgstr "Непрочитани Пораки"
+
+#. module: event
+#: model:ir.model.fields,field_description:event.field_event_event_message_unread_counter
+#: model:ir.model.fields,field_description:event.field_event_registration_message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Тезга на непрочитаните пораки"
 
 #. module: event
 #: model:ir.model.fields,help:event.field_event_config_settings_auto_confirmation
@@ -1711,14 +1812,29 @@ msgstr ""
 msgid ""
 "Warning: This Event has not reached its Minimum Registration Limit. Are you "
 "sure you want to confirm it?"
+msgstr "Предупредување: Овој настан ја нема достигнато минималната граница на регистрација.  Сигурно ли сакате да го потврдите?"
+
+#. module: event
+#: model:ir.model.fields,field_description:event.field_event_event_website_message_ids
+msgid "Website Messages"
+msgstr "Пораки на веб сајт"
+
+#. module: event
+#: model:ir.model.fields,help:event.field_event_event_website_message_ids
+msgid "Website communication history"
 msgstr ""
-"Предупредување: Овој настан ја нема достигнато минималната граница на "
-"регистрација.  Сигурно ли сакате да го потврдите?"
 
 #. module: event
 #: selection:event.mail,interval_unit:0
 msgid "Week(s)"
 msgstr "недели"
+
+#. module: event
+#: model:event.event,description:event.event_0
+#: model:event.event,description:event.event_1
+#: model:event.event,description:event.event_3
+msgid "What do people say about this course?"
+msgstr ""
 
 #. module: event
 #: model:event.event,description:event.event_0
@@ -1740,21 +1856,18 @@ msgid "Workflows"
 msgstr "Работни текови"
 
 #. module: event
-#: code:addons/event/models/event.py:232
+#: code:addons/event/models/event.py:230
 #, python-format
 msgid ""
 "You have already set a registration for this event as 'Attended'. Please "
 "reset it to draft if you want to cancel this event."
-msgstr ""
-"Веќе имате поставено регистрација за овој настан како 'Присуствувал'. "
-"Ресетирајте до нацрт доколку сакате да го откажете овој настан."
+msgstr "Веќе имате поставено регистрација за овој настан како 'Присуствувал'. Ресетирајте до нацрт доколку сакате да го откажете овој настан."
 
 #. module: event
-#: code:addons/event/models/event.py:357
+#: code:addons/event/models/event.py:355
 #, python-format
 msgid "You must wait for the starting day of the event to do this action."
-msgstr ""
-"Мора да го чекате почетниот ден на настанот за да ја извршите оваа постапка."
+msgstr "Мора да го чекате почетниот ден на настанот за да ја извршите оваа постапка."
 
 #. module: event
 #: model:ir.model.fields,help:event.field_event_config_settings_group_email_scheduling
@@ -1831,64 +1944,3 @@ msgstr ""
 #: model:event.event,description:event.event_3
 msgid "training material."
 msgstr ""
-
-#~ msgid "Action Needed"
-#~ msgstr "Потребна е акција"
-
-#~ msgid "Date of the last message posted on the record."
-#~ msgstr "Датум на испраќање на последната порака"
-
-#~ msgid "Followers"
-#~ msgstr "Пратители"
-
-#~ msgid "Followers (Channels)"
-#~ msgstr "Пратители (Канали)"
-
-#~ msgid "Followers (Partners)"
-#~ msgstr "Пратители (Партнери)"
-
-#~ msgid ""
-#~ "I did not expect such a great learning experience. I feel like I can "
-#~ "develop anything now."
-#~ msgstr ""
-#~ "Не очекував толку солидно искуство од учењето. Се чувствувам дека би "
-#~ "можел да испрограмирам било што сега."
-
-#~ msgid "If checked new messages require your attention."
-#~ msgstr "Доколку е штиклирано, новите пораки го бараат вашето внимание."
-
-#~ msgid "If checked, new messages require your attention."
-#~ msgstr "Доколку е штиклирано, новите пораки го бараат вашето вниманите."
-
-#~ msgid "Is Follower"
-#~ msgstr "е следач"
-
-#~ msgid "Last Message Date"
-#~ msgstr "Датум на последна порака"
-
-#~ msgid "Messages"
-#~ msgstr "Пораки"
-
-#~ msgid "Messages and communication history"
-#~ msgstr "Пораки и историја на комуникација"
-
-#~ msgid "Number of Actions"
-#~ msgstr "Број на акции"
-
-#~ msgid "Number of messages which requires an action"
-#~ msgstr "Број на пораки за кои ѝм е потребна акција"
-
-#~ msgid "Number of unread messages"
-#~ msgstr "Број на непрочитани пораки"
-
-#~ msgid "Open Event Menu"
-#~ msgstr "Отвори мени Настани"
-
-#~ msgid "Read Great Contents"
-#~ msgstr "Читај одлична содржина"
-
-#~ msgid "Unread Messages Counter"
-#~ msgstr "Тезга на непрочитаните пораки"
-
-#~ msgid "Website Messages"
-#~ msgstr "Пораки на веб сајт"

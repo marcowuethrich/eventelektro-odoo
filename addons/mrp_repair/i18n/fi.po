@@ -3,26 +3,41 @@
 # * mrp_repair
 # 
 # Translators:
-# Martin Trigaux <mat@odoo.com>, 2016
-# Tuomo Aura <tuomo.aura@web-veistamo.fi>, 2016
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
-# Kari Lindgren <kari.lindgren@emsystems.fi>, 2016
-# Sanna Edelman <direct@generare.com>, 2016
-# salmemik <salmemik@gmail.com>, 2016
-# Svante Suominen <svante.suominen@web-veistamo.fi>, 2016
+# Kari Lindgren <kari.lindgren@emsystems.fi>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-14 15:55+0000\n"
-"PO-Revision-Date: 2016-11-14 15:55+0000\n"
-"Last-Translator: Svante Suominen <svante.suominen@web-veistamo.fi>, 2016\n"
-"Language-Team: Finnish (https://www.transifex.com/odoo/teams/41243/fi/)\n"
+"POT-Creation-Date: 2015-09-18 08:12+0000\n"
+"PO-Revision-Date: 2016-06-21 06:41+0000\n"
+"Last-Translator: Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>\n"
+"Language-Team: Finnish (http://www.transifex.com/odoo/odoo-9/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: mrp_repair
+#: model:ir.model.fields,help:mrp_repair.field_mrp_repair_line_state
+msgid ""
+" * The 'Draft' status is set automatically as draft when repair order in draft status.                         \n"
+"* The 'Confirmed' status is set automatically as confirm when repair order in confirm status.                         \n"
+"* The 'Done' status is set automatically when repair order is completed.                        \n"
+"* The 'Cancelled' status is set automatically when user cancel repair order."
+msgstr ""
+
+#. module: mrp_repair
+#: model:ir.model.fields,help:mrp_repair.field_mrp_repair_state
+msgid ""
+" * The 'Draft' status is used when a user is encoding a new and unconfirmed repair order.             \n"
+"* The 'Confirmed' status is used when a user confirms the repair order.             \n"
+"* The 'Ready to Repair' status is used to start to repairing, user can start repairing only after repair order is confirmed.             \n"
+"* The 'To be Invoiced' status is used to generate the invoice before or after repairing done.             \n"
+"* The 'Done' status is set when repairing is completed.            \n"
+"* The 'Cancelled' status is used when user cancel repair order."
+msgstr ""
 
 #. module: mrp_repair
 #: model:ir.ui.view,arch_db:mrp_repair.report_mrprepairorder
@@ -32,18 +47,7 @@ msgstr ""
 #. module: mrp_repair
 #: model:ir.ui.view,arch_db:mrp_repair.view_repair_order_form
 msgid "(update)"
-msgstr "(päivitä)"
-
-#. module: mrp_repair
-#: model:ir.model.fields,help:mrp_repair.field_mrp_repair_state
-msgid ""
-"* The 'Draft' status is used when a user is encoding a new and unconfirmed repair order.\n"
-"* The 'Confirmed' status is used when a user confirms the repair order.\n"
-"* The 'Ready to Repair' status is used to start to repairing, user can start repairing only after repair order is confirmed.\n"
-"* The 'To be Invoiced' status is used to generate the invoice before or after repairing done.\n"
-"* The 'Done' status is set when repairing is completed.\n"
-"* The 'Cancelled' status is used when user cancel repair order."
-msgstr ""
+msgstr "(päivitys)"
 
 #. module: mrp_repair
 #: model:ir.ui.view,arch_db:mrp_repair.report_mrprepairorder
@@ -82,11 +86,6 @@ msgstr ""
 
 #. module: mrp_repair
 #: model:ir.ui.view,arch_db:mrp_repair.report_mrprepairorder
-msgid "<strong>Shipping address :</strong>"
-msgstr ""
-
-#. module: mrp_repair
-#: model:ir.ui.view,arch_db:mrp_repair.report_mrprepairorder
 msgid "<strong>Total Without Taxes</strong>"
 msgstr "<strong>Yhteensä ilman veroja</strong>"
 
@@ -94,6 +93,17 @@ msgstr "<strong>Yhteensä ilman veroja</strong>"
 #: model:ir.ui.view,arch_db:mrp_repair.report_mrprepairorder
 msgid "<strong>Total</strong>"
 msgstr "<strong>Yhteensä</strong>"
+
+#. module: mrp_repair
+#: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_message_needaction
+msgid "Action Needed"
+msgstr "Vaatii toimia"
+
+#. module: mrp_repair
+#: code:addons/mrp_repair/wizard/cancel_repair.py:24
+#, python-format
+msgid "Active ID not Found"
+msgstr ""
 
 #. module: mrp_repair
 #: selection:mrp.repair.line,type:0
@@ -121,16 +131,10 @@ msgid "Before Repair"
 msgstr "Ennen korjausta"
 
 #. module: mrp_repair
-#: code:addons/mrp_repair/models/mrp_repair.py:206
-#, python-format
-msgid "Can only confirm draft repairs."
-msgstr ""
-
-#. module: mrp_repair
 #: model:ir.ui.view,arch_db:mrp_repair.view_cancel_repair
 #: model:ir.ui.view,arch_db:mrp_repair.view_make_invoice
 msgid "Cancel"
-msgstr "Cancelar"
+msgstr "Peruuta"
 
 #. module: mrp_repair
 #: model:ir.model,name:mrp_repair.model_mrp_repair_cancel
@@ -148,12 +152,6 @@ msgstr "Peru korjaustilaus"
 #: selection:mrp.repair,state:0 selection:mrp.repair.line,state:0
 msgid "Cancelled"
 msgstr "Peruttu"
-
-#. module: mrp_repair
-#: code:addons/mrp_repair/models/mrp_repair.py:221
-#, python-format
-msgid "Cannot cancel completed repairs."
-msgstr ""
 
 #. module: mrp_repair
 #: model:ir.model.fields,help:mrp_repair.field_mrp_repair_partner_id
@@ -180,11 +178,10 @@ msgstr "Vahvista korjaus"
 #: model:ir.ui.view,arch_db:mrp_repair.view_repair_order_form_filter
 #: selection:mrp.repair,state:0 selection:mrp.repair.line,state:0
 msgid "Confirmed"
-msgstr "Confirmado"
+msgstr "Vahvistettu"
 
 #. module: mrp_repair
-#: code:addons/mrp_repair/models/mrp_repair.py:508
-#: code:addons/mrp_repair/models/mrp_repair.py:570
+#: code:addons/mrp_repair/mrp_repair.py:524
 #, python-format
 msgid ""
 "Couldn't find a pricelist line matching this product and quantity.\n"
@@ -227,9 +224,9 @@ msgid "Current Location"
 msgstr "Nykyinen sijainti"
 
 #. module: mrp_repair
-#: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_default_address_id
-msgid "Default address id"
-msgstr ""
+#: model:ir.model.fields,help:mrp_repair.field_mrp_repair_message_last_post
+msgid "Date of the last message posted on the record."
+msgstr "Viimeisen viestin päivämäärä"
 
 #. module: mrp_repair
 #: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_address_id
@@ -260,7 +257,7 @@ msgstr "Kohdepaikka"
 #: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_line_display_name
 #: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_make_invoice_display_name
 msgid "Display Name"
-msgstr "Näyttönimi"
+msgstr "Näytä nimi"
 
 #. module: mrp_repair
 #: model:ir.ui.view,arch_db:mrp_repair.view_make_invoice
@@ -275,7 +272,7 @@ msgstr "Valmis"
 #. module: mrp_repair
 #: selection:mrp.repair.line,state:0
 msgid "Draft"
-msgstr "Borrador"
+msgstr "Luonnos"
 
 #. module: mrp_repair
 #: model:ir.ui.view,arch_db:mrp_repair.view_repair_order_form
@@ -294,9 +291,24 @@ msgid "Fees"
 msgstr "Veloitukset"
 
 #. module: mrp_repair
+#: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_message_follower_ids
+msgid "Followers"
+msgstr "Seuraajat"
+
+#. module: mrp_repair
+#: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Seuraajat (kanavat)"
+
+#. module: mrp_repair
+#: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seuraajat (kumppanit)"
+
+#. module: mrp_repair
 #: model:ir.ui.view,arch_db:mrp_repair.view_repair_order_form_filter
 msgid "Group By"
-msgstr "Ryhmittely"
+msgstr "Ryhmittele"
 
 #. module: mrp_repair
 #: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_make_invoice_group
@@ -325,7 +337,17 @@ msgstr "Historia"
 #: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_line_id
 #: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_make_invoice_id
 msgid "ID"
-msgstr "Tunniste (ID)"
+msgstr "ID"
+
+#. module: mrp_repair
+#: model:ir.model.fields,help:mrp_repair.field_mrp_repair_message_unread
+msgid "If checked new messages require your attention."
+msgstr "Jos valittu, uudet viestit vaativat huomiosi."
+
+#. module: mrp_repair
+#: model:ir.model.fields,help:mrp_repair.field_mrp_repair_message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Jos valittu, uudet viestit vaativat huomiosi."
 
 #. module: mrp_repair
 #: model:ir.actions.act_window,help:mrp_repair.action_repair_order_tree
@@ -338,7 +360,7 @@ msgstr ""
 #. module: mrp_repair
 #: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_internal_notes
 msgid "Internal Notes"
-msgstr "Sisäiset kommentit"
+msgstr "Sisäiset muistiinpanot"
 
 #. module: mrp_repair
 #: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_line_move_id
@@ -348,7 +370,12 @@ msgstr "Varastosiirto"
 #. module: mrp_repair
 #: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_invoice_id
 msgid "Invoice"
-msgstr "Invoice"
+msgstr "Lasku"
+
+#. module: mrp_repair
+#: model:ir.ui.view,arch_db:mrp_repair.view_repair_order_form
+msgid "Invoice Corrected"
+msgstr "Lasku korjattu"
 
 #. module: mrp_repair
 #: selection:mrp.repair,state:0
@@ -395,6 +422,16 @@ msgid "Invoicing Address"
 msgstr "Laskutusosoite"
 
 #. module: mrp_repair
+#: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_message_is_follower
+msgid "Is Follower"
+msgstr "On seuraaja"
+
+#. module: mrp_repair
+#: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_message_last_post
+msgid "Last Message Date"
+msgstr "Viimeinen viestipvm"
+
+#. module: mrp_repair
 #: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair___last_update
 #: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_cancel___last_update
 #: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_fee___last_update
@@ -432,6 +469,16 @@ msgid "Make Invoice"
 msgstr "Luo lasku"
 
 #. module: mrp_repair
+#: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_message_ids
+msgid "Messages"
+msgstr "Viestit"
+
+#. module: mrp_repair
+#: model:ir.model.fields,help:mrp_repair.field_mrp_repair_message_ids
+msgid "Messages and communication history"
+msgstr "Viesti- ja kommunikointihistoria"
+
+#. module: mrp_repair
 #: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_move_id
 msgid "Move"
 msgstr "Siirrä"
@@ -447,34 +494,32 @@ msgid "No Invoice"
 msgstr "Ei laskua"
 
 #. module: mrp_repair
-#: code:addons/mrp_repair/models/mrp_repair.py:499
-#: code:addons/mrp_repair/models/mrp_repair.py:561
+#: code:addons/mrp_repair/mrp_repair.py:511
 #, python-format
 msgid "No Pricelist!"
 msgstr "Ei hinnastoa!"
 
 #. module: mrp_repair
-#: code:addons/mrp_repair/models/mrp_repair.py:260
+#: code:addons/mrp_repair/mrp_repair.py:322
 #, python-format
 msgid "No account defined for partner \"%s\"."
 msgstr "Kumppanille ei ole määritetty tiliä \"%s\"."
 
 #. module: mrp_repair
-#: code:addons/mrp_repair/models/mrp_repair.py:285
-#: code:addons/mrp_repair/models/mrp_repair.py:313
+#: code:addons/mrp_repair/mrp_repair.py:350
+#: code:addons/mrp_repair/mrp_repair.py:379
 #, python-format
 msgid "No account defined for product \"%s\"."
 msgstr "Tuotteelle \"%s\" ei ole määritetty tiliä"
 
 #. module: mrp_repair
-#: code:addons/mrp_repair/models/mrp_repair.py:306
+#: code:addons/mrp_repair/mrp_repair.py:372
 #, python-format
 msgid "No product defined on Fees!"
 msgstr "Tuotetta ei ole määritelty palkkioissa!"
 
 #. module: mrp_repair
-#: code:addons/mrp_repair/models/mrp_repair.py:506
-#: code:addons/mrp_repair/models/mrp_repair.py:568
+#: code:addons/mrp_repair/mrp_repair.py:522
 #, python-format
 msgid "No valid pricelist line found !"
 msgstr ""
@@ -482,7 +527,22 @@ msgstr ""
 #. module: mrp_repair
 #: model:ir.ui.view,arch_db:mrp_repair.view_repair_order_form
 msgid "Notes"
-msgstr "Lisätiedot"
+msgstr "Muistiinpanot"
+
+#. module: mrp_repair
+#: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_message_needaction_counter
+msgid "Number of Actions"
+msgstr "Toimenpiteiden määrä"
+
+#. module: mrp_repair
+#: model:ir.model.fields,help:mrp_repair.field_mrp_repair_message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Toimenpiteitä vaativien viestien määrä"
+
+#. module: mrp_repair
+#: model:ir.model.fields,help:mrp_repair.field_mrp_repair_message_unread_counter
+msgid "Number of unread messages"
+msgstr "Lukemattomien viestien määrä"
 
 #. module: mrp_repair
 #: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_operations
@@ -588,6 +648,16 @@ msgid "Ready to Repair"
 msgstr "Valmis korjattavaksi"
 
 #. module: mrp_repair
+#: model:ir.ui.view,arch_db:mrp_repair.view_repair_order_form_filter
+msgid "Reair Orders"
+msgstr ""
+
+#. module: mrp_repair
+#: model:ir.ui.view,arch_db:mrp_repair.view_repair_order_form
+msgid "Recreate Invoice"
+msgstr "Laskun uudelleenluonti"
+
+#. module: mrp_repair
 #: selection:mrp.repair.line,type:0
 msgid "Remove"
 msgstr "Poista"
@@ -622,7 +692,6 @@ msgstr "Korjaustilauksen viiite"
 
 #. module: mrp_repair
 #: model:ir.actions.act_window,name:mrp_repair.action_repair_order_tree
-#: model:ir.ui.view,arch_db:mrp_repair.view_repair_order_form_filter
 msgid "Repair Orders"
 msgstr "Korjaustilaukset"
 
@@ -637,37 +706,13 @@ msgid "Repair Reference"
 msgstr "Korjauksen viite"
 
 #. module: mrp_repair
-#: code:addons/mrp_repair/models/mrp_repair.py:194
-#, python-format
-msgid "Repair must be canceled in order to reset it to draft."
-msgstr ""
-
-#. module: mrp_repair
-#: code:addons/mrp_repair/models/mrp_repair.py:343
-#, python-format
-msgid "Repair must be confirmed before starting reparation."
-msgstr ""
-
-#. module: mrp_repair
-#: code:addons/mrp_repair/models/mrp_repair.py:371
-#, python-format
-msgid "Repair must be repaired in order to make the product moves."
-msgstr ""
-
-#. module: mrp_repair
-#: code:addons/mrp_repair/models/mrp_repair.py:354
-#, python-format
-msgid "Repair must be under repair in order to end reparation."
-msgstr ""
-
-#. module: mrp_repair
-#: code:addons/mrp_repair/models/mrp_repair.py:223
+#: code:addons/mrp_repair/mrp_repair.py:285
 #, python-format
 msgid "Repair order is already invoiced."
 msgstr ""
 
 #. module: mrp_repair
-#: code:addons/mrp_repair/wizard/mrp_repair_cancel.py:20
+#: code:addons/mrp_repair/wizard/cancel_repair.py:32
 #, python-format
 msgid "Repair order is not invoiced."
 msgstr "Korjaustilausta ei ole laskutettu"
@@ -696,8 +741,8 @@ msgstr "Korjausten tilaus"
 
 #. module: mrp_repair
 #: model:ir.ui.view,arch_db:mrp_repair.view_repair_order_form_filter
-msgid "Search Repair Orders"
-msgstr ""
+msgid "Search Reair Orders"
+msgstr "Etsi korjaustilaukset"
 
 #. module: mrp_repair
 #: model:ir.model.fields,help:mrp_repair.field_mrp_repair_invoice_method
@@ -708,7 +753,7 @@ msgid ""
 msgstr ""
 
 #. module: mrp_repair
-#: code:addons/mrp_repair/models/mrp_repair.py:213
+#: code:addons/mrp_repair/mrp_repair.py:272
 #, python-format
 msgid "Serial number is required for operation line with product '%s'"
 msgstr "Sarjanumero vaaditaan tuotantolinjalla tuotteelle '%s'"
@@ -716,12 +761,17 @@ msgstr "Sarjanumero vaaditaan tuotantolinjalla tuotteelle '%s'"
 #. module: mrp_repair
 #: model:ir.ui.view,arch_db:mrp_repair.view_repair_order_form
 msgid "Set to Draft"
-msgstr "Poner en borrador"
+msgstr "Aseta luonnokseksi"
+
+#. module: mrp_repair
+#: model:ir.ui.view,arch_db:mrp_repair.report_mrprepairorder
+msgid "Shipping address :"
+msgstr "Toimitusosoite:"
 
 #. module: mrp_repair
 #: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_line_location_id
 msgid "Source Location"
-msgstr "Lähtöpaikka"
+msgstr "Lähteen sijainti"
 
 #. module: mrp_repair
 #: model:ir.ui.view,arch_db:mrp_repair.view_repair_order_form
@@ -755,14 +805,12 @@ msgid "Taxes"
 msgstr "Verot"
 
 #. module: mrp_repair
-#: code:addons/mrp_repair/models/mrp_repair.py:166
+#: code:addons/mrp_repair/mrp_repair.py:207
 #, python-format
 msgid ""
 "The Product Unit of Measure you chose has a different category than in the "
 "product form."
-msgstr ""
-"Tuottelle valitsemallasi yksiköllä on eri kategoria, kuin tuoteomakkeella "
-"määritelty."
+msgstr "Tuottelle valitsemallasi yksiköllä on eri kategoria, kuin tuoteomakkeella määritelty."
 
 #. module: mrp_repair
 #: sql_constraint:mrp.repair:0
@@ -778,20 +826,11 @@ msgid ""
 msgstr ""
 
 #. module: mrp_repair
-#: model:ir.model.fields,help:mrp_repair.field_mrp_repair_line_state
-msgid ""
-"The status of a repair line is set automatically to the one of the linked "
-"repair order."
-msgstr ""
-
-#. module: mrp_repair
 #: model:ir.ui.view,arch_db:mrp_repair.view_cancel_repair
 msgid ""
 "This operation will cancel the Repair process, but will not cancel it's "
 "Invoice. Do you want to continue?"
-msgstr ""
-"Tämä toiminto peruuttaa korjausprosessin, mutta ei sen laskutusta. Haluatko "
-"jatkaa?"
+msgstr "Tämä toiminto peruuttaa korjausprosessin, mutta ei sen laskutusta. Haluatko jatkaa?"
 
 #. module: mrp_repair
 #: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_fee_to_invoice
@@ -834,7 +873,17 @@ msgstr "Yksikköhinta"
 #. module: mrp_repair
 #: model:ir.ui.view,arch_db:mrp_repair.view_repair_order_form
 msgid "Unit of Measure"
-msgstr "Mittayksikkö"
+msgstr "Yksikkö"
+
+#. module: mrp_repair
+#: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_message_unread
+msgid "Unread Messages"
+msgstr "Lukemattomia viestejä"
+
+#. module: mrp_repair
+#: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Lukemattomien viestien laskuri"
 
 #. module: mrp_repair
 #: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_amount_untaxed
@@ -852,7 +901,7 @@ msgid "VAT:"
 msgstr "ALV:"
 
 #. module: mrp_repair
-#: code:addons/mrp_repair/models/mrp_repair.py:166
+#: code:addons/mrp_repair/mrp_repair.py:207
 #, python-format
 msgid "Warning"
 msgstr "Varoitus"
@@ -863,21 +912,35 @@ msgid "Warranty Expiration"
 msgstr ""
 
 #. module: mrp_repair
+#: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_website_message_ids
+msgid "Website Messages"
+msgstr "Verkkosivun ilmoitukset"
+
+#. module: mrp_repair
+#: model:ir.model.fields,help:mrp_repair.field_mrp_repair_website_message_ids
+msgid "Website communication history"
+msgstr "Verkkosivun viestihistoria"
+
+#. module: mrp_repair
 #: model:ir.ui.view,arch_db:mrp_repair.view_cancel_repair
 msgid "Yes"
 msgstr "Kyllä"
 
 #. module: mrp_repair
-#: code:addons/mrp_repair/models/mrp_repair.py:248
+#: code:addons/mrp_repair/mrp_repair.py:308
 #, python-format
 msgid "You have to select a Partner Invoice Address in the repair form!"
 msgstr ""
 
 #. module: mrp_repair
-#: code:addons/mrp_repair/models/mrp_repair.py:501
-#: code:addons/mrp_repair/models/mrp_repair.py:563
+#: code:addons/mrp_repair/mrp_repair.py:513
 #, python-format
 msgid ""
 "You have to select a pricelist in the Repair form !\n"
-" Please set one before choosing a product."
+"Please set one before choosing a product."
 msgstr ""
+
+#. module: mrp_repair
+#: model:ir.model.fields,field_description:mrp_repair.field_mrp_repair_default_address_id
+msgid "unknown"
+msgstr "tuntematon"

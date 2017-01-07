@@ -1,20 +1,16 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
 import base64
+
 import json
 import pytz
-
 from datetime import datetime
 from psycopg2 import IntegrityError
-
-from odoo import http
-from odoo.http import request
-from odoo.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT
-from odoo.tools.translate import _
-from odoo.exceptions import ValidationError
-from odoo.addons.base.ir.ir_qweb.fields import nl2br
-
+from openerp import http, SUPERUSER_ID
+from openerp.http import request
+from openerp.tools import DEFAULT_SERVER_DATE_FORMAT, DEFAULT_SERVER_DATETIME_FORMAT
+from openerp.tools.translate import _
+from openerp.exceptions import ValidationError
+from openerp.addons.base.ir.ir_qweb import nl2br
 
 class WebsiteForm(http.Controller):
 
@@ -26,7 +22,7 @@ class WebsiteForm(http.Controller):
             return json.dumps(False)
 
         try:
-            data = self.extract_data(model_record, request.params)
+            data = self.extract_data(model_record, ** kwargs)
         # If we encounter an issue while extracting data
         except ValidationError, e:
             # I couldn't find a cleaner way to pass data to an exception
@@ -37,7 +33,7 @@ class WebsiteForm(http.Controller):
             if id_record:
                 self.insert_attachment(model_record, id_record, data['attachments'])
 
-        # Some fields have additional SQL constraints that we can't check generically
+        # Some fields have additionnal SQL constraints that we can't check generically
         # Ex: crm.lead.probability which is a float between 0 and 1
         # TODO: How to get the name of the erroneous field ?
         except IntegrityError:
@@ -105,7 +101,7 @@ class WebsiteForm(http.Controller):
 
 
     # Extract all data sent by the form and sort its on several properties
-    def extract_data(self, model, values):
+    def extract_data(self, model, **kwargs):
 
         data = {
             'record': {},        # Values to create record
@@ -116,8 +112,7 @@ class WebsiteForm(http.Controller):
         authorized_fields = model.sudo()._get_form_writable_fields()
         error_fields = []
 
-
-        for field_name, field_value in values.items():
+        for field_name, field_value in kwargs.items():
             # If the value of the field if a file
             if hasattr(field_value, 'filename'):
                 # Undo file upload field name indexing

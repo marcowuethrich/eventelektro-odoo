@@ -3,21 +3,17 @@
 # * report
 # 
 # Translators:
-# Martin Trigaux <mat@odoo.com>, 2016
-# danimaribeiro <danimaribeiro@gmail.com>, 2016
-# grazziano <gra.negocia@gmail.com>, 2016
-# Mateus Lopes <mateus1@gmail.com>, 2016
-# Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>, 2016
-# Luiz Carlos de Lima <luiz.carlos@akretion.com.br>, 2016
-# francisco alexandre bezerra da silva <falexandresilva@gmail.com>, 2016
+# grazziano <gra.negocia@gmail.com>, 2015
+# Martin Trigaux, 2015
+# Mateus Lopes <mateus1@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:57+0000\n"
-"PO-Revision-Date: 2016-09-07 08:57+0000\n"
-"Last-Translator: francisco alexandre bezerra da silva <falexandresilva@gmail.com>, 2016\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/odoo/teams/41243/pt_BR/)\n"
+"POT-Creation-Date: 2016-12-07 10:39+0000\n"
+"PO-Revision-Date: 2016-12-17 00:08+0000\n"
+"Last-Translator: Martin Trigaux\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/odoo/odoo-9/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -150,7 +146,7 @@ msgid "B9  23  33 x 62 mm"
 msgstr "B9 23 33 x 62 mm"
 
 #. module: report
-#: code:addons/report/models/report.py:273
+#: code:addons/report/models/report.py:274
 #, python-format
 msgid "Bad Report Reference"
 msgstr "Referência do relatório ruim"
@@ -203,19 +199,12 @@ msgid "Default paper format ?"
 msgstr "Formato padrão do relatório?"
 
 #. module: report
-#. openerp-web
-#: code:addons/report/static/src/xml/report.xml:12
-#, python-format
-msgid "Discard"
-msgstr "Descartar"
-
-#. module: report
 #: model:ir.model.fields,field_description:report.field_ir_qweb_field_barcode_display_name
 #: model:ir.model.fields,field_description:report.field_report_abstract_report_display_name
 #: model:ir.model.fields,field_description:report.field_report_display_name
 #: model:ir.model.fields,field_description:report.field_report_paperformat_display_name
 msgid "Display Name"
-msgstr "Nome para Exibição"
+msgstr "Nome de Exibição"
 
 #. module: report
 #: model:ir.model.fields,field_description:report.field_report_paperformat_header_line
@@ -223,39 +212,29 @@ msgid "Display a header line"
 msgstr "Exibir uma linha de cabeçalho"
 
 #. module: report
-#. openerp-web
-#: code:addons/report/static/src/xml/report.xml:8
-#, python-format
-msgid "Edit"
-msgstr "Editar"
-
-#. module: report
-#: model:ir.ui.view,arch_db:report.base_config_settings_inherited
+#: model:ir.ui.view,arch_db:report.reporting_settings_form_inherited
 msgid "Edit external footer"
 msgstr "Editar Rodapé Externo"
 
 #. module: report
-#: model:ir.ui.view,arch_db:report.base_config_settings_inherited
+#: model:ir.ui.view,arch_db:report.reporting_settings_form_inherited
 msgid "Edit external header"
 msgstr "Editar Cabeçalho Externo"
 
 #. module: report
-#: model:ir.ui.view,arch_db:report.base_config_settings_inherited
+#: model:ir.ui.view,arch_db:report.reporting_settings_form_inherited
 msgid "Edit internal header"
 msgstr "Editar Cabeçalho Interno"
 
 #. module: report
 #: model:ir.ui.view,arch_db:report.external_layout_footer
 msgid "Email:"
-msgstr "E-mail:"
+msgstr "Email:"
 
 #. module: report
-#: code:addons/report/models/report_paperformat.py:68
-#, python-format
-msgid "Error ! You cannot select a format AND specific page width/height."
-msgstr ""
-"Erro! Não é possível selecionar um formato E especificar largura/altura da "
-"página."
+#: constraint:report.paperformat:0
+msgid "Error ! You cannot select a format AND speficic page width/height."
+msgstr "Erro! Não é possível selecionar um formato e página ESPECÍFICO largura / altura."
 
 #. module: report
 #: selection:report.paperformat,format:0
@@ -276,11 +255,6 @@ msgstr "Fax:"
 #: selection:report.paperformat,format:0
 msgid "Folio 27  210 x 330 mm"
 msgstr "Ofício 27 210 x 330 mm"
-
-#. module: report
-#: model:ir.model,name:report.model_ir_http
-msgid "HTTP routing"
-msgstr "Rota HTTP"
 
 #. module: report
 #: model:ir.model.fields,field_description:report.field_report_paperformat_header_spacing
@@ -306,7 +280,7 @@ msgstr "Paisagem"
 #: model:ir.model.fields,field_description:report.field_report_abstract_report___last_update
 #: model:ir.model.fields,field_description:report.field_report_paperformat___last_update
 msgid "Last Modified on"
-msgstr "Última Modificação em"
+msgstr "Última modificação em"
 
 #. module: report
 #: model:ir.model.fields,field_description:report.field_report_paperformat_write_uid
@@ -387,11 +361,6 @@ msgid "Paper format"
 msgstr "Formato de papel"
 
 #. module: report
-#: model:ir.model.fields,field_description:report.field_base_config_settings_paperformat_id
-msgid "Paper format *"
-msgstr "Formato de papel *"
-
-#. module: report
 #: model:ir.ui.view,arch_db:report.paperformat_view_form
 #: model:ir.ui.view,arch_db:report.paperformat_view_tree
 msgid "Paper format configuration"
@@ -414,36 +383,22 @@ msgstr "Retrato"
 
 #. module: report
 #: model:ir.actions.report.xml,name:report.action_report_externalpreview
-#: model:ir.ui.view,arch_db:report.base_config_settings_inherited
+#: model:ir.ui.view,arch_db:report.reporting_settings_form_inherited
 msgid "Preview External Report"
 msgstr "Visualizar Relatório Externo"
 
 #. module: report
 #: model:ir.actions.report.xml,name:report.action_report_internalpreview
-#: model:ir.ui.view,arch_db:report.base_config_settings_inherited
+#: model:ir.ui.view,arch_db:report.reporting_settings_form_inherited
 msgid "Preview Internal Report"
 msgstr "Visualizar Relatório Interno"
 
 #. module: report
 #. openerp-web
-#: code:addons/report/static/src/xml/report.xml:5
-#, python-format
-msgid "Print"
-msgstr "Imprimir"
-
-#. module: report
-#: model:ir.model.fields,field_description:report.field_ir_act_report_xml_print_report_name
-msgid "Printed Report Name"
-msgstr "Nome de Relatório Impresso"
-
-#. module: report
-#: model:ir.ui.view,arch_db:report.act_report_xml_view_inherit
-msgid "QWeb views"
-msgstr "Visualizações QWeb"
-
-#. module: report
-#. openerp-web
-#: code:addons/report/static/src/js/qwebactionmanager.js:95
+#: code:addons/report/static/src/js/qwebactionmanager.js:76
+#: code:addons/report/static/src/js/qwebactionmanager.js:84
+#: code:addons/report/static/src/js/qwebactionmanager.js:91
+#: code:addons/report/static/src/js/qwebactionmanager.js:96
 #: model:ir.model,name:report.model_report
 #, python-format
 msgid "Report"
@@ -462,11 +417,9 @@ msgid "Right Margin (mm)"
 msgstr "Margem Direita (mm)"
 
 #. module: report
-#. openerp-web
-#: code:addons/report/static/src/xml/report.xml:11
-#, python-format
-msgid "Save"
-msgstr "Salvar"
+#: model:ir.ui.view,arch_db:report.act_report_xml_view_inherit
+msgid "Search associated QWeb views"
+msgstr "Pesquisa visualizações Qweb associadas"
 
 #. module: report
 #: model:ir.model.fields,help:report.field_report_paperformat_format
@@ -494,18 +447,7 @@ msgid "This is a sample of an internal report."
 msgstr "Esta é uma amostra de um relatório interno."
 
 #. module: report
-#: model:ir.model.fields,help:report.field_ir_act_report_xml_print_report_name
-msgid ""
-"This is the filename of the report going to download. Keep empty to not "
-"change the report filename. You can use a python expression with the object "
-"and time variables."
-msgstr ""
-"Este é o nome do arquivo do relatório que vai ser baixado. Manter vazio para"
-" não alterar o nome do arquivo do relatório. Você pode usar uma expressão "
-"python com as variáveis ​​objeto e tempo."
-
-#. module: report
-#: code:addons/report/models/report.py:273
+#: code:addons/report/models/report.py:274
 #, python-format
 msgid "This report is not loaded into the database: %s."
 msgstr "Este relatório não é carregado no banco de dados:%s."
@@ -517,24 +459,19 @@ msgstr "Margem Superior (mm)"
 
 #. module: report
 #. openerp-web
-#: code:addons/report/static/src/js/qwebactionmanager.js:18
+#: code:addons/report/static/src/js/qwebactionmanager.js:76
 #, python-format
 msgid ""
 "Unable to find Wkhtmltopdf on this \n"
 "system. The report will be shown in html.<br><br><a href=\"http://wkhtmltopdf.org/\" target=\"_blank\">\n"
 "wkhtmltopdf.org</a>"
-msgstr ""
-"Incapaz de encontrar o programa Wkhtmltopdf neste\n"
-"sistema. O relatório será mostrado em html.<br><br><a href=\"http://wkhtmltopdf.org/\" target=\"_blank\">\n"
-"wkhtmltopdf.org</a>"
+msgstr "Incapaz de encontrar o programa Wkhtmltopdf neste\nsistema. O relatório será mostrado em html.<br><br><a href=\"http://wkhtmltopdf.org/\" target=\"_blank\">\nwkhtmltopdf.org</a>"
 
 #. module: report
 #: code:addons/report/models/report.py:164
 #, python-format
 msgid "Unable to find Wkhtmltopdf on this system. The PDF can not be created."
-msgstr ""
-"Não é possível localizar Wkhtmltopdf neste sistema. O PDF não pode ser "
-"criado."
+msgstr "Não é possível localizar Wkhtmltopdf neste sistema. O PDF não pode ser criado."
 
 #. module: report
 #: model:ir.ui.view,arch_db:report.external_layout_footer
@@ -542,41 +479,30 @@ msgid "Website:"
 msgstr "Site:"
 
 #. module: report
-#: code:addons/report/models/report.py:435
+#: code:addons/report/models/report.py:464
 #, python-format
 msgid "Wkhtmltopdf failed (error code: %s). Message: %s"
 msgstr "Wkhtmltopdf falhou (código de erro: %s). Mensagem: %s"
 
 #. module: report
 #. openerp-web
-#: code:addons/report/static/src/js/qwebactionmanager.js:19
+#: code:addons/report/static/src/js/qwebactionmanager.js:84
 #, python-format
 msgid ""
 "You need to start OpenERP with at least two \n"
 "workers to print a pdf version of the reports."
-msgstr ""
-"Você precisa começar o Odoo com pelo menos dois\n"
-"trabalhadores para imprimir uma versão pdf dos relatórios"
+msgstr "Você precisa começar a Odoo com pelo menos dois\ntrabalhadores para imprimir uma versão pdf dos relatórios"
 
 #. module: report
 #. openerp-web
-#: code:addons/report/static/src/js/qwebactionmanager.js:20
+#: code:addons/report/static/src/js/qwebactionmanager.js:91
 #, python-format
 msgid ""
 "You should upgrade your version of\n"
 "Wkhtmltopdf to at least 0.12.0 in order to get a correct display of headers and footers as well as\n"
 "support for table-breaking between pages.<br><br><a href=\"http://wkhtmltopdf.org/\" \n"
 "target=\"_blank\">wkhtmltopdf.org</a>"
-msgstr ""
-"Você deve atualizar sua versão do\n"
-" Wkhtmltopdf para, pelo menos, 0.12.0, a fim de obter uma exibição correcta de cabeçalhos e rodapés, bem como\n"
-"  apoio para a tabela de quebra entre páginas.<br><br><a href=\"http://wkhtmltopdf.org/\" \n"
-" target=\"_blank\">wkhtmltopdf.org</a>"
-
-#. module: report
-#: model:ir.model,name:report.model_base_config_settings
-msgid "base.config.settings"
-msgstr "base.config.settings"
+msgstr "Você deve atualizar sua versão do\n Wkhtmltopdf para, pelo menos, 0.12.0, a fim de obter uma exibição correcta de cabeçalhos e rodapés, bem como\n  apoio para a tabela de quebra entre páginas.<br><br><a href=\"http://wkhtmltopdf.org/\" \n target=\"_blank\">wkhtmltopdf.org</a>"
 
 #. module: report
 #. openerp-web
@@ -585,11 +511,4 @@ msgstr "base.config.settings"
 msgid ""
 "Your installation of Wkhtmltopdf seems to be broken. The \n"
 "report will be shown in html.<br><br><a href=\"http://wkhtmltopdf.org/\" target=\"_blank\">wkhtmltopdf.org</a>"
-msgstr ""
-"A instalação do Wkhtmltopdf parece estar quebrada. O \n"
-"relatório será mostrado em html.<br><br><a href=\"http://wkhtmltopdf.org/\" target=\"_blank\">wkhtmltopdf.org</a>"
-
-#. module: report
-#: model:ir.model,name:report.model_ir_qweb_field_barcode
-msgid "ir.qweb.field.barcode"
-msgstr "ir.qweb.field.barcode"
+msgstr "A instalação do Wkhtmltopdf parece estar quebrada. O \nrelatório será mostrado em html.<br><br><a href=\"http://wkhtmltopdf.org/\" target=\"_blank\">wkhtmltopdf.org</a>"

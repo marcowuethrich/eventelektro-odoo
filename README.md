@@ -1,23 +1,18 @@
 Requirements:
 ----
 
-ubuntu => 16.04
+ubuntu 14.04 or higher
 
 
-Install
+Install Odoo 9
 ----
 
-sudo apt-get update
+* sudo apt-get install git
+* sudo git clone https://github.com/marcowuethrich/odoo --depth 1 --single-branch odoo/odoo-server/
 
-sudo apt-get upgrade
+* sudo chmod +x odoo/odoo-server/odoo_install.sh
+* odoo/odoo-server/odoo_install.sh
 
-sudo wget https://raw.githubusercontent.com/Yenthe666/InstallScript/10.0/odoo_install.sh
-
-sudo nano odoo_install.sh
-
-sudo chmod +x odoo_install.sh
-
-./odoo_install.sh
 
 
 Customer Changes

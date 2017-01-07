@@ -1,4 +1,4 @@
-from odoo.addons.account.tests.account_test_users import AccountTestUsers
+from openerp.addons.account.tests.account_test_users import AccountTestUsers
 
 
 class TestSearch(AccountTestUsers):

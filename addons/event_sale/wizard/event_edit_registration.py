@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from openerp import models, fields, api
 
 
-class RegistrationEditor(models.TransientModel):
+class SaleOrderEventRegistration(models.TransientModel):
     _name = "registration.editor"
 
     sale_order_id = fields.Many2one('sale.order', 'Sale Order', required=True)
@@ -11,7 +11,7 @@ class RegistrationEditor(models.TransientModel):
 
     @api.model
     def default_get(self, fields):
-        res = super(RegistrationEditor, self).default_get(fields)
+        res = super(SaleOrderEventRegistration, self).default_get(fields)
         if not res.get('sale_order_id'):
             sale_order_id = res.get('sale_order_id', self._context.get('active_id'))
             res['sale_order_id'] = sale_order_id
@@ -41,18 +41,19 @@ class RegistrationEditor(models.TransientModel):
                     'sale_order_line_id': so_line.id,
                 }])
         res['event_registration_ids'] = attendee_list
+        res = self._convert_to_cache(res, validate=False)
         res = self._convert_to_write(res)
         return res
 
     @api.multi
     def action_make_registration(self):
-        self.ensure_one()
-        for registration_line in self.event_registration_ids:
-            values = registration_line.get_registration_data()
-            if registration_line.registration_id:
-                registration_line.registration_id.write(values)
-            else:
-                self.env['event.registration'].create(values)
+        Registration = self.env['event.registration']
+        for wizard in self:
+            for wiz_registration in wizard.event_registration_ids:
+                if wiz_registration.registration_id:
+                    wiz_registration.registration_id.write(wiz_registration.get_registration_data()[0])
+                else:
+                    Registration.create(wiz_registration.get_registration_data()[0])
         if self.env.context.get('active_model') == 'sale.order':
             for order in self.env['sale.order'].browse(self.env.context.get('active_ids', [])):
                 order.order_line._update_registrations(confirm=True)
@@ -72,9 +73,8 @@ class RegistrationEditorLine(models.TransientModel):
     phone = fields.Char(string='Phone')
     name = fields.Char(string='Name', index=True)
 
-    @api.multi
+    @api.one
     def get_registration_data(self):
-        self.ensure_one()
         return {
             'event_id': self.event_id.id,
             'event_ticket_id': self.event_ticket_id.id,

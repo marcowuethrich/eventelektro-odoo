@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 import urlparse
 import datetime
 
-from odoo import api, fields, models, tools
+from openerp import api, fields, models, tools
 
 
 class BaseConfiguration(models.TransientModel):
@@ -16,15 +15,15 @@ class BaseConfiguration(models.TransientModel):
     alias_domain = fields.Char('Alias Domain', help="If you have setup a catch-all email domain redirected to "
                                "the Odoo server, enter the domain name here.")
 
-    @api.model
-    def get_default_fail_counter(self, fields):
+    @api.multi
+    def get_default_fail_counter(self):
         previous_date = datetime.datetime.now() - datetime.timedelta(days=30)
         return {
             'fail_counter': self.env['mail.mail'].sudo().search_count([('date', '>=', previous_date.strftime(tools.DEFAULT_SERVER_DATETIME_FORMAT)), ('state', '=', 'exception')]),
         }
 
-    @api.model
-    def get_default_alias_domain(self, fields):
+    @api.multi
+    def get_default_alias_domain(self):
         alias_domain = self.env["ir.config_parameter"].get_param("mail.catchall.domain", default=None)
         if alias_domain is None:
             domain = self.env["ir.config_parameter"].get_param("web.base.url")

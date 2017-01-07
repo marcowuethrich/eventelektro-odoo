@@ -1,4 +1,4 @@
-from odoo import models, api
+from openerp import models, api
 
 
 class AccountUnreconcile(models.TransientModel):

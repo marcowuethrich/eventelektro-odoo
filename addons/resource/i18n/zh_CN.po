@@ -3,15 +3,17 @@
 # * resource
 # 
 # Translators:
-# Jeffery Chen Fan <jeffery9@gmail.com>, 2016
+# Jeffery Chenn <jeffery9@gmail.com>, 2016
+# Joray <13637815@qq.com>, 2016
+# 卓忆科技 <zhanghao@jointd.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:57+0000\n"
-"PO-Revision-Date: 2016-09-07 08:57+0000\n"
-"Last-Translator: Jeffery Chen Fan <jeffery9@gmail.com>, 2016\n"
-"Language-Team: Chinese (China) (https://www.transifex.com/odoo/teams/41243/zh_CN/)\n"
+"POT-Creation-Date: 2015-09-07 14:41+0000\n"
+"PO-Revision-Date: 2016-07-12 01:02+0000\n"
+"Last-Translator: Jeffery Chenn <jeffery9@gmail.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/odoo/odoo-9/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -19,7 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: resource
-#: code:addons/resource/models/resource.py:689
+#: code:addons/resource/resource.py:689
 #, python-format
 msgid "%s (copy)"
 msgstr "%s (副本)"
@@ -54,7 +56,7 @@ msgstr "公司"
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_leaves_create_uid
 #: model:ir.model.fields,field_description:resource.field_resource_resource_create_uid
 msgid "Created by"
-msgstr "创建人"
+msgstr "创建者"
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance_create_date
@@ -67,7 +69,7 @@ msgstr "创建时间"
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance_dayofweek
 msgid "Day of Week"
-msgstr "星期"
+msgstr "星期几"
 
 #. module: resource
 #: model:ir.model.fields,help:resource.field_resource_resource_calendar_id
@@ -79,7 +81,7 @@ msgstr "定义资源调度"
 msgid ""
 "Define working hours and time table that could be scheduled to your project "
 "members"
-msgstr "定义你的项目成员可计划的工时和时间表"
+msgstr "定义您的项目成员可计划的工时和时间表"
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance_display_name
@@ -92,7 +94,7 @@ msgstr "显示名称"
 #. module: resource
 #: model:ir.ui.view,arch_db:resource.resource_calendar_leave_form
 msgid "Duration"
-msgstr "有效期"
+msgstr "持续时间"
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_resource_time_efficiency
@@ -103,11 +105,10 @@ msgstr "效率因子"
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance_date_to
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_leaves_date_to
 msgid "End Date"
-msgstr "结束日期"
+msgstr "终止日期"
 
 #. module: resource
-#: code:addons/resource/models/resource.py:738
-#, python-format
+#: constraint:resource.calendar.leaves:0
 msgid "Error! leave start-date must be lower then leave end-date."
 msgstr "错误！休假的开始日期必须小于结束日期。"
 
@@ -125,12 +126,12 @@ msgstr "分组"
 #. module: resource
 #: model:ir.ui.view,arch_db:resource.view_resource_calendar_attendance_form
 msgid "Hours"
-msgstr "小时"
+msgstr "时数"
 
 #. module: resource
 #: selection:resource.resource,resource_type:0
 msgid "Human"
-msgstr "人类"
+msgstr "人"
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance_id
@@ -157,7 +158,7 @@ msgstr "如果这有效字段设为否，那么可以隐藏此记录且并不删
 #. module: resource
 #: model:ir.ui.view,arch_db:resource.view_resource_resource_search
 msgid "Inactive"
-msgstr "无效"
+msgstr "不可用"
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar___last_update
@@ -165,7 +166,7 @@ msgstr "无效"
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_leaves___last_update
 #: model:ir.model.fields,field_description:resource.field_resource_resource___last_update
 msgid "Last Modified on"
-msgstr "最后修改日"
+msgstr "最后修改时间"
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance_write_uid
@@ -173,7 +174,7 @@ msgstr "最后修改日"
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_write_uid
 #: model:ir.model.fields,field_description:resource.field_resource_resource_write_uid
 msgid "Last Updated by"
-msgstr "最后更新人"
+msgstr "最后更新者"
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance_write_date
@@ -216,7 +217,7 @@ msgstr "周一"
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_name
 #: model:ir.model.fields,field_description:resource.field_resource_resource_name
 msgid "Name"
-msgstr "名字"
+msgstr "名称"
 
 #. module: resource
 #: model:ir.ui.view,arch_db:resource.resource_calendar_leave_form
@@ -319,12 +320,12 @@ msgstr "工作的开始和结束时间。"
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance_date_from
 msgid "Starting Date"
-msgstr "起始日期"
+msgstr "开始日期"
 
 #. module: resource
 #: model:ir.ui.view,arch_db:resource.view_resource_calendar_leaves_search
 msgid "Starting Date of Leave by Month"
-msgstr "休假的起始日期，按月"
+msgstr "休假的开始日期，按月"
 
 #. module: resource
 #: selection:resource.calendar.attendance,dayofweek:0
@@ -338,9 +339,7 @@ msgid ""
 "resource put alone on a phase of 5 days with 5 tasks assigned to him, will "
 "show a load of 100% for this phase by default, but if we put a efficiency of"
 " 200%, then his load will only be 50%."
-msgstr ""
-"这个字段描述完成任务的资源的效率。比如：例如： 资源单独投入一个阶段， 5 天 5 个任务指派给他，这一阶段默认情况将显示 "
-"100%的负荷，下，但如果我们把效率设置为 200%，他的负荷将只是 50%。"
+msgstr "这个字段描述完成任务的资源的效率。比如：例如： 资源单独投入一个阶段， 5 天 5 个任务指派给他，这一阶段默认情况将显示 100%的负荷，下，但如果我们把效率设置为 200%，他的负荷将只是 50%。"
 
 #. module: resource
 #: selection:resource.calendar.attendance,dayofweek:0
@@ -376,12 +375,12 @@ msgstr "工作细节"
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance_hour_from
 msgid "Work from"
-msgstr "工作起始"
+msgstr "工作从"
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_attendance_hour_to
 msgid "Work to"
-msgstr "工作截止"
+msgstr "工作至"
 
 #. module: resource
 #: model:ir.model.fields,field_description:resource.field_resource_calendar_manager

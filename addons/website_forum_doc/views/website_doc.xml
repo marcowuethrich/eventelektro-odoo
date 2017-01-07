@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<openerp>
+    <data>
 
         <!-- Front-end assets: custom css -->
         <template id="assets_frontend" inherit_id="website.assets_frontend" name="website_forum_doc assets">
@@ -71,7 +72,7 @@
                                 <div class="form-group">
                                     <input type="search" class="form-control"
                                         name="search" placeholder="Search..."
-                                        t-att-value="search or None"/>
+                                        t-att-value="search or ''"/>
                                     <button type="submit" class="btn btn-default">Search</button>
                                 </div>
                             </form>
@@ -110,7 +111,7 @@
                                 <div class="form-group">
                                     <input type="search" class="form-control"
                                         name="search" placeholder="Search..."
-                                        t-att-value="search or None"/>
+                                        t-att-value="search or ''"/>
                                     <button type="submit" class="btn btn-default">Search</button>
                                 </div>
                             </form>
@@ -259,7 +260,7 @@
                         <div class="col-sm-6">
                             <h4>Bad answer structure</h4>
                             <ol>
-                                <li>Explain how to configure Odoo</li>
+                                <li>Explain how to configure in Odoo</li>
                                 <li>No business benefit</li>
                             </ol>
                         </div>
@@ -267,4 +268,7 @@
                 </section>
             </t>
         </template>
-</odoo>
+
+
+    </data>
+</openerp>

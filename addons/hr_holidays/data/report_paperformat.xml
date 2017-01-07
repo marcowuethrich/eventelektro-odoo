@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<openerp>
+    <data>
         <record id="paperformat_hrsummary" model="report.paperformat">
             <field name="name">Holidays Summary</field>
             <field name="default" eval="True"/>
@@ -15,4 +16,5 @@
             <field name="header_spacing">20</field>
             <field name="dpi">90</field>
         </record>
-</odoo>
+    </data>
+</openerp>

@@ -1,17 +1,16 @@
-import odoo.tests
+import openerp.tests
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 
-class TestUi(odoo.tests.HttpCase):
-
-    post_install = True
-    at_install = False
+@openerp.tests.common.at_install(False)
+@openerp.tests.common.post_install(True)
+class TestUi(openerp.tests.HttpCase):
 
     def test_01_admin_survey_tour(self):
-        self.phantom_js("/", "odoo.__DEBUG__.services['web_tour.tour'].run('test_survey')", "odoo.__DEBUG__.services['web_tour.tour'].tours.test_survey.ready", login="admin")
+        self.phantom_js("/", "odoo.__DEBUG__.services['web.Tour'].run('test_survey', 'test')", "odoo.__DEBUG__.services['web.Tour'].tours.test_survey", login="admin")
 
     def test_02_demo_survey_tour(self):
-        self.phantom_js("/", "odoo.__DEBUG__.services['web_tour.tour'].run('test_survey')", "odoo.__DEBUG__.services['web_tour.tour'].tours.test_survey.ready", login="demo")
+        self.phantom_js("/", "odoo.__DEBUG__.services['web.Tour'].run('test_survey', 'test')", "odoo.__DEBUG__.services['web.Tour'].tours.test_survey", login="demo")
 
     def test_03_public_survey_tour(self):
-        self.phantom_js("/", "odoo.__DEBUG__.services['web_tour.tour'].run('test_survey')", "odoo.__DEBUG__.services['web_tour.tour'].tours.test_survey.ready")
+        self.phantom_js("/", "odoo.__DEBUG__.services['web.Tour'].run('test_survey', 'test')", "odoo.__DEBUG__.services['web.Tour'].tours.test_survey")

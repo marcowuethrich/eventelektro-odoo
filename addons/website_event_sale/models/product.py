@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-
-from odoo import fields, models
-
+from openerp.osv import osv, fields
 
 # defined for access rules
-class Product(models.Model):
+class product(osv.osv):
     _inherit = 'product.product'
-
-    event_ticket_ids = fields.One2many('event.event.ticket', 'product_id', string='Event Tickets')
+    _columns = {
+        'event_ticket_ids': fields.one2many('event.event.ticket', 'product_id', 'Event Tickets'),
+    }

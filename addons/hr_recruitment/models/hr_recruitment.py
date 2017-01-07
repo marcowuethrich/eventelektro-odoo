@@ -3,9 +3,9 @@
 
 from datetime import datetime
 
-from odoo import api, fields, models, tools, SUPERUSER_ID
-from odoo.tools.translate import _
-from odoo.exceptions import UserError
+from openerp import api, fields, models, tools
+from openerp.tools.translate import _
+from openerp.exceptions import UserError
 
 AVAILABLE_PRIORITIES = [
     ('0', 'Normal'),
@@ -51,11 +51,12 @@ class RecruitmentStage(models.Model):
 
     name = fields.Char("Stage name", required=True, translate=True)
     sequence = fields.Integer(
-        "Sequence", default=10,
+        "Sequence", default=1,
         help="Gives the sequence order when displaying a list of stages.")
-    job_id = fields.Many2one('hr.job', string='Job Specific',
-                             ondelete='cascade',
-                             help='Specific job that uses this stage. Other jobs will not use this stage.')
+    job_ids = fields.Many2many(
+        'hr.job', 'job_stage_rel', 'stage_id', 'job_id',
+        string='Job Stages',
+        default=lambda self: [(4, self._context['default_job_id'])] if self._context.get('default_job_id') else None)
     requirements = fields.Text("Requirements")
     template_id = fields.Many2one(
         'mail.template', "Use template",
@@ -63,14 +64,6 @@ class RecruitmentStage(models.Model):
     fold = fields.Boolean(
         "Folded in Recruitment Pipe",
         help="This stage is folded in the kanban view when there are no records in that stage to display.")
-
-    @api.model
-    def default_get(self, fields):
-        if self._context and self._context.get('default_job_id') and not self._context.get('hr_recruitment_stage_mono', False):
-            context = dict(self._context)
-            context.pop('default_job_id')
-            self = self.with_context(context)
-        return super(RecruitmentStage, self).default_get(fields)
 
 
 class RecruitmentDegree(models.Model):
@@ -94,9 +87,7 @@ class Applicant(models.Model):
     def _default_stage_id(self):
         if self._context.get('default_job_id'):
             ids = self.env['hr.recruitment.stage'].search([
-                '|',
-                ('job_id', '=', False),
-                ('job_id', '=', self._context['default_job_id']),
+                ('job_ids', '=', self._context['default_job_id']),
                 ('fold', '=', False)
             ], order='sequence asc', limit=1).ids
             if ids:
@@ -123,9 +114,7 @@ class Applicant(models.Model):
     create_date = fields.Datetime("Creation Date", readonly=True, index=True)
     write_date = fields.Datetime("Update Date", readonly=True)
     stage_id = fields.Many2one('hr.recruitment.stage', 'Stage', track_visibility='onchange',
-                               domain="['|', ('job_id', '=', False), ('job_id', '=', job_id)]",
-                               copy=False, index=True,
-                               group_expand='_read_group_stage_ids',
+                               domain="[('job_ids', '=', job_id)]", copy=False, index=True,
                                default=_default_stage_id)
     last_stage_id = fields.Many2one('hr.recruitment.stage', "Last Stage",
                                     help="Stage of the applicant before being in the current stage. Used for lost cases analysis.")
@@ -149,6 +138,8 @@ class Applicant(models.Model):
     partner_mobile = fields.Char("Mobile", size=32)
     type_id = fields.Many2one('hr.recruitment.degree', "Degree")
     department_id = fields.Many2one('hr.department', "Department")
+    survey = fields.Many2one('survey.survey', related='job_id.survey_id', string="Survey")  # TDE FIXME: rename to survey_id
+    response_id = fields.Many2one('survey.user_input', "Response", ondelete="set null", oldname="response")
     reference = fields.Char("Referred By")
     day_open = fields.Float(compute='_compute_day', string="Days to Open")
     day_close = fields.Float(compute='_compute_day', string="Days to Close")
@@ -182,17 +173,44 @@ class Applicant(models.Model):
             record.attachment_number = attach_data.get(record.id, 0)
 
     @api.model
-    def _read_group_stage_ids(self, stages, domain, order):
+    def _read_group_stage_ids(self, ids, domain, read_group_order=None, access_rights_uid=None):
+        access_rights_uid = access_rights_uid or self.env.uid
+        Stage = self.env['hr.recruitment.stage']
+        order = Stage._order
+        # lame hack to allow reverting search, should just work in the trivial case
+        if read_group_order == 'stage_id desc':
+            order = "%s desc" % order
         # retrieve job_id from the context and write the domain: ids + contextual columns (job or default)
         job_id = self._context.get('default_job_id')
-        search_domain = [('job_id', '=', False)]
+        department_id = self._context.get('default_department_id')
+        search_domain = []
         if job_id:
-            search_domain = ['|', ('job_id', '=', job_id)] + search_domain
-        if stages:
-            search_domain = ['|', ('id', 'in', stages.ids)] + search_domain
+            search_domain = [('job_ids', '=', job_id)]
+        if department_id:
+            if search_domain:
+                search_domain = ['|', ('job_ids.department_id', '=', department_id)] + search_domain
+            else:
+                search_domain = [('job_ids.department_id', '=', department_id)]
+        if self.ids:
+            if search_domain:
+                search_domain = ['|', ('id', 'in', self.ids)] + search_domain
+            else:
+                search_domain = [('id', 'in', self.ids)]
 
-        stage_ids = stages._search(search_domain, order=order, access_rights_uid=SUPERUSER_ID)
-        return stages.browse(stage_ids)
+        stage_ids = Stage._search(search_domain, order=order, access_rights_uid=access_rights_uid)
+        stages = Stage.sudo(access_rights_uid).browse(stage_ids)
+        result = stages.name_get()
+        # restore order of the search
+        result.sort(lambda x, y: cmp(stage_ids.index(x[0]), stage_ids.index(y[0])))
+
+        fold = {}
+        for stage in stages:
+            fold[stage.id] = stage.fold or False
+        return result, fold
+
+    _group_by_full = {
+        'stage_id': _read_group_stage_ids
+    }
 
     @api.onchange('job_id')
     def onchange_job_id(self):
@@ -211,9 +229,7 @@ class Applicant(models.Model):
             user_id = job.user_id.id
             if not self.stage_id:
                 stage_ids = self.env['hr.recruitment.stage'].search([
-                    '|',
-                    ('job_id', '=', False),
-                    ('job_id', '=', job.id),
+                    ('job_ids', '=', job.id),
                     ('fold', '=', False)
                 ], order='sequence asc', limit=1).ids
                 stage_id = stage_ids[0] if stage_ids else False
@@ -273,6 +289,11 @@ class Applicant(models.Model):
                 res = super(Applicant, self).write(vals)
         else:
             res = super(Applicant, self).write(vals)
+
+        # post processing: if stage changed, post a message in the chatter
+        if vals.get('stage_id'):
+            if self.stage_id.template_id:
+                self.message_post_with_template(self.stage_id.template_id.id, notify=True, composition_mode='mass_mail')
         return res
 
     @api.model
@@ -307,6 +328,27 @@ class Applicant(models.Model):
         }
         return res
 
+    @api.multi
+    def action_start_survey(self):
+        self.ensure_one()
+        # create a response and link it to this applicant
+        if not self.response_id:
+            response = self.env['survey.user_input'].create({'survey_id': self.survey.id, 'partner_id': self.partner_id.id})
+            self.response_id = response.id
+        else:
+            response = self.response_id
+        # grab the token of the response and start surveying
+        return self.survey.with_context(survey_token=response.token).action_start_survey()
+
+    @api.multi
+    def action_print_survey(self):
+        """ If response is available then print this response otherwise print survey form (print template of the survey) """
+        self.ensure_one()
+        if not self.response_id:
+            return self.survey.action_print_survey()
+        else:
+            response = self.response_id
+            return self.survey.with_context(survey_token=response.token).action_print_survey()
 
     @api.multi
     def action_get_attachment_tree_view(self):
@@ -314,17 +356,7 @@ class Applicant(models.Model):
         action = attachment_action.read()[0]
         action['context'] = {'default_res_model': self._name, 'default_res_id': self.ids[0]}
         action['domain'] = str(['&', ('res_model', '=', self._name), ('res_id', 'in', self.ids)])
-        action['search_view_id'] = (self.env.ref('hr_recruitment.ir_attachment_view_search_inherit_hr_recruitment').id, )
         return action
-
-    @api.multi
-    def _track_template(self, tracking):
-        res = super(Applicant, self)._track_template(tracking)
-        applicant = self[0]
-        changes, dummy = tracking[applicant.id]
-        if 'stage_id' in changes and applicant.stage_id.template_id:
-            res['stage_id'] = (applicant.stage_id.template_id, {'composition_mode': 'mass_mail'})
-        return res
 
     @api.multi
     def _track_subtype(self, init_values):
@@ -419,16 +451,15 @@ class Applicant(models.Model):
     @api.multi
     def reset_applicant(self):
         """ Reinsert the applicant into the recruitment pipe in the first stage"""
-        default_stage_id = self._default_stage_id()
-        self.write({'active': True, 'stage_id': default_stage_id})
+        for applicant in self:
+            first_stage_obj = self.env['hr.recruitment.stage'].search([('job_ids', 'in', applicant.job_id.id)], order="sequence asc", limit=1)
+            applicant.write({'active': True, 'stage_id': first_stage_obj.id})
 
-
-class ApplicantCategory(models.Model):
+class applicant_category(models.Model):
     _name = "hr.applicant.category"
     _description = "Category of applicant"
 
     name = fields.Char("Name", required=True)
-    color = fields.Integer(string='Color Index')
 
     _sql_constraints = [
             ('name_uniq', 'unique (name)', "Tag name already exists !"),

@@ -3,17 +3,16 @@
 # * hr
 # 
 # Translators:
-# Martin Trigaux <mat@odoo.com>, 2016
-# krnkris <krnkris@freemail.hu>, 2016
-# Oregional <geza.nagy@oregional.hu>, 2016
+# krnkris, 2015-2016
+# krnkris, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-10 08:43+0000\n"
-"PO-Revision-Date: 2016-10-10 08:43+0000\n"
-"Last-Translator: Oregional <geza.nagy@oregional.hu>, 2016\n"
-"Language-Team: Hungarian (https://www.transifex.com/odoo/teams/41243/hu/)\n"
+"POT-Creation-Date: 2016-01-15 10:41+0000\n"
+"PO-Revision-Date: 2016-06-06 19:55+0000\n"
+"Last-Translator: krnkris\n"
+"Language-Team: Hungarian (http://www.transifex.com/odoo/odoo-9/language/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -21,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: hr
-#: code:addons/hr/models/hr.py:76
+#: code:addons/hr/hr.py:119
 #, python-format
 msgid "%s (copy)"
 msgstr "%s (másolat)"
@@ -68,14 +67,12 @@ msgstr "<i>Könnyen kezeled ezeket</i>"
 msgid ""
 "<span class=\"o_unfollow\">Unfollow</span>\n"
 "                                    <span class=\"o_following\">Following</span>"
-msgstr ""
-"<span class=\"o_unfollow\">Leiratkozás</span>\n"
-"                                    <span class=\"o_following\">Feliratkozás</span>"
+msgstr "<span class=\"o_unfollow\">Leiratkozás</span>\n                                    <span class=\"o_following\">Feliratkozás</span>"
 
 #. module: hr
 #: model:ir.ui.view,arch_db:hr.hr_department_view_kanban
 msgid "<span>Reports</span>"
-msgstr "<span>Kimutatások</span>"
+msgstr "<span>Jelentések</span>"
 
 #. module: hr
 #: model:ir.ui.view,arch_db:hr.hr_department_view_kanban
@@ -100,12 +97,7 @@ msgid ""
 "people. You will start contract with a full technical and functional "
 "training. If you are passionate, motivate and flexible apply for this job, "
 "you will certainly join the best company ever."
-msgstr ""
-"Egy teljes munkaidős munka, vonzó fizetési csomaggal egy értelmes emberből "
-"álló kis csoportban. Szerződtetés esetén teljes technikai és gyakorlati "
-"tréninggel fog kezdeni. Ha munka iránt elkötelezett, motivált és sokoldalú "
-"akkor jelentkezzen erre az állásra, mert biztos az egyik legjobb vállalathoz"
-" fog bekerülni."
+msgstr "Egy teljes munkaidős munka, vonzó fizetési csomaggal egy értelmes emberből álló kis csoportban. Szerződtetés esetén teljes technikai és gyakorlati tréninggel fog kezdeni. Ha munka iránt elkötelezett, motivált és sokoldalú akkor jelentkezzen erre az állásra, mert biztos az egyik legjobb vállalathoz fog bekerülni."
 
 #. module: hr
 #: model:hr.job,website_description:hr.job_ceo
@@ -119,7 +111,13 @@ msgid "A good job in a young and dynamic team"
 msgstr "Jó munkahely egy fiatal és dinamikus csapatban"
 
 #. module: hr
-#: model:ir.model.fields,field_description:hr.field_hr_department_active
+#: model:ir.model.fields,field_description:hr.field_hr_department_message_needaction
+#: model:ir.model.fields,field_description:hr.field_hr_employee_message_needaction
+#: model:ir.model.fields,field_description:hr.field_hr_job_message_needaction
+msgid "Action Needed"
+msgstr "Művelet szükséges"
+
+#. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee_active
 msgid "Active"
 msgstr "Aktív"
@@ -130,20 +128,9 @@ msgid "Analyse needs, write specification documents and quotation"
 msgstr "Értékeléshez szükséges, részletezési dokumentumok és ajánlatok írása"
 
 #. module: hr
-#: model:ir.model,name:hr.model_account_analytic_account
-msgid "Analytic Account"
-msgstr "Gyűjtő/elemző könyvelés"
-
-#. module: hr
-#: model:ir.ui.view,arch_db:hr.view_department_filter
 #: model:ir.ui.view,arch_db:hr.view_employee_filter
 msgid "Archived"
-msgstr "Archivált"
-
-#. module: hr
-#: model:ir.model,name:hr.model_event_registration
-msgid "Attendee"
-msgstr "Feliratkozók"
+msgstr "Archívált"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee_bank_account_id
@@ -157,11 +144,7 @@ msgid ""
 "our team of enthusiastic chief technical officer. So if working on an open "
 "source project in a friendly and cooperative atmosphere sounds like fun to "
 "you, read on..."
-msgstr ""
-"Az állandó fejlődésünk miatt, embereket keresünk a lelkes műszaki osztály "
-"vezető csoportjainak megerősítésére. Szóval, ha egy nyílt forráskódú "
-"projekten, barátságos és segítségnyújtó környezetben végzett munka örömére "
-"szolgál, akkor olvasson tovább..."
+msgstr "Az állandó fejlődésünk miatt, embereket keresünk a lelkes műszaki osztály vezető csoportjainak megerősítésére. Szóval, ha egy nyílt forráskódú projekten, barátságos és segítségnyújtó környezetben végzett munka örömére szolgál, akkor olvasson tovább..."
 
 #. module: hr
 #: model:hr.job,website_description:hr.job_ceo
@@ -173,11 +156,7 @@ msgid ""
 "Because of our constant growth, we're now looking for people to reinforce "
 "our team of enthusiastic developers. So if working on an open source project"
 " in a friendly and cooperative atmosphere sounds like fun to you, read on..."
-msgstr ""
-"Az állandó fejlődésünk miatt, embereket keresünk a lelkes fejlesztői csoport"
-" megerősítésére. Szóval, ha egy nyílt forráskódú projekten, barátságos és "
-"segítségnyújtó környezetben végzett munka örömére szolgál, akkor olvasson "
-"tovább..."
+msgstr "Az állandó fejlődésünk miatt, embereket keresünk a lelkes fejlesztői csoport megerősítésére. Szóval, ha egy nyílt forráskódú projekten, barátságos és segítségnyújtó környezetben végzett munka örömére szolgál, akkor olvasson tovább..."
 
 #. module: hr
 #: model:hr.job,website_description:hr.job_trainee
@@ -185,11 +164,7 @@ msgid ""
 "Because of our constant growth, we're now looking for people to reinforce "
 "our team of enthusiastic trainees. So if working on an open source project "
 "in a friendly and cooperative atmosphere sounds like fun to you, read on..."
-msgstr ""
-"Az állandó fejlődésünk miatt, embereket keresünk a lelkes képzők "
-"csoportjának megerősítésére. Szóval, ha egy nyílt forráskódú projekten, "
-"barátságos és segítségnyújtó környezetben végzett munka örömére szolgál, "
-"akkor olvasson tovább..."
+msgstr "Az állandó fejlődésünk miatt, embereket keresünk a lelkes képzők csoportjának megerősítésére. Szóval, ha egy nyílt forráskódú projekten, barátságos és segítségnyújtó környezetben végzett munka örömére szolgál, akkor olvasson tovább..."
 
 #. module: hr
 #: model:ir.ui.view,arch_db:hr.view_employee_form
@@ -222,6 +197,11 @@ msgid "City"
 msgstr "Város"
 
 #. module: hr
+#: model:web.tip,description:hr.hr_tip_2
+msgid "Click here to change the recruitment goal!"
+msgstr "Kattintson ide a pályázati folyamat céljának a megváltoztatásához!"
+
+#. module: hr
 #: model:ir.actions.act_window,help:hr.act_employee_from_department
 #: model:ir.actions.act_window,help:hr.open_view_employee_list_my
 msgid "Click to add a new employee."
@@ -231,6 +211,11 @@ msgstr "Kattintson egy új alkalmazott hozzáadásához."
 #: model:ir.actions.act_window,help:hr.open_module_tree_department
 msgid "Click to create a department."
 msgstr "Kattintson egy osztály, részleg létrehozásához."
+
+#. module: hr
+#: model:ir.actions.act_window,help:hr.view_department_form_installer
+msgid "Click to define a new department."
+msgstr "Kattintson egy új osztály, részleg létrehozásához."
 
 #. module: hr
 #: model:ir.actions.act_window,help:hr.action_hr_job
@@ -264,7 +249,7 @@ msgstr "Kód"
 #: model:ir.model.fields,field_description:hr.field_hr_employee_category_color
 #: model:ir.model.fields,field_description:hr.field_hr_employee_color
 msgid "Color Index"
-msgstr "Szín jegyzék"
+msgstr "Szín meghatározó"
 
 #. module: hr
 #: model:ir.ui.view,arch_db:hr.view_department_tree
@@ -293,7 +278,7 @@ msgstr "Tanácsadó"
 #. module: hr
 #: model:ir.ui.view,arch_db:hr.view_employee_form
 msgid "Contact Information"
-msgstr "Kapcsolat információ"
+msgstr "Kapcsolat információk"
 
 #. module: hr
 #: model:hr.job,website_description:hr.job_cto
@@ -301,6 +286,11 @@ msgstr "Kapcsolat információ"
 #: model:hr.job,website_description:hr.job_trainee
 msgid "Contributions to open source projects"
 msgstr "Hozzájárulások a forrás projektek megnyitásához"
+
+#. module: hr
+#: model:ir.actions.act_window,name:hr.view_department_form_installer
+msgid "Create Your Departments"
+msgstr "Saját osztály létrehozása"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_department_create_uid
@@ -327,6 +317,13 @@ msgstr "Jelenlegi alkalmazottak száma"
 #: model:ir.model.fields,field_description:hr.field_hr_employee_birthday
 msgid "Date of Birth"
 msgstr "Születési idő"
+
+#. module: hr
+#: model:ir.model.fields,help:hr.field_hr_department_message_last_post
+#: model:ir.model.fields,help:hr.field_hr_employee_message_last_post
+#: model:ir.model.fields,help:hr.field_hr_job_message_last_post
+msgid "Date of the last message posted on the record."
+msgstr "A feljegyzésen történt utolsó levelezés dátuma."
 
 #. module: hr
 #: model:hr.job,website_description:hr.job_ceo
@@ -367,17 +364,12 @@ msgid "Departments"
 msgstr "Osztályok/Részlegek"
 
 #. module: hr
-#: model:ir.model,name:hr.model_mail_channel
-msgid "Discussion channel"
-msgstr "Hozzászólási csatorna"
-
-#. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_department_display_name
 #: model:ir.model.fields,field_description:hr.field_hr_employee_category_display_name
 #: model:ir.model.fields,field_description:hr.field_hr_employee_display_name
 #: model:ir.model.fields,field_description:hr.field_hr_job_display_name
 msgid "Display Name"
-msgstr "Megjelenített név"
+msgstr "Név megjelenítése"
 
 #. module: hr
 #: selection:hr.employee,marital:0
@@ -388,16 +380,6 @@ msgstr "Elvált"
 #: model:ir.model.fields,field_description:hr.field_hr_employee_time_efficiency
 msgid "Efficiency Factor"
 msgstr "Hatékonysági tényező"
-
-#. module: hr
-#: model:ir.model,name:hr.model_mail_alias
-msgid "Email Aliases"
-msgstr "Email álnevek"
-
-#. module: hr
-#: model:ir.model,name:hr.model_mail_thread
-msgid "Email Thread"
-msgstr "E-mail összafűzés"
 
 #. module: hr
 #: model:ir.model,name:hr.model_hr_employee
@@ -458,21 +440,16 @@ msgid "Employees Tags"
 msgstr "Alkalmazottak címkéi"
 
 #. module: hr
-#: code:addons/hr/models/hr.py:254
+#: code:addons/hr/hr.py:299 constraint:hr.department:0
 #, python-format
 msgid "Error! You cannot create recursive departments."
 msgstr "Hiba! Nem hozhat létre egymásba épülő osztályokat."
 
 #. module: hr
-#: code:addons/hr/models/hr.py:167
+#: code:addons/hr/hr.py:269 constraint:hr.employee:0
 #, python-format
 msgid "Error! You cannot create recursive hierarchy of Employee(s)."
 msgstr "Hiba! Nem készíthet visszatérő rangsorú alklamazott(ak) listát."
-
-#. module: hr
-#: model:ir.model,name:hr.model_event_event
-msgid "Event"
-msgstr "Esemény"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_job_no_of_recruitment
@@ -506,19 +483,26 @@ msgid "Follow and check the development part"
 msgstr "Kövesse és ellenőrizze a fejlesztési részt"
 
 #. module: hr
+#: model:ir.model.fields,field_description:hr.field_hr_department_message_follower_ids
+#: model:ir.model.fields,field_description:hr.field_hr_employee_message_follower_ids
+#: model:ir.model.fields,field_description:hr.field_hr_job_message_follower_ids
 #: model:ir.ui.view,arch_db:hr.hr_kanban_view_employees
 msgid "Followers"
 msgstr "Követők"
 
 #. module: hr
-#: model:ir.model,name:hr.model_gamification_badge
-msgid "Gamification badge"
-msgstr "Gamifikációs/játékos jelvény"
+#: model:ir.model.fields,field_description:hr.field_hr_department_message_channel_ids
+#: model:ir.model.fields,field_description:hr.field_hr_employee_message_channel_ids
+#: model:ir.model.fields,field_description:hr.field_hr_job_message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Követők (Csatornák)"
 
 #. module: hr
-#: model:ir.model,name:hr.model_gamification_challenge
-msgid "Gamification challenge"
-msgstr "Gamifikációs felmérés"
+#: model:ir.model.fields,field_description:hr.field_hr_department_message_partner_ids
+#: model:ir.model.fields,field_description:hr.field_hr_employee_message_partner_ids
+#: model:ir.model.fields,field_description:hr.field_hr_job_message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Követők (Partnerek)"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee_gender
@@ -569,7 +553,12 @@ msgstr "Más nyelvek, nyelvi érzéke"
 #: model:ir.ui.view,arch_db:hr.view_employee_filter
 #: model:ir.ui.view,arch_db:hr.view_job_filter
 msgid "Group By"
-msgstr "Csoportosítás"
+msgstr "Csoportosítás..."
+
+#. module: hr
+#: model:ir.model,name:hr.model_hr_department
+msgid "HR Department"
+msgstr "Emberi erőforrás Osztály, részleg"
 
 #. module: hr
 #: model:ir.ui.view,arch_db:hr.view_employee_form
@@ -607,14 +596,9 @@ msgid "Home Address"
 msgstr "Otthoni cím"
 
 #. module: hr
-#: model:ir.model,name:hr.model_hr_department
-msgid "Hr Department"
-msgstr "Emberi erőforrás Osztály, részleg"
-
-#. module: hr
 #: model:ir.ui.menu,name:hr.menu_hr_main
 msgid "Human Resources"
-msgstr "Emberi erőforrás HR"
+msgstr "Humán Erőforrás"
 
 #. module: hr
 #: model:hr.job,name:hr.job_hrm
@@ -627,7 +611,7 @@ msgstr "Emberi Erőforrás Igazgató"
 #: model:ir.model.fields,field_description:hr.field_hr_employee_id
 #: model:ir.model.fields,field_description:hr.field_hr_job_id
 msgid "ID"
-msgstr "Azonosító ID"
+msgstr "ID"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee_identification_id
@@ -635,13 +619,25 @@ msgid "Identification No"
 msgstr "Személyi igazolvány száma"
 
 #. module: hr
+#: model:ir.model.fields,help:hr.field_hr_department_message_unread
+#: model:ir.model.fields,help:hr.field_hr_employee_message_unread
+#: model:ir.model.fields,help:hr.field_hr_job_message_unread
+msgid "If checked new messages require your attention."
+msgstr "Ha be van jelölve, akkor figyelje az új üzeneteket."
+
+#. module: hr
+#: model:ir.model.fields,help:hr.field_hr_department_message_needaction
+#: model:ir.model.fields,help:hr.field_hr_employee_message_needaction
+#: model:ir.model.fields,help:hr.field_hr_job_message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Ha be van jelölve, akkor figyelje az új üzeneteket."
+
+#. module: hr
 #: model:ir.model.fields,help:hr.field_hr_employee_active
 msgid ""
 "If the active field is set to False, it will allow you to hide the resource "
 "record without removing it."
-msgstr ""
-"Ha az aktív mező hamisra van állítva, akkor elrejtheti az erőforrást, "
-"anélkül, hogy törölné azt."
+msgstr "Ha az aktív mező hamisra van állítva, akkor elrejtheti az erőforrást, anélkül, hogy törölné azt."
 
 #. module: hr
 #: model:hr.job,website_description:hr.job_ceo
@@ -675,9 +671,11 @@ msgid "Increase the visibility of the product"
 msgstr "Növelje a termék felfedezhetőségét"
 
 #. module: hr
-#: model:ir.model,name:hr.model_fleet_vehicle
-msgid "Information on a vehicle"
-msgstr "Gépjármű információ"
+#: model:ir.model.fields,field_description:hr.field_hr_department_message_is_follower
+#: model:ir.model.fields,field_description:hr.field_hr_employee_message_is_follower
+#: model:ir.model.fields,field_description:hr.field_hr_job_message_is_follower
+msgid "Is Follower"
+msgstr "Ő követő"
 
 #. module: hr
 #: model:ir.ui.view,arch_db:hr.view_employee_filter
@@ -693,12 +691,24 @@ msgid "Job Description"
 msgstr "Munkaköri leírás"
 
 #. module: hr
+#: model:ir.model.fields,field_description:hr.field_hr_job_name
+msgid "Job Name"
+msgstr "Munka megnevezése"
+
+#. module: hr
 #: model:ir.model,name:hr.model_hr_job
 msgid "Job Position"
 msgstr "Állás pozíció"
 
 #. module: hr
+#: model:ir.ui.view,arch_db:hr.view_hr_job_form
+msgid "Job Position Name"
+msgstr "Állás pozíció neve"
+
+#. module: hr
 #: model:ir.actions.act_window,name:hr.action_hr_job
+#: model:ir.ui.menu,name:hr.menu_hr_job_position
+#: model:ir.ui.menu,name:hr.menu_hr_job_position_config
 msgid "Job Positions"
 msgstr "Álláspozíciók"
 
@@ -709,15 +719,10 @@ msgid ""
 "                You can keep track of the number of employees you have per job\n"
 "                position and follow the evolution according to what you planned\n"
 "                for the future."
-msgstr ""
-"Állás pozíciók munkahelyek és azok követelményeinek a meghatározására szolgálnak.\n"
-"                Nyomon követheti, hány munkavállalója van egy állás \n"
-"                pozícióban és követheti a fejlődést a jövőbeni terveinek \n"
-"                megfelelően."
+msgstr "Állás pozíciók munkahelyek és azok követelményeinek a meghatározására szolgálnak.\n                Nyomon követheti, hány munkavállalója van egy állás \n                pozícióban és követheti a fejlődést a jövőbeni terveinek \n                megfelelően."
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee_job_id
-#: model:ir.model.fields,field_description:hr.field_hr_job_name
 msgid "Job Title"
 msgstr "Beosztás"
 
@@ -728,12 +733,24 @@ msgid "Jobs"
 msgstr "Feladatok"
 
 #. module: hr
+#: model:ir.model.fields,field_description:hr.field_hr_department_message_last_post
+#: model:ir.model.fields,field_description:hr.field_hr_employee_message_last_post
+#: model:ir.model.fields,field_description:hr.field_hr_job_message_last_post
+msgid "Last Message Date"
+msgstr "Utolsó üzenet dátuma"
+
+#. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_department___last_update
 #: model:ir.model.fields,field_description:hr.field_hr_employee___last_update
 #: model:ir.model.fields,field_description:hr.field_hr_employee_category___last_update
 #: model:ir.model.fields,field_description:hr.field_hr_job___last_update
 msgid "Last Modified on"
-msgstr "Utoljára frissítve ekkor"
+msgstr "Utolsó frissítés dátuma"
+
+#. module: hr
+#: model:ir.model.fields,field_description:hr.field_res_users_last_website_so_id
+msgid "Last Online Sale Order"
+msgstr "Utolsó online Vásárlói megrendelés"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_department_write_uid
@@ -741,13 +758,12 @@ msgstr "Utoljára frissítve ekkor"
 #: model:ir.model.fields,field_description:hr.field_hr_employee_write_uid
 #: model:ir.model.fields,field_description:hr.field_hr_job_write_uid
 msgid "Last Updated by"
-msgstr "Utoljára frissítette"
+msgstr "Utoljára frissítve, által"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_department_write_date
 #: model:ir.model.fields,field_description:hr.field_hr_employee_category_write_date
 #: model:ir.model.fields,field_description:hr.field_hr_employee_write_date
-#: model:ir.model.fields,field_description:hr.field_hr_job_write_date
 msgid "Last Updated on"
 msgstr "Utoljára frissítve "
 
@@ -779,7 +795,7 @@ msgstr "Indítson új termékekre kampányokat és ajánlatokat"
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee_login
 msgid "Login"
-msgstr "Bejelentkezés"
+msgstr "Bejelentkező név"
 
 #. module: hr
 #: selection:hr.employee,gender:0
@@ -790,14 +806,8 @@ msgstr "Férfi"
 #: model:ir.model.fields,field_description:hr.field_hr_department_manager_id
 #: model:ir.model.fields,field_description:hr.field_hr_employee_parent_id
 #: model:ir.ui.view,arch_db:hr.view_employee_filter
-#: model:res.groups,name:hr.group_hr_manager
 msgid "Manager"
 msgstr "Igazgató"
-
-#. module: hr
-#: model:res.groups,name:hr.group_hr_attendance
-msgid "Manual Attendance"
-msgstr "Kézi jelenlét"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee_marital
@@ -832,10 +842,7 @@ msgid ""
 "Medium-sized photo of the employee. It is automatically resized as a "
 "128x128px image, with aspect ratio preserved. Use this field in form views "
 "or some kanban views."
-msgstr ""
-"Közepes méretű fotó az alkalmazottakról. Automatikusan átméretezett mint "
-"128x128px kép, az arányok megtartása mellett. Használja ezt a mezőt a forma "
-"nézetben és egyes kanban nézetben."
+msgstr "Közepes méretű fotó az alkalmazottakról. Automatikusan átméretezett mint 128x128px kép, az arányok megtartása mellett. Használja ezt a mezőt a forma nézetben és egyes kanban nézetben."
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_department_member_ids
@@ -843,6 +850,9 @@ msgid "Members"
 msgstr "Tagok"
 
 #. module: hr
+#: model:ir.model.fields,field_description:hr.field_hr_department_message_ids
+#: model:ir.model.fields,field_description:hr.field_hr_employee_message_ids
+#: model:ir.model.fields,field_description:hr.field_hr_job_message_ids
 #: model:ir.ui.view,arch_db:hr.hr_kanban_view_employees
 msgid "Messages"
 msgstr "Üzenetek"
@@ -864,7 +874,9 @@ msgid "Must have ..."
 msgstr "Kell, hogy legyen ..."
 
 #. module: hr
+#: model:ir.model.fields,field_description:hr.field_hr_department_complete_name
 #: model:ir.model.fields,field_description:hr.field_hr_employee_name
+#: model:ir.model.fields,field_description:hr.field_hr_employee_name_related
 msgid "Name"
 msgstr "Név"
 
@@ -885,19 +897,21 @@ msgid "Nice to have"
 msgstr "Jó ha van"
 
 #. module: hr
-#: selection:hr.job,state:0
-msgid "Not Recruiting"
-msgstr "Nem toboroz"
-
-#. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_department_note
 msgid "Note"
-msgstr "Jegyzet"
+msgstr "Megjegyzés"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee_notes
 msgid "Notes"
-msgstr "Megjegyzések"
+msgstr "Jegyzetek"
+
+#. module: hr
+#: model:ir.model.fields,field_description:hr.field_hr_department_message_needaction_counter
+#: model:ir.model.fields,field_description:hr.field_hr_employee_message_needaction_counter
+#: model:ir.model.fields,field_description:hr.field_hr_job_message_needaction_counter
+msgid "Number of Actions"
+msgstr "Műveletek száma"
 
 #. module: hr
 #: model:ir.model.fields,help:hr.field_hr_job_no_of_employee
@@ -911,9 +925,23 @@ msgid ""
 msgstr "Az erre a munkára felvett munkavállalók száma a toborzás fázisában."
 
 #. module: hr
+#: model:ir.model.fields,help:hr.field_hr_department_message_needaction_counter
+#: model:ir.model.fields,help:hr.field_hr_employee_message_needaction_counter
+#: model:ir.model.fields,help:hr.field_hr_job_message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Üzenetek száma, melyek közbenjárást igényelnek"
+
+#. module: hr
 #: model:ir.model.fields,help:hr.field_hr_job_no_of_recruitment
 msgid "Number of new employees you expect to recruit."
 msgstr "A felvenni kívánt alkalmazottak száma"
+
+#. module: hr
+#: model:ir.model.fields,help:hr.field_hr_department_message_unread_counter
+#: model:ir.model.fields,help:hr.field_hr_employee_message_unread_counter
+#: model:ir.model.fields,help:hr.field_hr_job_message_unread_counter
+msgid "Number of unread messages"
+msgstr "Olvasatlan üzenetek száma"
 
 #. module: hr
 #: model:ir.actions.act_window,help:hr.open_module_tree_department
@@ -921,15 +949,12 @@ msgid ""
 "Odoo's department structure is used to manage all documents\n"
 "                related to employees by departments: expenses, timesheets,\n"
 "                leaves and holidays, recruitments, etc."
-msgstr ""
-" Odoo rendszer osztályfelépítése az összes munkavállaló \n"
-"                dokumentumának osztályonkénti kezelésére szolgál: kiadások, \n"
-"                időbeosztások, eltávozások és szabadságolások, felvételiztetések, stb."
+msgstr " Odoo rendszer osztályfelépítése az összes munkavállaló \n                dokumentumának osztályonkénti kezelésére szolgál: kiadások, \n                időbeosztások, eltávozások és szabadságolások, felvételiztetések, stb."
 
 #. module: hr
-#: model:res.groups,name:hr.group_hr_user
-msgid "Officer"
-msgstr "Hivatalnok"
+#: model:ir.actions.client,name:hr.action_client_hr_menu
+msgid "Open HR Menu"
+msgstr "Munkaügy HR menü megnyitása"
 
 #. module: hr
 #: selection:hr.employee,gender:0
@@ -956,11 +981,6 @@ msgstr "Alkalmazottaink munka közben"
 #: model:ir.model.fields,field_description:hr.field_hr_department_parent_id
 msgid "Parent Department"
 msgstr "Főrészleg"
-
-#. module: hr
-#: model:ir.model,name:hr.model_res_partner
-msgid "Partner"
-msgstr "Partner"
 
 #. module: hr
 #: model:hr.job,website_description:hr.job_developer
@@ -1022,6 +1042,11 @@ msgstr "Gyorsan és önállóan tanuló"
 
 #. module: hr
 #: selection:hr.job,state:0
+msgid "Recruitment Closed"
+msgstr "Toborzás vége"
+
+#. module: hr
+#: selection:hr.job,state:0
 msgid "Recruitment in Progress"
 msgstr "Toborzás folyamatban"
 
@@ -1038,9 +1063,7 @@ msgstr "Ide kapcsolódó alkalmazottak"
 #. module: hr
 #: model:ir.model.fields,help:hr.field_hr_employee_user_id
 msgid "Related user name for the resource to manage its access."
-msgstr ""
-"Az erőforráshoz kapcsolódó felhasználó neve, aki kezeli a hozzáférést az "
-"erőforráshoz."
+msgstr "Az erőforráshoz kapcsolódó felhasználó neve, aki kezeli a hozzáférést az erőforráshoz."
 
 #. module: hr
 #: model:ir.ui.menu,name:hr.menu_hr_reporting_timesheet
@@ -1056,11 +1079,6 @@ msgstr "Követelmények"
 #: model:ir.model.fields,field_description:hr.field_hr_employee_resource_id
 msgid "Resource"
 msgstr "Erőforrás"
-
-#. module: hr
-#: model:ir.model.fields,field_description:hr.field_hr_employee_name_related
-msgid "Resource Name"
-msgstr "Erőforrás neve"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee_resource_type
@@ -1099,9 +1117,7 @@ msgstr "Mérlegelje az eseményeink szervezését az egész világról"
 #: model:ir.model.fields,help:hr.field_hr_job_state
 msgid ""
 "Set whether the recruitment process is open or closed for this job position."
-msgstr ""
-"Állítsa be, hogy erre a munka beosztásra a felvételiztetés, toborzási "
-"folyamat  még tart vagy sem."
+msgstr "Állítsa be, hogy erre a munka beosztásra a felvételiztetés, toborzási folyamat  még tart vagy sem."
 
 #. module: hr
 #: model:ir.ui.view,arch_db:hr.hr_department_view_kanban
@@ -1135,10 +1151,7 @@ msgid ""
 "Small-sized photo of the employee. It is automatically resized as a 64x64px "
 "image, with aspect ratio preserved. Use this field anywhere a small image is"
 " required."
-msgstr ""
-"Kis méretű fotó az alkalmazottról. Automatikusan átméretezve 64x64px képre, "
-"az arányok megtartás mellett. Használja ezt mezőt bárhol ahol kisméretű "
-"képet igényel."
+msgstr "Kis méretű fotó az alkalmazottról. Automatikusan átméretezve 64x64px képre, az arányok megtartás mellett. Használja ezt mezőt bárhol ahol kisméretű képet igényel."
 
 #. module: hr
 #: model:ir.model.fields,help:hr.field_hr_employee_sinid
@@ -1173,6 +1186,11 @@ msgid "Subordinates"
 msgstr "Beosztottak"
 
 #. module: hr
+#: model:ir.model.fields,field_description:hr.field_res_users_subscription_count
+msgid "Subscriptions"
+msgstr "Feliratkozások"
+
+#. module: hr
 #: sql_constraint:hr.employee.category:0
 msgid "Tag name already exists !"
 msgstr "Címke név már létezik!"
@@ -1193,24 +1211,9 @@ msgid "Team spirit and good communication"
 msgstr "Csoport  szellem és jó kommunikációs készség"
 
 #. module: hr
-#: model:ir.model,name:hr.model_mail_test
-msgid "Test Mail Model"
-msgstr "Teszt levelezés modell"
-
-#. module: hr
 #: sql_constraint:hr.job:0
 msgid "The name of the job position must be unique per department in company!"
-msgstr ""
-"Az állás nevének egyedinek kell lennie osztályonként a vállalkozásban!"
-
-#. module: hr
-#: model:res.groups,comment:hr.group_hr_attendance
-msgid ""
-"The user will gain access to the human resources attendance menu, enabling "
-"him to manage his own attendance."
-msgstr ""
-"A felhasználó elérheti az emberi erőforrások jelenléti menüt,  lehetővé téve"
-" a saját jelenlétének szervezését."
+msgstr "Az állás nevének egyedinek kell lennie osztályonként a vállalkozásban!"
 
 #. module: hr
 #: model:ir.model.fields,help:hr.field_hr_employee_time_efficiency
@@ -1219,20 +1222,14 @@ msgid ""
 "resource put alone on a phase of 5 days with 5 tasks assigned to him, will "
 "show a load of 100% for this phase by default, but if we put a efficiency of"
 " 200%, then his load will only be 50%."
-msgstr ""
-"Ez a mező ábrázolja a kutatás hatékonyságát a teljes feladaton. pl. egyedül "
-"végrehajtott kutatási 5 napos fázis 5 tárgyban kiosztva neki, ez a 100% "
-"terhelés erre a fázisra alap értelmezve, de ha a hatékonyságot 200% tesszük "
-"akkor ez a terhelés \"csak\" 50%."
+msgstr "Ez a mező ábrázolja a kutatás hatékonyságát a teljes feladaton. pl. egyedül végrehajtott kutatási 5 napos fázis 5 tárgyban kiosztva neki, ez a 100% terhelés erre a fázisra alap értelmezve, de ha a hatékonyságot 200% tesszük akkor ez a terhelés \"csak\" 50%."
 
 #. module: hr
 #: model:ir.model.fields,help:hr.field_hr_employee_image
 msgid ""
 "This field holds the image used as photo for the employee, limited to "
 "1024x1024px."
-msgstr ""
-"Ez a mező tartalmazza a képet amit az alkalmazottakhoz használ, limitált "
-"méret 1024x1024px."
+msgstr "Ez a mező tartalmazza a képet amit az alkalmazottakhoz használ, limitált méret 1024x1024px."
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_job_expected_employees
@@ -1247,10 +1244,12 @@ msgstr "Gyakornok"
 #. module: hr
 #: model:hr.job,website_description:hr.job_marketing
 msgid "Transform our product into a suite of well positioned business Apps"
-msgstr ""
-"Alakítsa át a termékünket egy jól beállított üzleti alkalmazás készletre"
+msgstr "Alakítsa át a termékünket egy jól beállított üzleti alkalmazás készletre"
 
 #. module: hr
+#: model:ir.model.fields,field_description:hr.field_hr_department_message_unread
+#: model:ir.model.fields,field_description:hr.field_hr_employee_message_unread
+#: model:ir.model.fields,field_description:hr.field_hr_job_message_unread
 #: model:ir.ui.view,arch_db:hr.hr_kanban_view_employees
 #: model:ir.ui.view,arch_db:hr.view_department_filter
 #: model:ir.ui.view,arch_db:hr.view_employee_filter
@@ -1259,9 +1258,16 @@ msgid "Unread Messages"
 msgstr "Olvasatlan üzenetek"
 
 #. module: hr
-#: model:ir.model.fields,help:hr.field_hr_employee_login
-msgid "Used to log into the system"
-msgstr "A rendszerbe történő bejelentkezésre szolgál"
+#: model:ir.model.fields,field_description:hr.field_hr_department_message_unread_counter
+#: model:ir.model.fields,field_description:hr.field_hr_employee_message_unread_counter
+#: model:ir.model.fields,field_description:hr.field_hr_job_message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Olvasatlan üzenetek számlálója"
+
+#. module: hr
+#: model:ir.model.fields,field_description:hr.field_hr_job_write_date
+msgid "Update Date"
+msgstr "Frissítés Dátuma"
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee_user_id
@@ -1282,14 +1288,7 @@ msgid ""
 "customer to the delivery to the customer. You listen the customer and try to"
 " give him the best service. You report to the head of consulting service and"
 " will be coached by a senior consultant."
-msgstr ""
-"Keresünk motivált és eredmény-alapú Gyakorlati tanácsadót! Részt vehet az "
-"általunk a partnereink és ügyfeleink részére biztosított tanácsadói "
-"szolgáltatásokban, a tanácsadói oldalról. A feladata a vásárlókhoz kiküldött"
-" árajánlatokkal kezdődik és a vásárlók részére történt kiszállítással "
-"fejeződik be. Meghallgatja a vásárlót és megpróbálja a legjobb szolgáltatást"
-" megadni a részére. Jelentést tesz a tanácsadói szolgáltatás vezetőjének és "
-"lesz egy rangidős tanácsadó mentora."
+msgstr "Keresünk motivált és eredmény-alapú Gyakorlati tanácsadót! Részt vehet az általunk a partnereink és ügyfeleink részére biztosított tanácsadói szolgáltatásokban, a tanácsadói oldalról. A feladata a vásárlókhoz kiküldött árajánlatokkal kezdődik és a vásárlók részére történt kiszállítással fejeződik be. Meghallgatja a vásárlót és megpróbálja a legjobb szolgáltatást megadni a részére. Jelentést tesz a tanácsadói szolgáltatás vezetőjének és lesz egy rangidős tanácsadó mentora."
 
 #. module: hr
 #: model:hr.job,website_description:hr.job_hrm
@@ -1298,11 +1297,7 @@ msgid ""
 "products people love to use. We need someone who is ambitious, passionated, "
 "and ..... not afraid to start new things, a lot of new things and scale "
 "them."
-msgstr ""
-"Keresünk szenvedélyes Emberi Erőforrás Igazgatót, emberek által szerethető "
-"termékek létrehozásának hozzásegítésére. Nekünk szükségünk van olyan "
-"személyre aki ambiciózus, szenvedélyes, és  ..... nem fél új dolgok "
-"bevezetésértől, nagyon sok új dologtól és azok beosztásától."
+msgstr "Keresünk szenvedélyes Emberi Erőforrás Igazgatót, emberek által szerethető termékek létrehozásának hozzásegítésére. Nekünk szükségünk van olyan személyre aki ambiciózus, szenvedélyes, és  ..... nem fél új dolgok bevezetésértől, nagyon sok új dologtól és azok beosztásától."
 
 #. module: hr
 #: model:hr.job,website_description:hr.job_ceo
@@ -1310,11 +1305,7 @@ msgid ""
 "We are looking for a passionated executive manager to help us make products "
 "people love to use. We need someone who is ambitious, passionated, and ....."
 " not afraid to start new things, a lot of new things and scale them."
-msgstr ""
-"Keresünk szenvedélyes Főelőadó Igazgatót, emberek által szerethető termékek "
-"létrehozásának hozzásegítésére. Nekünk szükségünk van olyan személyre aki "
-"ambiciózus, szenvedélyes, és  ..... nem fél új dolgok bevezetésértől, nagyon"
-" sok új dologtól és azok beosztásától."
+msgstr "Keresünk szenvedélyes Főelőadó Igazgatót, emberek által szerethető termékek létrehozásának hozzásegítésére. Nekünk szükségünk van olyan személyre aki ambiciózus, szenvedélyes, és  ..... nem fél új dolgok bevezetésértől, nagyon sok új dologtól és azok beosztásától."
 
 #. module: hr
 #: model:hr.job,website_description:hr.job_marketing
@@ -1322,11 +1313,7 @@ msgid ""
 "We are looking for a passionated marketer manager to help us make products "
 "people love to use. We need someone who is ambitious, passionated, and ....."
 " not afraid to start new things, a lot of new things and scale them."
-msgstr ""
-"Keresünk szenvedélyes Marketing Igazgatót, emberek által szerethető termékek"
-" létrehozásának hozzásegítésére. Nekünk szükségünk van olyan személyre aki "
-"ambiciózus, szenvedélyes, és  ..... nem fél új dolgok bevezetésértől, nagyon"
-" sok új dologtól és azok beosztásától."
+msgstr "Keresünk szenvedélyes Marketing Igazgatót, emberek által szerethető termékek létrehozásának hozzásegítésére. Nekünk szükségünk van olyan személyre aki ambiciózus, szenvedélyes, és  ..... nem fél új dolgok bevezetésértől, nagyon sok új dologtól és azok beosztásától."
 
 #. module: hr
 #: model:hr.job,website_description:hr.job_ceo
@@ -1367,10 +1354,7 @@ msgid ""
 "With just a quick glance on the Odoo employee screen, you\n"
 "                can easily find all the information you need for each person;\n"
 "                contact data, job position, availability, etc."
-msgstr ""
-"Az Odoo rendszer munkavállalói képernyőn szempillantás alatt\n"
-"könnyen megtalálja az összes személyhez a kívánt információkat; \n"
-"kapcsolati adatok, munka pozíció, elérhetőség, stb."
+msgstr "Az Odoo rendszer munkavállalói képernyőn szempillantás alatt\nkönnyen megtalálja az összes személyhez a kívánt információkat; \nkapcsolati adatok, munka pozíció, elérhetőség, stb."
 
 #. module: hr
 #: model:hr.job,website_description:hr.job_ceo
@@ -1384,11 +1368,7 @@ msgid ""
 "With our product, which is a suite of 3000 business apps. It is fully open "
 "source, full featured and it’s online offer is 3 times cheaper than "
 "traditional competitors. We have 2.000.000 users, and we're growing fast."
-msgstr ""
-"Termékeinkkel, mely magában foglal 3000 üzleti alkalmazást. Teljesen nyílt "
-"forráskódú, teljes kialakítású és online felülete 3-szor olcsóbb mint a "
-"hagyományos versenytársaké. Több mint 2.000.000 felhasználónk van, és "
-"gyorsan fejlődünk."
+msgstr "Termékeinkkel, mely magában foglal 3000 üzleti alkalmazást. Teljesen nyílt forráskódú, teljes kialakítású és online felülete 3-szor olcsóbb mint a hagyományos versenytársaké. Több mint 2.000.000 felhasználónk van, és gyorsan fejlődünk."
 
 #. module: hr
 #: model:ir.model.fields,field_description:hr.field_hr_employee_work_email
@@ -1482,9 +1462,7 @@ msgid ""
 "You can attach a survey to a job position. It will be used in\n"
 "                the recruitment process to evaluate the applicants for this job\n"
 "                position."
-msgstr ""
-"Felmérést tud csatolni egy állás pozícióhoz. Ezt a toborzáshoz\n"
-"                fogja használni az állásra pályázók értékelésére."
+msgstr "Felmérést tud csatolni egy állás pozícióhoz. Ezt a toborzáshoz\n                fogja használni az állásra pályázók értékelésére."
 
 #. module: hr
 #: model:hr.job,website_description:hr.job_consultant
@@ -1528,28 +1506,20 @@ msgstr "Folyékonyan beszél Franciául és Angolul"
 #: model:hr.job,website_description:hr.job_cto
 #: model:hr.job,website_description:hr.job_trainee
 msgid ""
-"You will be responsible for developing and improving applications. You will "
-"work autonomously as well as                     coordinate and supervise "
-"small distributed development teams for specific projects. You will become a"
-" technical                 expert of the product."
-msgstr ""
-"Felelős lesz az alkalmazások fejlesztésében és kifejlesztésében. Egyedül és "
-"fogja munkáit végezni és koordinálja                    és felügyeli az "
-"egyedi projekt témákban a kisebb fejlesztési csoportoknak kiosztott "
-"munkákat. A termék műszaki                 szakértője lesz. "
+"You will be responsible for developing and improving applications, such as "
+"the You will work autonomously as well as                     coordinate and"
+" supervise small distributed development teams for specific projects. You "
+"will become a technical                 expert of the product."
+msgstr "Felelős lesz az alkalmazások fejlesztésében és kifejlesztésében, mint egyedül, mint irányítás alatt fogja munkáit\n                     végezni és felügyeli az egyedi projekt témákban a kisebb fejlesztési csoportoknak \n                     kiosztott munkákat. A termék Műszaki szakértője lesz."
 
 #. module: hr
 #: model:hr.job,website_description:hr.job_developer
 msgid ""
-"You will be responsible for developing and improving applications. You will "
-"work autonomously as well as coordinate and supervise small distributed "
-"development teams for specific projects. You will become a technical expert "
-"of the product."
-msgstr ""
-"Felelős lesz az alkalmazások fejlesztésében és kifejlesztésében. Egyedül és "
-"fogja munkáit végezni és koordinálja                    és felügyeli az "
-"egyedi projekt témákban a kisebb fejlesztési csoportoknak kiosztott "
-"munkákat. A termék műszaki                 szakértője lesz. "
+"You will be responsible for developing and improving applications, such as "
+"the You will work autonomously as well as coordinate and supervise small "
+"distributed development teams for specific projects. You will become a "
+"technical expert of the product."
+msgstr "Felelős lesz az alkalmazások fejlesztésében és kifejlesztésében, mint egyedül, mint irányítás alatt fogja munkáit\n                     végezni és felügyeli az egyedi projekt témákban a kisebb fejlesztési csoportoknak \n                     kiosztott munkákat. A termék Műszaki szakértője lesz."
 
 #. module: hr
 #: model:hr.job,website_description:hr.job_ceo
@@ -1560,10 +1530,7 @@ msgid ""
 "You will work autonomously as well as coordinate and supervise small "
 "distributed development teams for specific projects. You will become a "
 "techinical expert of the product."
-msgstr ""
-"Felelős lesz a termék hírközlés fejlesztésében és kifejlesztésében, mint egyedül, mint irányítás alatt fogja munkáit\n"
-"                     végezni és felügyeli az egyedi projekt témákban a kisebb fejlesztési csoportoknak \n"
-"                     kiosztott munkákat. A termék műszaki szakértője lesz."
+msgstr "Felelős lesz a termék hírközlés fejlesztésében és kifejlesztésében, mint egyedül, mint irányítás alatt fogja munkáit\n                     végezni és felügyeli az egyedi projekt témákban a kisebb fejlesztési csoportoknak \n                     kiosztott munkákat. A termék műszaki szakértője lesz."
 
 #. module: hr
 #: model:hr.job,website_description:hr.job_cto
@@ -1610,26 +1577,12 @@ msgid "You will work closely with all trainees"
 msgstr "Ön szorosan fog közreműködni a gyakornokokkal"
 
 #. module: hr
-#: model:mail.template,subject:hr.mail_template_data_unknown_employee_email_address
-msgid "Your document has not been created"
-msgstr "A dokumentuma nem készült el"
-
-#. module: hr
-#: model:mail.template,body_html:hr.mail_template_data_unknown_employee_email_address
+#: model:ir.actions.act_window,help:hr.view_department_form_installer
 msgid ""
-"Your document has not been created because your email address is not "
-"recognized. Please send emails with the email address recorded on your "
-"employee information, or contact your HR manager."
-msgstr ""
-"A dokumentuma nem készült el, mivel az e-mail címe nem ismert. Kérem az "
-"e-mail küldéshez a alkalmazotti információs oldalán jegyezze be, vagy vegye "
-"fel a kapcsolatot a HR emberi erőforrás igazgatóval."
-
-#. module: hr
-#: code:addons/hr/models/mail_thread.py:41
-#, python-format
-msgid "alias %s does not accept unknown employees"
-msgstr "alias %s nem fogadja el az ismeretlen alkalmazottakat"
+"Your departments structure is used to manage all documents\n"
+"                related to employees by departments: expenses and timesheets,\n"
+"                leaves and holidays, recruitments, etc."
+msgstr " Ön osztályfelépítése az összes munkavállaló \n                dokumentumának osztályonkénti kezelésére szolgál: kiadások, \n                és munkaidő-beosztások, eltávozások és szabadságolások, felvételiztetések, stb."
 
 #. module: hr
 #: model:ir.ui.view,arch_db:hr.view_department_form
@@ -1640,30 +1593,3 @@ msgstr "részleg"
 #: model:ir.ui.view,arch_db:hr.view_employee_form
 msgid "e.g. Part Time"
 msgstr "Pl. Rész időben"
-
-#. module: hr
-#: model:ir.ui.view,arch_db:hr.view_hr_job_form
-msgid "e.g. Sales Manager"
-msgstr "pl. Értékesítési menedzsment"
-
-#. module: hr
-#: code:addons/hr/models/mail_thread.py:41
-#, python-format
-msgid "skipping"
-msgstr "átugorja"
-
-#. module: hr
-#: model:res.groups,comment:hr.group_hr_user
-msgid "the user will be able to approve document created by employees."
-msgstr ""
-"a felhasználónak lehetővé válik a munkavállalók által létrehozott "
-"dokumentumok jóváhagyása"
-
-#. module: hr
-#: model:res.groups,comment:hr.group_hr_manager
-msgid ""
-"the user will have an access to the human resources configuration as well as"
-" statistic reports."
-msgstr ""
-"a felhasználónak elérése lesz az emberi erőforrások beállításához és a "
-"statikus kimutatásokhoz."

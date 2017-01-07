@@ -1,22 +1,21 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * payment_authorize
-#
+# 
 # Translators:
 # Aleksandar Vangelovski <aleksandarv@hbee.eu>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-18 14:07+0000\n"
-"PO-Revision-Date: 2016-04-20 11:07+0000\n"
+"POT-Creation-Date: 2015-09-18 08:11+0000\n"
+"PO-Revision-Date: 2016-12-02 13:52+0000\n"
 "Last-Translator: Aleksandar Vangelovski <aleksandarv@hbee.eu>\n"
-"Language-Team: Macedonian (http://www.transifex.com/odoo/odoo-9/language/"
-"mk/)\n"
-"Language: mk\n"
+"Language-Team: Macedonian (http://www.transifex.com/odoo/odoo-9/language/mk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
+"Language: mk\n"
 "Plural-Forms: nplurals=2; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : 1;\n"
 
 #. module: payment_authorize
@@ -29,7 +28,7 @@ msgstr "<span><i>Откажи,</i> Вашата наплата Ви беше о�
 msgid ""
 "<span><i>Done,</i> Your online payment has been successfully processed. "
 "Thank you for your order.</span>"
-msgstr ""
+msgstr "<span><i>Завршено,</i> Вашето онлајн плаќање Ви беше успешно процесирано. Ви благодариме на вашата нарачка.</span>"
 
 #. module: payment_authorize
 #: model:payment.acquirer,error_msg:payment_authorize.payment_acquirer_authorize
@@ -64,8 +63,8 @@ msgstr ""
 #. module: payment_authorize
 #: model:ir.ui.view,arch_db:payment_authorize.acquirer_form_authorize
 msgid ""
-"How to configure your Authorize.Net account (look for Getting Started "
-"Guide) ?"
+"How to configure your Authorize.Net account (look for Getting Started Guide)"
+" ?"
 msgstr ""
 
 #. module: payment_authorize

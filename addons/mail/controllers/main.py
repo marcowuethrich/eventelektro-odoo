@@ -1,20 +1,20 @@
-# -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
 import base64
 import json
 import logging
+from operator import itemgetter
 import psycopg2
 import werkzeug
-
-from operator import itemgetter
 from werkzeug import url_encode
 
-from odoo import api, http, registry, SUPERUSER_ID, _
-from odoo.addons.web.controllers.main import binary_content
-from odoo.exceptions import AccessError
-from odoo.http import request
-from odoo.tools import consteq
+import openerp
+from openerp import SUPERUSER_ID
+from openerp import http
+from openerp import _
+from openerp.exceptions import AccessError
+from openerp.http import request
+from openerp.tools import consteq
+
+from openerp.addons.web.controllers.main import binary_content
 
 _logger = logging.getLogger(__name__)
 
@@ -100,43 +100,45 @@ class MailController(http.Controller):
         for db in dbs:
             message = dbs[db].decode('base64')
             try:
-                db_registry = registry(db)
-                with db_registry.cursor() as cr:
-                    env = api.Environment(cr, SUPERUSER_ID, {})
-                    env['mail.thread'].message_process(None, message)
+                registry = openerp.registry(db)
+                with registry.cursor() as cr:
+                    mail_thread = registry['mail.thread']
+                    mail_thread.message_process(cr, SUPERUSER_ID, None, message)
             except psycopg2.Error:
                 pass
         return True
 
     @http.route('/mail/read_followers', type='json', auth='user')
-    def read_followers(self, follower_ids, res_model):
-        followers = []
+    def read_followers(self, follower_ids):
+        result = []
         is_editable = request.env.user.has_group('base.group_no_one')
-        partner_id = request.env.user.partner_id
-        follower_id = None
         for follower in request.env['mail.followers'].browse(follower_ids):
-            is_uid = partner_id == follower.partner_id
-            follower_id = follower.id if is_uid else follower_id
-            followers.append({
+            result.append({
                 'id': follower.id,
                 'name': follower.partner_id.name or follower.channel_id.name,
                 'email': follower.partner_id.email if follower.partner_id else None,
                 'res_model': 'res.partner' if follower.partner_id else 'mail.channel',
                 'res_id': follower.partner_id.id or follower.channel_id.id,
                 'is_editable': is_editable,
-                'is_uid': is_uid,
+                'is_uid': request.env.user.partner_id == follower.partner_id,
             })
-        return {
-            'followers': followers,
-            'subtypes': self.read_subscription_data(res_model, follower_id) if follower_id else None
-        }
+        return result
 
     @http.route('/mail/read_subscription_data', type='json', auth='user')
-    def read_subscription_data(self, res_model, follower_id):
+    def read_subscription_data(self, res_model, res_id, follower_id=None):
         """ Computes:
             - message_subtype_data: data about document subtypes: which are
                 available, which are followed if any """
-        followers = request.env['mail.followers'].browse(follower_id)
+        # find the document followers, update the data
+        followers = request.env['mail.followers']
+        if not follower_id:
+            followers = followers.search([
+                ('partner_id', '=', request.env.user.partner_id.id),
+                ('res_id', '=', res_id),
+                ('res_model', '=', res_model),
+            ])
+        else:
+            followers = followers.browse(follower_id)
 
         # find current model subtypes, add them to a dictionary
         subtypes = request.env['mail.message.subtype'].search(['&', ('hidden', '=', False), '|', ('res_model', '=', res_model), ('res_model', '=', False)])
@@ -222,18 +224,14 @@ class MailController(http.Controller):
 
     @http.route('/mail/<string:res_model>/<int:res_id>/avatar/<int:partner_id>', type='http', auth='public')
     def avatar(self, res_model, res_id, partner_id):
-        headers = [('Content-Type', 'image/png')]
-        status = 200
+        headers = [[('Content-Type', 'image/png')]]
         content = 'R0lGODlhAQABAIABAP///wAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=='  # default image is one white pixel
         if res_model in request.env:
             try:
                 # if the current user has access to the document, get the partner avatar as sudo()
                 request.env[res_model].browse(res_id).check_access_rule('read')
                 if partner_id in request.env[res_model].browse(res_id).sudo().exists().message_ids.mapped('author_id').ids:
-                    status, headers, _content = binary_content(model='res.partner', id=partner_id, field='image_medium', default_mimetype='image/png', env=request.env(user=SUPERUSER_ID))
-                    # binary content return an empty string and not a placeholder if obj[field] is False
-                    if _content != '':
-                        content = _content
+                    status, headers, content = binary_content(model='res.partner', id=partner_id, field='image_medium', default_mimetype='image/png', env=request.env(user=openerp.SUPERUSER_ID))
                     if status == 304:
                         return werkzeug.wrappers.Response(status=304)
             except AccessError:
@@ -252,11 +250,7 @@ class MailController(http.Controller):
     def mail_client_action(self):
         values = {
             'needaction_inbox_counter': request.env['res.partner'].get_needaction_count(),
-            'starred_counter': request.env['res.partner'].get_starred_count(),
             'channel_slots': request.env['mail.channel'].channel_fetch_slot(),
-            'commands': request.env['mail.channel'].get_mention_commands(),
             'mention_partner_suggestions': request.env['res.partner'].get_static_mention_suggestions(),
-            'shortcodes': request.env['mail.shortcode'].sudo().search_read([], ['shortcode_type', 'source', 'substitution', 'description']),
-            'menu_id': request.env['ir.model.data'].xmlid_to_res_id('mail.mail_channel_menu_root_chat'),
         }
         return values

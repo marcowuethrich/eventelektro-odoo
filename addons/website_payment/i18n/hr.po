@@ -3,18 +3,15 @@
 # * website_payment
 # 
 # Translators:
-# Karolina Tonković <karolina.tonkovic@storm.hr>, 2016
-# Vladimir Olujić <olujic.vladimir@storm.hr>, 2016
-# Bole <bole@dajmi5.com>, 2016
-# Martin Trigaux <mat@odoo.com>, 2016
+# Karolina Tonković <karolina.tonkovic@storm.hr>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:57+0000\n"
-"PO-Revision-Date: 2016-09-07 08:57+0000\n"
-"Last-Translator: Martin Trigaux <mat@odoo.com>, 2016\n"
-"Language-Team: Croatian (https://www.transifex.com/odoo/teams/41243/hr/)\n"
+"POT-Creation-Date: 2015-09-07 14:41+0000\n"
+"PO-Revision-Date: 2015-10-24 16:46+0000\n"
+"Last-Translator: Davor Bojkić <bole@dajmi5.com>\n"
+"Language-Team: Croatian (http://www.transifex.com/odoo/odoo-9/language/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -57,9 +54,7 @@ msgstr "Zadani stjecatelj"
 msgid ""
 "Default payment acquirer for website payments; your provider needs to be "
 "visible in the website."
-msgstr ""
-"Zadani stjecatelj plaćanja za uplate putem web stranice; vaš davatelj usluga"
-" treba biti vidljiv na web stranici."
+msgstr "Zadani stjecatelj plaćanja za uplate putem web stranice; vaš davatelj usluga treba biti vidljiv na web stranici."
 
 #. module: website_payment
 #: model:ir.ui.view,arch_db:website_payment.pay_methods
@@ -87,7 +82,12 @@ msgid "Manage your payment methods"
 msgstr "Upravljaj svojim načinima plaćanja"
 
 #. module: website_payment
-#: code:addons/website_payment/controllers/main.py:45
+#: model:ir.ui.view,arch_db:website_payment.pay_methods
+msgid "My Account"
+msgstr "Moj korisnički račun"
+
+#. module: website_payment
+#: code:addons/website_payment/controllers/main.py:42
 #, python-format
 msgid "Pay Now"
 msgstr "Plati odmah"
@@ -122,7 +122,12 @@ msgstr "Plaćanje obrađuje"
 #: model:ir.ui.view,arch_db:website_payment.confirm
 #: model:ir.ui.view,arch_db:website_payment.pay
 msgid "Reference"
-msgstr "Vezna oznaka"
+msgstr "Šifra"
+
+#. module: website_payment
+#: model:ir.model.fields,help:website_payment.field_payment_acquirer_website_url
+msgid "The full URL to access the document through the website."
+msgstr "Puni URL za pristup dokumentu putem web stranice."
 
 #. module: website_payment
 #: model:ir.ui.view,arch_db:website_payment.pay
@@ -132,7 +137,12 @@ msgstr "Transakcija će se obraditi"
 #. module: website_payment
 #: model:ir.model,name:website_payment.model_website
 msgid "Website"
-msgstr "Web stranica"
+msgstr "Web stranice"
+
+#. module: website_payment
+#: model:ir.model.fields,field_description:website_payment.field_payment_acquirer_website_url
+msgid "Website URL"
+msgstr "URL web stranice"
 
 #. module: website_payment
 #: model:ir.model,name:website_payment.model_account_config_settings

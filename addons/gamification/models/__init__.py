@@ -3,4 +3,5 @@
 
 import goal
 import challenge
+import res_users
 import badge

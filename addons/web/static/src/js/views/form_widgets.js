@@ -1,22 +1,21 @@
 odoo.define('web.form_widgets', function (require) {
 "use strict";
 
-var ajax = require('web.ajax');
 var core = require('web.core');
 var crash_manager = require('web.crash_manager');
 var data = require('web.data');
 var datepicker = require('web.datepicker');
-var dom_utils = require('web.dom_utils');
-var Priority = require('web.Priority');
 var ProgressBar = require('web.ProgressBar');
 var Dialog = require('web.Dialog');
 var common = require('web.form_common');
 var formats = require('web.formats');
 var framework = require('web.framework');
 var Model = require('web.DataModel');
+var Priority = require('web.Priority');
 var pyeval = require('web.pyeval');
 var session = require('web.session');
 var utils = require('web.utils');
+var dom_utils = require('web.dom_utils');
 
 var _t = core._t;
 var QWeb = core.qweb;
@@ -33,7 +32,11 @@ var WidgetButton = common.FormWidget.extend({
             this.view.default_focus_button = this;
         }
         if (this.node.attrs.icon) {
+            // if the icon isn't a font-awesome one, find it in the icons folder
             this.fa_icon = this.node.attrs.icon.indexOf('fa-') === 0;
+            if (!this.fa_icon && (! /\//.test(this.node.attrs.icon))) {
+                this.node.attrs.icon = '/web/static/src/img/icons/' + this.node.attrs.icon + '.png';
+            }
         }
     },
     start: function() {
@@ -116,25 +119,24 @@ var WidgetButton = common.FormWidget.extend({
 
 var FieldChar = common.AbstractField.extend(common.ReinitializeFieldMixin, {
     template: 'FieldChar',
+    widget_class: 'oe_form_field_char',
     events: {
-        'change': 'store_dom_value',
+        'change input': 'store_dom_value',
     },
     init: function (field_manager, node) {
         this._super(field_manager, node);
         this.password = this.node.attrs.password === 'True' || this.node.attrs.password === '1';
     },
     initialize_content: function() {
-        if(!this.get('effective_readonly') && !this.$input) {
-            this.$input = this.$el;
-        }
-        this.setupFocus(this.$el);
-    },
-    destroy_content: function() {
-        this.$input = undefined;
+        this.setupFocus(this.$('input'));
     },
     store_dom_value: function () {
-        if (this.$input && this.is_syntax_valid()) {
-            this.internal_set_value(this.parse_value(this.$input.val()));
+        if (!this.get('effective_readonly')
+                && this.$('input').length
+                && this.is_syntax_valid()) {
+            this.internal_set_value(
+                this.parse_value(
+                    this.$('input').val()));
         }
     },
     commit_value: function () {
@@ -143,19 +145,20 @@ var FieldChar = common.AbstractField.extend(common.ReinitializeFieldMixin, {
     },
     render_value: function() {
         var show_value = this.format_value(this.get('value'), '');
-        if (this.$input) {
-            this.$input.val(show_value);
+        if (!this.get("effective_readonly")) {
+            this.$el.find('input').val(show_value);
         } else {
             if (this.password) {
                 show_value = new Array(show_value.length + 1).join('*');
             }
-            this.$el.text(show_value);
+            this.$(".oe_form_char_content").text(show_value);
         }
     },
     is_syntax_valid: function() {
-        if (this.$input) {
+        if (!this.get("effective_readonly") && this.$("input").size() > 0) {
             try {
-                this.parse_value(this.$input.val(), '');
+                this.parse_value(this.$('input').val(), '');
+                return true;
             } catch(e) {
                 return false;
             }
@@ -172,30 +175,31 @@ var FieldChar = common.AbstractField.extend(common.ReinitializeFieldMixin, {
         return this.get('value') === '' || this._super();
     },
     focus: function() {
-        if (this.$input) {
-            return this.$input.focus();
-        }
-        return false;
+        var input = this.$('input:first')[0];
+        return input ? input.focus() : false;
     },
+    set_dimensions: function (height, width) {
+        this._super(height, width);
+        this.$('input').css({
+            height: height,
+            width: width
+        });
+    }
 });
 
-var KanbanSelection = common.AbstractField.extend({
+var KanbanSelection = FieldChar.extend({
     template: "FormSelection",
-    events: {
-        'click a': function(e) {
-            e.preventDefault();
-        },
-        'mouseup a': function(e) {
-            e.stopPropagation();
-        },
-        'click li': 'set_kanban_selection'
+    init: function (field_manager, node) {
+        this._super(field_manager, node);
     },
     start: function () {
+        var self = this;
+        this.states = [];
+        this._super.apply(this, arguments);
         // hook on form view content changed: recompute the states, because it may be related to the current stage
-        this.view.on('view_content_has_changed', this, function () {
-            this.render_value();
+        this.getParent().on('view_content_has_changed', self, function () {
+            self.render_value();
         });
-        return this._super();
     },
     prepare_dropdown_selection: function() {
         var self = this;
@@ -229,7 +233,6 @@ var KanbanSelection = common.AbstractField.extend({
         this._super();
         this.states = this.prepare_dropdown_selection();
         var self = this;
-
         // Adapt "FormSelection"
         var current_state = _.find(this.states, function(state) {
             return state.name === self.get('value');
@@ -245,6 +248,7 @@ var KanbanSelection = common.AbstractField.extend({
         var $dropdown = this.$el.find('.dropdown-menu');
         $dropdown.children().remove(); // remove old items
         $items.appendTo($dropdown);
+        this.$el.find('a').on('click', this.set_kanban_selection.bind(this));
     },
     /* setting the value: in view mode, perform an asynchronous call and reload
     the form view; in edit mode, use set_value to save the new value that will
@@ -255,7 +259,7 @@ var KanbanSelection = common.AbstractField.extend({
         var li = $(ev.target).closest('li');
         if (li.length) {
             var value = String(li.data('value'));
-            if (this.view.get('actual_mode') === 'view') {
+            if (this.view.get('actual_mode') == 'view') {
                 var write_values = {};
                 write_values[self.name] = value;
                 return this.view.dataset._model.call(
@@ -335,35 +339,66 @@ var FieldID = FieldChar.extend({
 
 var FieldEmail = FieldChar.extend({
     template: 'FieldEmail',
-    prefix: 'mailto',
-    init: function() {
-        this._super.apply(this, arguments);
-        this.clickable = true;
+    initialize_content: function() {
+        this._super();
+        var $button = this.$el.find('button');
+        $button.click(this.on_button_clicked);
+        this.setupFocus($button);
     },
     render_value: function() {
-        this._super();
-        if (this.get("effective_readonly") && this.clickable) {
-            this.$el.attr('href', this.prefix + ':' + this.get('value'));
+        if (!this.get("effective_readonly")) {
+            this._super();
+        } else {
+            this.$el.find('a')
+                    .attr('href', 'mailto:' + this.get('value'))
+                    .text(this.get('value') || '');
+        }
+    },
+    on_button_clicked: function() {
+        if (!this.get('value') || !this.is_syntax_valid()) {
+            this.do_warn(_t("E-mail Error"), _t("Can't send email to invalid e-mail address"));
+        } else {
+            location.href = 'mailto:' + this.get('value');
         }
     }
 });
 
-var FieldUrl = FieldEmail.extend({
-    render_value: function() {
+var FieldUrl = FieldChar.extend({
+    template: 'FieldUrl',
+    initialize_content: function() {
         this._super();
-        if(this.get("effective_readonly")) {
+        var $button = this.$el.find('button');
+        $button.click(this.on_button_clicked);
+        this.setupFocus($button);
+    },
+    render_value: function() {
+        if (!this.get("effective_readonly")) {
+            this._super();
+        } else {
             var tmp = this.get('value');
             var s = /(\w+):(.+)|^\.{0,2}\//.exec(tmp);
             if (!s) {
                 tmp = "http://" + this.get('value');
             }
             var text = this.get('value') ? this.node.attrs.text || tmp : '';
-            this.$el.attr('href', tmp).text(text);
+            this.$el.find('a').attr('href', tmp).text(text);
+        }
+    },
+    on_button_clicked: function() {
+        if (!this.get('value')) {
+            this.do_warn(_t("Resource Error"), _t("This resource is empty"));
+        } else {
+            var url = $.trim(this.get('value'));
+            if(/^www\./i.test(url))
+                url = 'http://'+url;
+            window.open(url);
         }
     }
 });
 
 var FieldFloat = FieldChar.extend({
+    is_field_number: true,
+    widget_class: 'oe_form_field_float',
     init: function (field_manager, node) {
         this._super(field_manager, node);
         this.internal_set_value(0);
@@ -373,18 +408,19 @@ var FieldFloat = FieldChar.extend({
             this.digits = this.field.digits;
         }
     },
-    initialize_content: function() {
-        this._super();
-        this.$el.addClass('o_form_field_number');
-    },
     set_value: function(value_) {
         if (value_ === false || value_ === undefined) {
-            value_ = 0; // As in GTK client, floats default to 0
+            // As in GTK client, floats default to 0
+            value_ = 0;
         }
         if (this.digits !== undefined && this.digits.length === 2) {
             value_ = utils.round_decimals(value_, this.digits[1]);
         }        
-        this._super(value_);
+        this._super.apply(this, [value_]);
+    },
+    focus: function () {
+        var $input = this.$('input:first');
+        return $input.length ? $input.select() : false;
     }
 });
 
@@ -427,8 +463,8 @@ var FieldCharDomain = common.AbstractField.extend(common.ReinitializeFieldMixin,
                 return;
             }
             var ds = new data.DataSetStatic(self, model, self.build_context());
-            ds.call('search_count', [domain]).then(function (results) {
-                self.$('.o_count').text(results + _t(' selected records'));
+            ds.call('search_count', [domain, ds.get_context()]).then(function (results) {
+                self.$('.o_count').text(results + ' ' + _t(' selected records'));
                 if (self.get('effective_readonly')) {
                     self.$('button').text(_t('See selection '));
                 }
@@ -445,7 +481,7 @@ var FieldCharDomain = common.AbstractField.extend(common.ReinitializeFieldMixin,
             this.$('.o_form_input').val('');
             this.$('.o_count').text(_t('No selected record'));
             var $arrow = this.$('button span').detach();
-            this.$('button').text(_t('Select records ')).append($("<span/>").addClass('fa fa-arrow-right'));
+            this.$('button').text(_('Select records ')).append($("<span/>").addClass('fa fa-arrow-right'));
         }
     },
     on_click: function(event) {
@@ -468,58 +504,60 @@ var FieldCharDomain = common.AbstractField.extend(common.ReinitializeFieldMixin,
     },
 });
 
-var FieldDate = common.AbstractField.extend(common.ReinitializeFieldMixin, {
-    tagName: "span",
-    className: "o_form_field_date",
+var FieldDatetime = common.AbstractField.extend(common.ReinitializeFieldMixin, {
+    template: "FieldDatetime",
     build_widget: function() {
-        return new datepicker.DateWidget(this);
+        return new datepicker.DateTimeWidget(this);
     },
-    initialize_content: function() {
+    destroy_content: function() {
         if (this.datewidget) {
             this.datewidget.destroy();
             this.datewidget = undefined;
         }
-
+    },
+    initialize_content: function() {
         if (!this.get("effective_readonly")) {
             this.datewidget = this.build_widget();
-            this.datewidget.on('datetime_changed', this, function() {
+            this.datewidget.on('datetime_changed', this, _.bind(function() {
                 this.internal_set_value(this.datewidget.get_value());
-            });
-
-            var self = this;
-            this.datewidget.appendTo('<div>').done(function() {
-                self.datewidget.$el.addClass(self.$el.attr('class'));
-                self.replaceElement(self.datewidget.$el);
-                self.datewidget.$input.addClass('o_form_input');
-                self.setupFocus(self.datewidget.$input);
-            });
+            }, this));
+            this.datewidget.appendTo(this.$el);
+            this.setupFocus(this.datewidget.$input);
         }
     },
     render_value: function() {
-        if (this.get("effective_readonly")) {
-            this.$el.text(formats.format_value(this.get('value'), this, ''));
-        } else {
+        if (!this.get("effective_readonly")) {
             this.datewidget.set_value(this.get('value'));
+        } else {
+            this.$el.text(formats.format_value(this.get('value'), this, ''));
         }
     },
     is_syntax_valid: function() {
-        return this.get("effective_readonly") || !this.datewidget || this.datewidget.is_valid();
+        if (!this.get("effective_readonly") && this.datewidget) {
+            return this.datewidget.is_valid();
+        }
+        return true;
     },
     is_false: function() {
         return this.get('value') === '' || this._super();
     },
     focus: function() {
-        if (!this.get("effective_readonly")) {
-            return this.datewidget.$input.focus();
-        }
-        return false;
+        var input = this.datewidget && this.datewidget.$input[0];
+        return input ? input.focus() : false;
     },
+    set_dimensions: function (height, width) {
+        this._super(height, width);
+        if (!this.get("effective_readonly")) {
+            this.datewidget.$input.css('height', height);
+        }
+    }
 });
 
-var FieldDatetime = FieldDate.extend({
+var FieldDate = FieldDatetime.extend({
+    template: "FieldDate",
     build_widget: function() {
-        return new datepicker.DateTimeWidget(this);
-    },
+        return new datepicker.DateWidget(this);
+    }
 });
 
 var FieldText = common.AbstractField.extend(common.ReinitializeFieldMixin, {
@@ -535,37 +573,46 @@ var FieldText = common.AbstractField.extend(common.ReinitializeFieldMixin, {
                 e.stopPropagation();
             }
         },
-        'change': 'store_dom_value',
+        'change textarea': 'store_dom_value',
     },
     initialize_content: function() {
-        if (!this.get("effective_readonly")) {
+        if (! this.get("effective_readonly")) {
+            this.$textarea = this.$el.find('textarea');
             this.auto_sized = false;
-            this.setupFocus(this.$el);
+            this.default_height = this.$textarea.css('height');
+            if (this.default_height === '0px') this.default_height = '90px';
+            if (this.get("effective_readonly")) {
+                this.$textarea.attr('disabled', 'disabled');
+            }
+            this.setupFocus(this.$textarea);
+        } else {
+            this.$textarea = undefined;
         }
     },
     commit_value: function () {
-        if (!this.get("effective_readonly")) {
+        if (! this.get("effective_readonly") && this.$textarea) {
             this.store_dom_value();
         }
         return this._super();
     },
     store_dom_value: function () {
-        this.internal_set_value(formats.parse_value(this.$el.val(), this));
+        this.internal_set_value(formats.parse_value(this.$textarea.val(), this));
     },
     render_value: function() {
-        if (this.get("effective_readonly")) {
-            var txt = this.get("value") || '';
-            this.$el.text(txt);
-        } else {
+        if (! this.get("effective_readonly")) {
             var show_value = formats.format_value(this.get('value'), this, '');
-            this.$el.val(show_value);
-            dom_utils.autoresize(this.$el, {parent: this});
+            this.$textarea.val(show_value);
+            dom_utils.autoresize(this.$textarea, {parent: this, min_height: parseInt(this.default_height)});
+        } else {
+            var txt = this.get("value") || '';
+            this.$(".oe_form_text_content").text(txt);
         }
     },
     is_syntax_valid: function() {
-        if (!this.get("effective_readonly")) {
+        if (!this.get("effective_readonly") && this.$textarea) {
             try {
-                formats.parse_value(this.$el.val(), this, '');
+                formats.parse_value(this.$textarea.val(), this, '');
+                return true;
             } catch(e) {
                 return false;
             }
@@ -576,48 +623,51 @@ var FieldText = common.AbstractField.extend(common.ReinitializeFieldMixin, {
         return this.get('value') === '' || this._super();
     },
     focus: function($el) {
-        if(!this.get("effective_readonly")) {
-            return this.$el.focus();
-        }
-        return false;
+        var input = !this.get("effective_readonly") && this.$textarea && this.$textarea[0];
+        return input ? input.focus() : false;
     },
-    set_dimensions: function(height, width) {
-        this.$el.css({
-            width: width,
-            minHeight: height,
-        });
+    set_dimensions: function (height, width) {
+        this._super(height, width);
+        if (!this.get("effective_readonly") && this.$textarea) {
+            this.$textarea.css({
+                width: width,
+                minHeight: height
+            });
+        }
     },
 });
 
 var FieldBoolean = common.AbstractField.extend({
     template: 'FieldBoolean',
-    events: {
-        'click': function() {
-            this.internal_set_value(this.$checkbox.prop('checked'));
-        }
-    },
     start: function() {
-        this.$checkbox = this.$('input');
-
-        this.$checkbox.prop('disabled', this.get("effective_readonly"));
-        this.on("change:effective_readonly", this, function() {
-            this.$checkbox.prop('disabled', this.get("effective_readonly"));
-        });
-
+        var self = this;
+        this.$checkbox = $("input", this.$el);
         this.setupFocus(this.$checkbox);
-
-        return this._super();
+        this.$el.click(_.bind(function() {
+            this.internal_set_value(this.$checkbox.is(':checked'));
+        }, this));
+        var check_readonly = function() {
+            self.$checkbox.prop('disabled', self.get("effective_readonly"));
+            self.click_disabled_boolean();
+        };
+        this.on("change:effective_readonly", this, check_readonly);
+        check_readonly.call(this);
+        this._super.apply(this, arguments);
     },
     render_value: function() {
-        this.$checkbox.prop('checked', this.get('value'));
+        this.$checkbox[0].checked = this.get('value');
     },
     focus: function() {
-        return this.$checkbox.focus();
+        var input = this.$checkbox && this.$checkbox[0];
+        return input ? input.focus() : false;
     },
-    set_dimensions: function(height, width) {}, // Checkboxes have a fixed height and width (even in list editable)
-    is_false: function() {
-        return false;
-    },
+    click_disabled_boolean: function(){
+        var $disabled = this.$el.find('input[type=checkbox]:disabled');
+        $disabled.each(function (){
+            $(this).next('div').remove();
+            $(this).closest("span").append($('<div class="boolean"></div>'));
+        });
+    }
 });
 
 /**
@@ -636,17 +686,16 @@ var FieldBooleanButton = common.AbstractField.extend({
                 this.hover_false = _t("Activate");
                 break;
             case "archive":
-                this.string_true = _t("Active");
+                this.string_true = _t("Not Archived");
                 this.hover_true = _t("Archive");
                 this.string_false = _t("Archived");
                 this.hover_false = _t("Unarchive");
                 break;
             default:
-                var terms = typeof this.options["terminology"] === 'string' ? {} : this.options["terminology"];
-                this.string_true = _t(terms.string_true || "On");
-                this.hover_true = _t(terms.hover_true || terms.string_false || "Switch Off");
-                this.string_false = _t(terms.string_false || "Off");
-                this.hover_false = _t(terms.hover_false || terms.string_true || "Switch On");
+                this.string_true = _t("On");
+                this.hover_true = _t("Switch Off");
+                this.string_false = _t("Off");
+                this.hover_false = _t("Switch On");
         }
     },
     render_value: function() {
@@ -658,7 +707,9 @@ var FieldBooleanButton = common.AbstractField.extend({
     },
 });
 
-// The progressbar field expects a float from 0 to 100.
+/**
+    The progressbar field expect a float from 0 to 100.
+*/
 var FieldProgressBar = common.AbstractField.extend(common.ReinitializeFieldMixin, {
     initialize_content: function() {
         if(this.progressbar) {
@@ -684,41 +735,96 @@ var FieldProgressBar = common.AbstractField.extend(common.ReinitializeFieldMixin
     render_value: function() {
         this.progressbar.set_value(this.get('value'));
     },
-    is_false: function() {
-        return false;
-    },
 });
 
-// The PercentPie field expects a float from 0 to 100.
+/**
+    The PercentPie field expect a float from 0 to 100.
+*/
 var FieldPercentPie = common.AbstractField.extend({
     template: 'FieldPercentPie',
-    start: function() {
-        this.$left_mask = this.$('.o_mask').first();
-        this.$right_mask = this.$('.o_mask').last();
-        this.$pie_value = this.$('.o_pie_value');
-        return this._super();
-    },
+
     render_value: function() {
-        var value = this.get('value') || 0, degValue = 360*value/100;
+        var value = this.get('value'),
+            formatted_value = Math.round(value || 0) + '%',
+            svg = this.$('svg')[0];
 
-        this.$right_mask.toggleClass('o_full', degValue >= 180);
+        svg.innerHTML = "";
+        nv.addGraph(function() {
+            var width = 42, height = 42;
+            var chart = nv.models.pieChart()
+                .width(width)
+                .height(height)
+                .margin({top: 0, right: 0, bottom: 0, left: 0})
+                .donut(true) 
+                .showLegend(false)
+                .showLabels(false)
+                .color(['#7C7BAD','#DDD'])
+                .donutRatio(0.62);
 
-        var leftDeg = 'rotate(' + ((degValue < 180)? 180 : degValue) + 'deg)';
-        var rightDeg = 'rotate(' + ((degValue < 180)? degValue : 0) + 'deg)';
-        this.$left_mask.css({transform: leftDeg, msTransform: leftDeg, mozTransform: leftDeg, webkitTransform: leftDeg});
-        this.$right_mask.css({transform: rightDeg, msTransform: rightDeg, mozTransform: rightDeg, webkitTransform: rightDeg});
+            chart.tooltip.enabled(false);
+   
+            d3.select(svg)
+                .datum([{'x': 'value', 'y': value}, {'x': 'complement', 'y': 100 - value}])
+                .transition()
+                .call(chart)
+                .attr('style', 'width: ' + width + 'px; height:' + height + 'px;');
 
-        this.$pie_value.html(Math.round(value) + '%');
-    },
-    is_false: function() {
-        return false;
+            d3.select(svg)
+                .append("text")
+                .attr({x: width/2, y: height/2 + 3, 'text-anchor': 'middle'})
+                .style({"font-size": "10px", "font-weight": "bold"})
+                .text(formatted_value);
+
+            return chart;
+        });
+   
     }
 });
+
+/**
+    The FieldBarChart expectsa list of values (indeed)
+*/
+var FieldBarChart = common.AbstractField.extend({
+    template: 'FieldBarChart',
+
+    render_value: function() {
+        var value = JSON.parse(this.get('value'));
+        var svg = this.$('svg')[0];
+        svg.innerHTML = "";
+        nv.addGraph(function() {
+            var width = 34, height = 34;
+            var chart = nv.models.discreteBarChart()
+                .x(function (d) { return d.tooltip; })
+                .y(function (d) { return d.value; })
+                .width(width)
+                .height(height)
+                .margin({top: 0, right: 0, bottom: 0, left: 0})
+                .showValues(false)
+                .transition(350)
+                .showXAxis(false)
+                .showYAxis(false);
+
+            chart.tooltip.enabled(false);
+
+            d3.select(svg)
+                .datum([{key: 'values', values: value}])
+                .transition()
+                .call(chart)
+                .attr('style', 'width: ' + (width + 4) + 'px; height: ' + (height + 8) + 'px;');
+
+            nv.utils.windowResize(chart.update);
+
+            return chart;
+        });
+   
+    }
+});
+
 
 var FieldSelection = common.AbstractField.extend(common.ReinitializeFieldMixin, {
     template: 'FieldSelection',
     events: {
-        'change': 'store_dom_value',
+        'change select': 'store_dom_value',
     },
     init: function(field_manager, node) {
         this._super(field_manager, node);
@@ -727,7 +833,7 @@ var FieldSelection = common.AbstractField.extend(common.ReinitializeFieldMixin, 
         this.records_orderer = new utils.DropMisordered();
         this.field_manager.on("view_content_has_changed", this, function() {
             var domain = new data.CompoundDomain(this.build_domain()).eval();
-            if (!_.isEqual(domain, this.get("domain"))) {
+            if (! _.isEqual(domain, this.get("domain"))) {
                 this.set("domain", domain);
             }
         });
@@ -764,27 +870,27 @@ var FieldSelection = common.AbstractField.extend(common.ReinitializeFieldMixin, 
         //   current row or switching to the next one)
         // * If the user presses [RETURN] with a select closed (side-effect:
         //   also if the user opened the select and pressed [RETURN] without
-        //   changing the selected value), takes the action as validating the row
-        if(!this.get('effective_readonly')) {
-            var ischanging = false;
-            this.$el
-                .change(function () { ischanging = true; })
-                .click(function () { ischanging = false; })
-                .keyup(function (e) {
-                    if (e.which !== 13 || !ischanging) { return; }
-                    e.stopPropagation();
-                    ischanging = false;
-                });
-            this.setupFocus(this.$el);
-        }
+        //   changing the selected value), takes the action as validating the
+        //   row
+        var ischanging = false;
+        var $select = this.$el.find('select')
+            .change(function () { ischanging = true; })
+            .click(function () { ischanging = false; })
+            .keyup(function (e) {
+                if (e.which !== 13 || !ischanging) { return; }
+                e.stopPropagation();
+                ischanging = false;
+            });
+        this.setupFocus($select);
     },
     commit_value: function () {
         this.store_dom_value();
         return this._super();
     },
     store_dom_value: function () {
-        if (!this.get('effective_readonly')) {
-            this.internal_set_value(JSON.parse(this.$el.val()));
+        if (!this.get('effective_readonly') && this.$('select').length) {
+            var val = JSON.parse(this.$('select').val());
+            this.internal_set_value(val);
         }
     },
     set_value: function(value_) {
@@ -796,29 +902,28 @@ var FieldSelection = common.AbstractField.extend(common.ReinitializeFieldMixin, 
         var values = this.get("values");
         values =  [[false, this.node.attrs.placeholder || '']].concat(values);
         var found = _.find(values, function(el) { return el[0] === this.get("value"); }, this);
-        if (!found) {
+        if (! found) {
             found = [this.get("value"), _t('Unknown')];
             values = [found].concat(values);
         }
-        if (!this.get("effective_readonly")) {
-            this.$el.empty();
-            for(var i = 0 ; i < values.length ; i++) {
-                this.$el.append($('<option/>', {
-                    value: JSON.stringify(values[i][0]),
-                    html: values[i][1]
-                }))
-            }
-            this.$el.val(JSON.stringify(found[0]));
+        if (! this.get("effective_readonly")) {
+            this.$().html(QWeb.render("FieldSelectionSelect", {widget: this, values: values}));
+            this.$("select").val(JSON.stringify(found[0]));
         } else {
             this.$el.text(found[1]);
         }
     },
     focus: function() {
-        if (!this.get("effective_readonly")) {
-            return this.$el.focus();
-        }
-        return false;
+        var input = this.$('select:first')[0];
+        return input ? input.focus() : false;
     },
+    set_dimensions: function (height, width) {
+        this._super(height, width);
+        this.$('select').css({
+            height: height,
+            width: width
+        });
+    }
 });
 
 /**
@@ -828,20 +933,20 @@ var FieldSelection = common.AbstractField.extend(common.ReinitializeFieldMixin, 
     the time difference between UTC time and local time, in minutes.
 */
 var TimezoneMismatch = FieldSelection.extend({
-    initialize_content: function() {
+    initialize_content: function(){
         this._super.apply(this, arguments);
         this.tz_offset_field = (this.options && this.options.tz_offset_field) || this.tz_offset_field || 'tz_offset';
         this.set({"tz_offset": this.field_manager.get_field_value(this.tz_offset_field)});
         this.on("change:tz_offset", this, this.render_value);
     },
-    start: function() {
+    start: function(){
         this._super.apply(this, arguments);
         // trigger a render_value when tz_offset field change
         this.field_manager.on("field_changed:" + this.tz_offset_field, this, function() {
             this.set({"tz_offset": this.field_manager.get_field_value(this.tz_offset_field)});
         });
     },
-    check_timezone: function() {
+    check_timezone: function(){
         var user_offset = this.get('tz_offset');
         if (user_offset) {
             var offset = -(new Date().getTimezoneOffset());
@@ -852,15 +957,17 @@ var TimezoneMismatch = FieldSelection.extend({
         }
         return false;
     },
-    render_value: function() {
+    render_value: function(){
         this._super.apply(this, arguments);
-        this.$label.next('.o_tz_warning').remove();
         if(this.check_timezone()){
+            this.$label.find('.oe_tz_warning').remove();
             var options = _.extend({
                 delay: { show: 501, hide: 0 },
                 title: _t("Timezone Mismatch : The timezone of your browser doesn't match the selected one. The time in Odoo is displayed according to your field timezone."),
             });
-            $('<span/>').addClass('fa fa-exclamation-triangle o_tz_warning').insertAfter(this.$label).tooltip(options);
+            this.$label.css('white-space', 'normal');
+            $(QWeb.render('WebClient.timezone_warning')).appendTo(this.$label);
+            this.$label.find('.oe_tz_warning').tooltip(options);
         }
     }
 });
@@ -873,8 +980,8 @@ var LabelSelection = FieldSelection.extend({
     render_value: function() {
         this._super.apply(this, arguments);
         if (this.get("effective_readonly")) {
-            var bt_class = this.classes[this.get('value')] || 'default';
-            this.$el.html($('<span/>', {html: this.$el.html()}).addClass('label label-' + bt_class));
+            var btn_class = this.classes[this.get('value')] || 'default';
+            this.$el.wrapInner($('<span/>').addClass('label label-' + btn_class));
         }
     },
 });
@@ -895,6 +1002,7 @@ var FieldRadio = common.AbstractField.extend(common.ReinitializeFieldMixin, {
         this.uniqueId = _.uniqueId("radio");
     },
     initialize_content: function () {
+        this.on("change:effective_readonly", this, this.render_value);
         this.field_manager.on("view_content_has_changed", this, this.get_selection);
         this.get_selection();
     },
@@ -936,7 +1044,7 @@ var FieldRadio = common.AbstractField.extend(common.ReinitializeFieldMixin, {
             def.resolve();
         }
         return def.then(function () {
-            if (!_.isEqual(selection, self.selection)) {
+            if (! _.isEqual(selection, self.selection)) {
                 self.selection = _.clone(selection);
                 self.renderElement();
                 self.render_value();
@@ -955,21 +1063,18 @@ var FieldRadio = common.AbstractField.extend(common.ReinitializeFieldMixin, {
     },
     get_value: function () {
         var value = this.get('value');
-        value = ((value instanceof Array)? value[0] : value);
-        return  _.isUndefined(value) ? false : value;
+        return ((value instanceof Array)? value[0] : value) || false;
     },
     render_value: function () {
         var self = this;
-        if(this.get('effective_readonly')) {
-            this.$el.html(this.get('value')? this.get('value')[1] : "");
-        } else {
-            this.$("input").prop("checked", false).filter(function () {return this.value == self.get_value();}).prop("checked", true);
-        }
+        this.$el.toggleClass("oe_readonly", this.get('effective_readonly'));
+        this.$("input").prop("checked", false).filter(function () {return this.value == self.get_value();}).prop("checked", true);
+        this.$(".oe_radio_readonly").text(this.get('value') ? this.get('value')[1] : "");
     }
 });
 
 var FieldReference = common.AbstractField.extend(common.ReinitializeFieldMixin, {
-    className: 'o_row',
+    template: 'FieldReference',
     init: function(field_manager, node) {
         this._super(field_manager, node);
         this.reference_ready = true;
@@ -982,8 +1087,9 @@ var FieldReference = common.AbstractField.extend(common.ReinitializeFieldMixin, 
     },
     initialize_content: function() {
         var self = this;
-        this.fm = new common.DefaultFieldManager(this);
-        this.fm.extend_field_desc({
+        var fm = new common.DefaultFieldManager(this);
+        this.fm = fm;
+        fm.extend_field_desc({
             "selection": {
                 selection: this.field_manager.get_field_desc(this.name).selection,
                 type: "selection",
@@ -993,24 +1099,24 @@ var FieldReference = common.AbstractField.extend(common.ReinitializeFieldMixin, 
                 type: "many2one",
             },
         });
-        this.selection = new FieldSelection(this.fm, { attrs: {
+        this.selection = new FieldSelection(fm, { attrs: {
             name: 'selection',
             modifiers: JSON.stringify({readonly: this.get('effective_readonly')}),
         }});
         this.selection.on("change:value", this, this.on_selection_changed);
-        this.selection.appendTo(this.$el);
+        this.selection.appendTo(this.$(".oe_form_view_reference_selection"));
         this.selection
             .on('focused', null, function () {self.trigger('focused');})
             .on('blurred', null, function () {self.trigger('blurred');});
 
         var FieldMany2One = core.form_widget_registry.get('many2one');
-        this.m2o = new FieldMany2One(this.fm, { attrs: {
+        this.m2o = new FieldMany2One(fm, { attrs: {
             name: 'Referenced Document',
             modifiers: JSON.stringify({readonly: this.get('effective_readonly')}),
             context: this.build_context().eval(),
         }});
         this.m2o.on("change:value", this, this.data_changed);
-        this.m2o.appendTo(this.$el);
+        this.m2o.appendTo(this.$(".oe_form_view_reference_m2o"));
         this.m2o
             .on('focused', null, function () {self.trigger('focused');})
             .on('blurred', null, function () {self.trigger('blurred');});
@@ -1048,7 +1154,7 @@ var FieldReference = common.AbstractField.extend(common.ReinitializeFieldMixin, 
         this.reference_ready = true;
     },
     is_false: function() {
-        return !this.get_value();
+        return this.get('value')[0] == false || this.get('value')[1] == false;
     },
 });
 
@@ -1060,7 +1166,7 @@ var FieldBinary = common.AbstractField.extend(common.ReinitializeFieldMixin, {
         this.useFileAPI = !!window.FileReader;
         this.max_upload_size = 25 * 1024 * 1024; // 25Mo
         if (!this.useFileAPI) {
-            this.fileupload_id = _.uniqueId('o_fileupload');
+            this.fileupload_id = _.uniqueId('oe_fileupload');
             $(window).on(this.fileupload_id, function() {
                 var args = [].slice.call(arguments).slice(1);
                 self.on_file_uploaded.apply(self, args);
@@ -1074,13 +1180,13 @@ var FieldBinary = common.AbstractField.extend(common.ReinitializeFieldMixin, {
         this._super.apply(this, arguments);
     },
     initialize_content: function() {
-        this.$inputFile = this.$('.o_form_input_file');
-        this.$inputFile.change(this.on_file_change);
-        var self = this;
-        this.$('.o_select_file_button').click(function() {
-            self.$inputFile.click();
+        var self= this;
+        this.$('input.o_form_input_file').change(this.on_file_change);
+        this.$('button.oe_form_binary_file_save').click(this.on_save_as);
+        this.$('.oe_form_binary_file_clear').click(this.on_clear);
+        this.$('.oe_form_binary_file_edit').click(function() {
+            self.$('input.o_form_input_file').click();
         });
-        this.$('.o_clear_file_button').click(this.on_clear);
     },
     on_file_change: function(e) {
         var self = this;
@@ -1101,28 +1207,26 @@ var FieldBinary = common.AbstractField.extend(common.ReinitializeFieldMixin, {
                     self.on_file_uploaded(file.size, file.name, file.type, data);
                 };
             } else {
-                this.$('form.o_form_binary_form input[name=session_id]').val(this.session.session_id);
-                this.$('form.o_form_binary_form').submit();
+                this.$el.find('form.o_form_binary_form input[name=session_id]').val(this.session.session_id);
+                this.$el.find('form.o_form_binary_form').submit();
             }
-            this.$('.o_form_binary_progress').show();
-            this.$('button').hide();
+            this.$el.find('.oe_form_binary_progress').show();
+            this.$el.find('.oe_form_binary').hide();
         }
     },
-    on_file_uploaded: function(size, name) {
+    on_file_uploaded: function(size, name, content_type, file_base64) {
         if (size === false) {
             this.do_warn(_t("File Upload"), _t("There was a problem while uploading your file"));
             // TODO: use openerp web crashmanager
             console.warn("Error while uploading file : ", name);
         } else {
+            this.filename = name;
             this.on_file_uploaded_and_valid.apply(this, arguments);
         }
-        this.$('.o_form_binary_progress').hide();
-        this.$('button').show();
+        this.$el.find('.oe_form_binary_progress').hide();
+        this.$el.find('.oe_form_binary').show();
     },
     on_file_uploaded_and_valid: function(size, name, content_type, file_base64) {
-        this.binary_value = true;
-        this.set_filename(name);
-        this.set_value(file_base64);
     },
     on_save_as: function(ev) {
         var value = this.get('value');
@@ -1149,6 +1253,7 @@ var FieldBinary = common.AbstractField.extend(common.ReinitializeFieldMixin, {
                 'error': c.rpc_error.bind(c)
             });
             ev.stopPropagation();
+            return false;
         }
     },
     set_filename: function(value) {
@@ -1162,95 +1267,129 @@ var FieldBinary = common.AbstractField.extend(common.ReinitializeFieldMixin, {
         }
     },
     on_clear: function() {
-        this.binary_value = false;
-        this.set_filename('');
-        this.set_value(false); // FIXME do not really remove the value
+        if (this.get('value') !== false) {
+            this.binary_value = false;
+            this.internal_set_value(false);
+        }
+        return false;
     }
 });
 
 var FieldBinaryFile = FieldBinary.extend({
     template: 'FieldBinaryFile',
     initialize_content: function() {
-        var self = this;
         this._super();
         if (this.get("effective_readonly")) {
-            this.$el.click(function(ev) {
+            var self = this;
+            this.$el.find('a').click(function(ev) {
                 if (self.get('value')) {
                     self.on_save_as(ev);
                 }
                 return false;
             });
-        } else {
-            this.$input = this.$('.o_form_input').eq(0);
-            this.$input.on('click', function() {
-                self.$inputFile.click();
-            });
         }
     },
     render_value: function() {
-        var filename = this.view.datarecord[this.node.attrs.filename];
-        if (this.get("effective_readonly")) {
-            this.do_toggle(!!this.get('value'));
-            if (this.get('value')) {
-                this.$el.empty().append($("<span/>").addClass('fa fa-download'));
-                if (filename) {
-                    this.$el.append(" " + filename);
-                }
-            }
-        } else {
-            if(this.get('value')) {
-                this.$el.children().removeClass('o_hidden');
-                this.$('.o_select_file_button').first().addClass('o_hidden');
-                this.$input.val(filename || this.get('value'));
+        var show_value;
+        if (!this.get("effective_readonly")) {
+            if (this.node.attrs.filename) {
+                show_value = this.view.datarecord[this.node.attrs.filename] || '';
             } else {
-                this.$el.children().addClass('o_hidden');
-                this.$('.o_select_file_button').first().removeClass('o_hidden');
+                show_value = (this.get('value') !== null && this.get('value') !== undefined && this.get('value') !== false) ? this.get('value') : '';
+            }
+            this.$el.find('input').eq(0).val(show_value);
+        } else {
+            this.$el.find('a').toggle(!!this.get('value'));
+            if (this.get('value')) {
+                show_value = _t("Download");
+                if (this.view)
+                    show_value += " " + (this.view.datarecord[this.node.attrs.filename] || '');
+                this.$el.find('a').text(show_value);
             }
         }
-    }
+    },
+    on_file_uploaded_and_valid: function(size, name, content_type, file_base64) {
+        this.binary_value = true;
+        this.set_filename(name);
+        this.internal_set_value(file_base64);
+        var show_value = name + " (" + utils.human_size(size) + ")";
+        this.$el.find('input').eq(0).val(show_value);
+    },
+    on_clear: function() {
+        this._super.apply(this, arguments);
+        this.$el.find('input').eq(0).val('');
+        this.set_filename('');
+    },
+    set_value: function(value_){
+        var changed = value_ !== this.get_value();
+        this._super.apply(this, arguments);
+        // Trigger value change if size is the same
+        if (!changed){
+            this.trigger("change:value", this, {
+                oldValue: value_,
+                newValue: value_
+            });
+        }
+     }
 });
 
 var FieldBinaryImage = FieldBinary.extend({
     template: 'FieldBinaryImage',
     placeholder: "/web/static/src/img/placeholder.png",
     render_value: function() {
-        var url = this.placeholder;
-        if(this.get('value')) {
-            if(!utils.is_bin_size(this.get('value'))) {
-                url = 'data:image/png;base64,' + this.get('value');
-            } else {
-                url = session.url('/web/image', {
-                    model: this.view.dataset.model,
-                    id: JSON.stringify(this.view.datarecord.id || null),
-                    field: (this.options.preview_image)? this.options.preview_image : this.name,
-                    unique: (this.view.datarecord.__last_update || '').replace(/[^0-9]/g, ''),
-                });
-            }
-        }
-
-        var $img = $(QWeb.render("FieldBinaryImage-img", {widget: this, url: url}));
-
         var self = this;
-        $img.click(function(e) {
+        var url;
+        this.session = session;
+        if (this.get('value') && !utils.is_bin_size(this.get('value'))) {
+            url = 'data:image/png;base64,' + this.get('value');
+        } else if (this.get('value')) {
+            var id = JSON.stringify(this.view.datarecord.id || null);
+            var field = this.name;
+            if (this.options.preview_image)
+                field = this.options.preview_image;
+            url = session.url('/web/image', {
+                                        model: this.view.dataset.model,
+                                        id: id,
+                                        field: field,
+                                        unique: (this.view.datarecord.__last_update || '').replace(/[^0-9]/g, ''),
+            });
+        } else {
+            url = this.placeholder;
+        }
+        var $img = $(QWeb.render("FieldBinaryImage-img", { widget: this, url: url }));
+        $($img).click(function(e) {
             if(self.view.get("actual_mode") == "view") {
-                var $button = $(".o_form_button_edit");
+                var $button = $(".oe_form_button_edit");
                 $button.openerpBounce();
                 e.stopPropagation();
             }
         });
-        this.$('> img').remove();
-        if (self.options.size) {
-            $img.css("width", "" + self.options.size[0] + "px");
-            $img.css("height", "" + self.options.size[1] + "px");
-        }
+        this.$el.find('> img').remove();
         this.$el.prepend($img);
+        $img.load(function() {
+            if (! self.options.size)
+                return;
+            $img.css("max-width", "" + self.options.size[0] + "px");
+            $img.css("max-height", "" + self.options.size[1] + "px");
+        });
         $img.on('error', function() {
             self.on_clear();
             $img.attr('src', self.placeholder);
             self.do_warn(_t("Image"), _t("Could not display the selected image."));
         });
     },
-    set_value: function(value_) {
+    on_file_uploaded_and_valid: function(size, name, content_type, file_base64) {
+        this.internal_set_value(file_base64);
+        this.binary_value = true;
+        this.render_value();
+        this.set_filename(name);
+    },
+    on_clear: function() {
+        this._super.apply(this, arguments);
+        this.render_value();
+        this.set_filename('');
+    },
+    set_value: function(value_){
         var changed = value_ !== this.get_value();
         this._super.apply(this, arguments);
         // By default, on binary images read, the server returns the binary size
@@ -1263,16 +1402,7 @@ var FieldBinaryImage = FieldBinary.extend({
                 newValue: value_
             });
         }
-    },
-    is_false: function() {
-        return false;
-    },
-    set_dimensions: function(height, width) {
-        this.$el.css({
-            maxWidth: width,
-            minHeight: height,
-        });
-    },
+    }
 });
 
 var FieldStatus = common.AbstractField.extend({
@@ -1298,13 +1428,12 @@ var FieldStatus = common.AbstractField.extend({
         });
         this.get_selection();
         if (this.options.clickable) {
-            this.bind_stage_click();
+            this.$el.on('click','li[data-id]',this.on_click_stage);
+        }
+        if (this.$el.parent().is('header')) {
+            this.$el.after('<div class="oe_clear"/>');
         }
         this._super();
-    },
-    bind_stage_click: function () {
-        // This function is overriden in the enterprise webclient
-        this.$el.on('click','li[data-id]',this.on_click_stage);
     },
     set_value: function(value_) {
         if (value_ instanceof Array) {
@@ -1344,15 +1473,15 @@ var FieldStatus = common.AbstractField.extend({
         var fold_field = this.options.fold_field;
 
         var calculation = _.bind(function() {
-            if (this.field.type === "many2one") {
-                return self.get_distant_fields().then(function () {
+            if (this.field.type == "many2one") {
+                return self.get_distant_fields().then(function (fields) {
                     return new data.DataSetSearch(self, self.field.relation, self.build_context(), self.get("evaluated_selection_domain"))
                         .read_slice(_.union(_.keys(self.distant_fields), ['id']), {}).then(function (records) {
                             var ids = _.pluck(records, 'id');
                             return self.dataset.name_get(ids).then(function (records_name) {
                                 _.each(records, function (record) {
-                                    var name = _.find(records_name, function (val) {return val[0] === record.id;})[1];
-                                    if (fold_field && record[fold_field] && record.id !== self.get('value')) {
+                                    var name = _.find(records_name, function (val) {return val[0] == record.id;})[1];
+                                    if (fold_field && record[fold_field] && record.id != self.get('value')) {
                                         selection_folded.push([record.id, name]);
                                     } else {
                                         selection_unfolded.push([record.id, name]);
@@ -1368,7 +1497,7 @@ var FieldStatus = common.AbstractField.extend({
                 var select = this.field.selection;
                 for(var i=0; i < select.length; i++) {
                     var key = select[i][0];
-                    if(key === this.get('value') || !this.options.visible || this.options.visible.indexOf(key) !== -1) {
+                    if(key == this.get('value') || !this.options.visible || this.options.visible.indexOf(key) != -1) {
                         selection_unfolded.push(select[i]);
                     }
                 }
@@ -1409,12 +1538,13 @@ var FieldStatus = common.AbstractField.extend({
         if (ul.attr('disabled')) {
             return;
         }
-        if (this.field.type === "many2one") {
+        if (this.field.type == "many2one") {
             val = parseInt($li.data("id"), 10);
-        } else {
+        }
+        else {
             val = $li.data("id");
         }
-        if (val !== self.get('value')) {
+        if (val != self.get('value')) {
             if (!this.view.datarecord.id ||
                     this.view.datarecord.id.toString().match(data.BufferedDataSet.virtual_id_regex)) {
                 // don't save, only set value for not-yet-saved many2ones
@@ -1437,7 +1567,8 @@ var FieldStatus = common.AbstractField.extend({
 });
 
 var FieldMonetary = FieldFloat.extend({
-    template: 'FieldMonetary',
+    template: "FieldMonetary",
+    widget_class: 'oe_form_field_float oe_form_field_monetary',
     init: function() {
         this._super.apply(this, arguments);
         this.set({"currency": false});
@@ -1455,23 +1586,6 @@ var FieldMonetary = FieldFloat.extend({
         this.on("change:currency_info", this, this.update);
         return tmp;
     },
-    initialize_content: function() {
-        if(!this.get('effective_readonly')) {
-            this.$input = this.$('input');
-            this.add_symbol();
-        } else {
-            this.$input = undefined;
-        }
-
-        this._super();
-    },
-    add_symbol: function() {
-        var currency = this.get('currency_info');
-        if(currency) {
-            var before = (currency.position === 'before');
-            this.$el[(before)? 'prepend' : 'append']($('<span/>', {html: currency.symbol}));
-        }
-    },
     get_currency_info: function() {
         var self = this;
         if (this.get("currency") === false) {
@@ -1481,21 +1595,15 @@ var FieldMonetary = FieldFloat.extend({
         return self.set({"currency_info": session.get_currency(self.get("currency"))});
     },
     update: function() {
-        if (this.view.options.is_list_editable) {
+        if (this.view.options.is_list_editable){
             return;
         } else {
             return this.reinitialize();
         }
     },
-    render_value: function() {
-        this._super();
-        if(this.get('effective_readonly')) {
-            this.add_symbol();
-        }
-    },
     get_digits_precision: function() {
         return this.node.attrs.digits || this.field.digits || (this.get('currency_info') && this.get('currency_info').digits);
-    },
+     },
     parse_value: function(val, def) {
         return formats.parse_value(val, {type: "float", digits: this.get_digits_precision()}, def);
     },
@@ -1536,6 +1644,7 @@ var StatInfo = common.AbstractField.extend({
         this.$el.html(QWeb.render("StatInfo", options));
         this.$el.addClass('o_stat_info');
     },
+
 });
 
 /**
@@ -1543,17 +1652,14 @@ var StatInfo = common.AbstractField.extend({
     switching between a green bullet / gray bullet.
 */
 var FieldToggleBoolean = common.AbstractField.extend({
-    template: "toggle_button",
-    events: {
-        'click': 'set_toggle_button'
-    },
     render_value: function () {
-        var class_name = this.get_value() ? 'o_toggle_button_success' : 'text-muted';
-        this.$('i').attr('class', ('fa fa-circle ' + class_name));
+        this.icon = this.get_value() ? 'gtk-yes.png' : 'gtk-normal.png';
+        this.$el.html(QWeb.render("FieldToggleBoolean", {'widget': this}));
+        this.$('.oe_toggle_button').on('click', this.set_toggle_button.bind(this));
     },
     set_toggle_button: function () {
         var self = this;
-        var toggle_value = !this.get_value();
+        var toggle_value = this.get_value() === false ? true: false;
         if (this.view.get('actual_mode') == 'view') {
             var rec_values = {};
             rec_values[self.node.attrs.name] = toggle_value;
@@ -1571,106 +1677,94 @@ var FieldToggleBoolean = common.AbstractField.extend({
     reload_record: function () {
         this.view.reload();
     },
-    is_false: function() {
-        return false;
-    },
 });
 
 /**
-    This widget is intended to be used on Text fields. It will provide Ace Editor for editing XML and Python.
+    This widget is intended to be used in config settings.
+    When checked, an upgrade popup is showed to the user.
 */
 
-var AceEditor = common.AbstractField.extend(common.ReinitializeFieldMixin, {
-    template: "AceEditor",
-    willStart: function() {
-        if (!window.ace && !this.loadJS_def) {
-            this.loadJS_def = ajax.loadJS('/web/static/lib/ace/ace.odoo-custom.js').then(function () {
-                return $.when(ajax.loadJS('/web/static/lib/ace/mode-python.js'),
-                    ajax.loadJS('/web/static/lib/ace/mode-xml.js')
-                );
+var AbstractFieldUpgrade = {
+    events: {
+        'click input': 'on_click_input',
+    },
+    
+    start: function() {
+        this._super.apply(this, arguments);
+        
+        this.get_enterprise_label().after($("<span>", {
+            text: "Enterprise",
+            'class': "label label-primary oe_inline"
+        }));
+    },
+    
+    open_dialog: function() {
+        var message = $(QWeb.render('EnterpriseUpgrade'));
+
+        var buttons = [
+            {
+                text: _t("Upgrade now"),
+                classes: 'btn-primary',
+                close: true,
+                click: this.confirm_upgrade,
+            },
+            {
+                text: _t("Cancel"),
+                close: true,
+            },
+        ];
+        
+        return new Dialog(this, {
+            size: 'medium',
+            buttons: buttons,
+            $content: $('<div>', {
+                html: message,
+            }),
+            title: _t("Odoo Enterprise"),
+        }).open();
+    },
+  
+    confirm_upgrade: function() {
+        new Model("res.users").call("search_count", [[["share", "=", false]]]).then(function(data) {
+            framework.redirect("https://www.odoo.com/odoo-enterprise/upgrade?num_users=" + data);
+        });
+    },
+    
+    get_enterprise_label: function() {},
+    on_click_input: function() {},
+};
+
+var UpgradeBoolean = FieldBoolean.extend(AbstractFieldUpgrade, {
+    template: "FieldUpgradeBoolean",
+    
+    get_enterprise_label: function() {
+        return this.$label;
+    },
+
+    on_click_input: function(event) {
+        if(this.$checkbox.prop("checked")) {
+            this.open_dialog().on('closed', this, function() {
+                this.$checkbox.prop("checked", false);
             });
         }
-        return $.when(this._super(), this.loadJS_def);
-    },
-    initialize_content: function () {
-        if (! this.get("effective_readonly")) {
-            var self = this;
-
-            this.aceEditor = ace.edit(this.$('.ace-view-editor')[0]);
-            this.aceEditor.setOptions({"maxLines": Infinity});
-            this.aceEditor.$blockScrolling = true;
-
-            var scrollIntoViewIfNeeded = _.throttle(function () {
-                var node = self.aceEditor.renderer.textarea;
-                if (node.scrollIntoViewIfNeeded) {
-                    node.scrollIntoViewIfNeeded(false);
-                } else {
-                    var offsetParent = node.offsetParent;
-                    while (offsetParent) {
-                        var elY = 0;
-                        var elH = node.offsetHeight+20;
-                        var parent = node;
-                        while (offsetParent && parent) {
-                            elY += node.offsetTop;
-                            // get if a parent have a scrollbar
-                            parent = node.parentNode;
-                            while (parent != offsetParent &&
-                                (parent.tagName === "BODY" || ["auto", "scroll"].indexOf(window.getComputedStyle(parent).overflowY) === -1)) {
-                                parent = parent.parentNode;
-                            }
-                            node = parent;
-                            if (parent !== offsetParent) {
-                                elY -= parent.offsetTop;
-                                parent = null;
-                            }
-                            offsetParent = node.offsetParent;
-                        }
-
-                        if ((node.tagName === "BODY" || ["auto", "scroll"].indexOf(window.getComputedStyle(node).overflowY) !== -1) &&
-                            (node.scrollTop + node.clientHeight) < (elY + elH)) {
-                            node.scrollTop = (elY + elH) - node.clientHeight;
-                        }
-                    }
-                }
-            });
-            var $moveTextAreaToCursor = this.aceEditor.renderer.$moveTextAreaToCursor;
-            self.aceEditor.renderer.$moveTextAreaToCursor = function() {
-                $moveTextAreaToCursor.call(this);
-                if (parseInt($(self.aceEditor.renderer.textarea).css('top'), 10) >= 0) {
-                    scrollIntoViewIfNeeded();
-                }
-            };
-
-            this.aceSession = this.aceEditor.getSession();
-            this.aceSession.setUseWorker(false);
-            this.aceSession.setMode("ace/mode/"+(this.options.mode || 'xml'));
-
-            this.aceEditor.on("blur", function() {
-                if (self.aceSession.getUndoManager().hasUndo()) {
-                    self.set_value(self.aceSession.getValue());
-                }
-            });
-        }
-    },
-    destroy_content: function() {
-        if (this.aceEditor) {
-            this.aceEditor.destroy();
-        }
-    },
-    render_value: function() {
-        if (! this.get("effective_readonly")) {
-            var value = formats.format_value(this.get('value'), this);
-            this.aceSession.setValue(value);
-
-        } else {
-            var txt = this.get("value") || '';
-            this.$(".oe_form_text_content").text(txt);
-        }
-    },
-    focus: function() {
-        return this.aceEditor.focus();
     },
 });
+
+var UpgradeRadio = FieldRadio.extend(AbstractFieldUpgrade, {
+  
+    get_enterprise_label: function() {
+        return this.$('label').last();
+    },
+    
+    on_click_input: function(event) {
+        if($(event.target).val() == 1) {
+            this.open_dialog().on('closed', this, function() {
+                this.$('input').first().prop("checked", true);
+            });
+        }
+    },
+});
+
 
 /**
  * Registry of form fields, called by :js:`instance.web.FormView`.
@@ -1695,6 +1789,7 @@ core.form_widget_registry
     .add('toggle_button', FieldToggleBoolean)
     .add('float', FieldFloat)
     .add('percentpie', FieldPercentPie)
+    .add('barchart', FieldBarChart)
     .add('integer', FieldFloat)
     .add('float_time', FieldFloat)
     .add('progressbar', FieldProgressBar)
@@ -1707,7 +1802,9 @@ core.form_widget_registry
     .add('statinfo', StatInfo)
     .add('timezone_mismatch', TimezoneMismatch)
     .add('label_selection', LabelSelection)
-    .add('ace', AceEditor);
+    .add('upgrade_boolean', UpgradeBoolean)
+    .add('upgrade_radio', UpgradeRadio);
+
 
 /**
  * Registry of widgets usable in the form view that can substitute to any possible
@@ -1718,12 +1815,8 @@ core.form_widget_registry
 core.form_tag_registry.add('button', WidgetButton);
 
 return {
-    FieldBoolean: FieldBoolean,
     FieldChar: FieldChar,
-    FieldEmail: FieldEmail,
     FieldFloat: FieldFloat,
-    FieldRadio: FieldRadio,
-    FieldStatus: FieldStatus,
     FieldMonetary: FieldMonetary,
     WidgetButton: WidgetButton
 };

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
-
-from odoo.addons.sale.tests.test_sale_common import TestSale
+from openerp.addons.sale.tests.test_sale_common import TestSale
 
 
 class TestSaleExpense(TestSale):
@@ -28,24 +27,20 @@ class TestSaleExpense(TestSale):
         account_payable = self.env['account.account'].create({'code': 'X1111', 'name': 'HR Expense - Test Payable Account', 'user_type_id': self.env.ref('account.data_account_type_payable').id, 'reconcile': True})
         employee = self.env['hr.employee'].create({'name': 'Test employee', 'user_id': self.user.id, 'address_home_id': self.user.partner_id.id})
         self.user.partner_id.property_account_payable_id = account_payable.id
-        # Submit to Manager
-        sheet = self.env['hr.expense.sheet'].create({
-            'name': 'Expense for John Smith',
-            'employee_id': employee.id,
-            'journal_id': journal.id,
-        })
         exp = self.env['hr.expense'].create({
             'name': 'Air Travel',
             'product_id': prod_exp_1.id,
             'analytic_account_id': so.project_id.id,
             'unit_amount': 621.54,
+            'journal_id': journal.id,
             'employee_id': employee.id,
-            'sheet_id': sheet.id
         })
+        # Submit to Manager
+        exp.submit_expenses()
         # Approve
-        sheet.approve_expense_sheets()
+        exp.approve_expenses()
         # Create Expense Entries
-        sheet.action_sheet_move_create()
+        exp.action_move_create()
         # expense should now be in sales order
         self.assertTrue(prod_exp_1 in map(lambda so: so.product_id, so.order_line), 'Sale Expense: expense product should be in so')
         sol = so.order_line.filtered(lambda sol: sol.product_id.id == prod_exp_1.id)
@@ -55,12 +50,6 @@ class TestSaleExpense(TestSale):
         # create some expense and validate it (expense at sales price)
         init_price = so.amount_total
         prod_exp_2 = self.env.ref('hr_expense.car_travel')
-        # Submit to Manager
-        sheet = self.env['hr.expense.sheet'].create({
-            'name': 'Expense for John Smith',
-            'employee_id': employee.id,
-            'journal_id': journal.id,
-        })
         exp = self.env['hr.expense'].create({
             'name': 'Car Travel',
             'product_id': prod_exp_2.id,
@@ -68,13 +57,15 @@ class TestSaleExpense(TestSale):
             'product_uom_id': self.env.ref('product.product_uom_km').id,
             'unit_amount': 0.15,
             'quantity': 100,
+            'journal_id': journal.id,
             'employee_id': employee.id,
-            'sheet_id': sheet.id
         })
+        # Submit to Manager
+        exp.submit_expenses()
         # Approve
-        sheet.approve_expense_sheets()
+        exp.approve_expenses()
         # Create Expense Entries
-        sheet.action_sheet_move_create()
+        exp.action_move_create()
         # expense should now be in sales order
         self.assertTrue(prod_exp_2 in map(lambda so: so.product_id, so.order_line), 'Sale Expense: expense product should be in so')
         sol = so.order_line.filtered(lambda sol: sol.product_id.id == prod_exp_2.id)

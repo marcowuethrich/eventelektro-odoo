@@ -3,21 +3,15 @@
 # * subscription
 # 
 # Translators:
-# Murat Kaplan <muratk@projetgrup.com>, 2016
-# Martin Trigaux <mat@odoo.com>, 2016
-# Ediz Duman <neps1192@gmail.com>, 2016
-# selim kartal <kartalselim37@gmail.com>, 2016
-# gezgin biri <gezginbiri@hotmail.com>, 2016
-# Ramiz Deniz Öner <deniz@denizoner.com>, 2016
-# Azar Huseynli <azerbay1984@gmail.com>, 2016
+# AYHAN KIZILTAN <akiziltan76@hotmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:57+0000\n"
-"PO-Revision-Date: 2016-09-07 08:57+0000\n"
-"Last-Translator: Azar Huseynli <azerbay1984@gmail.com>, 2016\n"
-"Language-Team: Turkish (https://www.transifex.com/odoo/teams/41243/tr/)\n"
+"POT-Creation-Date: 2015-09-07 14:41+0000\n"
+"PO-Revision-Date: 2015-09-08 09:06+0000\n"
+"Last-Translator: Martin Trigaux\n"
+"Language-Team: Turkish (http://www.transifex.com/odoo/odoo-9/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -44,7 +38,7 @@ msgstr "Oluşturan"
 #: model:ir.model.fields,field_description:subscription.field_subscription_subscription_create_date
 #: model:ir.model.fields,field_description:subscription.field_subscription_subscription_history_create_date
 msgid "Created on"
-msgstr "Oluşturulma"
+msgstr "Oluşturuldu"
 
 #. module: subscription
 #: model:ir.model.fields,field_description:subscription.field_subscription_subscription_cron_id
@@ -87,7 +81,7 @@ msgstr "Abonelik açıklaması veya Özeti"
 #: model:ir.model.fields,field_description:subscription.field_subscription_subscription_display_name
 #: model:ir.model.fields,field_description:subscription.field_subscription_subscription_history_display_name
 msgid "Display Name"
-msgstr "Adı Göstermek"
+msgstr "Adı Göster"
 
 #. module: subscription
 #: model:ir.model.fields,field_description:subscription.field_subscription_subscription_doc_lines
@@ -98,7 +92,7 @@ msgstr "Dokümanlar oluşturuldu"
 #. module: subscription
 #: selection:subscription.subscription,state:0
 msgid "Done"
-msgstr "Ok"
+msgstr "Biten"
 
 #. module: subscription
 #: selection:subscription.subscription,state:0
@@ -143,34 +137,30 @@ msgstr "ID"
 msgid ""
 "If the active field is set to False, it will allow you to hide the "
 "subscription document without removing it."
-msgstr ""
-"Etkin alanın yanlış olarak ayarlarsanız, size abonelik belge ezelî izale "
-"gizlemek sağlayacaktır."
+msgstr "Etkin alanın yanlış olarak ayarlarsanız, size abonelik belge ezelî izale gizlemek sağlayacaktır."
 
 #. module: subscription
 #: model:ir.model.fields,help:subscription.field_subscription_subscription_active
 msgid ""
 "If the active field is set to False, it will allow you to hide the "
 "subscription without removing it."
-msgstr ""
-"Etkin alanın yanlış olarak ayarlarsanız, size abonelik kaldırma olmadan "
-"gizlemek sağlayacaktır."
+msgstr "Etkin alanın yanlış olarak ayarlarsanız, size abonelik kaldırma olmadan gizlemek sağlayacaktır."
 
 #. module: subscription
 #: model:ir.model.fields,field_description:subscription.field_subscription_subscription_notes
 #: model:ir.ui.view,arch_db:subscription.view_subscription_form
 msgid "Internal Notes"
-msgstr "İç Notlar"
+msgstr "Dahili Notlar"
 
 #. module: subscription
 #: model:ir.model.fields,field_description:subscription.field_subscription_subscription_interval_number
-msgid "Internal Qty"
-msgstr ""
+msgid "Interval Qty"
+msgstr "Aralıklı Adet"
 
 #. module: subscription
 #: model:ir.model.fields,field_description:subscription.field_subscription_subscription_interval_type
 msgid "Interval Unit"
-msgstr "İç Birim"
+msgstr "Aralık Birimi"
 
 #. module: subscription
 #: model:ir.model.fields,field_description:subscription.field_subscription_document___last_update
@@ -178,7 +168,7 @@ msgstr "İç Birim"
 #: model:ir.model.fields,field_description:subscription.field_subscription_subscription___last_update
 #: model:ir.model.fields,field_description:subscription.field_subscription_subscription_history___last_update
 msgid "Last Modified on"
-msgstr "Son Güncelleme"
+msgstr "Son değiştirme tarihi"
 
 #. module: subscription
 #: model:ir.model.fields,field_description:subscription.field_subscription_document_fields_write_uid
@@ -194,7 +184,7 @@ msgstr "Son Güncelleyen"
 #: model:ir.model.fields,field_description:subscription.field_subscription_subscription_history_write_date
 #: model:ir.model.fields,field_description:subscription.field_subscription_subscription_write_date
 msgid "Last Updated on"
-msgstr "Son Güncelleme"
+msgstr "Son Güncellenen"
 
 #. module: subscription
 #: selection:subscription.subscription,interval_type:0
@@ -205,7 +195,7 @@ msgstr "Aylar"
 #: model:ir.model.fields,field_description:subscription.field_subscription_document_name
 #: model:ir.model.fields,field_description:subscription.field_subscription_subscription_name
 msgid "Name"
-msgstr "Adı"
+msgstr "Ad"
 
 #. module: subscription
 #: model:ir.model.fields,field_description:subscription.field_subscription_subscription_note
@@ -215,8 +205,8 @@ msgstr "Notlar"
 
 #. module: subscription
 #: model:ir.model.fields,field_description:subscription.field_subscription_subscription_exec_init
-msgid "Number of Documents"
-msgstr ""
+msgid "Number of documents"
+msgstr "Doküman sayısı"
 
 #. module: subscription
 #: model:ir.model.fields,field_description:subscription.field_subscription_document_model
@@ -230,7 +220,7 @@ msgid "Partner"
 msgstr "İş Ortağı"
 
 #. module: subscription
-#: code:addons/subscription/models/subscription.py:92
+#: code:addons/subscription/subscription.py:101
 #, python-format
 msgid ""
 "Please provide another source document.\n"
@@ -246,7 +236,7 @@ msgstr "Süreç"
 #: model:ir.actions.act_window,name:subscription.action_subscription_form
 #: model:ir.ui.menu,name:subscription.menu_action_subscription_form
 msgid "Recurring Documents"
-msgstr "Tekrarlayan Belgeler"
+msgstr "Tekrarlanan Dökümanlar"
 
 #. module: subscription
 #: model:ir.actions.act_window,name:subscription.action_document_form
@@ -273,7 +263,7 @@ msgstr "Abonelik Arama"
 #. module: subscription
 #: model:ir.ui.view,arch_db:subscription.view_subscription_form
 msgid "Set to Draft"
-msgstr "Taslak olarak ayarla"
+msgstr "Taslak Olarak Ayarla"
 
 #. module: subscription
 #: model:ir.model.fields,field_description:subscription.field_subscription_subscription_doc_source
@@ -298,11 +288,6 @@ msgstr "Durdur"
 #: model:ir.ui.view,arch_db:subscription.view_subscription_filter
 msgid "Subscription"
 msgstr "Abonelik"
-
-#. module: subscription
-#: model:ir.ui.view,arch_db:subscription.view_subscription_form
-msgid "Subscription Data"
-msgstr ""
 
 #. module: subscription
 #: model:ir.model,name:subscription.model_subscription_document
@@ -335,7 +320,12 @@ msgstr "Abonelik tarih"
 #: model:ir.ui.view,arch_db:subscription.view_subscription_form
 #: model:ir.ui.view,arch_db:subscription.view_subscription_tree
 msgid "Subscriptions"
-msgstr "Yarışmacılar"
+msgstr "Abonelik"
+
+#. module: subscription
+#: model:ir.ui.view,arch_db:subscription.view_subscription_form
+msgid "Subsription Data"
+msgstr "Abonelik Verisi"
 
 #. module: subscription
 #: model:ir.model.fields,field_description:subscription.field_subscription_subscription_user_id
@@ -347,9 +337,7 @@ msgstr "Kullanıcı"
 #: model:ir.model.fields,help:subscription.field_subscription_subscription_doc_source
 msgid ""
 "User can choose the source document on which he wants to create documents"
-msgstr ""
-"Kullanıcı o belgeleri oluşturma istediği üzerinde kaynak belge "
-"seçebilirsiniz"
+msgstr "Kullanıcı o belgeleri oluşturma istediği üzerinde kaynak belge seçebilirsiniz"
 
 #. module: subscription
 #: selection:subscription.subscription,interval_type:0
@@ -357,7 +345,7 @@ msgid "Weeks"
 msgstr "Haftalar"
 
 #. module: subscription
-#: code:addons/subscription/models/subscription.py:115
+#: code:addons/subscription/subscription.py:128
 #, python-format
 msgid "You cannot delete an active subscription!"
 msgstr "Etkin bir abonelik silemezsiniz!"

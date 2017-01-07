@@ -3,19 +3,15 @@
 # * account_test
 # 
 # Translators:
-# Wahyu Setiawan <wahyusetiaaa@gmail.com>, 2016
-# Deddy Ddr <deddy.ddr@gmail.com>, 2016
-# Martin Trigaux <mat@odoo.com>, 2016
-# Febrasari Almania <febrasari.almania@gmail.com>, 2016
-# William Surya Permana <zarambie_game@yahoo.com>, 2016
+# Deddy ddr <deddy.ddr@gmail.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:56+0000\n"
-"PO-Revision-Date: 2016-09-07 08:56+0000\n"
-"Last-Translator: William Surya Permana <zarambie_game@yahoo.com>, 2016\n"
-"Language-Team: Indonesian (https://www.transifex.com/odoo/teams/41243/id/)\n"
+"POT-Creation-Date: 2015-09-07 14:40+0000\n"
+"PO-Revision-Date: 2016-06-24 02:39+0000\n"
+"Last-Translator: Deddy ddr <deddy.ddr@gmail.com>\n"
+"Language-Team: Indonesian (http://www.transifex.com/odoo/odoo-9/language/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -27,9 +23,7 @@ msgstr ""
 msgid ""
 "<br/>\n"
 "                        <strong>Description:</strong>"
-msgstr ""
-"<br/>\n"
-"                        <strong>Deskripsi:</strong>"
+msgstr "<br/>\n                        <strong>Deskripsi:</strong>"
 
 #. module: account_test
 #: model:ir.ui.view,arch_db:account_test.report_accounttest
@@ -160,17 +154,17 @@ msgstr "ID"
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test___last_update
 #: model:ir.model.fields,field_description:account_test.field_report_account_test_report_accounttest___last_update
 msgid "Last Modified on"
-msgstr "Terakhir diubah pada"
+msgstr "Terakhir Dimodifikasi pada"
 
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test_write_uid
 msgid "Last Updated by"
-msgstr "Terakhir diperbarui oleh"
+msgstr "Diperbaharui oleh"
 
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test_write_date
 msgid "Last Updated on"
-msgstr "Terakhir Diperbaharui pada"
+msgstr "Diperbaharui pada"
 
 #. module: account_test
 #: model:ir.ui.view,arch_db:account_test.account_assert_form
@@ -185,7 +179,7 @@ msgstr "Kode Python"
 #. module: account_test
 #: model:ir.model.fields,field_description:account_test.field_accounting_assert_test_sequence
 msgid "Sequence"
-msgstr "Urutan"
+msgstr "Berurutan"
 
 #. module: account_test
 #: model:accounting.assert.test,name:account_test.account_test_01
@@ -235,7 +229,7 @@ msgid "Tests"
 msgstr "Tes"
 
 #. module: account_test
-#: code:addons/account_test/report/report_account_test.py:51
+#: code:addons/account_test/report/account_test_report.py:49
 #, python-format
 msgid "The test was passed successfully"
 msgstr "Tes telah selesai"

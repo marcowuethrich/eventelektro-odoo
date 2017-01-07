@@ -3,21 +3,15 @@
 # * website_customer
 # 
 # Translators:
-# Martin Trigaux <mat@odoo.com>, 2016
-# Kari Lindgren <kari.lindgren@emsystems.fi>, 2016
-# Miku Laitinen <miku.laitinen@gmail.com>, 2016
-# salmemik <salmemik@gmail.com>, 2016
-# Tuomo Aura <tuomo.aura@web-veistamo.fi>, 2016
-# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
-# Pekko Tuomisto <pekko.tuomisto@web-veistamo.fi>, 2016
+# Miku Laitinen <miku.laitinen@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:57+0000\n"
-"PO-Revision-Date: 2016-09-07 08:57+0000\n"
-"Last-Translator: Pekko Tuomisto <pekko.tuomisto@web-veistamo.fi>, 2016\n"
-"Language-Team: Finnish (https://www.transifex.com/odoo/teams/41243/fi/)\n"
+"POT-Creation-Date: 2015-09-07 14:41+0000\n"
+"PO-Revision-Date: 2016-09-07 12:09+0000\n"
+"Last-Translator: Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>\n"
+"Language-Team: Finnish (http://www.transifex.com/odoo/odoo-9/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -32,10 +26,10 @@ msgstr ""
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag_active
 msgid "Active"
-msgstr "Active"
+msgstr "Aktiivinen"
 
 #. module: website_customer
-#: code:addons/website_customer/controllers/main.py:65
+#: code:addons/website_customer/controllers/main.py:68
 #, python-format
 msgid "All Countries"
 msgstr "Kaikki maat"
@@ -73,12 +67,12 @@ msgstr "Luotu"
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag_display_name
 msgid "Display Name"
-msgstr "Näyttönimi"
+msgstr "Näytä nimi"
 
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_tag_id
 msgid "ID"
-msgstr "Tunniste (ID)"
+msgstr "ID"
 
 #. module: website_customer
 #: model:ir.ui.view,arch_db:website_customer.implemented_by_block
@@ -130,6 +124,12 @@ msgid "Partner Tag"
 msgstr "Kumppanin tunniste"
 
 #. module: website_customer
+#: model:ir.actions.act_window,name:website_customer.action_partner_tag_form
+#: model:ir.ui.view,arch_db:website_customer.view_partner_tag_list
+msgid "Partner Tags"
+msgstr "Kumppanien tunnisteet"
+
+#. module: website_customer
 #: model:ir.model,name:website_customer.model_res_partner_tag
 msgid ""
 "Partner Tags - These tags can be used on website to find customers by "
@@ -162,6 +162,16 @@ msgid "Search"
 msgstr "Haku"
 
 #. module: website_customer
+#: model:ir.ui.menu,name:website_customer.menu_partner_tag_form
+msgid "Tags"
+msgstr "Tunnisteet"
+
+#. module: website_customer
+#: model:ir.model.fields,help:website_customer.field_res_partner_tag_website_url
+msgid "The full URL to access the document through the website."
+msgstr "Dokumentin URL verkkosivulla."
+
+#. module: website_customer
 #: model:ir.ui.view,arch_db:website_customer.index
 msgid "Trusted by millions worldwide"
 msgstr "Kansainvälisesti miljoonien luottama"
@@ -172,12 +182,14 @@ msgid "Visible in Website"
 msgstr "Näkyvillä verkkosivustolla"
 
 #. module: website_customer
-#: model:ir.actions.act_window,name:website_customer.action_partner_tag_form
-#: model:ir.ui.menu,name:website_customer.menu_partner_tag_form
-#: model:ir.ui.view,arch_db:website_customer.view_partner_tag_list
 #: model:ir.ui.view,arch_db:website_customer.view_partners_form_website
 msgid "Website Tags"
 msgstr ""
+
+#. module: website_customer
+#: model:ir.model.fields,field_description:website_customer.field_res_partner_tag_website_url
+msgid "Website URL"
+msgstr "Verkkosivuston osoite"
 
 #. module: website_customer
 #: model:ir.model.fields,field_description:website_customer.field_res_partner_website_tag_ids

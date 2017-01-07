@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import api, fields, models, _
-from odoo.exceptions import UserError
+from openerp import models, fields, api, _
+from openerp.tools import float_compare
+from openerp.exceptions import UserError
 
-
-class StockImmediateTransfer(models.TransientModel):
+class stock_immediate_transfer(models.TransientModel):
     _name = 'stock.immediate.transfer'
     _description = 'Immediate Transfer'
 
@@ -13,9 +13,10 @@ class StockImmediateTransfer(models.TransientModel):
 
     @api.model
     def default_get(self, fields):
-        res = super(StockImmediateTransfer, self).default_get(fields)
-        if not res.get('pick_id') and self._context.get('active_id'):
-            res['pick_id'] = self._context['active_id']
+        res = {}
+        active_id = self._context.get('active_id')
+        if active_id:
+            res = {'pick_id': active_id}
         return res
 
     @api.multi

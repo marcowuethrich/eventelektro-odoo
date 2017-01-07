@@ -3,9 +3,9 @@ from datetime import datetime, timedelta
 
 from babel.dates import format_datetime, format_date
 
-from odoo import models, api, _, fields
-from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DF
-from odoo.tools.misc import formatLang
+from openerp import models, api, _, fields
+from openerp.tools import DEFAULT_SERVER_DATE_FORMAT as DF
+from openerp.tools.misc import formatLang
 
 class account_journal(models.Model):
     _inherit = "account.journal"
@@ -200,7 +200,6 @@ class account_journal(models.Model):
             'number_to_reconcile': number_to_reconcile,
             'account_balance': formatLang(self.env, account_sum, currency_obj=self.currency_id or self.company_id.currency_id),
             'last_balance': formatLang(self.env, last_balance, currency_obj=self.currency_id or self.company_id.currency_id),
-            'difference': (last_balance-account_sum) and formatLang(self.env, last_balance-account_sum, currency_obj=self.currency_id or self.company_id.currency_id) or False,
             'number_draft': number_draft,
             'number_waiting': number_waiting,
             'number_late': number_late,
@@ -261,11 +260,11 @@ class account_journal(models.Model):
             return {
                 'type': 'ir.actions.client',
                 'tag': 'bank_statement_reconciliation_view',
-                'context': {'statement_ids': bank_stmt.ids, 'company_ids': self.mapped('company_id').ids},
+                'context': {'statement_ids': bank_stmt.ids},
             }
         else:
             # Open reconciliation view for customers/suppliers
-            action_context = {'show_mode_selector': False, 'company_ids': self.mapped('company_id').ids}
+            action_context = {'show_mode_selector': False}
             if self.type == 'sale':
                 action_context.update({'mode': 'customers'})
             elif self.type == 'purchase':
@@ -312,7 +311,9 @@ class account_journal(models.Model):
             'default_type': invoice_type,
             'type': invoice_type
         })
-        [action] = self.env.ref('account.%s' % action_name).read()
+        ir_model_obj = self.pool['ir.model.data']
+        model, action_id = ir_model_obj.get_object_reference(self._cr, self._uid, 'account', action_name)
+        action = self.pool[model].read(self._cr, self._uid, [action_id], context=self._context)[0]
         action['context'] = ctx
         action['domain'] = self._context.get('use_domain', [])
         return action
@@ -353,13 +354,13 @@ class account_journal(models.Model):
         if ctx.get('search_default_journal', False):
             ctx.update(search_default_journal_id=self.id)
         ctx.pop('group_by', None)
-        ir_model_obj = self.env['ir.model.data']
-        model, action_id = ir_model_obj.get_object_reference('account', action_name)
-        [action] = self.env[model].browse(action_id).read()
+        ir_model_obj = self.pool['ir.model.data']
+        model, action_id = ir_model_obj.get_object_reference(self._cr, self._uid, 'account', action_name)
+        action = self.pool[model].read(self._cr, self._uid, [action_id], context=self._context)[0]
         action['context'] = ctx
         if ctx.get('use_domain', False):
             action['domain'] = ['|', ('journal_id', '=', self.id), ('journal_id', '=', False)]
-            action['name'] += ' for journal ' + self.name
+            action['name'] += ' for journal '+self.name
         return action
 
     @api.multi

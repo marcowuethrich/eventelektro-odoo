@@ -3,16 +3,14 @@
 # * sale_crm
 # 
 # Translators:
-# Martin Trigaux <mat@odoo.com>, 2016
-# Boško Stojaković <bluesoft83@gmail.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:57+0000\n"
-"PO-Revision-Date: 2016-09-07 08:57+0000\n"
-"Last-Translator: Boško Stojaković <bluesoft83@gmail.com>, 2016\n"
-"Language-Team: Bosnian (https://www.transifex.com/odoo/teams/41243/bs/)\n"
+"POT-Creation-Date: 2015-09-18 08:11+0000\n"
+"PO-Revision-Date: 2016-11-21 20:45+0000\n"
+"Last-Translator: Martin Trigaux\n"
+"Language-Team: Bosnian (http://www.transifex.com/odoo/odoo-9/language/bs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -20,9 +18,19 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. module: sale_crm
+#: model:ir.model.fields,field_description:sale_crm.field_res_users_claim_count
+msgid "# Claims"
+msgstr ""
+
+#. module: sale_crm
 #: model:ir.model.fields,field_description:sale_crm.field_res_users_issue_count
 msgid "# Issues"
 msgstr "# Problema"
+
+#. module: sale_crm
+#: model:ir.model.fields,field_description:sale_crm.field_res_users_task_count
+msgid "# Tasks"
+msgstr ""
 
 #. module: sale_crm
 #: model:ir.model.fields,field_description:sale_crm.field_res_users_sale_order_count
@@ -42,7 +50,7 @@ msgstr "<span class=\"o_stat_text\"> Predračun(i) </span>"
 #. module: sale_crm
 #: model:ir.model.fields,help:sale_crm.field_res_users_associate_member
 msgid ""
-"A member with whom you want to associate your membership. It will consider "
+"A member with whom you want to associate your membership.It will consider "
 "the membership state of the associated member."
 msgstr ""
 
@@ -52,21 +60,19 @@ msgid "Associate Member"
 msgstr "Povezani član"
 
 #. module: sale_crm
+#: model:ir.model.fields,field_description:sale_crm.field_sale_order_campaign_id
+msgid "Campaign"
+msgstr "Kampanja"
+
+#. module: sale_crm
 #: model:ir.model.fields,field_description:sale_crm.field_res_users_membership_cancel
 msgid "Cancel Membership Date"
 msgstr "Otkaži datum članarine"
 
 #. module: sale_crm
-#. openerp-web
-#: code:addons/sale_crm/static/src/js/tour.js:16
-#, python-format
-msgid "Click here to see more options."
-msgstr "Kliknite ovdje da vidite dodatne opcije."
-
-#. module: sale_crm
-#: model:ir.model.fields,field_description:sale_crm.field_res_users_payment_token_count
-msgid "Count Payment Token"
-msgstr "Broj tokena plaćanja"
+#: model:ir.model.fields,field_description:sale_crm.field_res_users_payment_method_count
+msgid "Count Payment Method"
+msgstr ""
 
 #. module: sale_crm
 #: model:ir.model.fields,field_description:sale_crm.field_res_users_membership_state
@@ -99,9 +105,19 @@ msgid "Free Member"
 msgstr "Besplatni Član"
 
 #. module: sale_crm
-#: model:ir.model,name:sale_crm.model_account_invoice
-msgid "Invoice"
-msgstr "Faktura"
+#: model:ir.model.fields,field_description:sale_crm.field_res_users_partner_latitude
+msgid "Geo Latitude"
+msgstr "Geo širina"
+
+#. module: sale_crm
+#: model:ir.model.fields,field_description:sale_crm.field_res_users_date_localization
+msgid "Geo Localization Date"
+msgstr "Datum Geo lokalizacije"
+
+#. module: sale_crm
+#: model:ir.model.fields,field_description:sale_crm.field_res_users_partner_longitude
+msgid "Geo Longitude"
+msgstr "Geo dužina"
 
 #. module: sale_crm
 #: model:ir.model.fields,field_description:sale_crm.field_res_users_target_sales_invoiced
@@ -126,16 +142,14 @@ msgid "Lead/Opportunity"
 msgstr "Potencijal/Prilika"
 
 #. module: sale_crm
-#. openerp-web
-#: code:addons/sale_crm/static/src/js/tour.js:20
-#, python-format
-msgid "Let's have a look at the quotations of this sales team."
-msgstr ""
-
-#. module: sale_crm
 #: model:ir.ui.view,arch_db:sale_crm.sale_view_inherit123
 msgid "Log in the chatter from which opportunity the order originates"
 msgstr ""
+
+#. module: sale_crm
+#: model:ir.model.fields,field_description:sale_crm.field_sale_order_medium_id
+msgid "Medium"
+msgstr "Srednje"
 
 #. module: sale_crm
 #: model:ir.model.fields,field_description:sale_crm.field_res_users_member_lines
@@ -158,16 +172,6 @@ msgid "Membership Start Date"
 msgstr "Početni datum članarine"
 
 #. module: sale_crm
-#: model:ir.model.fields,field_description:sale_crm.field_res_users_sale_warn_msg
-msgid "Message for Sales Order"
-msgstr "Poruka za prodajnu narudžbu"
-
-#. module: sale_crm
-#: model:ir.model.fields,field_description:sale_crm.field_res_users_picking_warn_msg
-msgid "Message for Stock Picking"
-msgstr "Moruka za prikupljanje proizvoda sa zalihe"
-
-#. module: sale_crm
 #: model:ir.ui.view,arch_db:sale_crm.crm_case_form_view_oppor
 msgid "New Quotation"
 msgstr "Novi predračun"
@@ -188,9 +192,9 @@ msgid "Orders"
 msgstr "Narudžbe"
 
 #. module: sale_crm
-#: model:ir.model.fields,field_description:sale_crm.field_res_users_payment_token_ids
-msgid "Payment Tokens"
-msgstr "Tokeni plaćanja"
+#: model:ir.model.fields,field_description:sale_crm.field_res_users_payment_method_ids
+msgid "Payment Methods"
+msgstr "Metoda plaćanja"
 
 #. module: sale_crm
 #: model:ir.actions.act_window,name:sale_crm.sale_action_quotations_new
@@ -205,7 +209,6 @@ msgstr "Predračuni"
 #. module: sale_crm
 #: model:ir.model,name:sale_crm.model_sale_order
 #: model:ir.model.fields,field_description:sale_crm.field_res_users_sale_order_ids
-#: model:ir.model.fields,field_description:sale_crm.field_res_users_sale_warn
 msgid "Sales Order"
 msgstr "Prodajna narudžba"
 
@@ -215,21 +218,9 @@ msgid "Select if you want to give free membership."
 msgstr "Odaberite ako želite da date besplatno članstvo"
 
 #. module: sale_crm
-#: model:ir.model.fields,help:sale_crm.field_res_users_picking_warn
-#: model:ir.model.fields,help:sale_crm.field_res_users_sale_warn
-msgid ""
-"Selecting the \"Warning\" option will notify user with the message, "
-"Selecting \"Blocking Message\" will throw an exception with the message and "
-"block the flow. The Message has to be written in the next field."
-msgstr ""
-"Odabirom opcije \"Upozorenje\" obavijestit ćete korisnika porukom, odabirom "
-"opcije \"Blokiranje poruke\" učinit ćete izuzetak s porukom i blokirati tok."
-" Poruku treba napisati u slijedećem polju."
-
-#. module: sale_crm
-#: model:ir.model.fields,field_description:sale_crm.field_res_users_picking_warn
-msgid "Stock Picking"
-msgstr "Prikupljanje proizvoda zalihe"
+#: model:ir.model.fields,field_description:sale_crm.field_sale_order_source_id
+msgid "Source"
+msgstr "Izvorno"
 
 #. module: sale_crm
 #: model:ir.model.fields,field_description:sale_crm.field_crm_lead_sale_amount_total
@@ -242,27 +233,47 @@ msgid "Tags"
 msgstr "Oznake"
 
 #. module: sale_crm
+#: model:ir.model.fields,field_description:sale_crm.field_res_users_task_ids
+msgid "Tasks"
+msgstr ""
+
+#. module: sale_crm
 #: model:ir.model.fields,help:sale_crm.field_res_users_membership_amount
 msgid "The price negotiated by the partner"
 msgstr "Cijena ugovorena sa partnerom"
+
+#. module: sale_crm
+#: model:ir.model.fields,help:sale_crm.field_sale_order_campaign_id
+msgid ""
+"This is a name that helps you keep track of your different campaign efforts "
+"Ex: Fall_Drive, Christmas_Special"
+msgstr ""
+
+#. module: sale_crm
+#: model:ir.model.fields,help:sale_crm.field_sale_order_medium_id
+msgid "This is the method of delivery. Ex: Postcard, Email, or Banner Ad"
+msgstr ""
+
+#. module: sale_crm
+#: model:ir.model.fields,help:sale_crm.field_sale_order_source_id
+msgid ""
+"This is the source of the link Ex: Search Engine, another domain, or name of"
+" email list"
+msgstr ""
 
 #. module: sale_crm
 #: model:ir.model.fields,help:sale_crm.field_res_users_property_stock_customer
 msgid ""
 "This stock location will be used, instead of the default one, as the "
 "destination location for goods you send to this partner"
-msgstr ""
-"Koristiće se ova lokacija zaliha, umjesto podrazumjevane, kao \n"
-"odredišna lokacija za robu koju šaljete ovom partneru"
+msgstr "Koristiće se ova lokacija zaliha, umjesto podrazumjevane, kao \nodredišna lokacija za robu koju šaljete ovom partneru"
 
 #. module: sale_crm
 #: model:ir.model.fields,help:sale_crm.field_res_users_property_stock_supplier
 msgid ""
 "This stock location will be used, instead of the default one, as the source "
 "location for goods you receive from the current partner"
-msgstr ""
-"Ova lokacija zalihe se koristi umjesto uobičajene kao ulazna lokacija za "
-"robu koju nabavljate od ovog partnera"
+msgstr "Ova lokacija zalihe se koristi umjesto uobičajene kao ulazna lokacija za robu koju nabavljate od ovog partnera"
 
 #. module: sale_crm
 #: model:ir.model,name:sale_crm.model_res_users

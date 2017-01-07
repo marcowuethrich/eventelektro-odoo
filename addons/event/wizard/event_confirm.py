@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import models, api
+from openerp import models, api
 
 
 class event_confirm(models.TransientModel):

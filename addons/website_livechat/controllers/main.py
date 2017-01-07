@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from odoo import http
-from odoo.http import request
+from openerp import http
+from openerp.http import request
 
 
 class WebsiteLivechat(http.Controller):
@@ -14,7 +13,7 @@ class WebsiteLivechat(http.Controller):
         values = {
             'channels': channels
         }
-        return request.render('website_livechat.channel_list_page', values)
+        return request.website.render('website_livechat.channel_list_page', values)
 
 
     @http.route('/livechat/channel/<model("im_livechat.channel"):channel>', type='http', auth='public', website=True)
@@ -35,4 +34,4 @@ class WebsiteLivechat(http.Controller):
             'team': channel.sudo().user_ids,
             'percentage': percentage
         }
-        return request.render("website_livechat.channel_page", values)
+        return request.website.render("website_livechat.channel_page", values)

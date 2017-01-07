@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<openerp>
+<data>
 <template id="report_userlabel">
     <t t-call="report.html_container">
         <div class="page">
@@ -24,4 +25,5 @@
         </div>
     </t>
 </template>
-</odoo>
+</data>
+</openerp>

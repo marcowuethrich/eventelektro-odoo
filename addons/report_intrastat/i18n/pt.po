@@ -3,18 +3,15 @@
 # * report_intrastat
 # 
 # Translators:
-# Martin Trigaux <mat@odoo.com>, 2016
-# Ricardo Martins <ricardo.nbs.martins@gmail.com>, 2016
-# Manuela Silva <inactive+h_manuela_rodsilva@transifex.com>, 2016
-# Daniel C Santos <dcs@thinkopensolutions.pt>, 2016
+# Ricardo Martins <ricardo.nbs.martins@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:57+0000\n"
-"PO-Revision-Date: 2016-09-07 08:57+0000\n"
-"Last-Translator: Daniel C Santos <dcs@thinkopensolutions.pt>, 2016\n"
-"Language-Team: Portuguese (https://www.transifex.com/odoo/teams/41243/pt/)\n"
+"POT-Creation-Date: 2015-09-07 14:41+0000\n"
+"PO-Revision-Date: 2015-09-28 11:21+0000\n"
+"Last-Translator: Ricardo Martins <ricardo.nbs.martins@gmail.com>\n"
+"Language-Team: Portuguese (http://www.transifex.com/odoo/odoo-9/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -48,8 +45,8 @@ msgstr "<strong>Ref. do Parceiro:</strong>"
 
 #. module: report_intrastat
 #: model:ir.ui.view,arch_db:report_intrastat.report_intrastatinvoice_document
-msgid "<strong>Payment Terms:</strong>"
-msgstr ""
+msgid "<strong>Payment Term:</strong>"
+msgstr "<strong>Termo de Pagamento:</strong>"
 
 #. module: report_intrastat
 #: model:ir.ui.view,arch_db:report_intrastat.report_intrastatinvoice_document
@@ -119,7 +116,7 @@ msgstr "Desconto (%)"
 #. module: report_intrastat
 #: model:ir.model.fields,field_description:report_intrastat.field_report_intrastat_display_name
 msgid "Display Name"
-msgstr "Nome a Exibir"
+msgstr "Nome a Mostrar"
 
 #. module: report_intrastat
 #: model:ir.ui.view,arch_db:report_intrastat.report_intrastatinvoice_document
@@ -139,7 +136,7 @@ msgstr "Fevereiro"
 #. module: report_intrastat
 #: model:ir.model.fields,field_description:report_intrastat.field_report_intrastat_id
 msgid "ID"
-msgstr "Id."
+msgstr "ID"
 
 #. module: report_intrastat
 #: selection:report.intrastat,type:0
@@ -242,12 +239,12 @@ msgstr "Outubro"
 #. module: report_intrastat
 #: model:ir.ui.view,arch_db:report_intrastat.report_intrastatinvoice_document
 msgid "PRO-FORMA"
-msgstr "PRÓ-FORMA"
+msgstr "PRO-FORMA"
 
 #. module: report_intrastat
 #: model:ir.model,name:report_intrastat.model_product_template
 msgid "Product Template"
-msgstr "Modelo de Produto"
+msgstr "Template Artigo"
 
 #. module: report_intrastat
 #: model:ir.ui.view,arch_db:report_intrastat.report_intrastatinvoice_document
@@ -257,7 +254,7 @@ msgstr "Quantidade"
 #. module: report_intrastat
 #: model:ir.ui.view,arch_db:report_intrastat.report_intrastatinvoice_document
 msgid "Refund"
-msgstr "Creditar"
+msgstr "Reembolsar"
 
 #. module: report_intrastat
 #: selection:report.intrastat,month:0

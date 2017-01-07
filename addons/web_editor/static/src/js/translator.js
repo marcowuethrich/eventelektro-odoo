@@ -4,12 +4,17 @@ odoo.define('web_editor.translate', function (require) {
 var core = require('web.core');
 var Model = require('web.Model');
 var ajax = require('web.ajax');
+var Class = require('web.Class');
 var Widget = require('web.Widget');
 var base = require('web_editor.base');
 var rte = require('web_editor.rte');
 var editor_widget = require('web_editor.widget');
 
+var qweb = core.qweb;
 var _t = core._t;
+
+ajax.loadXML('/web_editor/static/src/xml/translator.xml', qweb);
+
 
 var translatable = !!$('html').data('translatable');
 var edit_translations = !!$('html').data('edit_translations');
@@ -67,21 +72,17 @@ var RTE_Translate = rte.Class.extend({
 });
 
 var Translate_Modal = editor_widget.Dialog.extend({
-    init: function (p, options, parent, node) {
-        this._super(p, _.extend({}, {
-            title: _t("Translate Attribute"),
-            buttons: [
-                {text:  _t("Close"), classes: "btn-primary o_save_button", close: true, click: this.save}
-            ]
-        }, options || {}));
+    template: 'web_editor.translator.attributes',
+    init: function (parent, node) {
+        this._super();
         this.parent = parent;
         this.$target = $(node);
         this.translation = $(node).data('translation');
     },
     start: function () {
         var self = this;
-        var def = this._super.apply(this, arguments);
-        var $group = $("<div/>", {"class": "form-group"}).appendTo(this.$el);
+        this._super();
+        var $group = this.$el.find('.form-group');
         _.each(this.translation, function (node, attr) {
             var $node = $(node);
             var $label = $('<label class="control-label"></label>').text(attr);
@@ -94,7 +95,6 @@ var Translate_Modal = editor_widget.Dialog.extend({
             });
             $group.append($label).append($input);
         });
-        return def;
     }
 });
 
@@ -103,20 +103,20 @@ var Translate = Widget.extend({
         'click [data-action="save"]': 'save_and_reload',
         'click [data-action="cancel"]': 'cancel',
     },
-    template: 'web_editor.editorbar',
+    template: 'web_editor.translator',
     init: function (parent, $target, lang) {
         this.parent = parent;
         this.ir_translation = new Model('ir.translation');
         this.lang = lang || base.get_context().lang;
         this.setTarget($target);
-        this._super.apply(this, arguments);
+        this._super();
 
         this.rte = new RTE_Translate(this, this.config);
         this.rte.on('change', this, this.rte_changed);
     },
     start: function () {
-        this._super.apply(this, arguments);
-        this.$('#web_editor-toolbars').remove();
+        this._super();
+        this.$('button[data-action=save]').prop('disabled', true);
         return this.edit();
     },
     setTarget: function ($target) {
@@ -158,7 +158,7 @@ var Translate = Widget.extend({
     },
     edit: function () {
         var flag = false;
-        window.onbeforeunload = function (event) {
+        window.onbeforeunload = function(event) {
             if ($('.o_editable.o_dirty').length && !flag) {
                 flag = true;
                 setTimeout(function () {flag=false;},0);
@@ -179,6 +179,7 @@ var Translate = Widget.extend({
         var $node = $(node);
         var trans = this.getTranlationObject($node[0]);
         $node.toggleClass('o_dirty', trans.value !== $node.html().replace(/[ \t\n\r]+/, ' '));
+        this.$('button[data-action=save]').prop('disabled', !$('.o_editable.o_dirty').length);
     },
     getTranlationObject: function (node) {
         var $node = $(node);
@@ -211,7 +212,7 @@ var Translate = Widget.extend({
             return;
         }
 
-        new Translate_Modal(null, {}, event.data, event.target).open();
+        new Translate_Modal(event.data, event.target).appendTo('body');
     },
     markTranslatableNodes: function (node) {
         var self = this;
@@ -267,7 +268,7 @@ var Translate = Widget.extend({
     destroy: function () {
         this.cancel();
         this.$el.remove();
-        this._super.apply(this, arguments);
+        this._super();
     },
 
     config: function ($editable) {

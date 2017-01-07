@@ -3,7 +3,7 @@
 import datetime
 from dateutil.relativedelta import relativedelta
 
-from odoo.addons.membership.tests.common import TestMembershipCommon
+from openerp.addons.membership.tests.common import TestMembershipCommon
 
 
 class TestMembership(TestMembershipCommon):
@@ -28,7 +28,7 @@ class TestMembership(TestMembershipCommon):
         self.partner_1.create_membership_invoice(product_id=self.membership_1.id, datas={'amount': 75.0})
 
         # checks for invoices
-        invoice = self.env['account.invoice'].search([('partner_id', '=', self.partner_1.id)], limit=1)
+        invoice = self.env['account.invoice'].search([('partner_id', '=', self.partner_1.id)], limit=1)[0]
         self.assertEqual(
             invoice.state, 'draft',
             'membership: new subscription should create a draft invoice')
@@ -44,7 +44,7 @@ class TestMembership(TestMembershipCommon):
             'membership: new membership should be in waiting state')
 
         # the invoice is open -> customer goes to invoiced status
-        invoice.action_invoice_open()
+        invoice.signal_workflow('invoice_open')
         self.assertEqual(
             self.partner_1.membership_state, 'invoiced',
             'membership: after opening the invoice, customer should be in invoiced status')
@@ -74,9 +74,9 @@ class TestMembership(TestMembershipCommon):
         self.partner_1.create_membership_invoice(product_id=self.membership_1.id, datas={'amount': 75.0})
 
         # checks for invoices
-        invoice = self.env['account.invoice'].search([('partner_id', '=', self.partner_1.id)], limit=1)
+        invoice = self.env['account.invoice'].search([('partner_id', '=', self.partner_1.id)], limit=1)[0]
 
         # the invoice is canceled -> membership state of the customer goes to canceled
-        invoice.action_invoice_cancel()
+        invoice.signal_workflow('invoice_cancel')
         self.assertEqual(invoice.state, 'cancel')
         self.assertEqual(self.partner_1.membership_state, 'canceled')

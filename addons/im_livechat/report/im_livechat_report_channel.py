@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
-from odoo import api, fields, models, tools
+from openerp import fields, models, tools
 
 
 class ImLivechatReportChannel(models.Model):
@@ -22,13 +20,12 @@ class ImLivechatReportChannel(models.Model):
     duration = fields.Float('Average duration', digits=(16, 2), readonly=True, group_operator="avg", help="Duration of the conversation (in seconds)")
     nbr_speaker = fields.Integer('# of speakers', readonly=True, group_operator="avg", help="Number of different speakers")
     nbr_message = fields.Integer('Average message', readonly=True, group_operator="avg", help="Number of message in the conversation")
-    partner_id = fields.Many2one('res.partner', 'Operator', readonly=True)
+    partner_id = fields.Many2one('res.partner', 'Opertor', readonly=True)
 
-    @api.model_cr
-    def init(self):
+    def init(self, cr):
         # Note : start_date_hour must be remove when the read_group will allow grouping on the hour of a datetime. Don't forget to change the view !
-        tools.drop_view_if_exists(self.env.cr, 'im_livechat_report_channel')
-        self.env.cr.execute("""
+        tools.drop_view_if_exists(cr, 'im_livechat_report_channel')
+        cr.execute("""
             CREATE OR REPLACE VIEW im_livechat_report_channel AS (
                 SELECT
                     C.id as id,

@@ -3,20 +3,14 @@
 # * l10n_multilang
 # 
 # Translators:
-# Kari Lindgren <kari.lindgren@emsystems.fi>, 2016
-# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
-# Tommi Rintala <tommi.rintala@gmail.com>, 2016
-# Pekko Tuomisto <pekko.tuomisto@web-veistamo.fi>, 2016
-# salmemik <salmemik@gmail.com>, 2016
-# Eino Mäkitalo <eino.makitalo@netitbe.fi>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-09-18 08:20+0000\n"
-"PO-Revision-Date: 2015-09-18 08:20+0000\n"
-"Last-Translator: Eino Mäkitalo <eino.makitalo@netitbe.fi>, 2016\n"
-"Language-Team: Finnish (https://www.transifex.com/odoo/teams/41243/fi/)\n"
+"PO-Revision-Date: 2016-12-10 14:17+0000\n"
+"Last-Translator: Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>\n"
+"Language-Team: Finnish (http://www.transifex.com/odoo/odoo-9/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -70,12 +64,12 @@ msgstr "Verokannan malli"
 #. module: l10n_multilang
 #: model:ir.model,name:l10n_multilang.model_account_chart_template
 msgid "Templates for Account Chart"
-msgstr "Plantilla de plan de cuentas"
+msgstr ""
 
 #. module: l10n_multilang
 #: model:ir.model,name:l10n_multilang.model_account_account_template
 msgid "Templates for Accounts"
-msgstr "Plantillas para cuentas"
+msgstr "Tilimallit"
 
 #. module: l10n_multilang
 #: model:ir.model,name:l10n_multilang.model_account_tax_template
@@ -85,4 +79,4 @@ msgstr "Verojen mallipohjat"
 #. module: l10n_multilang
 #: model:ir.model,name:l10n_multilang.model_wizard_multi_charts_accounts
 msgid "wizard.multi.charts.accounts"
-msgstr "Plan de Cuentas Multiple"
+msgstr "wizard.multi.charts.accounts"

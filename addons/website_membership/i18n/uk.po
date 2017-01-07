@@ -3,17 +3,15 @@
 # * website_membership
 # 
 # Translators:
-# Bohdan Lisnenko <lem8r.ka11a@gmail.com>, 2016
-# ТАрас <tratatuta@i.ua>, 2016
 # Yaroslav Molochko <onorua@gmail.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:57+0000\n"
-"PO-Revision-Date: 2016-09-07 08:57+0000\n"
-"Last-Translator: Yaroslav Molochko <onorua@gmail.com>, 2016\n"
-"Language-Team: Ukrainian (https://www.transifex.com/odoo/teams/41243/uk/)\n"
+"POT-Creation-Date: 2015-09-07 14:41+0000\n"
+"PO-Revision-Date: 2016-08-28 12:33+0000\n"
+"Last-Translator: Bohdan Lisnenko\n"
+"Language-Team: Ukrainian (http://www.transifex.com/odoo/odoo-9/language/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -26,7 +24,7 @@ msgid "All"
 msgstr "Всі"
 
 #. module: website_membership
-#: code:addons/website_membership/controllers/main.py:83
+#: code:addons/website_membership/controllers/main.py:80
 #, python-format
 msgid "All Countries"
 msgstr "Всі країни"
@@ -42,7 +40,7 @@ msgid "Find a business partner"
 msgstr "Знайти бізнес-партнера"
 
 #. module: website_membership
-#: code:addons/website_membership/controllers/main.py:126
+#: code:addons/website_membership/controllers/main.py:122
 #, python-format
 msgid "Free Members"
 msgstr ""
@@ -56,7 +54,7 @@ msgstr "Розташування"
 #: model:ir.ui.view,arch_db:website_membership.footer_custom
 #: model:ir.ui.view,arch_db:website_membership.index
 msgid "Members"
-msgstr "Учасники"
+msgstr "Склад"
 
 #. module: website_membership
 #: model:ir.ui.view,arch_db:website_membership.index

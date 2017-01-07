@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
 from datetime import datetime, timedelta
 
-from odoo import fields, http
-from odoo.exceptions import AccessError
-from odoo.http import request
-from odoo import release
+from openerp import http
+from openerp.exceptions import AccessError
+from openerp.http import request
+from openerp.tools import DEFAULT_SERVER_DATETIME_FORMAT
+
 
 class WebSettingsDashboard(http.Controller):
 
@@ -48,9 +47,8 @@ class WebSettingsDashboard(http.Controller):
 
         # See update.py for this computation
         limit_date = datetime.now() - timedelta(15)
-        enterprise_users = request.env['res.users'].search_count([("login_date", ">=", fields.Datetime.to_string(limit_date)), ('share', '=', False)])
+        enterprise_users = request.env['res.users'].search_count([("login_date", ">=", limit_date.strftime(DEFAULT_SERVER_DATETIME_FORMAT)), ('share', '=', False)])
 
-        expiration_date = request.env['ir.config_parameter'].sudo().get_param('database.expiration_date')
         return {
             'apps': {
                 'installed_apps': installed_apps,
@@ -62,9 +60,4 @@ class WebSettingsDashboard(http.Controller):
                 'pending_users': pending_users,
                 'user_form_view_id': request.env['ir.model.data'].xmlid_to_res_id("base.view_users_form"),
             },
-            'share': {
-                'server_version': release.version,
-                'expiration_date': expiration_date,
-                'debug': request.debug,
-            }
         }

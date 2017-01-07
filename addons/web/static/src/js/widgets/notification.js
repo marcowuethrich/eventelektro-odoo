@@ -3,6 +3,7 @@ odoo.define('web.notification', function (require) {
 
 var core = require('web.core');
 var Widget = require('web.Widget');
+var _t = core._t;
 
 var Notification = Widget.extend({
     template: 'Notification',

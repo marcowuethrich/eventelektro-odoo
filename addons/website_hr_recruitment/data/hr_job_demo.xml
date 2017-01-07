@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<openerp>
+    <data>
 
     <record id="hr.job_marketing" model="hr.job">
         <field name="website_published">True</field>
@@ -140,7 +141,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-offset-1 col-md-10 mb16 mt16">
-                You will be responsible for developing and improving applications. You will work autonomously as well as coordinate and supervise small distributed development teams for specific projects. You will become a technical expert of the product.
+                You will be responsible for developing and improving applications, such as the You will work autonomously as well as coordinate and supervise small distributed development teams for specific projects. You will become a technical expert of the product.
             </div>
         </div>
     </div>
@@ -535,7 +536,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-offset-1 col-md-10 mb16 mt16">
-                You will be responsible for developing and improving applications. You will work autonomously as well as                     coordinate and supervise small distributed development teams for specific projects. You will become a technical                 expert of the product.
+                You will be responsible for developing and improving applications, such as the You will work autonomously as well as                     coordinate and supervise small distributed development teams for specific projects. You will become a technical                 expert of the product.
             </div>
         </div>
     </div>
@@ -663,7 +664,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-offset-1 col-md-10 mb16 mt16">
-                You will be responsible for developing and improving applications. You will work autonomously as well as                     coordinate and supervise small distributed development teams for specific projects. You will become a technical                 expert of the product.
+                You will be responsible for developing and improving applications, such as the You will work autonomously as well as                     coordinate and supervise small distributed development teams for specific projects. You will become a technical                 expert of the product.
             </div>
         </div>
     </div>
@@ -914,4 +915,5 @@
         </field>
     </record>
 
-</odoo>
+    </data>
+</openerp>

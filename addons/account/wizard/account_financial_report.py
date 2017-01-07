@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models
+from openerp import api, fields, models
 
 
 class AccountingReport(models.TransientModel):

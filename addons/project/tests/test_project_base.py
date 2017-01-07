@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo.addons.mail.tests.common import TestMail
+from openerp.addons.mail.tests.common import TestMail
 
 
 class TestProjectBase(TestMail):
@@ -18,19 +18,21 @@ class TestProjectBase(TestMail):
         cls.user_projectuser = Users.create({
             'name': 'Armande ProjectUser',
             'login': 'Armande',
+            'alias_name': 'armande',
             'email': 'armande.projectuser@example.com',
             'groups_id': [(6, 0, [user_group_employee.id, user_group_project_user.id])]
         })
         cls.user_projectmanager = Users.create({
             'name': 'Bastien ProjectManager',
             'login': 'bastien',
+            'alias_name': 'bastien',
             'email': 'bastien.projectmanager@example.com',
             'groups_id': [(6, 0, [user_group_employee.id, user_group_project_manager.id])]})
 
         # Test 'Pigs' project
         cls.project_pigs = cls.env['project.project'].with_context({'mail_create_nolog': True}).create({
             'name': 'Pigs',
-            'privacy_visibility': 'employees',
+            'privacy_visibility': 'portal',
             'alias_name': 'project+pigs',
             'partner_id': cls.partner_1.id})
         # Already-existing tasks in Pigs
@@ -46,7 +48,7 @@ class TestProjectBase(TestMail):
         # Test 'Goats' project, same as 'Pigs', but with 2 stages
         cls.project_goats = cls.env['project.project'].with_context({'mail_create_nolog': True}).create({
             'name': 'Goats',
-            'privacy_visibility': 'followers',
+            'privacy_visibility': 'portal',
             'alias_name': 'project+goats',
             'partner_id': cls.partner_1.id,
             'type_ids': [

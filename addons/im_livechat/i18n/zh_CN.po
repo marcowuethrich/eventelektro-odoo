@@ -3,16 +3,27 @@
 # * im_livechat
 # 
 # Translators:
-# Jeffery Chen Fan <jeffery9@gmail.com>, 2016
-# hman tsao <herman.tsao@gmail.com>, 2016
+# Alex Duan <alex.duan@elico-corp.com>, 2015
+# Eddie Lim <bhweelim@yahoo.com>, 2016
+# fausthuang, 2016
+# fausthuang, 2016
+# Jeffery Chenn <jeffery9@gmail.com>, 2016
+# jiangzhixiao <zhixiao.jiang1984@gmail.com>, 2015
+# jiangzhixiao <zhixiao.jiang1984@gmail.com>, 2015
+# Joray <13637815@qq.com>, 2016
+# Joray <13637815@qq.com>, 2016
+# liAnGjiA <liangjia@qq.com>, 2015
+# ZIHAN LI <lizihan0419@126.com>, 2016
+# 榴莲 <nocoolyoyo@bengentea.top>, 2015
+# liAnGjiA <liangjia@qq.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:58+0000\n"
-"PO-Revision-Date: 2016-09-07 08:58+0000\n"
-"Last-Translator: hman tsao <herman.tsao@gmail.com>, 2016\n"
-"Language-Team: Chinese (China) (https://www.transifex.com/odoo/teams/41243/zh_CN/)\n"
+"POT-Creation-Date: 2016-05-26 12:06+0000\n"
+"PO-Revision-Date: 2016-09-20 07:47+0000\n"
+"Last-Translator: Jeffery Chenn <jeffery9@gmail.com>\n"
+"Language-Team: Chinese (China) (http://www.transifex.com/odoo/odoo-9/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -21,8 +32,8 @@ msgstr ""
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_report_operator_nbr_channel
-msgid "# of Sessions"
-msgstr "# 的会话"
+msgid "# of channel"
+msgstr "频道"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_report_channel_nbr_speaker
@@ -38,10 +49,10 @@ msgstr "高兴"
 #. module: im_livechat
 #: model:ir.model.fields,help:im_livechat.field_im_livechat_channel_rule_action
 msgid ""
-"* 'Display the button' displays the chat button on the pages.\n"
-"* 'Auto popup' displays the button and automatically open the conversation pane.\n"
-"* 'Hide the button' hides the chat button on the pages."
-msgstr ""
+"* Select 'Display the button' to simply display the chat button on the pages.\n"
+"* Select 'Auto popup' for to display the button, and automatically open the conversation window.\n"
+"* Select 'Hide the button' to hide the chat button on the pages."
+msgstr "*选择'显示按钮'可简单显示网页上的聊天按钮\n*选择'自动弹出'来显示按钮，同时自动打开对话框\n*选择'隐藏按钮'来隐藏页面上的聊天按钮"
 
 #. module: im_livechat
 #: model:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
@@ -51,14 +62,12 @@ msgid ""
 "button available) for the given URL, and per country.<br/>To identify the "
 "country, GeoIP must be install on your server, otherwise, the countries of "
 "the rule will not be taken into account.</span>"
-msgstr ""
-"<span>为你的在线支持频道定义规则. 你能对所给的URL按国家做类似动作 (禁用支持, 自动开启支持, 或只是让按钮可用).<br/>为了定义国家,"
-" 必须在你的服务器上安装GeoIP, 否则,该规则的国家不会被考虑.</span>"
+msgstr "<span>为你的在线支持频道定义规则. 你能对所给的URL按国家做类似动作 (禁用支持, 自动开启支持, 或只是让按钮可用).<br/>为了定义国家, 必须在你的服务器上安装GeoIP, 否则,该规则的国家不会被考虑.</span>"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel_rule_action
 msgid "Action"
-msgstr "动作"
+msgstr "行动"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_mail_channel_anonymous_name
@@ -68,7 +77,7 @@ msgstr "匿名用户姓名"
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel_are_you_inside
 msgid "Are you inside the matrix?"
-msgstr "你是否在频道中？"
+msgstr "您是否在频道中？"
 
 #. module: im_livechat
 #. openerp-web
@@ -117,21 +126,6 @@ msgid "Bad"
 msgstr "坏"
 
 #. module: im_livechat
-#: model:ir.actions.act_window,name:im_livechat.im_livechat_canned_response_action
-#: model:ir.ui.menu,name:im_livechat.canned_responses
-msgid "Canned Responses"
-msgstr "灌装回应"
-
-#. module: im_livechat
-#: model:ir.actions.act_window,help:im_livechat.im_livechat_canned_response_action
-msgid ""
-"Canned responses allow you to insert prewritten responses in\n"
-"                your messages by typing <i>:shortcut</i>. The shortcut is\n"
-"                replaced directly in your message, so that you can still edit\n"
-"                it before sending."
-msgstr ""
-
-#. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel_rule_channel_id
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_report_channel_livechat_channel_id
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_report_operator_livechat_channel_id
@@ -140,7 +134,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:im_livechat.im_livechat_report_operator_view_search
 #: model:ir.ui.view,arch_db:im_livechat.mail_channel_view_search
 msgid "Channel"
-msgstr "频道"
+msgstr "渠道"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_report_channel_channel_name
@@ -161,7 +155,7 @@ msgstr "频道规则"
 #. module: im_livechat
 #: model:ir.ui.menu,name:im_livechat.support_channels
 msgid "Channels"
-msgstr "频道"
+msgstr "渠道"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel_input_placeholder
@@ -170,15 +164,10 @@ msgstr "聊天输入为空时显示"
 
 #. module: im_livechat
 #. openerp-web
-#: code:addons/im_livechat/static/src/js/im_livechat.js:29
+#: code:addons/im_livechat/static/src/js/im_livechat.js:28
 #, python-format
 msgid "Chat with one of our collaborators"
 msgstr "和我们的合作者聊天"
-
-#. module: im_livechat
-#: model:ir.actions.act_window,help:im_livechat.im_livechat_canned_response_action
-msgid "Click to create a new canned response."
-msgstr "点击创建一个新罐装回应。"
 
 #. module: im_livechat
 #: model:ir.actions.act_window,help:im_livechat.im_livechat_channel_action
@@ -192,11 +181,6 @@ msgid "Code"
 msgstr "代码"
 
 #. module: im_livechat
-#: model:ir.ui.menu,name:im_livechat.livechat_config
-msgid "Configuration"
-msgstr "配置"
-
-#. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_report_channel_channel_id
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_report_operator_channel_id
 msgid "Conversation"
@@ -206,7 +190,7 @@ msgstr "对话"
 #: model:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
 msgid ""
 "Copy and paste this code into your website, within the &lt;head&gt; tag:"
-msgstr "将此代码复制并粘贴到你的网站的<head>标签内："
+msgstr "将此代码复制并粘贴到您的网站的<head>标签内："
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel_rule_country_ids
@@ -217,7 +201,7 @@ msgstr "国家"
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel_create_uid
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel_rule_create_uid
 msgid "Created by"
-msgstr "创建人"
+msgstr "创建者"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel_create_date
@@ -267,22 +251,22 @@ msgstr "在线客服按钮上的默认内容"
 #. module: im_livechat
 #: model:ir.model.fields,help:im_livechat.field_im_livechat_channel_rule_auto_popup_timer
 msgid ""
-"Delay (in seconds) to automatically open the conversation window. Note: the "
-"selected action must be 'Auto popup' otherwise this parameter will not be "
-"taken into account."
-msgstr ""
+"Delay (in seconds) to automatically open the converssation window. Note : "
+"the selected action must be 'Auto popup', otherwise this parameter will not "
+"be take into account."
+msgstr "对话框自动弹出持续时间(单位:秒)。注意：选择的动作必须是“自动弹出”，否则，该参数无效"
 
 #. module: im_livechat
 #. openerp-web
 #: code:addons/im_livechat/static/src/xml/im_livechat.xml:7
 #, python-format
 msgid "Did we correctly answer your question ?"
-msgstr "我们是否正确回答了你的问题?"
+msgstr "我们是否正确回答了您的问题?"
 
 #. module: im_livechat
 #: model:ir.model,name:im_livechat.model_mail_channel
 msgid "Discussion channel"
-msgstr "讨论频道"
+msgstr "讨论渠道"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel_display_name
@@ -308,14 +292,14 @@ msgstr "对话持续时间(秒)"
 msgid ""
 "Each channel has it's own URL that you can send by email to\n"
 "                your customers in order to start chatting with you."
-msgstr "每个频道都有对应的URL地址,你可以通过它来和你的客户进行邮件沟通."
+msgstr "每个频道都有对应的URL地址,您可以通过它来和您的客户进行邮件交流."
 
 #. module: im_livechat
 #. openerp-web
 #: code:addons/im_livechat/static/src/xml/im_livechat.xml:19
 #, python-format
 msgid "Explain your note"
-msgstr "备注你的笔记"
+msgstr "备注您的笔记"
 
 #. module: im_livechat
 #: model:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
@@ -323,8 +307,7 @@ msgid ""
 "For website built with Odoo CMS, please install the website_livechat module."
 " Then go to Settings &gt; Website Settings and select the Website Live Chat "
 "Channel you want to add on your website."
-msgstr ""
-"对于带有Odoo CMS 的网站，请安装 website_livechat 模块。 然后到 设置 > 网站设置，选择要添加到你的站点的即时聊天频道。"
+msgstr "对于带有Odoo CMS 的网站，请安装 website_livechat 模块。 然后到 设置 > 网站设置，选择要添加到你的站点的即时聊天频道。"
 
 #. module: im_livechat
 #: model:ir.model.fields,help:im_livechat.field_im_livechat_channel_rule_sequence
@@ -348,17 +331,13 @@ msgid "Group By..."
 msgstr "分组..."
 
 #. module: im_livechat
-#: model:ir.ui.view,arch_db:im_livechat.mail_channel_view_tree
-msgid "Has a Rating"
-msgstr ""
-
-#. module: im_livechat
 #: selection:im_livechat.channel.rule,action:0
 msgid "Hide the button"
 msgstr "隐藏按钮"
 
 #. module: im_livechat
 #: model:ir.actions.act_window,name:im_livechat.mail_channel_action
+#: model:ir.ui.menu,name:im_livechat.session_history
 #: model:ir.ui.view,arch_db:im_livechat.mail_channel_view_form
 #: model:ir.ui.view,arch_db:im_livechat.mail_channel_view_tree
 msgid "History"
@@ -371,10 +350,10 @@ msgstr "会话开始的小时数"
 
 #. module: im_livechat
 #. openerp-web
-#: code:addons/im_livechat/static/src/js/im_livechat.js:30
+#: code:addons/im_livechat/static/src/js/im_livechat.js:29
 #, python-format
 msgid "How may I help you?"
-msgstr "请问有什么可以帮到你？"
+msgstr "请问有什么可以帮到您？"
 
 #. module: im_livechat
 #: model:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
@@ -423,18 +402,13 @@ msgstr "过去24小时"
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_report_channel___last_update
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_report_operator___last_update
 msgid "Last Modified on"
-msgstr "最后修改日"
-
-#. module: im_livechat
-#: model:ir.model,name:im_livechat.model_mail_channel_partner
-msgid "Last Seen Many2many"
-msgstr "最后一次见到 Many2many"
+msgstr "最后修改时间"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel_rule_write_uid
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel_write_uid
 msgid "Last Updated by"
-msgstr "最后更新人"
+msgstr "最后更新者"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel_rule_write_date
@@ -449,19 +423,9 @@ msgid "Last Week"
 msgstr "上周"
 
 #. module: im_livechat
-#: model:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_kanban
-msgid "Leave"
-msgstr "休假"
-
-#. module: im_livechat
 #: model:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
 msgid "Leave Channel"
 msgstr "离开频道"
-
-#. module: im_livechat
-#: model:ir.ui.menu,name:im_livechat.menu_livechat_root
-msgid "Live Chat"
-msgstr "在线聊天"
 
 #. module: im_livechat
 #: model:ir.module.category,name:im_livechat.module_category_im_livechat
@@ -470,7 +434,7 @@ msgstr "即时支持"
 
 #. module: im_livechat
 #. openerp-web
-#: code:addons/im_livechat/static/src/xml/im_livechat_backend.xml:9
+#: code:addons/im_livechat/static/src/xml/im_livechat_backend.xml:8
 #, python-format
 msgid "Livechat"
 msgstr "在线客服"
@@ -485,9 +449,14 @@ msgstr "即时聊天"
 #: model:ir.actions.act_window,help:im_livechat.im_livechat_report_operator_action
 msgid ""
 "Livechat Support Channel Statistics allows you to easily check and analyse "
-"your company livechat session performance. Extract information about the "
+"your company livechat session performance. Extract informations about the "
 "missed sessions, the audiance, the duration of a session, etc."
-msgstr ""
+msgstr "实时交流渠道分析能让你便捷的检查和分析贵司的实时聊天会话的表现。提取出来错失的会话，顾客群，会话持续时间等等"
+
+#. module: im_livechat
+#: model:ir.ui.view,arch_db:im_livechat.support_page
+msgid "Livechat Support Page"
+msgstr "即时聊天支持页面"
 
 #. module: im_livechat
 #: model:ir.model,name:im_livechat.model_im_livechat_report_channel
@@ -522,7 +491,7 @@ msgstr "匹配的订单"
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel_image_medium
 msgid "Medium"
-msgstr "普通"
+msgstr "媒介"
 
 #. module: im_livechat
 #: model:ir.model.fields,help:im_livechat.field_im_livechat_channel_image_medium
@@ -530,7 +499,7 @@ msgid ""
 "Medium-sized photo of the group. It is automatically resized as a 128x128px "
 "image, with aspect ratio preserved. Use this field in form views or some "
 "kanban views."
-msgstr "群组的中等尺寸照片。它们自动被缩放为128x128px，保持纵横比。表单视图或者一些看板视图使用这个字段。"
+msgstr "群组的中等尺寸照片。它们被缩放为128x128px，纵横比保留。表单视图或者一些看板视图使用这个字段。"
 
 #. module: im_livechat
 #: model:ir.ui.view,arch_db:im_livechat.im_livechat_report_channel_view_search
@@ -538,13 +507,18 @@ msgid "Missed sessions"
 msgstr "结束的对话"
 
 #. module: im_livechat
+#: model:ir.ui.view,arch_db:im_livechat.mail_channel_view_search
+msgid "My sessions"
+msgstr "我的对话"
+
+#. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel_name
 msgid "Name"
-msgstr "名字"
+msgstr "名称"
 
 #. module: im_livechat
 #. openerp-web
-#: code:addons/im_livechat/static/src/js/im_livechat.js:117
+#: code:addons/im_livechat/static/src/js/im_livechat.js:76
 #, python-format
 msgid ""
 "None of our collaborators seems to be available, please try again later."
@@ -574,7 +548,11 @@ msgid "OK"
 msgstr "Ok"
 
 #. module: im_livechat
-#: model:ir.model.fields,field_description:im_livechat.field_im_livechat_report_channel_partner_id
+#: model:ir.actions.client,name:im_livechat.ir_action_client_open_livechat_menu
+msgid "Open Livechat Channel Menu"
+msgstr "打开在线客服频道菜单"
+
+#. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_report_operator_partner_id
 #: model:ir.ui.view,arch_db:im_livechat.im_livechat_report_channel_view_search
 #: model:ir.ui.view,arch_db:im_livechat.im_livechat_report_operator_view_search
@@ -598,17 +576,12 @@ msgid ""
 "Operators\n"
 "                                            <br/>\n"
 "                                            <i class=\"fa fa-comments\"/>"
-msgstr ""
-"操作员\n"
-"                                            <br/>\n"
-"                                            <i class=\"fa fa-comments\"/>"
+msgstr "操作员\n                                            <br/>\n                                            <i class=\"fa fa-comments\"/>"
 
 #. module: im_livechat
-#: model:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
-msgid ""
-"Operators that do not show any activity In Odoo for more than 30 minutes "
-"will be considered as disconnected."
-msgstr ""
+#: model:ir.model.fields,field_description:im_livechat.field_im_livechat_report_channel_partner_id
+msgid "Opertor"
+msgstr "Opertor"
 
 #. module: im_livechat
 #: model:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
@@ -621,13 +594,19 @@ msgid "Percentage of happy ratings over the past 7 days"
 msgstr "在过去的7天内，快乐比率的百分比"
 
 #. module: im_livechat
+#: model:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_kanban
+msgid "Quit"
+msgstr "退出"
+
+#. module: im_livechat
 #: model:ir.model,name:im_livechat.model_rating_rating
+#: model:ir.model.fields,field_description:im_livechat.field_mail_channel_rating_ids
 msgid "Rating"
-msgstr "点评"
+msgstr "评级"
 
 #. module: im_livechat
 #. openerp-web
-#: code:addons/im_livechat/static/src/js/im_livechat.js:309
+#: code:addons/im_livechat/static/src/js/im_livechat.js:308
 #, python-format
 msgid "Rating: :rating_%d"
 msgstr ""
@@ -635,13 +614,14 @@ msgstr ""
 #. module: im_livechat
 #: model:ir.model.fields,help:im_livechat.field_im_livechat_channel_rule_regex_url
 msgid ""
-"Regular expression specifying the web pages this rule will be applied on."
-msgstr ""
+"Regular expression identifying the web page on which the rules will be "
+"applied."
+msgstr "规则的表达定义了可以选用规则的web页面"
 
 #. module: im_livechat
 #: model:ir.ui.menu,name:im_livechat.menu_reporting_livechat
 msgid "Report"
-msgstr "报表"
+msgstr "报告"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel_rule_ids
@@ -690,11 +670,6 @@ msgid "Sessions"
 msgstr "会话"
 
 #. module: im_livechat
-#: model:ir.ui.menu,name:im_livechat.session_history
-msgid "Sessions History"
-msgstr ""
-
-#. module: im_livechat
 #: model:ir.model.fields,help:im_livechat.field_im_livechat_channel_image_small
 msgid ""
 "Small-sized photo of the group. It is automatically resized as a 64x64px "
@@ -720,6 +695,15 @@ msgid "Text of the Button"
 msgstr "按钮的文本"
 
 #. module: im_livechat
+#: model:ir.model.fields,help:im_livechat.field_im_livechat_channel_rule_country_ids
+msgid ""
+"The actual rule will match only for this country. So if you set select "
+"'Belgium' and 'France' and you set the action to 'Hide Buttun', this 2 "
+"country will not be see the support button for the specified URL. This "
+"feature requires GeoIP installed on your server."
+msgstr "实际的规则只和国家匹配。所以如果你选择了‘比利时’和‘法国’并且设置相关动作到‘隐藏按钮’，那么这两个国家在特定URL支持按钮中将不可见。需要安装GeoIP才能实现这个特性"
+
+#. module: im_livechat
 #: model:ir.model.fields,help:im_livechat.field_im_livechat_channel_rule_channel_id
 msgid "The channel of the rule"
 msgstr "规则的渠道"
@@ -728,16 +712,6 @@ msgstr "规则的渠道"
 #: model:ir.model.fields,help:im_livechat.field_im_livechat_channel_name
 msgid "The name of the channel"
 msgstr "渠道的名称"
-
-#. module: im_livechat
-#: model:ir.model.fields,help:im_livechat.field_im_livechat_channel_rule_country_ids
-msgid ""
-"The rule will only be applied for these countries. Example: if you select "
-"'Belgium' and 'United States' and that you set the action to 'Hide Button', "
-"the chat button will be hidden on the specified URL from the visitors "
-"located in these 2 countries. This feature requires GeoIP installed on your "
-"server."
-msgstr ""
 
 #. module: im_livechat
 #: model:res.groups,comment:im_livechat.im_livechat_group_manager
@@ -802,8 +776,8 @@ msgstr "用户"
 
 #. module: im_livechat
 #. openerp-web
-#: code:addons/im_livechat/controllers/main.py:37
-#: code:addons/im_livechat/static/src/js/im_livechat.js:28
+#: code:addons/im_livechat/controllers/main.py:30
+#: code:addons/im_livechat/static/src/js/im_livechat.js:27
 #, python-format
 msgid "Visitor"
 msgstr "访问者"
@@ -814,9 +788,19 @@ msgid "Web Page"
 msgstr "Web页"
 
 #. module: im_livechat
+#: model:ir.ui.menu,name:im_livechat.menu_livechat_root
+msgid "Website Live Chat"
+msgstr "网页聊天"
+
+#. module: im_livechat
 #: model:ir.actions.act_window,name:im_livechat.im_livechat_channel_action
 msgid "Website Live Chat Channels"
 msgstr "网站在线客服"
+
+#. module: im_livechat
+#: model:ir.ui.view,arch_db:im_livechat.support_page
+msgid "Website Live Chat Powered by <strong>Odoo</strong>."
+msgstr "<strong>Odoo</strong>的实时聊天"
 
 #. module: im_livechat
 #: model:ir.model.fields,field_description:im_livechat.field_im_livechat_channel_default_message
@@ -827,21 +811,14 @@ msgstr "欢迎信息"
 #: model:ir.actions.act_window,help:im_livechat.im_livechat_channel_action
 msgid ""
 "You can create channels for each website on which you want\n"
-"                to integrate the website live chat widget, allowing your website\n"
+"                to integrate the website live chat widget, allowing you website\n"
 "                visitors to talk in real time with your operators."
-msgstr ""
-
-#. module: im_livechat
-#: model:ir.actions.act_window,help:im_livechat.mail_channel_action
-msgid ""
-"Your chatter history is empty. Create a channel and start chatting to fill "
-"up your history."
-msgstr ""
+msgstr "你可以给每个你想集成即时聊天功能的网站创建渠道网站的访问者可以和客服实时聊天"
 
 #. module: im_livechat
 #: model:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
 msgid "e.g. Hello, how may I help you?"
-msgstr "例如：你好！请问有什么可以帮你的吗？"
+msgstr "例如：您好！请问有什么可以帮你的吗？"
 
 #. module: im_livechat
 #: model:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
@@ -849,14 +826,9 @@ msgid "e.g. YourWebsite.com"
 msgstr "例如：你的网站地址 "
 
 #. module: im_livechat
-#: model:ir.model,name:im_livechat.model_ir_autovacuum
-msgid "ir.autovacuum"
-msgstr "ir.autovacuum"
-
-#. module: im_livechat
 #: model:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
 msgid "or copy this url and send it by email to your customers or suppliers:"
-msgstr "或者拷贝这个URL并且通过邮件发送给你的客户、供应商："
+msgstr "或者拷贝这个URL并且通过邮件发送给您的客户、供应商："
 
 #. module: im_livechat
 #: model:ir.ui.view,arch_db:im_livechat.im_livechat_channel_rule_view_form

@@ -7,10 +7,6 @@ var base = require('web_editor.base');
 var registry = {};
 var ready = [];
 
-/**
- * The Animation class provides a way for executing code once a website snippet is loaded in the dom
- * and handle the case where the website edit mode is triggered.
- */
 var Animation = Class.extend({
     selector: false,
     $: function () {
@@ -20,61 +16,67 @@ var Animation = Class.extend({
         this.$el = this.$target = $(dom);
         this.start(editable_mode);
     },
-    /**
-     * start
-     * This method is called after init
-     * @param editable_mode
-     */
-    start: function () {},
-    /**
-     * stop
-     * This method is called to stop the animation (e.g.: when rte is launch)
-     */
-    stop: function () {},
+    /*
+    *  start
+    *  This method is called after init
+    */
+    start: function (editable_mode) {
+    },
+    /*
+    *  stop
+    *  This method is called to stop the animation (e.g.: when rte is launch)
+    */
+    stop: function () {
+    },
 });
 
-/**
- * Start animations when loading the website is finished and stop/restart them
- * once we enter in edit mode.
- */
-base.ready().always(function () {
-    _.defer(start);
-});
-
-return {
-    Class: Animation,
-    registry: registry,
-    start: start,
-    stop: stop
-};
-
-function start(editable_mode, $init_target) {
+var start = function (editable_mode, $target) {
     for (var k in registry) {
         var Animation = registry[k];
-        var selector = Animation.prototype.selector || "";
-        var $target = $init_target ? $init_target.filter(selector) : $(selector);
+        var selector = "";
+        if (Animation.prototype.selector) {
+            if (selector != "") selector += ", " 
+            selector += Animation.prototype.selector;
+        }
+        if ($target) {
+            if ($target.is(selector)) selector = $target;
+            else continue;
+        }
 
-        $target.each(function () {
-            var $snippet = $(this);
-            var animation = $snippet.data("snippet-view");
-            if (!$snippet.parents("#oe_snippets").length &&
-                !$snippet.parent("body").length &&
-                !animation) {
-                ready.push($snippet);
-                $snippet.data("snippet-view", new Animation($snippet, editable_mode));
-            } else if (animation) {
-                animation.start(editable_mode);
+        $(selector).each(function() {
+            var $snipped_id = $(this);
+            if (    !$snipped_id.parents("#oe_snippets").length &&
+                    !$snipped_id.parent("body").length &&
+                    !$snipped_id.data("snippet-view")) {
+                ready.push($snipped_id);
+                $snipped_id.data("snippet-view", new Animation($snipped_id, editable_mode));
+            } else if ($snipped_id.data("snippet-view")) {
+                $snipped_id.data("snippet-view").start(editable_mode);
             }
         });
     }
-}
+};
 
-function stop() {
-    _.each(ready, function ($snippet) {
-        var animation = $snippet.data("snippet-view");
-        if (animation) {
-            animation.stop();
+var stop = function () {
+    $(ready).each(function() {
+        var $snipped_id = $(this);
+        if ($snipped_id.data("snippet-view")) {
+            $snipped_id.data("snippet-view").stop();
         }
     });
-}
+};
+
+base.ready().always(function () {
+    setTimeout(function () {
+        start();
+    },0);
+});
+
+return {
+    'Class': Animation,
+    'registry': registry,
+    'start': start,
+    'stop': stop
+};
+
 });

@@ -1,15 +1,9 @@
-# -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
+import openerp
+from openerp.tools.safe_eval import safe_eval as eval
 
-import odoo
-import odoo.http as http
+class DiagramView(openerp.http.Controller):
 
-from odoo.tools.safe_eval import safe_eval
-
-
-class DiagramView(http.Controller):
-
-    @http.route('/web_diagram/diagram/get_diagram_info', type='json', auth='user')
+    @openerp.http.route('/web_diagram/diagram/get_diagram_info', type='json', auth='user')
     def get_diagram_info(self, req, id, model, node, connector,
                          src_node, des_node, label, **kw):
 
@@ -36,9 +30,10 @@ class DiagramView(http.Controller):
                     shape_colour, shape_color_state = shape_spec.split(':')
                     shapes[shape_colour] = shape_color_state
 
-        ir_view = http.request.env['ir.ui.view']
-        graphs = ir_view.graph_get(int(id), model, node, connector, src_node,
-                                   des_node, label, (140, 180))
+        ir_view = req.session.model('ir.ui.view')
+        graphs = ir_view.graph_get(
+            int(id), model, node, connector, src_node, des_node, label,
+            (140, 180), req.session.context)
         nodes = graphs['nodes']
         transitions = graphs['transitions']
         isolate_nodes = {}
@@ -58,9 +53,10 @@ class DiagramView(http.Controller):
                 's_id': transitions[tr][0],
                 'd_id': transitions[tr][1]
             })
+        connector_tr = req.session.model(connector)
+        connector_ids = connector_tr.search([('id', 'in', list_tr)], 0, 0, 0, req.session.context)
 
-        connector_model = http.request.env[connector]
-        data_connectors = connector_model.search([('id', 'in', list_tr)]).read(connector_fields)
+        data_connectors =connector_tr.read(connector_ids, connector_fields, req.session.context)
 
         for tr in data_connectors:
             transition_id = str(tr['id'])
@@ -76,11 +72,12 @@ class DiagramView(http.Controller):
             for i, fld in enumerate(connector_fields):
                 t['options'][connector_fields_string[i]] = tr[fld]
 
-        fields = http.request.env['ir.model.fields']
-        field = fields.search([('model', '=', model), ('relation', '=', node)])
-        node_act = http.request.env[node]
-        search_acts = node_act.search([(field.relation_field, '=', id)])
-        data_acts = search_acts.read(invisible_node_fields + visible_node_fields)
+        fields = req.session.model('ir.model.fields')
+        field_ids = fields.search([('model', '=', model), ('relation', '=', node)], 0, 0, 0, req.session.context)
+        field_data = fields.read(field_ids, ['relation_field'], req.session.context)
+        node_act = req.session.model(node)
+        search_acts = node_act.search([(field_data[0]['relation_field'], '=', id)], 0, 0, 0, req.session.context)
+        data_acts = node_act.read(search_acts, invisible_node_fields + visible_node_fields, req.session.context)
 
         for act in data_acts:
             n = nodes.get(str(act['id']))
@@ -96,17 +93,17 @@ class DiagramView(http.Controller):
                 options={}
             )
             for color, expr in bgcolors.items():
-                if safe_eval(expr, act):
+                if eval(expr, act):
                     n['color'] = color
 
             for shape, expr in shapes.items():
-                if safe_eval(expr, act):
+                if eval(expr, act):
                     n['shape'] = shape
 
             for i, fld in enumerate(visible_node_fields):
                 n['options'][node_fields_string[i]] = act[fld]
 
-        _id, name = http.request.env[model].browse([id]).name_get()[0]
+        _id, name = req.session.model(model).name_get([id], req.session.context)[0]
         return dict(nodes=nodes,
                     conn=connectors,
                     name=name,

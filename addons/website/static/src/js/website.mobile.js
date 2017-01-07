@@ -1,49 +1,39 @@
 odoo.define('website.mobile', function (require) {
 'use strict';
 
-var ajax = require('web.ajax');
 var core = require('web.core');
-var Dialog = require('web.Dialog');
+var ajax = require('web.ajax');
 var Widget = require('web.Widget');
 var base = require('web_editor.base');
 var website = require('website.website');
 
-var _t = core._t;
+var qweb = core.qweb;
 
-var MobilePreviewDialog = Dialog.extend({
+var MobilePreview = Widget.extend({
     template: 'website.mobile_preview',
-
-    init: function () {
-        this._super.apply(this, arguments);
-        this.mobile_src = $.param.querystring(window.location.href, 'mobilepreview');
+    events: {
+        'hidden.bs.modal': 'destroy'
     },
-
-    start: function () {
-        var self = this;
-        this.$modal.addClass('oe_mobile_preview');
-        this.$modal.on('click', '.modal-header', function () {
-            self.$el.toggleClass('o_invert_orientation');
-        });
-        this.$iframe = this.$('iframe');
-        this.$iframe.on('load', function (e) {
-            self.$iframe.contents().find('body').removeClass('o_connected_user');
-            self.$iframe.contents().find('#oe_main_menu_navbar, #o_website_add_page_modal').remove();
-        });
-
-        return this._super.apply(this, arguments);
+    start: function() {
+        if (!window.location.origin) { // fix for ie9
+            window.location.origin = window.location.protocol + "//" + window.location.hostname + (window.location.port ? ':' + window.location.port: '');
+        }
+        document.getElementById("mobile-viewport").src = window.location.origin + window.location.pathname + window.location.search + "#mobile-preview";
+        this.$el.modal();
+    },
+    destroy: function() {
+        $('.modal-backdrop').remove();
+        this._super();
     },
 });
 
 website.TopBar.include({
     start: function () {
-        var self = this;
-        this.$el.on('click', 'a[data-action=show-mobile-preview]', function () {
-            new MobilePreviewDialog(self, {
-                title: _t('Mobile preview') + " <span class='fa fa-refresh'/>",
-            }).open();
+        this.$el.on('click', 'a[data-action=show-mobile-preview]', function() {
+            new MobilePreview().appendTo($(document.body));
         });
         return this._super();
-    },
+    }
 });
 
 });

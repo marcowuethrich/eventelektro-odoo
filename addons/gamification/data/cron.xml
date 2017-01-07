@@ -1,4 +1,5 @@
-<odoo>
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
     <data noupdate="1">
         <record forcecreate="True" id="ir_cron_check_challenge"
             model="ir.cron">
@@ -12,4 +13,4 @@
             <field name="args">()</field>
         </record>
     </data>
-</odoo>
+</openerp>

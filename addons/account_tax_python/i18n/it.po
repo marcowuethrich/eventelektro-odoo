@@ -3,17 +3,15 @@
 # * account_tax_python
 # 
 # Translators:
-# Francesco Garganese <francesco.garganese@aeromnia.aero>, 2016
-# Francesco <francesco.bianchi.88@gmail.com>, 2016
-# Paolo Valier <paolo.valier@hotmail.it>, 2016
+# Francesco <francesco.bianchi.88@gmail.com>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:56+0000\n"
-"PO-Revision-Date: 2016-09-07 08:56+0000\n"
-"Last-Translator: Paolo Valier <paolo.valier@hotmail.it>, 2016\n"
-"Language-Team: Italian (https://www.transifex.com/odoo/teams/41243/it/)\n"
+"POT-Creation-Date: 2015-09-07 14:40+0000\n"
+"PO-Revision-Date: 2016-04-20 19:38+0000\n"
+"Last-Translator: Francesco <francesco.bianchi.88@gmail.com>\n"
+"Language-Team: Italian (http://www.transifex.com/odoo/odoo-9/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -83,9 +81,9 @@ msgstr "Codice Python"
 #. module: account_tax_python
 #: model:ir.model,name:account_tax_python.model_account_tax
 msgid "Tax"
-msgstr "Imposta"
+msgstr "Imposte"
 
 #. module: account_tax_python
 #: model:ir.model,name:account_tax_python.model_account_tax_template
 msgid "Templates for Taxes"
-msgstr "Modelli per Imposte"
+msgstr "Modelli per tasse"

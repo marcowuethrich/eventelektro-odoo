@@ -1,5 +1,5 @@
 <addon name>
-  +-- __manifest__.py
+  +-- __openerp__.py
   +-- controllers/
   +-- static/
        +-- lib/

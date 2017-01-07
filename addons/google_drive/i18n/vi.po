@@ -3,20 +3,14 @@
 # * google_drive
 # 
 # Translators:
-# lam nguyen <lamev.inc@gmail.com>, 2016
-# fanha99 <fanha99@hotmail.com>, 2016
-# Phạm Lân <phamquanglan@gmail.com>, 2016
-# Martin Trigaux <mat@odoo.com>, 2016
-# son dang <son.dang@doda100.com>, 2016
-# Hoang Loc Le Huu <loclhh@gmail.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0c\n"
+"Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-07 08:56+0000\n"
-"PO-Revision-Date: 2016-09-07 08:56+0000\n"
-"Last-Translator: Hoang Loc Le Huu <loclhh@gmail.com>, 2016\n"
-"Language-Team: Vietnamese (https://www.transifex.com/odoo/teams/41243/vi/)\n"
+"POT-Creation-Date: 2015-09-07 14:40+0000\n"
+"PO-Revision-Date: 2015-12-29 08:18+0000\n"
+"Last-Translator: Martin Trigaux\n"
+"Language-Team: Vietnamese (http://www.transifex.com/odoo/odoo-9/language/vi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -37,10 +31,10 @@ msgstr ""
 #. module: google_drive
 #: model:ir.model.fields,field_description:google_drive.field_google_drive_config_active
 msgid "Active"
-msgstr "Có hiệu lực"
+msgstr "Kích hoạt"
 
 #. module: google_drive
-#: code:addons/google_drive/models/google_drive.py:40
+#: code:addons/google_drive/google_drive.py:34
 #, python-format
 msgid "At least one key cannot be found in your Google Drive name pattern"
 msgstr ""
@@ -75,10 +69,10 @@ msgstr "Được tạo bởi"
 #. module: google_drive
 #: model:ir.model.fields,field_description:google_drive.field_google_drive_config_create_date
 msgid "Created on"
-msgstr "Thời điểm tạo"
+msgstr "Được tạo vào"
 
 #. module: google_drive
-#: code:addons/google_drive/models/google_drive.py:159
+#: code:addons/google_drive/google_drive.py:141
 #, python-format
 msgid "Creating google drive may only be done by one at a time."
 msgstr ""
@@ -99,15 +93,15 @@ msgid "Filter"
 msgstr "Bộ lọc"
 
 #. module: google_drive
-#: code:addons/google_drive/models/google_drive.py:59
-#: code:addons/google_drive/models/google_drive.py:80
+#: code:addons/google_drive/google_drive.py:53
+#: code:addons/google_drive/google_drive.py:73
 #, python-format
 msgid "Go to the configuration panel"
 msgstr "Đi tới bảng cấu hình"
 
 #. module: google_drive
 #: model:ir.model.fields,field_description:google_drive.field_google_drive_config_google_drive_client_id
-msgid "Google Client"
+msgid "Google Client "
 msgstr ""
 
 #. module: google_drive
@@ -127,8 +121,8 @@ msgid "Google Drive Name Pattern"
 msgstr ""
 
 #. module: google_drive
-#: code:addons/google_drive/models/google_drive.py:61
-#: code:addons/google_drive/models/google_drive.py:82
+#: code:addons/google_drive/google_drive.py:55
+#: code:addons/google_drive/google_drive.py:75
 #, python-format
 msgid "Google Drive is not yet configured. Please contact your administrator."
 msgstr ""
@@ -151,7 +145,7 @@ msgstr "Sửa lần cuối vào"
 #. module: google_drive
 #: model:ir.model.fields,field_description:google_drive.field_google_drive_config_write_uid
 msgid "Last Updated by"
-msgstr "Cập nhật lần cuối bởi"
+msgstr "Last Updated by"
 
 #. module: google_drive
 #: model:ir.model.fields,field_description:google_drive.field_google_drive_config_write_date
@@ -169,19 +163,21 @@ msgid ""
 msgstr ""
 
 #. module: google_drive
+#: model:ir.model.fields,field_description:google_drive.field_google_drive_config_model
 #: model:ir.model.fields,field_description:google_drive.field_google_drive_config_model_id
 msgid "Model"
 msgstr "Mô hình"
 
 #. module: google_drive
-#: code:addons/google_drive/models/google_drive.py:201
-#, python-format
-msgid "Please enter a valid Google Document URL."
+#: constraint:google.drive.config:0
+msgid ""
+"Model of selected filter is not matching with model of current template."
 msgstr ""
 
 #. module: google_drive
-#: model:ir.model.fields,field_description:google_drive.field_google_drive_config_model
-msgid "Related Model"
+#: code:addons/google_drive/google_drive.py:173
+#, python-format
+msgid "Please enter a valid Google Document URL."
 msgstr ""
 
 #. module: google_drive
@@ -190,7 +186,7 @@ msgid "Resource Id"
 msgstr "Mã Tài nguyên"
 
 #. module: google_drive
-#: code:addons/google_drive/models/google_drive.py:79
+#: code:addons/google_drive/google_drive.py:72
 #, python-format
 msgid ""
 "Something went wrong during the token generation. Please request again an "
@@ -214,7 +210,7 @@ msgid "Templates"
 msgstr "Các mẫu"
 
 #. module: google_drive
-#: code:addons/google_drive/models/google_drive.py:97
+#: code:addons/google_drive/google_drive.py:90
 #, python-format
 msgid "The Google Template cannot be found. Maybe it has been deleted."
 msgstr ""
@@ -234,7 +230,7 @@ msgid ""
 msgstr ""
 
 #. module: google_drive
-#: code:addons/google_drive/models/google_drive.py:135
+#: code:addons/google_drive/google_drive.py:117
 #, python-format
 msgid ""
 "The permission 'reader' for 'anyone with the link' has not been written on "
@@ -247,7 +243,7 @@ msgid "URI"
 msgstr ""
 
 #. module: google_drive
-#: code:addons/google_drive/models/google_drive.py:58
+#: code:addons/google_drive/google_drive.py:52
 #, python-format
 msgid ""
 "You haven't configured 'Authorization Code' generated from google, Please "

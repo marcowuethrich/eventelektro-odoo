@@ -7,9 +7,9 @@ import select
 import threading
 import time
 
-import odoo
-from odoo import api, fields, models, SUPERUSER_ID
-from odoo.tools.misc import DEFAULT_SERVER_DATETIME_FORMAT
+import openerp
+from openerp import api, fields, models
+from openerp.tools.misc import DEFAULT_SERVER_DATETIME_FORMAT
 
 _logger = logging.getLogger(__name__)
 
@@ -61,7 +61,7 @@ class ImBus(models.Model):
             # transaction is not commited yet, there will be nothing to fetch,
             # and the longpolling will return no notification.
             def notify():
-                with odoo.sql_db.db_connect('postgres').cursor() as cr:
+                with openerp.sql_db.db_connect('postgres').cursor() as cr:
                     cr.execute("notify imbus, %s", (json_dump(list(channels)),))
             self._cr.after('commit', notify)
 
@@ -115,18 +115,17 @@ class ImDispatch(object):
         # Dont hang ctrl-c for a poll request, we need to bypass private
         # attribute access because we dont know before starting the thread that
         # it will handle a longpolling request
-        if not odoo.evented:
+        if not openerp.evented:
             current = threading.current_thread()
             current._Thread__daemonic = True
             # rename the thread to avoid tests waiting for a longpolling
             current.setName("openerp.longpolling.request.%s" % current.ident)
 
-        registry = odoo.registry(dbname)
+        registry = openerp.registry(dbname)
 
         # immediatly returns if past notifications exist
         with registry.cursor() as cr:
-            env = api.Environment(cr, SUPERUSER_ID, {})
-            notifications = env['bus.bus'].poll(channels, last, options)
+            notifications = registry['bus.bus'].poll(cr, openerp.SUPERUSER_ID, channels, last, options)
         # or wait for future ones
         if not notifications:
             event = self.Event()
@@ -135,8 +134,7 @@ class ImDispatch(object):
             try:
                 event.wait(timeout=timeout)
                 with registry.cursor() as cr:
-                    env = api.Environment(cr, SUPERUSER_ID, {})
-                    notifications = env['bus.bus'].poll(channels, last, options, force_status=True)
+                    notifications = registry['bus.bus'].poll(cr, openerp.SUPERUSER_ID, channels, last, options, force_status=True)
             except Exception:
                 # timeout
                 pass
@@ -145,7 +143,7 @@ class ImDispatch(object):
     def loop(self):
         """ Dispatch postgres notifications to the relevant polling threads/greenlets """
         _logger.info("Bus.loop listen imbus on db postgres")
-        with odoo.sql_db.db_connect('postgres').cursor() as cr:
+        with openerp.sql_db.db_connect('postgres').cursor() as cr:
             conn = cr._cnx
             cr.execute("listen imbus")
             cr.commit();
@@ -173,12 +171,12 @@ class ImDispatch(object):
                 time.sleep(TIMEOUT)
 
     def start(self):
-        if odoo.evented:
+        if openerp.evented:
             # gevent mode
             import gevent
             self.Event = gevent.event.Event
             gevent.spawn(self.run)
-        elif odoo.multi_process:
+        elif openerp.multi_process:
             # disabled in prefork mode
             return
         else:

@@ -1,28 +1,21 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * analytic
-#
+# 
 # Translators:
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo 9.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-18 14:07+0000\n"
-"PO-Revision-Date: 2015-09-30 09:24+0000\n"
+"POT-Creation-Date: 2016-09-22 13:16+0000\n"
+"PO-Revision-Date: 2016-09-23 08:42+0000\n"
 "Last-Translator: Martin Trigaux\n"
-"Language-Team: Serbian (Latin) (http://www.transifex.com/odoo/odoo-9/"
-"language/sr@latin/)\n"
-"Language: sr@latin\n"
+"Language-Team: Serbian (Latin) (http://www.transifex.com/odoo/odoo-9/language/sr@latin/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"#-#-#-#-#  sr@latin.po (Odoo 9.0)  #-#-#-#-#\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"#-#-#-#-#  sr@latin.po (Odoo 9.0)  #-#-#-#-#\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: sr@latin\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. module: analytic
 #: model:ir.ui.view,arch_db:analytic.account_analytic_chart_view
@@ -38,6 +31,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_currency_id
 msgid "Account Currency"
 msgstr "Valuta"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_needaction
+msgid "Action Needed"
+msgstr "Potrebna akcija"
 
 #. module: analytic
 #: selection:account.analytic.account,account_type:0
@@ -89,6 +87,11 @@ msgstr "Analitičke stavke"
 #: model:ir.ui.view,arch_db:analytic.view_account_analytic_line_form
 msgid "Analytic Entry"
 msgstr "Stavka analitike"
+
+#. module: analytic
+#: model:ir.model,name:analytic.model_account_analytic_line
+msgid "Analytic Line"
+msgstr "Analiticki red"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_line_ids
@@ -202,6 +205,11 @@ msgid "Date"
 msgstr "Datum"
 
 #. module: analytic
+#: model:ir.model.fields,help:analytic.field_account_analytic_account_message_last_post
+msgid "Date of the last message posted on the record."
+msgstr "Datum zadnje poslate poruke na slog."
+
+#. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account_debit
 msgid "Debit"
 msgstr "Duguje"
@@ -218,6 +226,21 @@ msgstr "Opis"
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_tag_display_name
 msgid "Display Name"
 msgstr "Ime za prikaz"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_follower_ids
+msgid "Followers"
+msgstr "Pratioci"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Pratioci (kanali)"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Pratioci (partneri)"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_chart_from_date
@@ -239,14 +262,33 @@ msgid "ID"
 msgstr "ID"
 
 #. module: analytic
+#: model:ir.model.fields,help:analytic.field_account_analytic_account_message_unread
+msgid "If checked new messages require your attention."
+msgstr "Ako je označeno, nove poruke zahtjevaju pažnju"
+
+#. module: analytic
+#: model:ir.model.fields,help:analytic.field_account_analytic_account_message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Ako je označeno, nove poruke zahtjevaju pažnju"
+
+#. module: analytic
 #: model:ir.actions.act_window,help:analytic.account_analytic_line_action
 #: model:ir.actions.act_window,help:analytic.account_analytic_line_action_entries
 msgid ""
 "In Odoo, sale orders and projects are implemented using\n"
-"                analytic accounts. You can track costs and revenues to "
-"analyse\n"
+"                analytic accounts. You can track costs and revenues to analyse\n"
 "                your margins easily."
 msgstr ""
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_is_follower
+msgid "Is Follower"
+msgstr "Je pratioc"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_last_post
+msgid "Last Message Date"
+msgstr "Datum zadnje poruke"
 
 #. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_account___last_update
@@ -273,6 +315,11 @@ msgid "Last Updated on"
 msgstr "Zadnja izmjena"
 
 #. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_ids
+msgid "Messages"
+msgstr "Poruke"
+
+#. module: analytic
 #: model:ir.actions.act_window,help:analytic.account_analytic_line_action
 msgid "No activity yet on this account."
 msgstr ""
@@ -281,6 +328,21 @@ msgstr ""
 #: model:ir.actions.act_window,help:analytic.account_analytic_line_action_entries
 msgid "No activity yet."
 msgstr ""
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_needaction_counter
+msgid "Number of Actions"
+msgstr "Broj akcija"
+
+#. module: analytic
+#: model:ir.model.fields,help:analytic.field_account_analytic_account_message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Broj poruka koje zahtjevaju akciju"
+
+#. module: analytic
+#: model:ir.model.fields,help:analytic.field_account_analytic_account_message_unread_counter
+msgid "Number of unread messages"
+msgstr "Broj nepročitanih poruka"
 
 #. module: analytic
 #: model:ir.ui.view,arch_db:analytic.account_analytic_chart_view
@@ -308,10 +370,8 @@ msgstr "Referenca"
 #: model:ir.actions.act_window,help:analytic.account_analytic_line_action_entries
 msgid ""
 "Revenues will be created automatically when you create customer\n"
-"                invoices. Customer invoices can be created based on sale "
-"orders\n"
-"                (fixed price invoices), on timesheets (based on the work "
-"done) or\n"
+"                invoices. Customer invoices can be created based on sale orders\n"
+"                (fixed price invoices), on timesheets (based on the work done) or\n"
 "                on expenses (e.g. reinvoicing of travel costs)."
 msgstr ""
 
@@ -357,65 +417,26 @@ msgid "Total"
 msgstr "Ukupno"
 
 #. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_account_type
+msgid "Type of Account"
+msgstr ""
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_unread
+msgid "Unread Messages"
+msgstr "Nepročitane poruke"
+
+#. module: analytic
+#: model:ir.model.fields,field_description:analytic.field_account_analytic_account_message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Brojač nepročitanih poruka"
+
+#. module: analytic
 #: model:ir.model.fields,field_description:analytic.field_account_analytic_line_user_id
 msgid "User"
 msgstr "Korisnik"
 
 #. module: analytic
-#: model:ir.model,name:analytic.model_account_analytic_line
-#, fuzzy
-msgid "account analytic line"
-msgstr "Analiticki red"
-
-#. module: analytic
 #: model:ir.ui.view,arch_db:analytic.view_account_analytic_account_form
 msgid "e.g. Project XYZ"
 msgstr ""
-
-#~ msgid "Action Needed"
-#~ msgstr "Potrebna akcija"
-
-#~ msgid "Date of the last message posted on the record."
-#~ msgstr "Datum zadnje poslate poruke na slog."
-
-#~ msgid "Followers"
-#~ msgstr "Pratioci"
-
-#~ msgid "Followers (Channels)"
-#~ msgstr "Pratioci (kanali)"
-
-#~ msgid "Followers (Partners)"
-#~ msgstr "Pratioci (partneri)"
-
-#~ msgid "If checked new messages require your attention."
-#~ msgstr "Ako je označeno, nove poruke zahtjevaju pažnju"
-
-#~ msgid "If checked, new messages require your attention."
-#~ msgstr "Ako je označeno, nove poruke zahtjevaju pažnju"
-
-#~ msgid "Is Follower"
-#~ msgstr "Je pratioc"
-
-#~ msgid "Last Message Date"
-#~ msgstr "Datum zadnje poruke"
-
-#~ msgid "Messages"
-#~ msgstr "Poruke"
-
-#~ msgid "Messages and communication history"
-#~ msgstr "Poruke i istorija komunikacije"
-
-#~ msgid "Number of Actions"
-#~ msgstr "Broj akcija"
-
-#~ msgid "Number of messages which requires an action"
-#~ msgstr "Broj poruka koje zahtjevaju akciju"
-
-#~ msgid "Number of unread messages"
-#~ msgstr "Broj nepročitanih poruka"
-
-#~ msgid "Unread Messages"
-#~ msgstr "Nepročitane poruke"
-
-#~ msgid "Unread Messages Counter"
-#~ msgstr "Brojač nepročitanih poruka"

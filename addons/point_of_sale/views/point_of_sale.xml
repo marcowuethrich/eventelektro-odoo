@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<openerp>
+    <data>
         <template id="assets" name="point_of_sale assets">
-            <link rel="stylesheet" type="text/less" href="/web/static/src/less/fonts.less" />
+            <link rel="stylesheet" href="/web/static/src/fonts/lato/stylesheet.css" />
             <link rel="stylesheet" href="/web/static/lib/fontawesome/css/font-awesome.css" />
             <link rel="stylesheet" href="/point_of_sale/static/src/css/pos.css" id="pos-stylesheet"/>
             <link rel="stylesheet" href="/point_of_sale/static/src/css/keyboard.css" />
@@ -20,4 +21,5 @@
             <script type="text/javascript" src="/point_of_sale/static/src/js/screens.js"></script>
             <script type="text/javascript" src="/point_of_sale/static/src/js/tests.js"></script>
         </template>
-</odoo>
+    </data>
+</openerp>
