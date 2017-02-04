@@ -9,7 +9,7 @@ Install Odoo 9
 
 * sudo su root
 * sudo apt-get install wget
-* sudo wget https://raw.githubusercontent.com/marcowuethrich/odoo/version/odoo9/odoo_install.sh
+* sudo wget https://raw.githubusercontent.com/marcowuethrich/odoo/master/odoo_install.sh
 * sudo sh odoo_install.sh
 
 
